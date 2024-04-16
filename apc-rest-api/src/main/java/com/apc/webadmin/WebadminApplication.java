@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @ComponentScan(basePackages = "com.apc.webadmin")
 @EnableMongoRepositories(basePackages = "com.apc.webadmin.repositories")
-
 public class WebadminApplication {
 
 	public static void main(String[] args) {
