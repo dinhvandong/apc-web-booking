@@ -141,7 +141,7 @@ const Sidebar = (props) => {
 
   }
 
-  function gotoRoom(){
+  function gotoRoom() {
     navigate('/admin/room');
   }
 
@@ -153,13 +153,13 @@ const Sidebar = (props) => {
     navigate("/admin/cabin");
 
   }
-  function gotoEvent(){
+  function gotoEvent() {
 
     navigate("/admin/event");
 
   }
 
-  function gotoPrice(){
+  function gotoPrice() {
 
     navigate("/admin/price");
 
@@ -211,7 +211,7 @@ const Sidebar = (props) => {
 
             <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
             {
-              (active == true) ? <div className="text-sm">Người dùng</div>:<div></div>
+              (active == true) ? <div className="text-sm">Người dùng</div> : <div></div>
 
             }
           </button>
@@ -225,7 +225,7 @@ const Sidebar = (props) => {
 
             <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
             {
-              active == true ? <div className="text-sm">Phòng</div>:<div></div>
+              active == true ? <div className="text-sm">Phòng</div> : <div></div>
             }
           </button>
           {/* <button
@@ -260,7 +260,7 @@ const Sidebar = (props) => {
           >
             <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
             {
-              active == true ? <div className="text-sm ">Sự kiện</div>:<div></div>
+              active == true ? <div className="text-sm ">Sự kiện</div> : <div></div>
             }
           </button>
 
@@ -272,7 +272,7 @@ const Sidebar = (props) => {
           >
             <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
             {
-              active == true ? <div className="text-sm ">Giá</div>:<div></div>
+              active == true ? <div className="text-sm ">Giá</div> : <div></div>
             }
           </button>
           {/* <button
@@ -312,6 +312,45 @@ const Sidebar = (props) => {
 
             }
           </button> */}
+
+          <button
+            onClick={() => gotoNotification()}
+            onMouseEnter={handleMouseEnter5}
+            onMouseLeave={handleMouseLeave5}
+            className={`flex flex-row justify-start items-center ${styleMenu5} hover:text-red-600`}
+          >
+            <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
+            {
+              active == true ? <div className="text-sm ">Tin tức</div> : <div></div>
+
+            }
+          </button>
+
+          <button
+            onClick={() => gotoNotification()}
+            onMouseEnter={handleMouseEnter5}
+            onMouseLeave={handleMouseLeave5}
+            className={`flex flex-row justify-start items-center ${styleMenu5} hover:text-red-600`}
+          >
+            <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
+            {
+              active == true ? <div className="text-sm ">Thông báo</div> : <div></div>
+
+            }
+          </button>
+
+          <button
+            onClick={() => gotoNotification()}
+            onMouseEnter={handleMouseEnter5}
+            onMouseLeave={handleMouseLeave5}
+            className={`flex flex-row justify-start items-center ${styleMenu5} hover:text-red-600`}
+          >
+            <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
+            {
+              active == true ? <div className="text-sm ">Thư viện ảnh</div> : <div></div>
+
+            }
+          </button>
         </div>
       </div>
     </div>

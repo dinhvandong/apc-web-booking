@@ -35,6 +35,11 @@ public class RoomService {
         return roomRepository.insert(newRoom);
     }
 
+    public boolean deleteAll()
+    {
+        roomRepository.deleteAll();
+        return  true;
+    }
     public void autoGenerateFolio(Room room){
         PriceFolio priceFolio = new PriceFolio();
         priceFolio.setRoomID(room.getId());

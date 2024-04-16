@@ -5,13 +5,21 @@ import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
 import './UserTable.css'; // Import your custom CSS file
 //import './tableStyle.css';
-const RoomTableFolio = () => {
+const RoomTableFolio = (props) => {
   const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
 
+  // Invoke the callback function provided by the parent component
+  const handleClick = () => {
+   // const data = 'Hello from child component!';
+   // props.onChildCallback(data);
+  };
+
   const handleEdit = (id) => {
     console.log('Edit clicked for ID:', id);
-    navigate(`/admin/room/update/${id}`)
+    //navigate(`/admin/room/update/${id}`)
+   props.onChildCallback(id);
+
   };
 
   const handleDelete = async (id) => {
@@ -129,8 +137,7 @@ const RoomTableFolio = () => {
       key: 'actions',
       render: (text, record) => (
         <Space size="middle">
-          <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Chỉnh sửa</Button>
-          <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
+          <Button className="text-white bg-edit" type="primary" onClick={()=>handleEdit(record.id)}>Xem bảng giá</Button>
           {/* <Button className="mr-5 text-white bg-emerald-500" type="danger" onClick={() => handleDelete(record.id)}>Kích hoạt</Button> */}
           {/* <Button className="mr-5 text-white bg-history" type="danger" onClick={() => handleDelete(record.id)}>Xem lịch sử</Button> */}
 

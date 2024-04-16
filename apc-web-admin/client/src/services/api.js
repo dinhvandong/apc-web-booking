@@ -286,10 +286,10 @@ export const updateEvent = async (eventData) => {
   }
 };
 
-export const getPricesByRoomID = async()=>{
+export const getPricesByRoomID = async(roomID)=>{
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/priceFolio/findByRoomID?id=1`);
+    const response = await axios.get(`${API_URL}/priceFolio/findByRoomID?id=${roomID}`);
     return response.data.data.priceTableList;
   } catch (error) {
     throw error;

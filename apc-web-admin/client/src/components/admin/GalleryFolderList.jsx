@@ -6,7 +6,7 @@ import { IoMdSearch } from 'react-icons/io';
 import CategoryTable from '../table/CategoryTable';
 import NotificationTable from '../table/NotificationTable';
 
-const NotificationList = () => {
+const GalleryFolderList = () => {
   const [isOn, setIsOn] = useState(false);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
@@ -68,4 +68,5 @@ const NotificationList = () => {
   );
 }
 
-export default NotificationList
+
+export default GalleryFolderList

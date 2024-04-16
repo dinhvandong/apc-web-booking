@@ -14,6 +14,7 @@ import { IoMdSearch } from 'react-icons/io';
 import { MdAdd } from "react-icons/md";
 import RoomTable from "../table/RoomTable";
 import PriceTable from "../table/PriceTable";
+import RoomTableFolio from "../table/RoomTableFolio";
 
 const PriceList = () => {
     const [isOn, setIsOn] = useState(false);
@@ -22,6 +23,9 @@ const PriceList = () => {
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
+
+    const [roomID, setRoomID] = useState(1);
+
     const toggleSwitch = () => {
         setIsOn(!isOn);
     };
@@ -31,6 +35,17 @@ const PriceList = () => {
     const handleSearch = () => {
 
     }
+
+    const selectRow = (id) =>{
+
+    }
+
+    const handleChildCallback = (data) => {
+        console.log('Received data from child:', data);
+        setRoomID(data);
+        // Perform any necessary actions with the data in the parent component
+      };
+
     return (
         <div className='flex flex-col w-full h-auto '>
             <div className="w-full h-[50px] bg-base_color">
@@ -83,11 +98,11 @@ const PriceList = () => {
             <div className="flex w-[100%] ml-5 flex-row justify-center">
 
                 <div className="w-2/3 mt-5">
-                    <RoomTable />
+                    <RoomTableFolio  onChildCallback={handleChildCallback}  />
 
                 </div>
                 <div className="flex-row justify-center w-1/3 ml-5">
-                    <PriceTable />
+                    <PriceTable roomID = {roomID}/>
 
                 </div>
             </div>

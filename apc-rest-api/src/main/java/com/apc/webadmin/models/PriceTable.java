@@ -4,18 +4,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 
 public class PriceTable {
-
     @Id
     private Long id;
-
     @Transient
     public static final String SEQUENCE_NAME = "price_table_sequence";
     private int percentage; // percent of occupancy
     private double priceUpdate;
-
     public PriceTable() {
     }
-
     public Long getId() {
         return id;
     }

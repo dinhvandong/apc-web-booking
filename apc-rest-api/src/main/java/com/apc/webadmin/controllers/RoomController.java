@@ -106,6 +106,16 @@ public class RoomController {
         }
     }
 
+
+    @GetMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll(){
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, roomService.deleteAll(),"success"));
+
+    }
+
+
+
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestParam String token, @RequestBody Room newRoom)
     {

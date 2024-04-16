@@ -33,11 +33,10 @@ const EventCreate = () => {
 
     }
     const [formData, setFormData] = useState({
-        roomType: '',
-        priceBase: '',
-        description: '',
-        thumb: '',
-        roomItemList: []
+        name: '',
+        subName: '',
+        type: '',
+       
 
     });
 
@@ -132,7 +131,7 @@ const EventCreate = () => {
                     <form onSubmit={handleSubmit} className="w-full mx-auto mt-2 ml-5 mr-5">
                         <div className="mb-2">
                             <label htmlFor="name" className="block mb-2 font-medium">
-                                Loại phòng: <span className="text-lg text-red-500">*</span>
+                                Tên sự kiện: <span className="text-lg text-red-500">*</span>
                             </label>
                             {/* <input
                                 type="text"

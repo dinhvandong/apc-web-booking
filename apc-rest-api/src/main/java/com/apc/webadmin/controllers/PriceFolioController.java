@@ -3,6 +3,7 @@ package com.apc.webadmin.controllers;
 import com.apc.webadmin.dto.ResponseObject;
 import com.apc.webadmin.jwt.JwtInterceptor;
 import com.apc.webadmin.models.PriceFolio;
+import com.apc.webadmin.models.PriceTable;
 import com.apc.webadmin.models.Room;
 import com.apc.webadmin.services.PriceFolioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,13 @@ public class PriceFolioController {
         }
     }
 
+    @GetMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll(){
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, priceFolioService.deleteAll(),"success"));
+
+    }
+
     @GetMapping("/findByRoomID")
     public ResponseEntity<?> findByRoomID(@RequestParam Long id)
     {
@@ -90,6 +98,24 @@ public class PriceFolioController {
 
         }
     }
+
+    @PostMapping("/updatePriceTable")
+    public ResponseEntity<?> updatePriceTable(@RequestParam Long roomID, @RequestBody PriceTable priceTable)
+    {
+        // List<Room> response =  roomService.findAll();
+        PriceFolio optionalRoom = priceFolioService.findByRoomID(roomID);
+        if(optionalRoom !=null){
+
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, priceFolioService.updatePriceTable(roomID, priceTable),"success"));
+
+        }else
+        {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(202, "Not found","fail"));
+
+
+        }
+    }
+
 
     @PostMapping("/insert")
     public ResponseEntity<?> insert(@RequestParam String token, @RequestBody PriceFolio priceFolio)

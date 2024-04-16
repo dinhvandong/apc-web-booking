@@ -66,7 +66,7 @@ const Login = () => {
       backgroundPosition: 'center',
     }}>
       <img src={logo} alt='pig-icon' className='mt-5 mb-5 w-[150px] h-[37.5px]' />
-      <form className="w-1/4 h-auto p-8 rounded shadow bg-edit" >
+      <form className="w-1/4 h-auto p-8 bg-[#F4ABBA] rounded shadow" >
         <div className="mt-4 mb-4">
           <label htmlFor="username" className="block mb-2">Username</label>
           <input

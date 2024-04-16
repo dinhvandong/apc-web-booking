@@ -49,6 +49,13 @@ public class PriceFolioService {
 
     }
 
+
+    public boolean deleteAll(){
+
+        priceFolioRepository.deleteAll();
+        return  true;
+    }
+
     public PriceFolio update(PriceFolio priceFolio){
 
         Optional<PriceFolio> optionalPriceFolio = priceFolioRepository.findById(priceFolio.getId());
@@ -82,6 +89,24 @@ public class PriceFolioService {
     }
 
 
+    public PriceFolio updatePriceTable (Long roomID, PriceTable priceTable){
+
+        PriceFolio priceFolio = findByRoomID(roomID);
+
+        List<PriceTable> priceTableList = priceFolio.getPriceTableList();
+        List<PriceTable> priceTableListUpdate = new ArrayList<>();
+        for(PriceTable pt: priceTableList){
+
+            if(pt.getId() == priceTable.getId()){
+                priceTableListUpdate.add(priceTable);
+
+            }else {
+                priceTableListUpdate.add(pt);
+            }
+        }
+        priceFolio.setPriceTableList(priceTableListUpdate);
+        return priceFolioRepository.save(priceFolio);
+    }
 
     public PriceFolio findByRoomID(Long id){
         return priceFolioRepository.findByRoomID(id);
