@@ -12,6 +12,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 @RestController
 @RequestMapping("/api/files")
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81"})
+
 public class FileController {
     private static final String UPLOAD_DIRECTORY = "/var/www/uploads/";
 

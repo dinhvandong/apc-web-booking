@@ -76,6 +76,12 @@ function App() {
         <Route path="/admin/notifications" element={<NotificationListPage />} />
         <Route path="/admin/notifications/create-new" element={<NotificationCreatePage />} />
         <Route path="/admin/notifications/update/:id" element={<NotificationEditPage />} />
+      
+        <Route path="/admin/gallery" element={<NotificationListPage />} />
+        <Route path="/admin/gallery/create-new" element={<NotificationCreatePage />} />
+        <Route path="/admin/gallery/update/:id" element={<NotificationEditPage />} />
+    
+      
       </Routes>
     </BrowserRouter>
   );

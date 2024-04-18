@@ -1,7 +1,7 @@
 // api.js
 import axios from 'axios';
 
-export const ROOT_URL = "localhost";
+export const ROOT_URL = "163.44.206.118";
 export const API_URL_IMAGE = `http://${ROOT_URL}:8080/api/images/`;
 
 const API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
@@ -19,7 +19,10 @@ export const loginRequest = async (email, password) => {
     password: password,
   };
   try {
-    const response = await axios.post(`${API_URL}/auth/signin`,data);
+    const response = await axios.post(`${API_URL}/auth/signin`, data, 
+    {
+      withCredentials: true,
+    });
     console.log("login:", response);
     if (response.data.success === 200) {
       const token = response.data.message;
@@ -193,7 +196,7 @@ export const createTransaction = async (transactionData) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(`${API_URL}/transaction/insert?token=${token}`,
-     transactionData)
+      transactionData)
     return response.data;
   } catch (error) {
     throw error;
@@ -204,7 +207,7 @@ export const createRoom = async (roomData) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(`${API_URL}/room/insert?token=${token}`,
-    roomData)
+      roomData)
     return response.data;
   } catch (error) {
     throw error;
@@ -215,7 +218,7 @@ export const updateRoom = async (roomData) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(`${API_URL}/room/update?token=${token}`,
-    roomData)
+      roomData)
     return response.data;
   } catch (error) {
     throw error;
@@ -233,7 +236,7 @@ export const getRooms = async () => {
 };
 
 
-export const getEvents = async () =>{
+export const getEvents = async () => {
   try {
     //const token = localStorage.getItem("token");
     const response = await axios.get(`${API_URL}/event-plan/findAll`);
@@ -244,7 +247,7 @@ export const getEvents = async () =>{
 
 }
 
-export const getEventsItem = async (eventID) =>{
+export const getEventsItem = async (eventID) => {
   try {
     //const token = localStorage.getItem("token");
     const response = await axios.get(`${API_URL}/event-plan/findAllEventItems?eventID=${eventID}`);
@@ -255,7 +258,7 @@ export const getEventsItem = async (eventID) =>{
 
 }
 
-export const getEventsItemChild = async (eventID, eventItemID) =>{
+export const getEventsItemChild = async (eventID, eventItemID) => {
   try {
     //const token = localStorage.getItem("token");
     const response = await axios.get(`${API_URL}/event-plan/findAllEventItemsChild?eventID=${eventID}&eventItemID=${eventItemID}`);
@@ -269,7 +272,7 @@ export const getEventsItemChild = async (eventID, eventItemID) =>{
 export const createEvent = async (eventData) => {
   try {
     const response = await axios.post(`${API_URL}/event-plan/insert`,
-    eventData)
+      eventData)
     return response.data;
   } catch (error) {
     throw error;
@@ -279,14 +282,14 @@ export const createEvent = async (eventData) => {
 export const updateEvent = async (eventData) => {
   try {
     const response = await axios.post(`${API_URL}/event-plan/update`,
-    eventData)
+      eventData)
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-export const getPricesByRoomID = async(roomID)=>{
+export const getPricesByRoomID = async (roomID) => {
   try {
     //const token = localStorage.getItem("token");
     const response = await axios.get(`${API_URL}/priceFolio/findByRoomID?id=${roomID}`);
@@ -328,7 +331,7 @@ export const createNotification = async (notificationData) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(`${API_URL}/notification/insert?token=${token}`,
-    notificationData)
+      notificationData)
     return response.data;
   } catch (error) {
     throw error;
@@ -339,9 +342,9 @@ export const updateNotification = async (notificationData) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(`${API_URL}/notification/update?token=${token}`,
-    {
+      {
         withCredentials: true,
-    }, notificationData)
+      }, notificationData)
     return response.data;
   } catch (error) {
     throw error;
@@ -419,44 +422,43 @@ export const uploadFile = async (file) => {
   return fileResponse.data;
 };
 
-export const getPriorityList = () =>{
+export const getPriorityList = () => {
   const array = [
     {
-      id:1,
-      priority:1,
-      name:"Cao nhất"
+      id: 1,
+      priority: 1,
+      name: "Cao nhất"
     },
     {
-      id:2,
-      priority:2,
-      name:"Trung bình"
+      id: 2,
+      priority: 2,
+      name: "Trung bình"
     },
     {
-      id:3,
-      priority:3,
-      name:"Thấp"
+      id: 3,
+      priority: 3,
+      name: "Thấp"
     }
   ];
   return array;
 };
 
-export const getNotificationType = () =>
-{
+export const getNotificationType = () => {
   const array = [
     {
-      id:1,
-      name:"Đến tất cả",
-      code:"ALL"
+      id: 1,
+      name: "Đến tất cả",
+      code: "ALL"
     },
     {
-      id:2,
-      name:"Đến nhóm cụ thể",
-      code:"GROUP"
+      id: 2,
+      name: "Đến nhóm cụ thể",
+      code: "GROUP"
     },
     {
-      id:3,
-      name:"Đến 1 người cụ thể",
-      code:"PERSONAL"
+      id: 3,
+      name: "Đến 1 người cụ thể",
+      code: "PERSONAL"
     }
   ];
   return array;

@@ -7,7 +7,7 @@ import UserCreate from '../components/admin/UserCreate';
 import { isAuthenticated } from '../utils/localStorage';
 import CategoryCreate from '../components/admin/CategoryCreate';
 import NotificationCreate from '../components/admin/NotificationCreate';
-const GallaryCreatePage = () => {
+const GalleryCreatePage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,4 +36,4 @@ const GallaryCreatePage = () => {
     );
 }
 
-export default GallaryCreatePage
+export default GalleryCreatePage

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://150.95.110.230")
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81"})
 @RestController
 @RequestMapping("/api/event-plan")
 public class EventPlanController {
