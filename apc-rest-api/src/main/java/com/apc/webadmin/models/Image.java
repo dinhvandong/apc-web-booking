@@ -1,19 +1,23 @@
 package com.apc.webadmin.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "images")
 public class Image {
     @Id
-    private String id;
+    private Long id;
     private byte[] data;
 
-    public String getId() {
+    @Transient
+    public static final String SEQUENCE_NAME = "image_sequence";
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -5,11 +5,16 @@ import UserTable from '../table/UserTable';
 import { IoMdSearch } from 'react-icons/io';
 import CategoryTable from '../table/CategoryTable';
 import NotificationTable from '../table/NotificationTable';
+import GalleryFolderTable from '../table/GalleryFolderTable';
+import GalleryItemTable from '../table/GalleryItemTable';
 
 const GalleryFolderList = () => {
   const [isOn, setIsOn] = useState(false);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [galleryID, setGalleryID] = useState(1);
+
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -22,16 +27,22 @@ const GalleryFolderList = () => {
   const handleSearch = () => {
 
   }
+
+  const handleChildCallback = (data) => {
+    console.log('Received data from child:', data);
+    setGalleryID(data);
+    // Perform any necessary actions with the data in the parent component
+  };
   return (
     <div className='flex flex-col w-full h-auto'>
       <div className="w-full h-[50px] bg-base_color">
 
       </div>
       <div className="flex justify-start m-5 md:justify-center sm:justify-center lg:justify-start">
-        <p className="font-bold">NOTIFICATIONS</p>
+        <p className="font-bold">Gallery photo</p>
       </div>
       <Button className="w-[160px] ml-5 font-bold text-center mb-5 bg-blue-500" type="primary" onClick={handleInsert}>
-        NEW NOTIFICATION
+        New photo
       </Button>
       <div className='flex flex-row m-5'>
         <div className='flex items-center gap-3'>
@@ -60,7 +71,16 @@ const GalleryFolderList = () => {
         </div>
       </div>
       <div className="flex w-[100%]   flex-row justify-center">
-        <NotificationTable />
+        {/* <GalleryFolderTable /> */}
+
+        <div className="w-1/2">
+                    <GalleryFolderTable  onChildCallback={handleChildCallback}  />
+
+                </div>
+                <div className="flex-row justify-center w-1/2 ml-5">
+                    <GalleryItemTable galleryID = {galleryID}/>
+
+                </div>
 
       </div>
 

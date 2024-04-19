@@ -173,12 +173,18 @@ const Sidebar = (props) => {
     navigate("/admin/notifications");
   }
 
+  function gotoGallery() {
+    navigate("/admin/gallery");
+  }
+
   const tab = props.menu;
   const styleMenu1 = tab === "tab1" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu2 = tab === "tab2" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu3 = tab === "tab3" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu4 = tab === "tab4" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu5 = tab === "tab5" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu6 = tab === "tab6" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu7 = tab === "tab7" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
 
   const [width, setWidth] = useState('w-[200px]');
   const [active, setActive] = useState(true);
@@ -275,44 +281,6 @@ const Sidebar = (props) => {
               active == true ? <div className="text-sm ">Giá</div> : <div></div>
             }
           </button>
-          {/* <button
-            onClick={() => gotoNotification()}
-            onMouseEnter={handleMouseEnter5}
-            onMouseLeave={handleMouseLeave5}
-            className={`flex flex-row justify-start items-center ${styleMenu4} hover:text-red-600`}
-          >
-            <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
-            {
-              active == true ? <div className="text-sm ">Thông báo</div>:<div></div>
-
-            }
-          </button>
-          <button
-            onClick={() => gotoNotification()}
-            onMouseEnter={handleMouseEnter5}
-            onMouseLeave={handleMouseLeave5}
-            className={`flex flex-row justify-start items-center ${styleMenu5} hover:text-red-600`}
-          >
-            <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
-            {
-              active == true ? <div className="text-sm ">Cấu hình Giá</div>:<div></div>
-
-            }
-          </button>
-
-          <button
-            onClick={() => gotoNotification()}
-            onMouseEnter={handleMouseEnter5}
-            onMouseLeave={handleMouseLeave5}
-            className={`flex flex-row justify-start items-center ${styleMenu6} hover:text-red-600`}
-          >
-            <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
-            {
-              active == true ? <div className="text-sm ">Tin tức</div>:<div></div>
-
-            }
-          </button> */}
-
           <button
             onClick={() => gotoNotification()}
             onMouseEnter={handleMouseEnter5}
@@ -328,9 +296,9 @@ const Sidebar = (props) => {
 
           <button
             onClick={() => gotoNotification()}
-            onMouseEnter={handleMouseEnter5}
-            onMouseLeave={handleMouseLeave5}
-            className={`flex flex-row justify-start items-center ${styleMenu5} hover:text-red-600`}
+            onMouseEnter={handleMouseEnter6}
+            onMouseLeave={handleMouseLeave6}
+            className={`flex flex-row justify-start items-center ${styleMenu6} hover:text-red-600`}
           >
             <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
             {
@@ -340,10 +308,10 @@ const Sidebar = (props) => {
           </button>
 
           <button
-            onClick={() => gotoNotification()}
-            onMouseEnter={handleMouseEnter5}
-            onMouseLeave={handleMouseLeave5}
-            className={`flex flex-row justify-start items-center ${styleMenu5} hover:text-red-600`}
+            onClick={() => gotoGallery()}
+            onMouseEnter={handleMouseEnter7}
+            onMouseLeave={handleMouseLeave7}
+            className={`flex flex-row justify-start items-center ${styleMenu7} hover:text-red-600`}
           >
             <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
             {
@@ -352,6 +320,9 @@ const Sidebar = (props) => {
             }
           </button>
         </div>
+      </div>
+      <div className="flex w-[2px] h-full bg-base_color">
+
       </div>
     </div>
   );

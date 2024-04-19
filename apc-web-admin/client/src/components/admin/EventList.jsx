@@ -28,7 +28,7 @@ const EventList = () => {
         setIsOn(!isOn);
     };
     const createNewRoom = () => {
-        navigate("/admin/room/create-new");
+        navigate("/admin/event/create-new");
     };
     const handleSearch = () => {
 

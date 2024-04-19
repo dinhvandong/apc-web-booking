@@ -1,7 +1,7 @@
 // api.js
 import axios from 'axios';
 
-export const ROOT_URL = "163.44.206.118";
+export const ROOT_URL = "localhost";
 export const API_URL_IMAGE = `http://${ROOT_URL}:8080/api/images/`;
 
 const API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
@@ -19,10 +19,10 @@ export const loginRequest = async (email, password) => {
     password: password,
   };
   try {
-    const response = await axios.post(`${API_URL}/auth/signin`, data, 
-    {
-      withCredentials: true,
-    });
+    const response = await axios.post(`${API_URL}/auth/signin`, data,
+      {
+        withCredentials: true,
+      });
     console.log("login:", response);
     if (response.data.success === 200) {
       const token = response.data.message;
@@ -125,7 +125,10 @@ export const getGroups = async () => {
 export const getCategory = async () => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/category/findAll?token=${token}`);
+    const response = await axios.post(`${API_URL}/category/findAll?token=${token}`,
+      {
+        withCredentials: true,
+      });
     return response.data.data;
   } catch (error) {
     throw error;
@@ -135,7 +138,12 @@ export const getCategory = async () => {
 export const getCategoryByGroupId = async (groupId) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/category/findAllByGroupId?token=${token}&groupId=${groupId}`);
+    const response = await axios.post(`${API_URL}/category/findAllByGroupId?token=${token}&groupId=${groupId}`,
+      {
+        withCredentials: true,
+      }
+
+    );
     return response.data.data;
   } catch (error) {
     throw error;
@@ -145,7 +153,9 @@ export const getCategoryByGroupId = async (groupId) => {
 export const createGroups = async (groupData) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/category-group/insert?token=${token}`, groupData);
+    const response = await axios.post(`${API_URL}/category-group/insert?token=${token}`, {
+      withCredentials: true,
+    }, groupData);
     return response.data;
   } catch (error) {
     throw error;
@@ -155,7 +165,9 @@ export const createGroups = async (groupData) => {
 export const createCategory = async (groupID, categoryData) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/category/insert?token=${token}&groupID=${groupID}`, categoryData);
+    const response = await axios.post(`${API_URL}/category/insert?token=${token}&groupID=${groupID}`, {
+      withCredentials: true,
+    }, categoryData);
     return response.data;
   } catch (error) {
     throw error;
@@ -165,7 +177,9 @@ export const createCategory = async (groupID, categoryData) => {
 export const findCategory = async (id) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/category/findById?token=${token}&id=${id}`);
+    const response = await axios.post(`${API_URL}/category/findById?token=${token}&id=${id}`, {
+      withCredentials: true,
+    });
     return response.data.data;
   } catch (error) {
     throw error;
@@ -175,7 +189,9 @@ export const findCategory = async (id) => {
 export const getTransactions = async () => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/transaction/findAll?token=${token}`);
+    const response = await axios.post(`${API_URL}/transaction/findAll?token=${token}`, {
+      withCredentials: true,
+    });
     return response.data.data;
   } catch (error) {
     throw error;
@@ -185,7 +201,9 @@ export const getTransactions = async () => {
 export const findTransactionsByUserId = async (userId) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/transaction/findAllByUserId?token=${token}&userId=${userId}`);
+    const response = await axios.post(`${API_URL}/transaction/findAllByUserId?token=${token}&userId=${userId}`, {
+      withCredentials: true,
+    });
     return response.data.data;
   } catch (error) {
     throw error;
@@ -195,7 +213,9 @@ export const findTransactionsByUserId = async (userId) => {
 export const createTransaction = async (transactionData) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/transaction/insert?token=${token}`,
+    const response = await axios.post(`${API_URL}/transaction/insert?token=${token}`, {
+      withCredentials: true,
+    },
       transactionData)
     return response.data;
   } catch (error) {
@@ -206,8 +226,21 @@ export const createTransaction = async (transactionData) => {
 export const createRoom = async (roomData) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/room/insert?token=${token}`,
+    const response = await axios.post(`${API_URL}/room/insert?token=${token}`, {
+      withCredentials: true,
+    },
       roomData)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createGallery = async (galleryData) => {
+  try {
+    //const token = localStorage.getItem("token");
+    const response = await axios.post(`${API_URL}/galleryFolder/insert`, 
+    galleryData)
     return response.data;
   } catch (error) {
     throw error;
@@ -217,7 +250,9 @@ export const createRoom = async (roomData) => {
 export const updateRoom = async (roomData) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/room/update?token=${token}`,
+    const response = await axios.post(`${API_URL}/room/update?token=${token}`, {
+      withCredentials: true,
+    },
       roomData)
     return response.data;
   } catch (error) {
@@ -228,7 +263,31 @@ export const updateRoom = async (roomData) => {
 export const getRooms = async () => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/room/findAll`);
+    const response = await axios.get(`${API_URL}/room/findAll`, {
+      withCredentials: true,
+    });
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getGalleries = async () => {
+  try {
+    //const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_URL}/galleryFolder/findAll`, 
+    );
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getGalleryById = async (galleryID) => {
+  try {
+    //const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_URL}/galleryFolder/findById?id=${galleryID}`, 
+    );
     return response.data.data;
   } catch (error) {
     throw error;
@@ -239,7 +298,9 @@ export const getRooms = async () => {
 export const getEvents = async () => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/event-plan/findAll`);
+    const response = await axios.get(`${API_URL}/event-plan/findAll`, {
+      withCredentials: true,
+    });
     return response.data.data;
   } catch (error) {
     throw error;
@@ -250,7 +311,9 @@ export const getEvents = async () => {
 export const getEventsItem = async (eventID) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/event-plan/findAllEventItems?eventID=${eventID}`);
+    const response = await axios.get(`${API_URL}/event-plan/findAllEventItems?eventID=${eventID}`, {
+      withCredentials: true,
+    });
     return response.data.data;
   } catch (error) {
     throw error;
@@ -261,7 +324,9 @@ export const getEventsItem = async (eventID) => {
 export const getEventsItemChild = async (eventID, eventItemID) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/event-plan/findAllEventItemsChild?eventID=${eventID}&eventItemID=${eventItemID}`);
+    const response = await axios.get(`${API_URL}/event-plan/findAllEventItemsChild?eventID=${eventID}&eventItemID=${eventItemID}`, {
+      withCredentials: true,
+    });
     return response.data.data;
   } catch (error) {
     throw error;
@@ -270,9 +335,13 @@ export const getEventsItemChild = async (eventID, eventItemID) => {
 
 
 export const createEvent = async (eventData) => {
+
+  console.log("EventData:", eventData);
   try {
-    const response = await axios.post(`${API_URL}/event-plan/insert`,
-      eventData)
+    const response = await axios.post(`${API_URL}/event-plan/insert`, eventData, {
+      withCredentials: true,
+    }
+      )
     return response.data;
   } catch (error) {
     throw error;
@@ -281,8 +350,30 @@ export const createEvent = async (eventData) => {
 
 export const updateEvent = async (eventData) => {
   try {
-    const response = await axios.post(`${API_URL}/event-plan/update`,
+    const response = await axios.post(`${API_URL}/event-plan/update`, {
+      withCredentials: true,
+    },
       eventData)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getEventById = async (eventID) => {
+  try {
+    const response = await axios.get(`${API_URL}/event-plan/findById?id=${eventID}`)
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteEvent = async (eventID) => {
+  console.log("delete_eventID:", eventID);
+  try {
+    const response = await axios.post(`${API_URL}/event-plan/delete`,eventID
+    )
     return response.data;
   } catch (error) {
     throw error;
@@ -292,7 +383,9 @@ export const updateEvent = async (eventData) => {
 export const getPricesByRoomID = async (roomID) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/priceFolio/findByRoomID?id=${roomID}`);
+    const response = await axios.get(`${API_URL}/priceFolio/findByRoomID?id=${roomID}`, {
+      withCredentials: true,
+    });
     return response.data.data.priceTableList;
   } catch (error) {
     throw error;
@@ -409,15 +502,15 @@ export const convertDateFormat = (inputDate) => {
 
 export const uploadFile = async (file) => {
   const formData = new FormData();
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
   formData.append('file', file);
-  const fileResponse = await axios.post(`${API_URL}/images?token=${token}`,
-    formData, {
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const fileResponse = await axios.post(`${API_URL}/images`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },);
   console.log("fileResponse", fileResponse);
   return fileResponse.data;
 };

@@ -234,9 +234,6 @@ const RoomCreate = () => {
                         </ul>
 
                         </div>
-
-                     
-
                         <button
                             type="submit"
                             className="w-full px-4 py-2 mt-5 text-white rounded bg-base_color hover:bg-orange-600"
@@ -250,15 +247,10 @@ const RoomCreate = () => {
                     <div className="flex w-[100%] ml-5 mr-2 flex-row justify-center">
                         <RoomTable />
                     </div>
-
                 </div>
-
             </div>
-
-
         </div>
 
     );
 }
-
 export default RoomCreate

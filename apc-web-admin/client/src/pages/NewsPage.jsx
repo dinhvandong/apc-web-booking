@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react'
 import CategoriesList from '../components/admin/CategoriesList';
 import HeaderAdmin from '../components/admin/HeaderAdmin';
@@ -6,8 +5,7 @@ import Sidebar from '../components/admin/SideBar';
 import { isAuthenticated } from '../utils/localStorage';
 import { useNavigate } from 'react-router-dom';
 import NotificationList from '../components/admin/NotificationList';
-import GalleryFolderList from '../components/admin/GalleryFolderList';
-const GalleryPage = () => {
+const NewsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,14 +24,14 @@ const GalleryPage = () => {
       <HeaderAdmin />
       <div className="flex flex-row w-full">
       <div>
-          <Sidebar menu="tab7" />
+          <Sidebar menu="tab6" />
         </div>
         <div className="flex w-[100%]   flex-row justify-center">     
-          <GalleryFolderList />
+          <NotificationList />
         </div>
       </div>
     </div>);
 }
 
 
-export default GalleryPage
+export default NewsPage

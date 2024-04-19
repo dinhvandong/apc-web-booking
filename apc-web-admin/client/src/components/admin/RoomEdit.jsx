@@ -60,12 +60,6 @@ const RoomEdit = (props) => {
             }
         };
 
-        //const fetchData = async () => {
-        //const data = await getGroups();
-        //setOptions(data);
-        //   fetchCategoryById();
-        // };
-        // fetchData();
 
         fetchRoomById();
     }, []);

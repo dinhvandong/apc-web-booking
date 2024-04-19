@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { convertDateFormat, deleteUser, getEvents, getEventsItem, getEventsItemChild, getRooms, getUsers } from '../../services/api'
+import { convertDateFormat, deleteEvent, deleteUser, getEvents, getEventsItem, getEventsItemChild, getRooms, getUsers } from '../../services/api'
 import { Button, Space, Table } from 'antd';
 import { useNavigate } from 'react-router-dom';
 // import defaultImage from '../../assets/icon.png';
@@ -19,7 +19,7 @@ const EventTable = () => {
 
     const handleEdit = (id) => {
         console.log('Edit clicked for ID:', id);
-        navigate(`/admin/room/update/${id}`)
+        navigate(`/admin/event/update/${id}`)
     };
 
     const handleStep = (id) => {
@@ -60,7 +60,8 @@ const EventTable = () => {
 
     const handleDelete = async (id) => {
         console.log('Delete clicked for ID:', id);
-        const response = await deleteUser(id);
+        const deleteEventModel = {id: id};
+        const response = await deleteEvent(deleteEventModel);
         refreshData();
         console.log("delete:", response);
     };
@@ -155,7 +156,7 @@ const EventTable = () => {
             key: 'actions',
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="text-white bg-orange-600" type="primary" onClick={() => handleStep(record.id)}>Tạo Danh mục con</Button>
+                    <Button className="text-white bg-orange-600" type="primary" onClick={() => handleStep(record.id)}>Xem danh mục con</Button>
                     <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Chỉnh sửa</Button>
                     <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
                 </Space>

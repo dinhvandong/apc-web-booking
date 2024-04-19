@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
-@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81"})
+@CrossOrigin(origins = {"http://163.44.206.118:80",
+        "http://163.44.206.118:81",
+        "http://localhost:3001"})
 @RestController
 @RequestMapping("/api/images")
 public class ImageController {
@@ -25,27 +27,29 @@ public class ImageController {
         this.imageService = imageService;
     }
     @PostMapping
-    public ResponseEntity<?> uploadImage(@RequestParam String token, @RequestParam("file") MultipartFile file) {
-        try {
-            if(token.isBlank()){
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"user not exist"));
-            }
-            token = "Bearer " + token;
-            boolean isAuthenticated = JwtInterceptor.getInstance().isValidToken(token);
-            if(isAuthenticated){
-                Image savedImage = imageService.saveImage(file);
-                //return ResponseEntity.ok(savedImage.getId());
-               return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, savedImage.getId(),"upload Ok"));
-            }else {
-               return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"upload not Ok"));
-            }
-        } catch (IOException e) {
-           return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"upload not Ok"));
-        }
+    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
+//        try {
+//            if(token.isBlank()){
+//                return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"user not exist"));
+//            }
+//            token = "Bearer " + token;
+//            boolean isAuthenticated = JwtInterceptor.getInstance().isValidToken(token);
+//            if(isAuthenticated){
+//                          }else {
+//               return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"upload not Ok"));
+//            }
+//        } catch (IOException e) {
+//           return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"upload not Ok"));
+//        }
+
+        Image savedImage = imageService.saveImage(file);
+        //return ResponseEntity.ok(savedImage.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, savedImage.getId(),"upload Ok"));
+
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable("id") String id) {
+    public ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
         Optional<Image> imageOptional = imageService.getImage(id);
         if (imageOptional.isPresent()) {
             Image image = imageOptional.get();

@@ -14,7 +14,7 @@ import { IoMdSearch } from 'react-icons/io';
 import { MdAdd } from "react-icons/md";
 import RoomTable from "../table/RoomTable";
 import PriceTable from "../table/PriceTable";
-import RoomTableFolio from "../table/RoomTableFolio";
+import RoomTableFolio from './../table/RoomTableFolio';
 
 const PriceList = () => {
     const [isOn, setIsOn] = useState(false);
@@ -97,7 +97,7 @@ const PriceList = () => {
             </div>
             <div className="flex w-[100%] ml-5 flex-row justify-center">
 
-                <div className="w-2/3 mt-5">
+                <div className="w-2/3">
                     <RoomTableFolio  onChildCallback={handleChildCallback}  />
 
                 </div>

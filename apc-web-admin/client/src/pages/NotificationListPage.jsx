@@ -24,7 +24,7 @@ const NotificationListPage = () => {
       <HeaderAdmin />
       <div className="flex flex-row w-full">
       <div>
-          <Sidebar menu="tab4" />
+          <Sidebar menu="tab6" />
         </div>
         <div className="flex w-[100%]   flex-row justify-center">     
           <NotificationList />

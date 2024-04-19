@@ -30,6 +30,9 @@ import EventEditPage from './pages/EventEditPage';
 import PricePage from './pages/PricePage';
 import PriceCreatePage from './pages/PriceCreatePage';
 import PriceEditPage from './pages/PriceEditPage';
+import GalleryPage from './pages/GalleryPage';
+import GalleryCreatePage from './pages/GalleryCreatePage';
+import GalleryEditPage from './pages/GalleryEditPage';
 
 function App() {
   return (
@@ -77,9 +80,9 @@ function App() {
         <Route path="/admin/notifications/create-new" element={<NotificationCreatePage />} />
         <Route path="/admin/notifications/update/:id" element={<NotificationEditPage />} />
       
-        <Route path="/admin/gallery" element={<NotificationListPage />} />
-        <Route path="/admin/gallery/create-new" element={<NotificationCreatePage />} />
-        <Route path="/admin/gallery/update/:id" element={<NotificationEditPage />} />
+        <Route path="/admin/gallery" element={<GalleryPage />} />
+        <Route path="/admin/gallery/create-new" element={<GalleryCreatePage />} />
+        <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
     
       
       </Routes>

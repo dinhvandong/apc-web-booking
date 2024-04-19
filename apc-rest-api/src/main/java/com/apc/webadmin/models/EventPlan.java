@@ -17,7 +17,7 @@ public class EventPlan {
     private String subName;
     private boolean active;
     private String icon;
-    private int type;
+    private String type;
     private Long createdDate;
     public String getSubName() {
         return subName;
@@ -27,11 +27,11 @@ public class EventPlan {
         this.subName = subName;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

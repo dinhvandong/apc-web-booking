@@ -31,7 +31,7 @@ public class EventPlanService {
     }
 
     public List<EventPlan> findAll(){
-        return eventPlanRepository.findAll();
+        return eventPlanRepository.findAllByActive(true);
     }
 
     public List<EventItem> findAllEventItem(Long eventID){
