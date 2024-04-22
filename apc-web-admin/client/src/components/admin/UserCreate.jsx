@@ -47,7 +47,7 @@ const UserCreate = () => {
 
         setFormData(prevFormData => ({
             ...prevFormData,
-            avatar: fileResponse
+            avatar: response.data
           }));
 
        
@@ -73,11 +73,11 @@ const UserCreate = () => {
     };
 
     return (
-        <div className='w-full h-auto flex flex-col p-3'>
-            {/* <p className='text-sm ml-10'> <span className='text-gray-500'>Trang chủ /</span>&nbsp;Quản trị viên</p> */}
+        <div className='flex flex-col w-full h-auto p-3'>
+            {/* <p className='ml-10 text-sm'> <span className='text-gray-500'>Trang chủ /</span>&nbsp;Quản trị viên</p> */}
             <div className='flex items-center gap-3 my-5'>
                 <button onClick={gotoUserList} className='text-lg font-semibold'>Danh sách</button>
-                <button className='w-24 h-9 p-4 bg-white text-gray-500 border-black rounded flex justify-center items-center hover:shadow-lg'>Tạo mới</button>
+                <button className='flex items-center justify-center w-24 p-4 text-gray-500 bg-white border-black rounded h-9 hover:shadow-lg'>Tạo mới</button>
             </div>
 
             <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto overflow-auto">

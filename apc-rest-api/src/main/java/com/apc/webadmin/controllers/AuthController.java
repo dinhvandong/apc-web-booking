@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81","http://localhost:3001"})
+
+
+
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})//@CrossOrigin(origins = {"http://163.44.206.118:83","http://163.44.206.118:80", "http://163.44.206.118:81","http://localhost:3001"})
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

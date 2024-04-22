@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import bg_signin from '../assets/bg_signin.png'
+import { loginRequest } from '../services/api';
 
 const SignIn = () => {
 
@@ -14,18 +15,27 @@ const SignIn = () => {
   // const [userInfo, setUserInfo] = useState({});
   // const [isLogin, setIsLogin] = useState(false);
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const gotoForgotPassword=()=>{
+    navigate('/forgot-password1');
+
+  }
+  const gotoSignUp =()=>{
+
+    navigate('/sign-up');
+
+  }
+  const handleSubmit_FIX = async (e) => {
     e.preventDefault();
     // console.log("username:", username);
     // console.log("password:", password);
@@ -40,9 +50,29 @@ const SignIn = () => {
     //   console.log("resultLogin:", result);
     // }
     navigate('/profile-page');
-    setUsername('');
+    setEmail('');
     setPassword('');
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("email:", email);
+    console.log("password:", password);
+    const result = await loginRequest(email, password);
+    if(result.success===200){
+      const token = result.data.message;
+      const user = result.data
+      //login(token, user);
+      navigate('/profile-page');
+      
+    }else {
+      console.log("resultLogin:", result);
+    }
+   // navigate('/admin');
+    setEmail('');
+    setPassword('');
+  };
+
+
 
   useEffect(() => {
     // const checkAuthentication = async () => {
@@ -56,7 +86,7 @@ const SignIn = () => {
     // checkAuthentication();
   }, []);
   return (
-    <div className='justify-center w-full h-full items-center  flex  flex-col' style={{
+    <div className='flex flex-col items-center justify-center w-full h-full' style={{
       backgroundImage: `url(${bg_signin})`, backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -71,14 +101,14 @@ const SignIn = () => {
         <p>Login to your Ambassador Cruise account</p>
       </div>
       <form className=" px-5 h-full w-full md:w-[400px]   flex flex-col mt-5 md:ml-5 md:mr-5  rounded">
-        <div className="mb-4 mt-4">
-          <label htmlFor="username" className="text-[14px] block mb-2 text-white">Username</label>
+        <div className="mt-4 mb-4">
+          <label htmlFor="username" className="text-[14px] block mb-2 text-white">Email</label>
           <input
             type="text"
-            id="username"
-            className="w-full border rounded py-1 px-3"
-            value={username}
-            onChange={handleUsernameChange}
+            id="email"
+            className="w-full px-3 py-1 border rounded"
+            value={email}
+            onChange={handleEmailChange}
           />
         </div>
         <div className="mb-4">
@@ -86,13 +116,13 @@ const SignIn = () => {
           <input
             type="password"
             id="password"
-            className="w-full border rounded py-1 px-3"
+            className="w-full px-3 py-1 border rounded"
             value={password}
             onChange={handlePasswordChange}
           />
         </div>
 
-        <div className="flex items-center mt-5">
+        <div onClick={gotoForgotPassword} className="flex items-center mt-5 hover:cursor-pointer">
 
           <label htmlFor="myCheckbox" className="ml-2 underline italic text-[#B77855]">
             Forgot password
@@ -105,7 +135,7 @@ const SignIn = () => {
         >
           Sign In
         </button>
-        <div className='mt-3'>
+        <div onClick={gotoSignUp} className='mt-3 cursor-pointer hover:'>
           <span className="text-white">Do you have an account?</span>
           <span className="text-[#B77855] italic"> Sign up</span>
         </div>

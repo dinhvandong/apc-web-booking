@@ -11,6 +11,11 @@ import SelectCabinPage from './pages/SelectCabinPage';
 import AmbassadorSuitePage from './pages/AmbassadorSuitePage';
 import SignInPage from './pages/SignInPage';
 import ProfilePage from './pages/ProfilePage';
+import SignUpPage from './pages/SignUpPage';
+import SignUpSuccessPage from './pages/SignUpSuccessPage';
+import ForgotPassword1Page from './pages/ForgotPassword1Page';
+import ForgotPassword2Page from './pages/ForgotPassword2Page';
+import ForgotPassword3Page from './pages/ForgotPassword3Page';
 
 function App() {
   return (
@@ -19,6 +24,12 @@ function App() {
         {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
         <Route path="/" element={<MenuPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/registration-success" element={<SignUpSuccessPage />} />
+        <Route path="/forgot-password1" element={<ForgotPassword1Page />} />
+        <Route path="/forgot-password2" element={<ForgotPassword2Page />} />
+        <Route path="/forgot-password3" element={<ForgotPassword3Page />} />
+
         <Route path="/home" element={<HomePage />} />
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/faq" element={<FaqPage/>}/>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { convertDateFormat, deleteUser, getRooms, getUsers } from '../../services/api'
+import { API_URL_IMAGE, convertDateFormat, deleteUser, getRooms, getUsers } from '../../services/api'
 import { Button, Space, Table } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
@@ -35,6 +35,7 @@ const RoomTable = () => {
   const getRowClassName = (record, index) => {
     return index %2===1 ? 'row-even' : 'row-odd';
   };
+  //const fileResponse = API_URL_IMAGE + response.data;
 
   useEffect(() => {
     const fetRooms = async () => {
@@ -111,7 +112,7 @@ const RoomTable = () => {
       dataIndex: 'thumb',
       key: 'thumb',
       render: (thumb) => <img
-        src={thumb || defaultImage}
+        src={(API_URL_IMAGE + thumb)   || defaultImage}
         alt="thumb"
         className="w-10 h-10 rounded-full"
       />,

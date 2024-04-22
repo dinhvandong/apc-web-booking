@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { convertDateFormat, deleteEvent, deleteUser, getEvents, getEventsItem, getEventsItemChild, getRooms, getUsers } from '../../services/api'
+import { API_URL_IMAGE, convertDateFormat, deleteEvent, deleteUser, getEvents, getEventsItem, getEventsItemChild, getRooms, getUsers } from '../../services/api'
 import { Button, Space, Table } from 'antd';
 import { useNavigate } from 'react-router-dom';
 // import defaultImage from '../../assets/icon.png';
@@ -196,7 +196,7 @@ const EventTable = () => {
             dataIndex: 'icon',
             key: 'icon',
             render: (icon) => <img
-                src={icon}
+                src={API_URL_IMAGE + icon}
                 alt="icon"
                 className="w-10 h-10 rounded-full"
             />,

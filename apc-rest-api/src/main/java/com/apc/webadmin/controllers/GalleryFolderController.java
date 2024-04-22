@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/galleryFolder")
-@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81","http://localhost:3001"})
+@CrossOrigin(origins = {"http://163.44.206.118:83","http://163.44.206.118:80", "http://163.44.206.118:81","http://localhost:3001"})
 
 public class GalleryFolderController {
     @Autowired
