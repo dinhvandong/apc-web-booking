@@ -52,9 +52,24 @@ public class UserService {
 //        //  return userRepository.findByUsername(username).get();
 //    }
 
+
+    public  boolean existsByEmailOrPhone(String email, String phone){
+
+        return userRepository.existsByEmailOrPhone(email,phone);
+    }
+
     public User findByEmail(String email) {
-        Optional<User> optionalUser = userRepository.findByEmail(email);
-        return optionalUser.orElse(null);
+        //Optional<User> optionalUser = userRepository.findByEmail(email);
+
+        //if(optionalUser.isEmpty()) return  null;
+        //return  optionalUser.get();
+
+
+        for(User user: findAll()){
+            if(user.getEmail().equals(email)) return user;
+        }
+        return  null;
+       // return optionalUser.orElse(null);
         //  return userRepository.findByUsername(username).get();
     }
 

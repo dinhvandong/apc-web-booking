@@ -36,7 +36,7 @@ public class User {
     private String phone;
     private int status;
     private  long createdDate;
-    private  int gender;
+    private  String gender;
     private String country;
     private String avatar;
 
@@ -104,13 +104,15 @@ public class User {
         this.country = country;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
-    public void setGender(int gender) {
+
+    public void setGender(String gender) {
         this.gender = gender;
     }
-//    public String getAddress() {
+
+    //    public String getAddress() {
 //        return address;
 //    }
 //    public void setAddress(String address) {

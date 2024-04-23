@@ -77,7 +77,7 @@ const PriceCreate = () => {
 
         setFormData(prevFormData => ({
             ...prevFormData,
-            thumb: fileResponse
+            thumb: response.data
         }));
 
 

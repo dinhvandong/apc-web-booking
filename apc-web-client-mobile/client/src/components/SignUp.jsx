@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { loginRequest } from '../services/api';
+import { loginRequest, registerRequest } from '../services/api';
 import iconHide from '../assets/icon_hide_password.png';
 import iconShow from '../assets/icon_hide_password.png';
 
@@ -13,6 +13,14 @@ const SignUp = () => {
 
   const [gender, setGender] = useState('Mr');
   const genderList = ['Mr', 'Ms'];
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [country, setCountry] = useState('');
+  const [countryCode, setCountryCode] = useState('');
   const [selectedCountry, setSelectedCountry] = useState({
     "NAME": "Vietnam",
     "CODE": "84",
@@ -149,12 +157,19 @@ const SignUp = () => {
     }
   ];
 
-  // const { login } = useContext(AuthContext);
-  // const [userInfo, setUserInfo] = useState({});
-  // const [isLogin, setIsLogin] = useState(false);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const handlePhoneChange = (e)=>{
+  console.log("phone:", phone)
+  setPhone(e.target.value);
+}
+
+const handleFirstNameChange = (e)=>{
+  setFirstName(e.target.value);
+}
+
+const handleLastNameChange = (e)=>{
+  setLastName(e.target.value);
+}
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -183,15 +198,25 @@ const SignUp = () => {
     setPassword('');
   };
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     console.log("email:", email);
     console.log("password:", password);
-    const result = await loginRequest(email, password);
+    console.log("firstName:", firstName);
+    console.log("lastName:", lastName);
+    console.log("gender:", gender);
+    console.log("country:", country);
+
+    //firstName, lastName, phone, 
+  //country, gender,
+  //email, password
+    const result = await registerRequest(firstName, lastName,phone,
+       country, gender, email, password);
     if (result.success === 200) {
       const token = result.data.message;
       const user = result.data
       //login(token, user);
-      navigate('/profile-page');
+      navigate('/registration-success');
 
     } else {
       console.log("resultLogin:", result);
@@ -200,22 +225,39 @@ const SignUp = () => {
     setEmail('');
     setPassword('');
   };
+  const handleGenderChange = event => {
+    const gender = event.target.value;
+    setGender(gender);
 
+
+  }
   const handleCountryChange = event => {
     const countryCode = event.target.value;
-    const selected = countryList.find(country => country.CODE === countryCode);
-    setSelectedCountry(selected);
-  };
-  async function parseCSVtoJSON(csvData) {
-    try {
-      const jsonArray = await csvtojson().fromString(csvData);
-      console.log("jsonArray:", jsonArray);
-      return jsonArray;
-    } catch (error) {
-      console.error('Error:', error);
-      return [];
+    console.log("countryCode::",countryCode);
+
+    for(var item in countryList){
+
+      if(item.CODE === countryCode){
+        setCountry(item.NAME);
+        setSelectedCountry(item);
+
+      }
     }
-  }
+    // const selected = countryList.find(country => country.CODE === countryCode);
+    // setSelectedCountry(selected);
+    // setCountry(selected.NAME);
+    // console.log("country::::", country);
+  };
+  // async function parseCSVtoJSON(csvData) {
+  //   try {
+  //     const jsonArray = await csvtojson().fromString(csvData);
+  //     console.log("jsonArray:", jsonArray);
+  //     return jsonArray;
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     return [];
+  //   }
+  // }
   // function parseCSVtoJSON(csvData) {
   //   return new Promise((resolve, reject) => {
   //     Papa.parse(csvData, {
@@ -314,7 +356,7 @@ const SignUp = () => {
               ))}
             </select> */}
 
-            <select id="country" name="country" className="w-auto px-2 py-2 ml-1 mr-1 border-transparent rounded">
+            <select onChange={handleGenderChange} value={gender} id="country" name="country" className="w-auto px-2 py-2 ml-1 mr-1 border-transparent rounded">
               {genderList.map((gender, index) => (
                 <option key={index} value={gender}>{gender}</option>
               ))}
@@ -328,10 +370,10 @@ const SignUp = () => {
             <label htmlFor="username" className="text-[14px] block mb-2 text-black">First Name*</label>
             <input
               type="text"
-              id="email"
+              id="firstName"
               className="w-full px-3 py-1 border border-gray-300 rounded"
-              value={email}
-              onChange={handleEmailChange}
+              value={firstName}
+              onChange={handleFirstNameChange}
             />
           </div>
           <div className='w-[50%] ml-2 flex flex-col'>
@@ -339,10 +381,10 @@ const SignUp = () => {
             <label htmlFor="username" className="text-[14px] block mb-2 text-black">Last Name*</label>
             <input
               type="text"
-              id="email"
+              id="lastName"
               className="w-full px-3 py-1 border border-gray-300 rounded"
-              value={email}
-              onChange={handleEmailChange}
+              value={lastName}
+              onChange={handleLastNameChange}
             />
           </div>
         </div>
@@ -368,7 +410,7 @@ const SignUp = () => {
             </select>
           </div>
           {/* Phone Number Input */}
-          <input type="tel" placeholder="Phone Number" className="w-auto px-4 py-2 ml-2 border-transparent rounded" />
+          <input value={phone} onChange={handlePhoneChange} type="tel" placeholder="Phone Number" className="w-auto px-4 py-2 ml-2 border-transparent rounded" />
         </div>
 
         <div className="mt-1 mb-4">
@@ -383,16 +425,10 @@ const SignUp = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block mb-2 text-black text-[14px]">Password</label>
-          {/* <input
-            type="password"
-            id="password"
-            className="w-full px-3 py-1 border rounded"
-            value={password}
-            onChange={handlePasswordChange}
-          /> */}
+          
 
           <div className="flex items-center border border-gray-300 rounded">
-            <input
+            <input value={password} onChange={handlePasswordChange}
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
               className="w-full p-2 mr-2 border-transparent hover:border-transparent"

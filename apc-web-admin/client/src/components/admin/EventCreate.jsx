@@ -76,7 +76,7 @@ const EventCreate = () => {
 
         setFormData(prevFormData => ({
             ...prevFormData,
-            icon: fileResponse
+            icon: response.data
         }));
 
 

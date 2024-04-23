@@ -10,7 +10,7 @@ package com.apc.webadmin.dto;
 
     private String lastName;
 
-    private int gender;
+    private String gender;
 
     private String country;
 
@@ -30,11 +30,11 @@ package com.apc.webadmin.dto;
          this.lastName = lastName;
      }
 
-     public int getGender() {
+     public String getGender() {
          return gender;
      }
 
-     public void setGender(int gender) {
+     public void setGender(String gender) {
          this.gender = gender;
      }
 

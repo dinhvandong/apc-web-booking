@@ -7,7 +7,7 @@ const SignUpSuccessPage = () => {
 
     const gotoHomePage =()=>{
 
-        navigate('/home');
+        navigate('/sign-in');
 
     }
 

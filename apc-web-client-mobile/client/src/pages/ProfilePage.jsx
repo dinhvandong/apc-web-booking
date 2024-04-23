@@ -22,7 +22,7 @@ const ProfilePage = () => {
       }, []);
     return (
         <div
-            className={`h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
+            className={`min-h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
 
         >      <HeaderProfile />
             <Profile />

@@ -14,8 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})//@CrossOrigin(origins = {"http://163.44.206.118:83","http://163.44.206.118:80", "http://163.44.206.118:81","http://localhost:3001"})
+@CrossOrigin(origins = {
+        "http://163.44.206.118:83",
+        "http://163.44.206.118:80",
+        "http://163.44.206.118:81",
+        "http://localhost:3001",
+        "http://localhost:3000"
+})
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -30,6 +35,29 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody UserDTO userDTO) {
+        if (userService.existsByEmailOrPhone(userDTO.getEmail(), userDTO.getPhone())) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, "null", "Email already exists"));
+        }
+        User requestUser = new User();
+        requestUser.setEmail(userDTO.getEmail());
+        requestUser.setPassword(userDTO.getPassword());
+        requestUser.setPhone(userDTO.getPhone());
+        requestUser.setCountry(userDTO.getCountry());
+        requestUser.setLastName(userDTO.getLastName());
+        requestUser.setFirstName(userDTO.getFirstName());
+        requestUser.setStatus(1);
+        requestUser.setRole("client");
+        requestUser.setCountry(userDTO.getCountry());
+        requestUser.setGender(userDTO.getGender());
+        requestUser.setStatus(1);
+        User user = userService.createUser(requestUser);
+        return ResponseEntity.status(HttpStatus.OK).body
+                (new ResponseObject(200, user, "success"));
+    }
+
+
+    @PostMapping("/signupAdmin")
+    public ResponseEntity<?> signupAdmin(@RequestBody UserDTO userDTO) {
         if (userService.findByEmail(userDTO.getEmail())!=null) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, "null", "Email already exists"));
         }
@@ -44,6 +72,8 @@ public class AuthController {
         requestUser.setFirstName(userDTO.getFirstName());
         requestUser.setStatus(1);
         requestUser.setStatus(1);
+        requestUser.setGender(userDTO.getGender());
+        requestUser.setRole("admin");
         User user = userService.createUser(requestUser);
         return ResponseEntity.status(HttpStatus.OK).body
                 (new ResponseObject(200, user, "success"));
@@ -52,7 +82,23 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody UserDTO userDTO) {
         User user = userService.findByEmail((userDTO.getEmail()));
+
+        System.out.println("UserDTO-Emai:"+ user.getEmail());
+        System.out.println("UserDTO-PASS:"+ user.getPassword());
         if (user == null || !PasswordEncoder.getInstance().matches(userDTO.getPassword(), user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseObject(201, user, "Token invalid"));
+        }
+        String token = authService.loginWithEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
+        JwtTokenStore.getInstance().storeToken(userDTO.getEmail(), token);
+        return ResponseEntity.status(HttpStatus.OK).body
+                (new ResponseObject(200,user,token));
+    }
+
+    @PostMapping("/signinAdmin")
+    public ResponseEntity<?> signinAdmin(@RequestBody UserDTO userDTO) {
+        User user = userService.findByEmail((userDTO.getEmail()));
+        if (!user.getRole().equals("admin") || !PasswordEncoder.getInstance().matches(userDTO.getPassword(), user.getPassword())) {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseObject(201, user, "Token invalid"));
         }

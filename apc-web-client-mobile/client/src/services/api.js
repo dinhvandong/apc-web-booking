@@ -1,7 +1,7 @@
 // api.js
 import axios from 'axios';
 
-export const ROOT_URL = "163.44.206.118";
+export const ROOT_URL = "localhost";
 export const API_URL_IMAGE = `http://${ROOT_URL}:8080/api/images/`;
 
 const API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
@@ -13,27 +13,27 @@ axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT,
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'; // Specify the allowed headers
 
 export const isAuthenticated = async () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const response = await axios.get(`${API_URL}/user/findToken?token=${token}`
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      const response = await axios.get(`${API_URL}/user/findToken?token=${token}`
         , {
           withCredentials: true,
         },);
-        const user = response.data;
-        console.log("USER:"+ user);
-  
-        if (user.data) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (error) {
+      const user = response.data;
+      console.log("USER:" + user);
+
+      if (user.data) {
+        return true;
+      } else {
         return false;
       }
+    } catch (error) {
+      return false;
     }
-    return false;
-  };
+  }
+  return false;
+};
 
 export const loginRequest = async (email, password) => {
 
@@ -42,11 +42,46 @@ export const loginRequest = async (email, password) => {
     email: email,
     password: password,
   };
+
+  console.log("dataLogin:", data);
+
   try {
-    const response = await axios.post(`${API_URL}/auth/signin`, data,
-      {
-        withCredentials: true,
-      });
+    const response = await axios.post(`${API_URL}/auth/signin`, data, {
+      withCredentials: true,
+    },);
+    console.log("login:", response);
+    if (response.data.success === 200) {
+      const token = response.data.message;
+      localStorage.setItem("token", token);
+      return response.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const registerRequest = async (
+  firstName, lastName, phone,
+  country, gender,
+  email, password) => {
+
+  const data = {
+    // JSON data to be sent in the request body
+    phone: phone,
+    lastName: lastName,
+    firstName: firstName,
+    gender: gender,
+    country: country,
+    email: email,
+    password: password,
+  };
+
+  console.log("register:", data);
+  try {
+    const response = await axios.post(`${API_URL}/auth/signup`, data);
     console.log("login:", response);
     if (response.data.success === 200) {
       const token = response.data.message;
@@ -263,8 +298,8 @@ export const createRoom = async (roomData) => {
 export const createGallery = async (galleryData) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/galleryFolder/insert`, 
-    galleryData)
+    const response = await axios.post(`${API_URL}/galleryFolder/insert`,
+      galleryData)
     return response.data;
   } catch (error) {
     throw error;
@@ -299,7 +334,7 @@ export const getRooms = async () => {
 export const getGalleries = async () => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/galleryFolder/findAll`, 
+    const response = await axios.get(`${API_URL}/galleryFolder/findAll`,
     );
     return response.data.data;
   } catch (error) {
@@ -310,7 +345,7 @@ export const getGalleries = async () => {
 export const getGalleryById = async (galleryID) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/galleryFolder/findById?id=${galleryID}`, 
+    const response = await axios.get(`${API_URL}/galleryFolder/findById?id=${galleryID}`,
     );
     return response.data.data;
   } catch (error) {
@@ -365,7 +400,7 @@ export const createEvent = async (eventData) => {
     const response = await axios.post(`${API_URL}/event-plan/insert`, eventData, {
       withCredentials: true,
     }
-      )
+    )
     return response.data;
   } catch (error) {
     throw error;
@@ -396,7 +431,7 @@ export const getEventById = async (eventID) => {
 export const deleteEvent = async (eventID) => {
   console.log("delete_eventID:", eventID);
   try {
-    const response = await axios.post(`${API_URL}/event-plan/delete`,eventID
+    const response = await axios.post(`${API_URL}/event-plan/delete`, eventID
     )
     return response.data;
   } catch (error) {

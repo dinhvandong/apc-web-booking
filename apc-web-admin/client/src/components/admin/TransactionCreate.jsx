@@ -45,7 +45,7 @@ const TransactionCreate = () => {
     console.log("upload-file", response);
     setFormData(prevFormData => ({
       ...prevFormData,
-      icon: fileResponse
+      icon: response.data
     }));
   };
 

@@ -35,24 +35,7 @@ const SignIn = () => {
     navigate('/sign-up');
 
   }
-  const handleSubmit_FIX = async (e) => {
-    e.preventDefault();
-    // console.log("username:", username);
-    // console.log("password:", password);
-    // const result = await loginRequest(username, password);
-    // if(result.success===200){
-    //   const token = result.data.message;
-    //   const user = result.data
-    //   login(token, user);
-    //   navigate('/admin');
-
-    // }else {
-    //   console.log("resultLogin:", result);
-    // }
-    navigate('/profile-page');
-    setEmail('');
-    setPassword('');
-  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("email:", email);

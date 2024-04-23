@@ -31,6 +31,9 @@ public class PasswordEncoder {
     }
 
     public   boolean matches(String raw, String hasPassword){
+
+        System.out.println("encode:"+ encodePassword(raw));
+        System.out.println("hasPassword:" + hasPassword);
         return encodePassword(raw).equals(hasPassword);
     }
     public  String bytesToHex(byte[] bytes) {

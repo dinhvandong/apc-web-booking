@@ -1,6 +1,4 @@
 package com.apc.webadmin.database;
-
-import com.apc.webadmin.models.CategoryGroup;
 import com.apc.webadmin.models.User;
 import com.apc.webadmin.repositories.CategoryGroupRepository;
 import com.apc.webadmin.repositories.UserRepository;
@@ -24,7 +22,7 @@ public class Database {
                 user.setPhone("84965741051");
                 user.setPassword(PasswordEncoder.getInstance().encodePassword("A123456a@"));
                 user.setStatus(1);
-                user.setGender(1);
+                user.setGender("Mr");
                 user.setCountry("Vietnam");
                 user.setFirstName("Dong");
                 user.setLastName("Dinh");

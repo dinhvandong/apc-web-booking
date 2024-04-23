@@ -120,7 +120,7 @@ const PriceEdit = (props) => {
 
         setFormData(prevFormData => ({
             ...prevFormData,
-            thumb: fileResponse
+            thumb: response.data
         }));
 
 

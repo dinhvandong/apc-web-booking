@@ -22,7 +22,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
-        <Route path="/" element={<MenuPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/registration-success" element={<SignUpSuccessPage />} />

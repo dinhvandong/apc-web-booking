@@ -77,7 +77,7 @@ const RoomCreate = () => {
 
         setFormData(prevFormData => ({
             ...prevFormData,
-            thumb: fileResponse
+            thumb: response.data
         }));
 
 
