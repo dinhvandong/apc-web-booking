@@ -21,6 +21,8 @@ public class CorsConfigNew {
         corsConfig.addAllowedOrigin("http://163.44.206.118:83");
         corsConfig.addAllowedOrigin("http://163.44.206.118:3000");
         corsConfig.addAllowedOrigin("http://150.95.113.18:80");
+        corsConfig.addAllowedOrigin("http://150.95.113.18");
+
         //150.95.113.18
         // Add more allowed origins, headers, or methods as needed
         corsConfig.addAllowedMethod("*");
