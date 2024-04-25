@@ -43,7 +43,7 @@ const ForgotPassword1Page = () => {
                         Enter code to reset your password.
                     </div>
 
-                    <div className="flex flex-col w-full md:w-[400px] mt-4 mb-4">
+                    <div className="flex flex-col w-full md:w-[600px] mt-4 mb-4">
                         <label htmlFor="username" className="text-[14px] block mb-2 text-black">Email</label>
                         <input
                             type="text"
@@ -54,7 +54,7 @@ const ForgotPassword1Page = () => {
                         />
                     </div>
 
-                    <button onClick={gotoHomePage} className='text-white w-full md:w-[400px] m-5 py-2 rounded bg-[#B77855]'> Send Code</button>
+                    <button onClick={gotoHomePage} className='text-white w-full md:w-[600px] m-5 py-2 rounded bg-[#B77855]'> Send Code</button>
                 </div>
             </div>
         </div>

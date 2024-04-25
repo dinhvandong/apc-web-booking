@@ -19,7 +19,7 @@ const HeaderProfile = () => {
             </div>
             <div className='flex flex-col w-3/4 md:w-full '>
                 <p className='w-full'>Chunie Nguyen</p>
-                <div className='w-full md:w-[400px]  bg-[#9DA4AE] rounded-2xl flex p-2 flex-row item-center '>
+                <div className='w-full md:w-[600px]  bg-[#9DA4AE] rounded-2xl flex p-2 flex-row item-center '>
                     <img src={apc_badge} className='w-[25px] h-[25px]' alt='logo-ambassador-account' />
                     <p> Ambassador Account</p>
                 </div>

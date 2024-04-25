@@ -37,7 +37,7 @@ const SignUpSuccessPage = () => {
                         Continue to enjoy the best on our app.
                     </div>
 
-                    <button onClick={gotoHomePage} className='text-white w-full md:w-[400px] m-5 py-2 rounded bg-[#B77855]'> Back to Home</button>
+                    <button onClick={gotoHomePage} className='text-white w-full md:w-[600px] m-5 py-2 rounded bg-[#B77855]'> Back to Home</button>
 
                 </div>
 

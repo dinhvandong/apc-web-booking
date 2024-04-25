@@ -33,8 +33,12 @@ function BottomNavigation(props) {
   }
   function gotoPlanCruise()
   {
-    navigate("/plan-cruise");
+    navigate("/plan-cruise/1");
 
+  }
+  const  gotoMyBooking =()=>
+  {
+    navigate('/my-booking');
   }
 
   function gotoAccount()
@@ -93,7 +97,7 @@ function BottomNavigation(props) {
       src={selected==='home' ?iconHomeSelected: iconHomeDefault} />
       Home
     </button>
-    <button className={`flex flex-col items-center  text-sm  ${css2}`}>
+    <button onClick={gotoMyBooking} className={`flex flex-col items-center  text-sm  ${css2}`}>
       <img className="h-[15px] w-[15px] " src={selected ==='booking'?iconMyBookingSelected: iconMyBookingDefault} />
       My Booking
     </button>

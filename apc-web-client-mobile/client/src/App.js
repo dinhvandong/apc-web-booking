@@ -16,6 +16,9 @@ import SignUpSuccessPage from './pages/SignUpSuccessPage';
 import ForgotPassword1Page from './pages/ForgotPassword1Page';
 import ForgotPassword2Page from './pages/ForgotPassword2Page';
 import ForgotPassword3Page from './pages/ForgotPassword3Page';
+import MyBookingPage from './pages/MyBookingPage';
+import MyBookingSearchPage from './pages/MyBookingSearchPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -29,16 +32,21 @@ function App() {
         <Route path="/forgot-password1" element={<ForgotPassword1Page />} />
         <Route path="/forgot-password2" element={<ForgotPassword2Page />} />
         <Route path="/forgot-password3" element={<ForgotPassword3Page />} />
+        <Route path="/my-booking" element={<MyBookingPage />} />
 
+        <Route path='/booking-search' element={<MyBookingSearchPage />} />
         <Route path="/home" element={<HomePage />} />
+
+        <Route path="/contact" element={<ContactPage />} />
+
         <Route path="/menu" element={<MenuPage />} />
-        <Route path="/faq" element={<FaqPage/>}/>
-        <Route path="/term-condition" element={<TermConditionPage/>}/>
-        <Route path="/plan-cruise" element={<PlanCruisePage/>}/>
-        <Route path="/profile-page" element={<ProfilePage/>}/>
-        <Route path="/news" element={<NewsPage/>}/>
-        <Route path="/select-your-cabin" element={<SelectCabinPage/>}/>
-        <Route path="/ambassador-suite" element={<AmbassadorSuitePage/>}/>
+        <Route path="/faq" element={<FaqPage />} />
+        <Route path="/term-condition" element={<TermConditionPage />} />
+        <Route path="/plan-cruise/:id" element={<PlanCruisePage />} />
+        <Route path="/profile-page" element={<ProfilePage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/select-your-cabin" element={<SelectCabinPage />} />
+        <Route path="/ambassador-suite" element={<AmbassadorSuitePage />} />
 
       </Routes>
     </BrowserRouter>

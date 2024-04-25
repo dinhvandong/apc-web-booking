@@ -10,12 +10,12 @@ const HeaderSelectCabin = () => {
 
       };
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-white">
+        <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between w-full p-4 bg-white">
             <button className="mr-5 " onClick={handleBackClick}>
                 {/* Add your back icon here */}
                 <FaArrowLeft className='text-red-600' />
             </button>
-            <h1 className="text-xl font-bold">Select Your Cabin</h1>
+            <h1 className="text-xl font-bold">Select Your Plan</h1>
             <div className="mr-4"></div> {/* Add any other elements on the right side */}
         </header>
     )

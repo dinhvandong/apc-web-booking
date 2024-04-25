@@ -42,7 +42,7 @@ const SelectCabin = () => {
             }
         ]
     return (
-        <div className='flex w-full mt-10'>
+        <div className='flex w-full md:w-[600px] mt-10'>
             <ListCabinComponent data={listCabin} />
         </div>
     )

@@ -10,14 +10,14 @@ const Profile = () => {
             backgroundPosition: 'center',
         }}>
 
-            <div className='text-white w-full md:w-[400px]'>
+            <div className='text-white w-full md:w-[600px]'>
 
                 <p>
                     Get access to latest offers and easily plan your group booking!
                 </p>
             </div>
 
-            <div className='mt-5 bg-white rounded justify-center items-center flex flex-col w-full m-5 p-2 md:m-5 md:w-[400px]'>
+            <div className='mt-5 bg-white rounded justify-center items-center flex flex-col w-full m-5 p-2 md:m-5 md:w-[600px]'>
 
                 <img src={iconBooking} className='w-[50px] h-[50px]' />
 
@@ -31,15 +31,15 @@ const Profile = () => {
 
             </div>
 
-            <div className=' md:w-[400px] w-full flex flex-row items-center justify-center mt-5 rounded'>
+            <div className=' md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
 
-                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[200px] bg-white'>
+                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[300px] bg-white'>
 
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Manage-Sub User</p>
                     </div>
                 </div>
-                <div className='w-1/2 flex items-center rounded h-[60px] md:w-[200px] ml-5 bg-white '>
+                <div className='w-1/2 flex items-center rounded h-[60px] md:w-[300px] ml-5 bg-white '>
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Promotion</p>
                     </div>
@@ -47,15 +47,15 @@ const Profile = () => {
 
             </div>
 
-            <div className=' md:w-[400px] w-full flex flex-row items-center justify-center mt-5 rounded'>
+            <div className=' md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
 
-                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[200px] bg-white'>
+                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[300px] bg-white'>
 
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Voucher</p>
                     </div>
                 </div>
-                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[200px] ml-5 bg-white '>
+                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[300px] ml-5 bg-white '>
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Settings</p>
                     </div>
@@ -63,13 +63,13 @@ const Profile = () => {
 
             </div>
 
-            <div className='hover:cursor-pointer h-[60px] text-white bg-[#B77855] md:w-[400px] w-full flex flex-row items-center justify-center mt-5 rounded'>
+            <div className='hover:cursor-pointer h-[60px] text-white bg-[#B77855] md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
            
            <p>Plan Your Cruise</p>
            
             </div>
 
-            <div className='hover:cursor-pointer h-[60px] text-white bg-[#B77855] md:w-[400px] w-full flex flex-row items-center justify-center mt-5 rounded'>
+            <div className='hover:cursor-pointer h-[60px] text-white bg-[#B77855] md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
            
            <p>Upgrade To Business Account</p>
            

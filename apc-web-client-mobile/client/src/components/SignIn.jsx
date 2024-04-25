@@ -83,7 +83,7 @@ const SignIn = () => {
       <div className='mt-5 text-[14px] text-center text-white'>
         <p>Login to your Ambassador Cruise account</p>
       </div>
-      <form className=" px-5 h-full w-full md:w-[400px]   flex flex-col mt-5 md:ml-5 md:mr-5  rounded">
+      <form className=" px-5 h-full w-full md:w-[600px]   flex flex-col mt-5 md:ml-5 md:mr-5  rounded">
         <div className="mt-4 mb-4">
           <label htmlFor="username" className="text-[14px] block mb-2 text-white">Email</label>
           <input

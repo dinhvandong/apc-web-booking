@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa';
 import { SlArrowDown } from "react-icons/sl";
 import { RiLogoutBoxLine, RiNotification2Line } from 'react-icons/ri';
@@ -9,8 +9,9 @@ import { IoIosAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
 import classNames from 'classnames';
 
-const PlanCruise = () => {
+const PlanCruise = (props) => {
     const navigate = useNavigate();
+    const { id } = props;
 
     const [ adult, setAdult] = useState(0);
     const [children, setChildren] = useState(0);
@@ -25,6 +26,16 @@ const PlanCruise = () => {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+
+    useEffect(()=>{
+
+        if(id==1){
+            setCruiseType('Day Cruise');
+        }else {
+            setCruiseType('Dinner Cruise');
+        }
+
+    },[]);
 
     const toggleMenuPassenger = () => {
         setIsMenuPassengerOpen(!isMenuPassengerOpen);

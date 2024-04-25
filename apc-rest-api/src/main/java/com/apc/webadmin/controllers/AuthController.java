@@ -26,13 +26,10 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     @Autowired
     AuthService authService;
-
     @Autowired
     UserService userService;
-
     @Autowired
     UserRepository userRepository;
-
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody UserDTO userDTO) {
         if (userService.existsByEmailOrPhone(userDTO.getEmail(), userDTO.getPhone())) {
@@ -55,14 +52,12 @@ public class AuthController {
                 (new ResponseObject(200, user, "success"));
     }
 
-
     @PostMapping("/signupAdmin")
     public ResponseEntity<?> signupAdmin(@RequestBody UserDTO userDTO) {
         if (userService.findByEmail(userDTO.getEmail())!=null) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, "null", "Email already exists"));
         }
         User requestUser = new User();
-
         //requestUser.setId(1L);
         requestUser.setEmail(userDTO.getEmail());
         requestUser.setPassword(PasswordEncoder.getInstance().encodePassword(userDTO.getPassword()));
@@ -82,9 +77,6 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody UserDTO userDTO) {
         User user = userService.findByEmail((userDTO.getEmail()));
-
-        System.out.println("UserDTO-Emai:"+ user.getEmail());
-        System.out.println("UserDTO-PASS:"+ user.getPassword());
         if (user == null || !PasswordEncoder.getInstance().matches(userDTO.getPassword(), user.getPassword())) {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseObject(201, user, "Token invalid"));
