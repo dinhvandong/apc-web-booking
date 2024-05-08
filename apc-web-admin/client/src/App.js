@@ -33,6 +33,7 @@ import PriceEditPage from './pages/PriceEditPage';
 import GalleryPage from './pages/GalleryPage';
 import GalleryCreatePage from './pages/GalleryCreatePage';
 import GalleryEditPage from './pages/GalleryEditPage';
+import TimeTablePricePage from './pages/TimeTablePricePage';
 
 function App() {
   return (
@@ -83,7 +84,8 @@ function App() {
         <Route path="/admin/gallery" element={<GalleryPage />} />
         <Route path="/admin/gallery/create-new" element={<GalleryCreatePage />} />
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
-    
+        <Route path="/admin/time-price" element={<TimeTablePricePage />} />
+
       
       </Routes>
     </BrowserRouter>

@@ -11,22 +11,21 @@ const SignInPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      const checkAuthentication = async () => {
-        const authenticated = await isAuthenticated();
-        console.log("authenticated", authenticated);
-        if (authenticated) {
-           navigate('/profile-page');
-        } else {
-        }
-      };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      checkAuthentication();
-    }, []);
+    const checkAuthentication = async () => {
+      const authenticated = await isAuthenticated();
+      console.log("authenticated", authenticated);
+      if (authenticated) {
+        navigate('/profile-page');
+      } else {
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    checkAuthentication();
+
+  }, []);
   return (
     <div
-      className={`h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
-
-    >      <HeaderSignIn />
+      className={`h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}>     <HeaderSignIn title={"Sign In"} />
       <SignIn />
       <BottomNavigation selected={"account"} />
     </div>

@@ -19,6 +19,9 @@ import ForgotPassword3Page from './pages/ForgotPassword3Page';
 import MyBookingPage from './pages/MyBookingPage';
 import MyBookingSearchPage from './pages/MyBookingSearchPage';
 import ContactPage from './pages/ContactPage';
+import AncillaryPage from './pages/AncillaryPage';
+import PaymentConfirmPage from './pages/PaymentConfirmPage';
+import BookingSuccessfulPage from './pages/BookingSuccessfulPage';
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
         <Route path="/home" element={<HomePage />} />
 
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/ancillary" element={<AncillaryPage />} />
+        <Route path="/payment-confirm" element={<PaymentConfirmPage />} />
+        <Route path="/booking-success" element={<BookingSuccessfulPage />} />
 
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/faq" element={<FaqPage />} />

@@ -16,7 +16,7 @@ const EventItem = () => {
                     </div>
 
                     <div>
-                        <p>
+                    <p className='font-thin text-[#9DA4AE]'>
                             Savor your sumptuous meal on board
                         </p>
                     </div>
@@ -29,7 +29,7 @@ const EventItem = () => {
                         </div>
 
                         <div>
-                            <p>
+                            <p className='font-thin text-[#9DA4AE]'>
                                 Enjoy your welcome drink upon embarkation
                             </p>
                         </div>
@@ -39,13 +39,13 @@ const EventItem = () => {
                     <div className='flex flex-col w-full h-auto mt-5'>
                         <div className='font-bold text-black'>
                             <p>
-                            DINNER BUFFET
+                                DINNER BUFFET
                             </p>
                         </div>
 
                         <div>
-                            <p>
-                            Savor one dinner buffet on Ambassador Cruise
+                            <p className='font-thin text-[#9DA4AE]'>
+                                Savor one dinner buffet on Ambassador Cruise
                             </p>
                         </div>
                     </div>
@@ -53,13 +53,13 @@ const EventItem = () => {
                     <div className='flex flex-col w-full h-auto mt-5'>
                         <div className='font-bold text-black'>
                             <p>
-                            BEVERAGE
+                                BEVERAGE
                             </p>
                         </div>
 
                         <div>
-                            <p>
-                            Additional fee applied
+                            <p className='font-thin text-[#9DA4AE]'>
+                                Additional fee applied
                             </p>
                         </div>
                     </div>

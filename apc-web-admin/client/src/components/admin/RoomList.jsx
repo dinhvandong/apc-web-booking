@@ -39,10 +39,6 @@ const RoomList = () => {
                 <p className="font-bold">Danh sách phòng</p>
             </div>
             <div className='h-[1px] bg-base_color w-full'></div>
-
-            {/* <Button className="w-[120px] text-center font-bold ml-5 mb-5 bg-blue-500" type="primary" onClick={handleInsert}>
-      NEW USER
-    </Button> */}
             <div className='flex flex-row m-5'>
                 <div className='flex items-center gap-3'>
                     <input type="radio"

@@ -299,7 +299,7 @@ const handleLastNameChange = (e)=>{
     // checkAuthentication();
   }, []);
   return (
-    <div className='flex flex-col items-center justify-center flex-grow w-full md:w-[600px] h-[1000px] overflow-y-auto'>
+    <div className='flex flex-col items-center justify-center  w-full md:w-[600px] flex-grow  h-[1000px] overflow-y-auto'>
       <div className='text-xl font-bold mt-[100px] text-center  text-black'>
         <p>
           Let's embark on the journey with

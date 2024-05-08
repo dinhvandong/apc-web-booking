@@ -1,10 +1,10 @@
 // api.js
 import axios from 'axios';
 
-export const ROOT_URL = "163.44.206.118";
+export const ROOT_URL = "localhost";
 export const API_URL_IMAGE = `http://${ROOT_URL}:8080/api/images/`;
 
-const API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
+export const  API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
 axios.defaults.baseURL = `http://${ROOT_URL}:8080`; // Replace with your backend API's base URL
 
 // Add the following lines to set the CORS headers
@@ -222,6 +222,9 @@ export const createTransaction = async (transactionData) => {
     throw error;
   }
 };
+
+
+
 
 export const createRoom = async (roomData) => {
   try {

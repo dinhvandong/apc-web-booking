@@ -3,7 +3,7 @@ import { MdKeyboardArrowUp } from 'react-icons/md'
 
 const CustomerItem = () => {
     return (
-        <div className='flex flex-col w-full p-5 mt-5 border border-gray-300'>
+        <div className='flex flex-col w-full p-5 mt-5  border border-gray-300'>
 
 
             <div className='flex w-full mt-5 text-[16px] text-black font-bold'>

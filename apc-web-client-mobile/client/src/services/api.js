@@ -1,10 +1,10 @@
 // api.js
 import axios from 'axios';
 
-export const ROOT_URL = "163.44.206.118";
+export const ROOT_URL = "localhost";
 export const API_URL_IMAGE = `http://${ROOT_URL}:8080/api/images/`;
 
-const API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
+export const API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
 axios.defaults.baseURL = `http://${ROOT_URL}:8080`; // Replace with your backend API's base URL
 
 // Add the following lines to set the CORS headers
@@ -46,18 +46,22 @@ export const loginRequest = async (email, password) => {
   console.log("dataLogin:", data);
 
   try {
-    const response = await axios.post(`${API_URL}/auth/signin`, data, {
+    const response = await axios.post(`${API_URL}/auth/signin`, data, 
+    {
       withCredentials: true,
     },);
     console.log("login:", response);
-    if (response.data.success === 200) {
+    if (response.data.success === 200) 
+    {
       const token = response.data.message;
       localStorage.setItem("token", token);
       return response.data;
-    } else {
+    } else 
+    {
       return null;
     }
-  } catch (error) {
+  } catch (error) 
+  {
     throw error;
   }
 };
