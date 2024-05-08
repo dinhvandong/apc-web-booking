@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { loginRequest, registerRequest } from '../services/api';
 import iconHide from '../assets/icon_hide_password.png';
 import iconShow from '../assets/icon_hide_password.png';
 import HeaderSignIn from '../components/HeaderSignIn';
+import { AuthContext } from '../AuthProvider';
 
 const ContactPage = () => {
     const [countryList, setCountryList] = useState([]);
@@ -171,11 +172,18 @@ const ContactPage = () => {
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
+    const { bookingInfo } = useContext(AuthContext);
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
+    const [cruiseType, setCruiseType]= useState('Day Cruise');
+
     useEffect(() => {
+        console.log("Booking Type:", bookingInfo)
+
+        setCruiseType(bookingInfo.typeBooking);
+
         async function fetchData() {
             try {
                 //const response = await fetch('country.csv'); // Replace with the actual path to your CSV file
@@ -236,6 +244,17 @@ const ContactPage = () => {
         setEmail('');
         setPassword('');
     };
+    const handleNext = ()=>{
+
+         if(cruiseType === 'Day Cruise')
+        {
+            navigate('/ancillary');
+        }
+        else 
+        {
+            navigate('/payment-confirm');
+        }
+    }
     const handleGenderChange = event => {
         const gender = event.target.value;
         setGender(gender);
@@ -375,7 +394,7 @@ const ContactPage = () => {
           </label>
         </div> */}
 
-                <div className="flex items-center justify-center py-4 mt-5 mb-4 font-bold text-white rounded bg-brown_color">
+                <div onClick={handleNext} className="flex items-center justify-center py-4 mt-5 mb-4 font-bold text-white rounded bg-brown_color">
 
                     <p>Next</p>
                 </div>

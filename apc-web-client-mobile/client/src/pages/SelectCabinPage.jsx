@@ -16,14 +16,16 @@ const SelectCabinPage = () => {
     const [cruiseType, setCruiseType]= useState('Day Cruise');
 
     const gotoContactInfor = () => {
-        if(cruiseType === 'Day Cruise')
-        {
-            navigate('/ancillary');
-        }
-        else 
-        {
-            navigate('/contact');
-        }
+        // if(cruiseType === 'Day Cruise')
+        // {
+        //     navigate('/ancillary');
+        // }
+        // else 
+        // {
+        //     navigate('/contact');
+        // }
+        navigate('/contact');
+
     }
 
     useEffect(()=>{

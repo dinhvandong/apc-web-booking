@@ -57,10 +57,13 @@ public class PriceTimerService {
             }
             else
             {
-             PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
-             priceTime.setId(priceTime2.getId());
-             PriceTime priceTimeResult = priceTimeRepository.save(priceTime);
-             listReturn.add(priceTimeResult);
+                priceTimeRepository.deleteById(priceTime.getId());
+                PriceTime priceTime1 = priceTimeRepository.insert(priceTime);
+
+//             PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
+//             priceTime.setId(priceTime2.getId());
+//             PriceTime priceTimeResult = priceTimeRepository.save(priceTime);
+             listReturn.add(priceTime1);
             }
         }
         return listReturn;

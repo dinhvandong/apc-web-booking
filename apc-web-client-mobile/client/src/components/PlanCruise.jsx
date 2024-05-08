@@ -39,6 +39,8 @@ const PlanCruise = (props) => {
 
     const [dateResultString, setDateResultString] = useState('');
     const toggleDate = () => {
+      //  console.log("Curise Type:", cruiseType);
+
         setShowDate(!showDate);
     }
 
@@ -119,10 +121,13 @@ const PlanCruise = (props) => {
     }
 
     const handleDayCruise = () => {
+        console.log("Day Cruise");
         setCruiseType('Day Cruise');
     }
 
     const handleDinnerCruise = () => {
+        console.log("Dinner Cruise");
+
         setCruiseType('Dinner Cruise');
 
     }
@@ -338,12 +343,13 @@ const PlanCruise = (props) => {
 
 
     const handleUpdateBookingInfo = () => {
+        console.log("Curise Type:", cruiseType);
         const newBookingInfo = {
           customerName: '',
           adult: adult,
           children: children,
           infant: infant,
-          price: cruiseType === 'Day Cruise' ? priceByDate.priceDay: priceByDate.priceDinner,
+          price: (cruiseType === 'Day Cruise') ? priceByDate.priceDay: priceByDate.priceDinner,
           typeBooking: cruiseType,
         };
         updateBookingInfo(newBookingInfo);
@@ -352,6 +358,8 @@ const PlanCruise = (props) => {
       const nextAction = () => {
         handleUpdateBookingInfo();
         toggleDate();
+        navigate("/select-your-cabin")
+
       }
     
     return (
@@ -630,7 +638,7 @@ const PlanCruise = (props) => {
                    
                 </div>
             </div>
-            <button className='h-[50px] w-full rounded mt-5  bg-[#B77855]' onClick={handleSearchCruise}>
+            <button className='h-[50px] w-full rounded mt-5  bg-[#B77855]' onClick={nextAction}>
                 Search
             </button>
         </div>
