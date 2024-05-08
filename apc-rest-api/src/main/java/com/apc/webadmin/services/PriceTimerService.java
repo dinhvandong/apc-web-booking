@@ -57,7 +57,10 @@ public class PriceTimerService {
             }
             else
             {
-                priceTimeRepository.deleteById(priceTime.getId());
+
+                PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
+
+                priceTimeRepository.deleteById(priceTime2.getId());
                 PriceTime priceTime1 = priceTimeRepository.insert(priceTime);
 
 //             PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
