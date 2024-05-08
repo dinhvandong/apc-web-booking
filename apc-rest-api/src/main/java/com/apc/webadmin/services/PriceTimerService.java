@@ -12,9 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PriceTimerService {
@@ -57,16 +55,10 @@ public class PriceTimerService {
             }
             else
             {
-
-                PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
-
-                priceTimeRepository.deleteById(priceTime2.getId());
-                PriceTime priceTime1 = priceTimeRepository.insert(priceTime);
-
-//             PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
-//             priceTime.setId(priceTime2.getId());
-//             PriceTime priceTimeResult = priceTimeRepository.save(priceTime);
-             listReturn.add(priceTime1);
+             PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
+             priceTime.setId(priceTime2.getId());
+             PriceTime priceTimeResult = priceTimeRepository.save(priceTime);
+             listReturn.add(priceTimeResult);
             }
         }
         return listReturn;
@@ -119,6 +111,9 @@ public class PriceTimerService {
 
 
         }
+
+        returnList.sort(Comparator.comparingLong(PriceTime::getDateTime));
+
         return returnList;
     }
 

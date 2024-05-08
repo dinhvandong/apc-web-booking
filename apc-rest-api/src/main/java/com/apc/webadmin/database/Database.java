@@ -1,6 +1,7 @@
 package com.apc.webadmin.database;
 import com.apc.webadmin.models.User;
 import com.apc.webadmin.repositories.CategoryGroupRepository;
+import com.apc.webadmin.repositories.PriceTimeRepository;
 import com.apc.webadmin.repositories.UserRepository;
 import com.apc.webadmin.security.PasswordEncoder;
 import org.springframework.boot.CommandLineRunner;
@@ -12,11 +13,13 @@ import java.time.format.DateTimeFormatter;
 public class Database {
     @Bean
     CommandLineRunner initDatabase(UserRepository userRepository,
-                                   CategoryGroupRepository categoryGroupRepository) {
+                                   CategoryGroupRepository categoryGroupRepository, PriceTimeRepository priceTimeRepository) {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
+
                 User user = new User();
+                priceTimeRepository.deleteAll();;
                 user.setId(1L);
                 user.setEmail("admin@gmail.com");
                 user.setPhone("84965741051");
