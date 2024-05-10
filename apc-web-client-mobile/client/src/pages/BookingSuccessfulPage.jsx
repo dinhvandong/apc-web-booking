@@ -13,6 +13,7 @@ import bg_payment from '../assets/bg-payment.png';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import ic_success from '../assets/ic_success.png';
 import ic_copy from '../assets/copy.png';
+import HeaderBookingSuccess from '../components/HeaderBookingSuccess';
 
 const BookingSuccessfulPage = () => {
     const navigate = useNavigate();
@@ -49,8 +50,8 @@ const BookingSuccessfulPage = () => {
         'En-suite bathroom with standing shower'];
     return (
         <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
-            <HeaderSelectCabin />
-            <div className=' mt-[100px] w-full items-center justify-center md:w-[600px] flex flex-col mb-[100px] h-screen'>
+            <HeaderBookingSuccess />
+            <div className=' w-full items-center justify-center md:w-[600px] flex flex-col mb-[10px] h-screen'>
 
                 <img src={ic_success} className='mt-5 w-[150px] h-[150px]' />
                 <p className='mt-5 ml-5 mr-5 text-center text-black'>

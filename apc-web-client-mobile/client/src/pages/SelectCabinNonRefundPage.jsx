@@ -7,13 +7,13 @@ import ic_checkbox from '../assets/ic_checkbox.png';
 import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
 import { AuthContext } from '../AuthProvider';
-const SelectCabinPage = () => {
+const SelectCabinNonRefundPage = () => {
 
     const navigate = useNavigate();
     const { bookingInfo } = useContext(AuthContext);
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
-    const [cruiseType, setCruiseType]= useState('Day Cruise');
+    const [cruiseType, setCruiseType] = useState('Day Cruise');
 
     const gotoContactInfor = () => {
         // if(cruiseType === 'Day Cruise')
@@ -28,6 +28,19 @@ const SelectCabinPage = () => {
 
     }
 
+    useEffect(() => {
+
+        const adult = bookingInfo.adult;
+        const children = bookingInfo.children;
+        const infant = bookingInfo.infant;
+        const price = bookingInfo.price;
+        const count = adult + children * 0.75 + infant * 0.5;
+        setFinalPrice(count * price);
+        setCruiseType(bookingInfo.typeBooking);
+        setPrice(price);
+
+    }, []);
+
     const gotoPlanFlexible = ()=>{
         navigate('/select-your-cabin/flexible');
 
@@ -37,24 +50,14 @@ const SelectCabinPage = () => {
         navigate('/select-your-cabin/non-refundable');
 
     }
-    useEffect(()=>{
-
-        const adult = bookingInfo.adult;
-        const children = bookingInfo.children;
-        const infant = bookingInfo.infant;
-        const price = bookingInfo.price;
-        const count = adult + children*0.75 + infant*0.5 ;
-        setFinalPrice(count*price);
-        setCruiseType(bookingInfo.typeBooking);
-        setPrice(price);
-
-    },[]);
     return (
         <div className='flex flex-col items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderSelectCabin />
             <div className='mt-[100px] flex  w-full md:w-[600px] items-center h-auto flex-row justify-between'>
-                <div onClick={gotoPlanFlexible} className=' hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto bg-[#2F4842] text-white text-[14px] font-bold'> <p className='text-center'>Flexible Rate </p> </div>
-                <div onClick={gotoPlanNonRefund} className='hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto ml-2  text-[#2F4842] bg-[#B2D0C6] text-[14px] font-bold'><p className='text-center'>Non-Refundable Rate </p></div>
+                <div onClick={gotoPlanFlexible} className='hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto ml-2  text-[#2F4842] bg-[#B2D0C6] text-[14px] font-bold'><p className='text-center'>Flexible Rate </p></div>
+
+
+                <div onClick={gotoPlanNonRefund} className=' hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto bg-[#2F4842] text-white text-[14px] font-bold'> <p className='text-center'> Non-Refundable Rate</p> </div>
             </div>
             <div className='font-bold mt-5 text-base_color flex w-full md:w-[600px]'>
 
@@ -64,21 +67,21 @@ const SelectCabinPage = () => {
 
             <div className='mt-[20px]  text-base_color flex w-full md:w-[600px]'>
 
-              <div className='text-base_color w-1/3 flex  md:w-[200px]'>
-                <img className='w-5 h-5 ml-5' src= {ic_checkbox} />
-                <p>Free/Allowed</p>
+                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+                    <img className='w-5 h-5 ml-5' src={ic_checkbox} />
+                    <p>Free/Allowed</p>
 
-              </div>
-              <div className='text-base_color w-1/3 flex  md:w-[200px]'>
-                <img className='w-5 h-5' src={ic_charge} />
-                <p>Free/Allowed</p>
+                </div>
+                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+                    <img className='w-5 h-5' src={ic_charge} />
+                    <p>Free/Allowed</p>
 
-              </div>
-              <div className='text-[#B77855] w-1/3 flex  md:w-[200px]'>
-                <img className='w-5 h-5 ' src={ic_notpermit} />
-                <p className='mr-5'>Free/Allowed</p>
+                </div>
+                <div className='text-[#B77855] w-1/3 flex  md:w-[200px]'>
+                    <img className='w-5 h-5 ' src={ic_notpermit} />
+                    <p className='mr-5'>Free/Allowed</p>
 
-              </div>
+                </div>
 
             </div>
 
@@ -123,4 +126,4 @@ const SelectCabinPage = () => {
     )
 }
 
-export default SelectCabinPage
+export default SelectCabinNonRefundPage

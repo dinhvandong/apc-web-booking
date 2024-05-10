@@ -19,6 +19,18 @@ public class EventPlan {
     private String icon;
     private String type;
     private Long createdDate;
+
+    private  List<EventPlanItem> eventPlanItemList;
+
+
+    public List<EventPlanItem> getEventPlanItemList() {
+        return eventPlanItemList;
+    }
+
+    public void setEventPlanItemList(List<EventPlanItem> eventPlanItemList) {
+        this.eventPlanItemList = eventPlanItemList;
+    }
+
     public String getSubName() {
         return subName;
     }

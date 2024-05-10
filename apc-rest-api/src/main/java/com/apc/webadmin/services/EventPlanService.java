@@ -4,6 +4,7 @@ import com.apc.webadmin.database.SequenceGeneratorService;
 import com.apc.webadmin.models.EventItem;
 import com.apc.webadmin.models.EventItemChild;
 import com.apc.webadmin.models.EventPlan;
+import com.apc.webadmin.models.EventPlanItem;
 import com.apc.webadmin.repositories.EventPlanRepository;
 import com.apc.webadmin.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,79 @@ public class EventPlanService {
         eventPlan.setId(id);
         eventPlan.setActive(true);
         eventPlan.setCreatedDate(DateUtils.getCurrentDate());
+
+
+        List<EventPlanItem> eventPlanItemList = new ArrayList<>();
+        List<EventPlanItem> eventPlansItems = new ArrayList<>();
+
+        eventPlansItems = eventPlan.getEventPlanItemList();
+        for(EventPlanItem epi: eventPlansItems){
+
+            Long idEventItem = sequenceGeneratorService.generateSequence(EventPlanItem.SEQUENCE_NAME);
+            epi.setActive(true);
+            epi.setId(idEventItem);
+            eventPlanItemList.add(epi);
+        }
+
+        eventPlan.setEventPlanItemList(eventPlanItemList);
         return eventPlanRepository.insert(eventPlan);
+    }
+
+    public EventPlan  addEventPlanItem(Long id, List<EventPlanItem> eventPlanItemList)
+    {
+
+        Optional<EventPlan> optionalEventPlan = eventPlanRepository.findById(id);
+        if(optionalEventPlan.isEmpty()){
+            return null;
+        }
+
+        EventPlan eventPlan = optionalEventPlan.get();
+
+        List<EventPlanItem> eventPlanItems = eventPlan.getEventPlanItemList();
+
+        List<EventPlanItem> itemList = new ArrayList<>();
+        for(EventPlanItem item: eventPlanItemList){
+
+            Long idEventItem = sequenceGeneratorService.generateSequence(EventPlanItem.SEQUENCE_NAME);
+            item.setActive(true);
+            item.setId(idEventItem);
+            itemList.add(item);
+        }
+        eventPlanItems.addAll(itemList);
+        eventPlan.setEventPlanItemList(eventPlanItems);
+        return eventPlanRepository.save(eventPlan);
+    }
+
+    public EventPlan removeItem(Long id, Long itemIdToRemove){
+
+        Optional<EventPlan> optionalEventPlan = eventPlanRepository.findById(id);
+        if(optionalEventPlan.isEmpty()){
+            return null;
+        }
+
+        EventPlan eventPlan = optionalEventPlan.get();
+
+        List<EventPlanItem> eventPlanItems = eventPlan.getEventPlanItemList();
+
+        // Iterate over the list and find the item with the matching ID
+        EventPlanItem itemToRemove = null;
+        for (EventPlanItem item : eventPlanItems) {
+            if (item.getId() == itemIdToRemove) {
+                itemToRemove = item;
+                break;
+            }
+        }
+
+        // Remove the item if it was found
+        if (itemToRemove != null) {
+            eventPlanItems.remove(itemToRemove);
+        }
+
+        eventPlan.setEventPlanItemList(eventPlanItems);
+
+        return eventPlanRepository.save(eventPlan);
+
+
     }
 
     public List<EventPlan> findAll(){

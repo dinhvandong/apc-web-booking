@@ -5,6 +5,7 @@ import iconHide from '../assets/icon_hide_password.png';
 import iconShow from '../assets/icon_hide_password.png';
 import HeaderSignIn from '../components/HeaderSignIn';
 import { AuthContext } from '../AuthProvider';
+import HeaderContactConfirmation from '../components/HeaderContactConfirmation';
 
 const ContactPage = () => {
     const [countryList, setCountryList] = useState([]);
@@ -281,7 +282,7 @@ const ContactPage = () => {
     return (
         <div className='flex flex-col items-center justify-center w-full'>
 
-            <HeaderSignIn title={"Contact Confirmation"} />
+            <HeaderContactConfirmation  />
 
             <form className=" px-5  w-full md:w-[600px]   flex flex-col mt-[100px] md:ml-5 md:mr-5  rounded">
                 <div className='flex mt-2 mb-2'>

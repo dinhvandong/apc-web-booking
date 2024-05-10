@@ -9,55 +9,29 @@ import UserTable from '../table/UserTable';
 import { MdAdd } from 'react-icons/md';
 import RoomTable from '../table/RoomTable';
 import EventTable from '../table/EventTable';
+import EventItemList from './EventItemList';
 
 const EventCreate = () => {
     const navigate = useNavigate();
-    const [items, setItems] = useState([]);
-    // const [searchTerm, setSearchTerm] = useState('');
-    // const [selectedType, setSelectedType] = useState('');
-
+    //const [items, setItems] = useState([]);
     const eventTypes = ['Flexible Rate', 'Non-Refundable Rate'];
-    // const handleInputChange = (event) => {
-    //     setSearchTerm(event.target.value);
-    // };
 
-    // const handleTypeSelection = (type) => {
-    //     setSelectedType(type);
-    // };
-    // const gotoCreateNew = () => {
-    //     navigate('/admin/users/room-new');
-
-    // }
-    // const gotoUserList = () => {
-    //     navigate('/admin/room');
-
-    // }
+    //     id": 1,
+    //   "name": "My Event Plan",
+    //   "subName": "Sub Plan",
+    //   "active": true,
+    //   "icon": "plan-icon",
+    //   "type": "type",
+    //   "createdDate": 1620569200000,
     const [formData, setFormData] = useState({
         name: '',
         subName: '',
-        type: '',
-        icon:''
+        type: 'root',
+        icon: '',
+        eventPlanItemList: []
     });
 
-    // const handleInsert = () => {
-    //     console.log("Item_SIZE:", items);
-
-    //     const newItem = {
-    //         id: (items.length +1), // Generate a unique ID for the new item
-    //         item: 'Dịch vụ ' + items.length ,
-    //         active: true // Initialize the value as an empty string
-    //     };
-
-
-    //     setFormData((prevData) => ({
-    //         ...prevData,
-    //         roomItemList: [...prevData.roomItemList, newItem]
-    //       }));
-
-    //    setItems((prevItems) => [...prevItems, newItem]);
-
-    //     //console.log("Item_SIZE:", items);
-    // }
+    const [updatedEventPlanItemList, setUpdateEventPlanItemList]= useState([]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,46 +41,71 @@ const EventCreate = () => {
 
     const handleFileUpload = async (file) => {
         // Handle the file upload logic here
-        console.log(file);
-
+        //console.log(file);
         const response = await uploadFile(file);
-        const fileResponse = API_URL_IMAGE + response.data;
-        setFile(fileResponse);
-        console.log("upload-file", fileResponse);
-
+        //const fileResponse = API_URL_IMAGE + response.data;
+        // Khi hien thi image thi su dung API_URL_IMAGE + ten file luu trong database
+        setFile(response.data);
+        //console.log("upload-file", fileResponse);
         setFormData(prevFormData => ({
             ...prevFormData,
             icon: response.data
         }));
-
-
     };
+    const [types, setTypes] = useState([]);
 
-    // function handleInputChangeItem(e, itemId) {
-    //     const updatedItems = items.map((item) => {
-    //       if (item.id === itemId) {
-    //         return { ...item, item: e.target.value };
-    //       }
-    //       return item;
-    //     });
-      
-    //     setItems(updatedItems);
-    //     console.log("Items-List:", items);
-    //   }
+    const [items, setItems] = useState([]);
+    const [images, setImages] = useState([]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-      //  console.log("items::", items);
-        // setFormData(prevFormData => ({
-        //     ...prevFormData,
-        //     icon: file
-        // }));
-
         console.log("formDataEvent::", formData);
+        const eventItemList = types.map((item, index) => ({
+            type: item,
+            title: items[index],
+            icon: images[index],
+          }));
+
+
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            eventPlanItemList: eventItemList
+          }));
+
+          console.log(formData);
+
         const result = await createEvent(formData);
         if (result.success === 200) {
             navigate('/admin/event');
         }
         // Reset form data
+    };
+    //==================EVENT PLAN ITEM =====================================
+
+    // Cau hinh lien quan den event plan o duoi day
+    
+
+    const addItem = () => {
+        setItems(prevItems => [...prevItems, '']);
+        setTypes(prevTypes => [...prevTypes, 1]);
+        setImages(prevImages => [...prevImages, null]);
+    };
+
+    const handleInputChange = (index, value) => {
+        const updatedItems = [...items];
+        updatedItems[index] = value;
+        setItems(updatedItems);
+    };
+
+    const handleInputEventTypeChange = (index, value) => {
+        const updatedTypes = [...types];
+        updatedTypes[index] = value;
+        setTypes(updatedTypes);
+    };
+
+    const handleImageUpload = (index, file) => {
+        const updatedImages = [...images];
+        updatedImages[index] = file;
+        setImages(updatedImages);
     };
 
     return (
@@ -128,8 +127,6 @@ const EventCreate = () => {
                             <label htmlFor="name" className="block mb-2 font-medium">
                                 Event type: <span className="text-lg text-red-500">*</span>
                             </label>
-                           
-
                             <select
                                 name="type"
                                 id="type"
@@ -146,7 +143,7 @@ const EventCreate = () => {
                             </select>
                         </div>
                         <div className="mb-2">
-                            <label htmlFor="email" className="block mb-2 font-medium">
+                            <label htmlFor="name" className="block mb-2 font-medium">
                                 Event Name: <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
@@ -159,8 +156,6 @@ const EventCreate = () => {
                                 required
                             />
                         </div>
-
-
                         <div className="mb-2">
                             <label htmlFor="subName" className="block mb-2 font-medium">
                                 Event Desc: <span className="text-lg text-red-500">*</span>
@@ -175,8 +170,6 @@ const EventCreate = () => {
                                 required
                             />
                         </div>
-
-
                         <div className="mb-2">
                             <label htmlFor="email" className="block mb-2 font-medium">
                                 Icon: <span className="text-lg text-red-500">*</span>
@@ -192,9 +185,7 @@ const EventCreate = () => {
                         </div>
                         <div className="mb-2">
                             <img src={file} className='w-[100px] h-[100px]' />
-
-                        </div>                     
-
+                        </div>
                         <button
                             type="submit"
                             className="w-full px-4 py-2 mt-5 text-white rounded bg-base_color hover:bg-orange-600"
@@ -204,18 +195,41 @@ const EventCreate = () => {
                     </form>
                 </div>
                 <div className='flex flex-col w-2/3 h-auto'>
+                    <div className="flex w-[100%] ml-5 mr-2 flex-col justify-center">
+                        {/* <EventItemList/> */}
 
-                    <div className="flex w-[100%] ml-5 mr-2 flex-row justify-center">
-                        <EventTable />
+                        <button className='className="w-[200px] px-4 py-1 mt-2 mb-5 text-white rounded bg-base_color hover:bg-orange-600"' onClick={addItem}>Thêm danh mục con</button>
+                        {items.map((item, index) => (
+                            <div key={index}>
+                                <input className='text-black border border-black'
+                                    type="number"
+                                    placeholder='Loại danh mục'
+                                    value={types.at(index)}
+                                    onChange={e => handleInputEventTypeChange(index, e.target.value)}
+                                />
+                                <input className='text-black border border-black'
+                                    type="text"
+                                    placeholder='Tên danh mục'
+                                    value={item}
+                                    onChange={e => handleInputChange(index, e.target.value)}
+                                />
+                                <input
+                                    className='text-black border border-black'
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={e => handleImageUpload(index, e.target.files[0])}
+                                />
+                                <button className="w-[200px] px-4 py-1 mt-2 mb-5 text-white rounded bg-red-500 hover:bg-orange-600" onClick={() => handleInputChange(index, '')}>Remove</button>
+                            </div>
+                        ))}
+
+
+                        <div>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
-
-
         </div>
-
     );
 }
 

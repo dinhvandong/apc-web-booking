@@ -11,6 +11,7 @@ import { AuthContext } from '../AuthProvider';
 import RoomItem from '../components/RoomItem';
 import bg_payment from '../assets/bg-payment.png';
 import { MdKeyboardArrowUp } from 'react-icons/md';
+import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
 const PaymentConfirmPage = () => {
     const navigate = useNavigate();
     const { bookingInfo } = useContext(AuthContext);
@@ -47,7 +48,7 @@ const PaymentConfirmPage = () => {
         'En-suite bathroom with standing shower'];
     return (
         <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
-            <HeaderSelectCabin />
+            <HeaderPaymentConfirm />
             <div className=' mt-[100px] w-full md:w-[600px] flex flex-col mb-[100px] h-screen'>
 
                 <div className='w-full flex ml-2 mr-2 items-center rounded-lg bg-[#2F4842] h-[150px]'>

@@ -2,10 +2,7 @@ package com.apc.webadmin.controllers;
 
 import com.apc.webadmin.dto.EventId;
 import com.apc.webadmin.dto.ResponseObject;
-import com.apc.webadmin.models.CruiseCabin;
-import com.apc.webadmin.models.EventItem;
-import com.apc.webadmin.models.EventItemChild;
-import com.apc.webadmin.models.EventPlan;
+import com.apc.webadmin.models.*;
 import com.apc.webadmin.services.EventPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,18 +25,18 @@ public class EventPlanController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.findAll(),"success"));
     }
 
-    @GetMapping("/findAllEventItems")
-    public ResponseEntity<?> findAllEventItems(@RequestParam Long eventID)
-    {
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.findAllEventItem(eventID),"success"));
-    }
-
-
-    @GetMapping("/findAllEventItemsChild")
-    public ResponseEntity<?> findAllEventItemsChild(@RequestParam Long eventID, @RequestParam Long eventItemID)
-    {
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.findAllEventItemChild(eventID, eventItemID),"success"));
-    }
+//    @GetMapping("/findAllEventItems")
+//    public ResponseEntity<?> findAllEventItems(@RequestParam Long eventID)
+//    {
+//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.findAllEventItem(eventID),"success"));
+//    }
+//
+//
+//    @GetMapping("/findAllEventItemsChild")
+//    public ResponseEntity<?> findAllEventItemsChild(@RequestParam Long eventID, @RequestParam Long eventItemID)
+//    {
+//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.findAllEventItemChild(eventID, eventItemID),"success"));
+//    }
 
     @GetMapping("/findById")
     public ResponseEntity<?> findById(@RequestParam Long id){
@@ -77,17 +74,31 @@ public class EventPlanController {
 
     }
 
-    @PostMapping("/add-event-item")
-    public ResponseEntity<?> addEventItem(@RequestParam Long id,  @RequestBody List<EventItem> eventItemList){
+    @PostMapping("/add-event-plan-item")
+    public ResponseEntity<?> addEventItem(@RequestParam Long id,  @RequestBody List<EventPlanItem> eventItemList){
 
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.addItem(id, eventItemList),"success"));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.addEventPlanItem(id, eventItemList),"success"));
 
     }
 
+    @PostMapping("/remove-event-plan-item")
+    public ResponseEntity<?> addEventItem(@RequestParam Long id,  @RequestParam Long itemID){
 
-    @PostMapping("/add-event-item-child")
-    public ResponseEntity<?> addEventItemChild(@RequestParam Long id, @RequestParam Long idItem,  @RequestBody List<EventItemChild> itemChildList){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.addItemChild(id,idItem, itemChildList),"success"));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.removeItem(id, itemID),"success"));
+
     }
+
+//    @PostMapping("/add-event-item")
+//    public ResponseEntity<?> addEventItem(@RequestParam Long id,  @RequestBody List<EventItem> eventItemList){
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.addItem(id, eventItemList),"success"));
+//
+//    }
+//
+//
+//    @PostMapping("/add-event-item-child")
+//    public ResponseEntity<?> addEventItemChild(@RequestParam Long id, @RequestParam Long idItem,  @RequestBody List<EventItemChild> itemChildList){
+//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.addItemChild(id,idItem, itemChildList),"success"));
+//    }
 
 }

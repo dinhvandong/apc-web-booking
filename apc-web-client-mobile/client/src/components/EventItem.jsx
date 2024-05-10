@@ -5,7 +5,7 @@ const EventItem = () => {
     return (
         <div className=' flex flex-col justify-center mt-5  w-full md:w-[600px] h-auto  '>
 
-            <div className='border rounded border-base_color flex  justify-center w-full p-5 md:w-[600px]'>
+            <div className='border-[1px] rounded-lg border-[#B2D0C6] flex  justify-center w-full p-5 md:w-[600px]'>
                 <img className='w-[50px] h-[50px]' src={menu1} />
 
                 <div className='flex flex-col w-full h-auto ml-5'>

@@ -22,6 +22,7 @@ import ContactPage from './pages/ContactPage';
 import AncillaryPage from './pages/AncillaryPage';
 import PaymentConfirmPage from './pages/PaymentConfirmPage';
 import BookingSuccessfulPage from './pages/BookingSuccessfulPage';
+import SelectCabinNonRefundPage from './pages/SelectCabinNonRefundPage';
 
 function App() {
   return (
@@ -51,7 +52,9 @@ function App() {
         <Route path="/plan-cruise/:id" element={<PlanCruisePage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/news" element={<NewsPage />} />
-        <Route path="/select-your-cabin" element={<SelectCabinPage />} />
+        <Route path="/select-your-cabin/flexible" element={<SelectCabinPage />} />
+        <Route path="/select-your-cabin/non-refundable" element={<SelectCabinNonRefundPage />} />
+
         <Route path="/ambassador-suite" element={<AmbassadorSuitePage />} />
 
       </Routes>

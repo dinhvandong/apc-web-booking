@@ -9,6 +9,7 @@ import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
 import { AuthContext } from '../AuthProvider';
 import RoomItem from '../components/RoomItem';
+import HeaderAncillary from '../components/HeaderAncillary';
 const AncillaryPage = () => {
 
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ const AncillaryPage = () => {
         'En-suite bathroom with standing shower'];
     return (
         <div className='flex flex-col bg-[#FCFCFD] items-center justify-center w-full mb-[100px] h-auto'>
-            <HeaderSelectCabin />
+            <HeaderAncillary />
             <div className=' mt-[100px] flex flex-col mb-[100px] ml-5 mr-5'>
                 <RoomItem imageSrc={imageSrc} title={title} description={description}
                     items={items} />

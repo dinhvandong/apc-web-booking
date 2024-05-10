@@ -32,15 +32,14 @@ const PlanCruise = (props) => {
     const [packageOption, setPackageOption] = useState(null);
     const [passengerOption, setPassengerOption] = useState(null);
     const [priceDayCruise, priceDinnerCruise] = useState(0);
-    
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
     const [dateResultString, setDateResultString] = useState('');
     const toggleDate = () => {
-      //  console.log("Curise Type:", cruiseType);
-
+        //  console.log("Curise Type:", cruiseType);
         setShowDate(!showDate);
     }
 
@@ -68,7 +67,7 @@ const PlanCruise = (props) => {
         setIsMenuPassengerOpen(!isMenuPassengerOpen);
     };
     const handleSearchCruise = () => {
-        navigate("/select-your-cabin")
+        navigate("/select-your-cabin/flexible")
 
     }
 
@@ -91,7 +90,7 @@ const PlanCruise = (props) => {
     }
 
     const handleChangeAdultSub = () => {
-        if(adult>0){
+        if (adult > 0) {
             setAdult(adult - 1);
 
         }
@@ -102,7 +101,7 @@ const PlanCruise = (props) => {
     }
 
     const handleChangeChildrenSub = () => {
-        if(children>0){
+        if (children > 0) {
             setChildren(children - 1)
 
         }
@@ -114,7 +113,7 @@ const PlanCruise = (props) => {
     }
 
     const handleChangeInfantSub = () => {
-        if(infant>0){
+        if (infant > 0) {
             setInfant(infant - 1)
 
         }
@@ -177,6 +176,8 @@ const PlanCruise = (props) => {
         setCurrentMonth(monthString);
         console.log("getDataByMonth:", monthString);
         getDataByMonth(monthString);
+
+        handleEmptyCell();
     }
     const [currentMonth, setCurrentMonth] = useState('202401');
     const handleMonthChange = (event) => {
@@ -226,18 +227,18 @@ const PlanCruise = (props) => {
 
     const convertDateFormat = (dateString) => {
         const stringDate = dateString.toString();
-        if(dateString.length <=0) return "";
+        if (dateString.length <= 0) return "";
         // Extract year, month, and day from the input dateString
         const year = stringDate.substring(0, 4);
         const month = stringDate.substring(4, 6);
         const day = stringDate.substring(6, 8);
-       
+
 
         // Construct the new date string in dd/MM/yyyy format
         const newDateString = `${day}/${month}/${year}`;
-    
+
         return newDateString;
-      };
+    };
 
     const handleSelectDay = (dateTimeString) => {
         setDateResultString((dateTimeString));
@@ -290,21 +291,21 @@ const PlanCruise = (props) => {
         const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
         const day = currentDate.getDate().toString().padStart(2, '0');
         return `${year}${month}${day}`;
-      }
+    }
     // useEffect(async () => {
-       
+
     // }, []);
 
     const fetchDataPriceByDate = async (dateString) => {
         try {
-          const response = await getPriceByDate(dateString);
-         // const jsonData = await response.json();
-         // console.log("SetPriceByDate:", response);
-          setPriceByDate(response);
+            const response = await getPriceByDate(dateString);
+            // const jsonData = await response.json();
+            // console.log("SetPriceByDate:", response);
+            setPriceByDate(response);
         } catch (error) {
-          console.log('Error:', error);
+            console.log('Error:', error);
         }
-      };
+    };
     useEffect(() => {
         const getData = async (currentMonth) => {
             const result = await getPriceFromMonth(currentMonth);
@@ -345,23 +346,83 @@ const PlanCruise = (props) => {
     const handleUpdateBookingInfo = () => {
         console.log("Curise Type:", cruiseType);
         const newBookingInfo = {
-          customerName: '',
-          adult: adult,
-          children: children,
-          infant: infant,
-          price: (cruiseType === 'Day Cruise') ? priceByDate.priceDay: priceByDate.priceDinner,
-          typeBooking: cruiseType,
+            customerName: '',
+            adult: adult,
+            children: children,
+            infant: infant,
+            price: (cruiseType === 'Day Cruise') ? priceByDate.priceDay : priceByDate.priceDinner,
+            typeBooking: cruiseType,
         };
         updateBookingInfo(newBookingInfo);
-      };
+    };
 
-      const nextAction = () => {
+    const nextAction = () => {
         handleUpdateBookingInfo();
         toggleDate();
-        navigate("/select-your-cabin")
+        navigate("/select-your-cabin/flexible")
 
-      }
-    
+    }
+    const [emptyCells, setEmptyCells] = useState([]);
+
+    function getDayOfWeek(year, month, day) {
+        const date = new Date(year, month - 1, day);
+        const options = { weekday: 'long' }; // or 'short' for short names
+
+        return new Intl.DateTimeFormat('en-US', options).format(date);
+    }
+    const handleEmptyCell = () => {
+
+
+
+        const firstDay = new Date(selectedYear, selectedMonth, 1).getDay();
+
+        const firstDayOfWeek = getDayOfWeek(selectedYear, selectedMonth, 1);
+
+        console.log("selectedYear:", selectedYear);
+        console.log("selectedMonth:", selectedMonth);
+        console.log("firstDayOfWeek:", firstDayOfWeek);
+
+        //const emptyCells = Array(firstDay === 0 ? 6 : firstDay - 1).fill(null);
+        // <div className="font-bold text-center">Sun</div>
+        // <div className="font-bold text-center">Mon</div>
+        // <div className="font-bold text-center">Tue</div>
+        // <div className="font-bold text-center">Wed</div>
+        // <div className="font-bold text-center">Thu</div>
+        // <div className="font-bold text-center">Fri</div>
+        // <div className="font-bold text-center">Sat</div>
+
+        //console.log("emptyCells:", emptyCells );
+        if (firstDayOfWeek.includes('Sun')) {
+            const emptyCells = Array(0).fill(null)
+            setEmptyCells(emptyCells);
+        } else if (firstDayOfWeek.includes('Mon')) {
+            const emptyCells = Array(1).fill(null)
+            setEmptyCells(emptyCells);
+        } else if (firstDayOfWeek.includes('Tue')) {
+            const emptyCells = Array(2).fill(null)
+            setEmptyCells(emptyCells);
+        } else if (firstDayOfWeek.includes('Wed')) {
+            const emptyCells = Array(3).fill(null)
+            setEmptyCells(emptyCells);
+        } else if (firstDayOfWeek.includes('Thu')) {
+            const emptyCells = Array(4).fill(null)
+            setEmptyCells(emptyCells);
+        } else if (firstDayOfWeek.includes('Fri')) {
+            const emptyCells = Array(5).fill(null)
+            setEmptyCells(emptyCells);
+        } else if (firstDayOfWeek.includes('Sat')) {
+            const emptyCells = Array(6).fill(null)
+            setEmptyCells(emptyCells);
+        }
+        console.log("emptyCells:", emptyCells);
+
+
+    }
+
+    useEffect(() => {
+        handleEmptyCell();
+    }, [])
+
     return (
         <div className='flex-col  flex h-[1200px] w-full md:w-[600px] mt-5 ml-5 mr-5  overflow-y-auto text-white'>
             <div className=' text-5xl h-[150px] font-bold'>
@@ -418,6 +479,10 @@ const PlanCruise = (props) => {
                                     <div className="font-bold text-center">Thu</div>
                                     <div className="font-bold text-center">Fri</div>
                                     <div className="font-bold text-center">Sat</div>
+                                    {emptyCells.map((_, index) => (
+                                        <div key={`empty-${index}`} />
+                                    ))}
+
                                     {
                                         arrayPriceTime.map((day) => (
                                             <div
@@ -436,7 +501,7 @@ const PlanCruise = (props) => {
                                     }
                                 </div>
 
-                                <div onClick={nextAction} className="hover:cursor-pointer flex w-full justify-center items-center text-center py-5 mt-[50px] mb-[50px] font-bold text-white bg-brown_color text-xl">
+                                <div onClick={toggleDate}  className="hover:cursor-pointer flex w-full justify-center items-center text-center py-5 mt-[50px] mb-[50px] font-bold text-white bg-brown_color text-xl">
                                     <p>Done</p>
                                 </div>
                             </div>
@@ -615,7 +680,7 @@ const PlanCruise = (props) => {
                                     <p>Starting from</p>
                                 </div>
                                 <div>
-                                <p>{priceByDate.priceDinner} k VND</p>
+                                    <p>{priceByDate.priceDinner} k VND</p>
                                 </div>
                             </div>
                         </div>
@@ -635,7 +700,7 @@ const PlanCruise = (props) => {
 
                 <div className='h-[50px] rounded bg-white flex flex-row justify-between items-center hover:cursor-pointer'>
                     <input className='w-full h-full m-2 text-black border border-transparent focus:outline-none' placeholder='Enter your promotion' />
-                   
+
                 </div>
             </div>
             <button className='h-[50px] w-full rounded mt-5  bg-[#B77855]' onClick={nextAction}>
