@@ -164,7 +164,18 @@ public class EventPlanService {
             eventPlanFound.setActive(true);
             eventPlanFound.setName(eventPlan.getName());
             eventPlanFound.setSubName(eventPlan.getSubName());
-            return eventPlanRepository.save(eventPlan);
+
+            List<EventPlanItem> eventPlanItemList = new ArrayList<>();
+            List<EventPlanItem> eventPlansItems = new ArrayList<>();
+            eventPlansItems = eventPlan.getEventPlanItemList();
+            for(EventPlanItem epi: eventPlansItems){
+                Long idEventItem = sequenceGeneratorService.generateSequence(EventPlanItem.SEQUENCE_NAME);
+                epi.setActive(true);
+                epi.setId(idEventItem);
+                eventPlanItemList.add(epi);
+            }
+            eventPlanFound.setEventPlanItemList(eventPlanItemList);
+            return eventPlanRepository.save(eventPlanFound);
         }
         return null;
     }

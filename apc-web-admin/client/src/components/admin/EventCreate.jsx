@@ -26,12 +26,12 @@ const EventCreate = () => {
     const [formData, setFormData] = useState({
         name: '',
         subName: '',
-        type: 'root',
+        type: 1,
         icon: '',
         eventPlanItemList: []
     });
 
-    const [updatedEventPlanItemList, setUpdateEventPlanItemList]= useState([]);
+    const [updatedEventPlanItemList, setUpdateEventPlanItemList] = useState([]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,50 +39,53 @@ const EventCreate = () => {
 
     const [file, setFile] = useState(noImage);
 
-    const handleFileUpload = async (file) => {
-        // Handle the file upload logic here
-        //console.log(file);
-        const response = await uploadFile(file);
-        //const fileResponse = API_URL_IMAGE + response.data;
-        // Khi hien thi image thi su dung API_URL_IMAGE + ten file luu trong database
-        setFile(response.data);
-        //console.log("upload-file", fileResponse);
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            icon: response.data
-        }));
-    };
+
     const [types, setTypes] = useState([]);
 
     const [items, setItems] = useState([]);
     const [images, setImages] = useState([]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("formDataEvent::", formData);
         const eventItemList = types.map((item, index) => ({
             type: item,
             title: items[index],
             icon: images[index],
-          }));
+        }));
 
 
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            eventPlanItemList: eventItemList
-          }));
+        // setFormData(prevFormData => ({
+        //     ...prevFormData,
+        //     eventPlanItemList: eventItemList
+        //   }), ()=>{
+        //     console.log("formDataEvent00::", formData);
 
-          console.log(formData);
+        //   });
 
-        const result = await createEvent(formData);
-        if (result.success === 200) {
-            navigate('/admin/event');
-        }
+        setFormData(async prevFormData => {
+            const updatedFormData = {
+                ...prevFormData,
+                eventPlanItemList: eventItemList
+            };
+
+            console.log("formDataEvent00::", updatedFormData);
+            const result = await createEvent(updatedFormData);
+            if (result.success === 200) {
+                navigate('/admin/event');
+            }
+
+            return updatedFormData;
+        });
+
+        // console.log("eventItemList", eventItemList);
+        // console.log("formDataEvent::", formData);
+
+       
         // Reset form data
     };
     //==================EVENT PLAN ITEM =====================================
 
     // Cau hinh lien quan den event plan o duoi day
-    
+
 
     const addItem = () => {
         setItems(prevItems => [...prevItems, '']);
@@ -102,9 +105,27 @@ const EventCreate = () => {
         setTypes(updatedTypes);
     };
 
-    const handleImageUpload = (index, file) => {
+
+    const handleFileUpload = async (file) => {
+        // Handle the file upload logic here
+        //console.log(file);
+        const response = await uploadFile(file);
+        //const fileResponse = API_URL_IMAGE + response.data;
+        // Khi hien thi image thi su dung API_URL_IMAGE + ten file luu trong database
+        setFile(API_URL_IMAGE+response.data);
+        //console.log("upload-file", fileResponse);
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            icon: response.data
+        }));
+    };
+
+    const handleImageUpload = async (index, file) => {
+
+        const response = await uploadFile(file);
+        console.log("response:", response);
         const updatedImages = [...images];
-        updatedImages[index] = file;
+        updatedImages[index] = response.data;
         setImages(updatedImages);
     };
 
@@ -222,8 +243,6 @@ const EventCreate = () => {
                                 <button className="w-[200px] px-4 py-1 mt-2 mb-5 text-white rounded bg-red-500 hover:bg-orange-600" onClick={() => handleInputChange(index, '')}>Remove</button>
                             </div>
                         ))}
-
-
                         <div>
                         </div>
                     </div>

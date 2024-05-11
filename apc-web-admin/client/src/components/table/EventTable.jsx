@@ -146,7 +146,7 @@ const EventTable = () => {
             dataIndex: 'icon',
             key: 'icon',
             render: (icon) => <img
-                src={icon}
+                src={API_URL_IMAGE+icon}
                 alt="icon"
                 className="w-10 h-10"
             />,
@@ -156,7 +156,7 @@ const EventTable = () => {
             key: 'actions',
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="text-white bg-orange-600" type="primary" onClick={() => handleStep(record.id)}>Xem danh mục con</Button>
+                    {/* <Button className="text-white bg-orange-600" type="primary" onClick={() => handleStep(record.id)}>Xem danh mục con</Button> */}
                     <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Chỉnh sửa</Button>
                     <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
                 </Space>
