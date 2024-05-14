@@ -107,6 +107,10 @@ public class EventPlanService {
         return eventPlanRepository.findAllByActive(true);
     }
 
+    public List<EventPlan> findAllByType( String type){
+        return eventPlanRepository.findAllByTypeAndActive(type, true);
+    }
+
     public List<EventItem> findAllEventItem(Long eventID){
 
         Optional<EventPlan> optionalEventPlan = eventPlanRepository.findById(eventID);

@@ -25,6 +25,13 @@ public class EventPlanController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.findAll(),"success"));
     }
 
+
+    @GetMapping("/findAllByType")
+    public ResponseEntity<?> findByType(@RequestParam String type)
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, eventPlanService.findAllByType(type),"success"));
+    }
+
 //    @GetMapping("/findAllEventItems")
 //    public ResponseEntity<?> findAllEventItems(@RequestParam Long eventID)
 //    {

@@ -26,7 +26,7 @@ const EventCreate = () => {
     const [formData, setFormData] = useState({
         name: '',
         subName: '',
-        type: 1,
+        type: 'root',
         icon: '',
         eventPlanItemList: []
     });

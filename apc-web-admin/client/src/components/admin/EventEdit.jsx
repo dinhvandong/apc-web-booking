@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { API_URL_IMAGE, createEvent, createRoom, createUser, getEventById, updateEvent, uploadFile } from '../../services/api';
+import { API_URL_IMAGE, createEvent, createRoom, createUser, deleteEventItem, getEventById, updateEvent, uploadFile } from '../../services/api';
 import { IoMdSearch } from 'react-icons/io';
 import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
@@ -17,6 +17,7 @@ const EventEdit = (props) => {
     const navigate = useNavigate();
     const eventTypes = ['Flexible Rate', 'Non-Refundable Rate'];
     const [formData, setFormData] = useState({
+        id: 1,
         name: '',
         subName: '',
         type: 'root',
@@ -24,45 +25,11 @@ const EventEdit = (props) => {
         eventPlanItemList: []
 
     });
-
-
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
     const [file, setFile] = useState(noImage);
-
-    // const handleFileUpload = async (file) => {
-    //     // Handle the file upload logic here
-    //     console.log(file);
-
-    //     const response = await uploadFile(file);
-    //     const fileResponse = API_URL_IMAGE + response.data;
-    //     setFile(fileResponse);
-    //     console.log("upload-file", fileResponse);
-
-    //     setFormData(prevFormData => ({
-    //         ...prevFormData,
-    //         icon: response.data
-    //     }));
-
-
-    // };
-
-
-
-
-
-
-    //============================================================
-
-    //==================EVENT PLAN ITEM =====================================
-
-    // Cau hinh lien quan den event plan o duoi day
-    // const [types, setTypes] = useState([]);
-
     const [items, setItems] = useState([]);
-
     const addItem = () => {
 
         setItems(prevItems => [...prevItems, {
@@ -108,7 +75,7 @@ const EventEdit = (props) => {
         // setFile(API_URL_IMAGE + response.data);
         setItems(prevItems => {
             const updatedItems = [...prevItems];
-            updatedItems[index].icon = response.data;
+            updatedItems[index].icon = response.data.toString();
             return updatedItems;
         });
     };
@@ -121,27 +88,40 @@ const EventEdit = (props) => {
         });
     };
 
-    const handleItemRemove = index => {
-        setItems(prevItems => {
-            const updatedItems = [...prevItems];
-            updatedItems.splice(index, 1);
-            return updatedItems;
-        });
+    const handleItemRemove = async index => {
+        // setItems(prevItems => {
+        //     const updatedItems = [...prevItems];
+        //     updatedItems.splice(index, 1);
+        //     return updatedItems;
+        // });
+        const eventItem = items.at(index);
+        try {
+            const response = await deleteEventItem(id, eventItem.id);
+            fetchEventById();
+            //console.log("eventByID:", response);
+            // setFormData(response);
+            // setItems(response.eventPlanItemList);
+            // console.log("responseEvent:", response);
+            // setFile(API_URL_IMAGE + response.icon);
+            //  setItems(response.roomItemList)
+        } catch (error) {
+        }
+    };
+    const fetchEventById = async () => {
+        try {
+            const response = await getEventById(id);
+            //console.log("eventByID:", response);
+            setFormData(response);
+            setItems(response.eventPlanItemList);
+            console.log("responseEvent:", response);
+            setFile(API_URL_IMAGE + response.icon);
+            //  setItems(response.roomItemList)
+        } catch (error) {
+        }
     };
 
-
     useEffect(() => {
-        const fetchEventById = async () => {
-            try {
-                const response = await getEventById(id);
-                setFormData(response);
-                setItems(response.eventPlanItemList);
-                console.log("responseEvent:", response);
-                setFile(API_URL_IMAGE + response.icon);
-                //  setItems(response.roomItemList)
-            } catch (error) {
-            }
-        };
+
 
 
         fetchEventById();
@@ -156,7 +136,10 @@ const EventEdit = (props) => {
             };
 
             console.log("formDataEvent00::", updatedFormData);
-            const result = await updateEvent(formData);
+
+            console.log(JSON.stringify(updatedFormData));
+
+            const result = await updateEvent(JSON.stringify(updatedFormData));
             if (result.success === 200) {
                 navigate('/admin/event');
             }
@@ -181,8 +164,6 @@ const EventEdit = (props) => {
                             <label htmlFor="name" className="block mb-2 font-medium">
                                 Event type: <span className="text-lg text-red-500">*</span>
                             </label>
-
-
                             <select
                                 name="type"
                                 id="type"
@@ -212,8 +193,6 @@ const EventEdit = (props) => {
                                 required
                             />
                         </div>
-
-
                         <div className="mb-2">
                             <label htmlFor="subName" className="block mb-2 font-medium">
                                 Event Desc: <span className="text-lg text-red-500">*</span>
@@ -228,8 +207,6 @@ const EventEdit = (props) => {
                                 required
                             />
                         </div>
-
-
                         <div className="mb-2">
                             <label htmlFor="email" className="block mb-2 font-medium">
                                 Icon: <span className="text-lg text-red-500">*</span>
@@ -245,19 +222,16 @@ const EventEdit = (props) => {
                         </div>
                         <div className="mb-2">
                             <img src={file} className='w-[100px] h-[100px]' />
-
                         </div>
-
                         <button
                             type="submit"
                             className="w-full px-4 py-2 mt-5 text-white rounded bg-base_color hover:bg-orange-600"
                         >
-                            Tạo mới sự kiện
+                            Cập nhật sự kiện
                         </button>
                     </form>
                 </div>
                 <div className='flex flex-col w-2/3 h-auto'>
-
                     <div className="flex w-[100%] ml-5 mr-2 flex-col justify-center">
                         <button className='className="w-[200px] px-4 py-1 mt-2 mb-5 text-white rounded bg-base_color hover:bg-orange-600"' onClick={addItem}>Thêm danh mục con</button>
                         {/* {items.map((item, index) => (
@@ -285,7 +259,6 @@ const EventEdit = (props) => {
                                 <button className="w-1/5 px-2 py-1 mt-2 mb-5 ml-2 text-white bg-red-500 rounded hover:bg-orange-600" onClick={() => handleRemove(item)}>Remove</button>
                             </div>
                         ))} */}
-
                         {items.map((item, index) => (
                             <EventItemComponent
                                 key={index}

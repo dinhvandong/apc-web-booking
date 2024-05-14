@@ -19,7 +19,7 @@ public class Database {
             public void run(String... args) throws Exception {
 
                 User user = new User();
-                priceTimeRepository.deleteAll();;
+               // priceTimeRepository.deleteAll();;
                 user.setId(1L);
                 user.setEmail("admin@gmail.com");
                 user.setPhone("84965741051");
@@ -35,6 +35,7 @@ public class Database {
                 String formattedDate = currentDate.format(formatter);
                 long longDate = Long.parseLong(formattedDate);
                 user.setCreatedDate(longDate);
+                userRepository.deleteAll();
                 if(userRepository.findAll().isEmpty())
                     userRepository.insert(user);
 

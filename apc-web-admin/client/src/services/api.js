@@ -4,7 +4,7 @@ import axios from 'axios';
 export const ROOT_URL = "163.44.206.118";
 export const API_URL_IMAGE = `http://${ROOT_URL}:8080/api/images/`;
 
-export const  API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
+export const API_URL = `http://${ROOT_URL}:8080/api`; // Replace with your API URL
 axios.defaults.baseURL = `http://${ROOT_URL}:8080`; // Replace with your backend API's base URL
 
 // Add the following lines to set the CORS headers
@@ -242,8 +242,8 @@ export const createRoom = async (roomData) => {
 export const createGallery = async (galleryData) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/galleryFolder/insert`, 
-    galleryData)
+    const response = await axios.post(`${API_URL}/galleryFolder/insert`,
+      galleryData)
     return response.data;
   } catch (error) {
     throw error;
@@ -278,7 +278,7 @@ export const getRooms = async () => {
 export const getGalleries = async () => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/galleryFolder/findAll`, 
+    const response = await axios.get(`${API_URL}/galleryFolder/findAll`,
     );
     return response.data.data;
   } catch (error) {
@@ -289,7 +289,7 @@ export const getGalleries = async () => {
 export const getGalleryById = async (galleryID) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/galleryFolder/findById?id=${galleryID}`, 
+    const response = await axios.get(`${API_URL}/galleryFolder/findById?id=${galleryID}`,
     );
     return response.data.data;
   } catch (error) {
@@ -344,7 +344,7 @@ export const createEvent = async (eventData) => {
     const response = await axios.post(`${API_URL}/event-plan/insert`, eventData, {
       withCredentials: true,
     }
-      )
+    )
     return response.data;
   } catch (error) {
     throw error;
@@ -353,10 +353,12 @@ export const createEvent = async (eventData) => {
 
 export const updateEvent = async (eventData) => {
   try {
-    const response = await axios.post(`${API_URL}/event-plan/update`, {
-      withCredentials: true,
-    },
-      eventData)
+    const response = await axios.post(`${API_URL}/event-plan/update`,
+      eventData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     return response.data;
   } catch (error) {
     throw error;
@@ -375,8 +377,19 @@ export const getEventById = async (eventID) => {
 export const deleteEvent = async (eventID) => {
   console.log("delete_eventID:", eventID);
   try {
-    const response = await axios.post(`${API_URL}/event-plan/delete`,eventID
+    const response = await axios.post(`${API_URL}/event-plan/delete`, eventID
     )
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteEventItem = async (eventID, eventItemID) => {
+  //console.log("delete_eventID:", eventItemID);
+  try {
+    const response = 
+    await axios.post(`${API_URL}/event-plan/remove-event-plan-item?id=` + eventID + "&itemID=" + eventItemID)
     return response.data;
   } catch (error) {
     throw error;
