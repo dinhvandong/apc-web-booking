@@ -12,6 +12,11 @@ public class EventPlanItem {
     private String title;
     private String icon;
 
+
+    private float width;
+
+    private float height;
+
     private int type;
     private boolean active;
 
@@ -53,5 +58,21 @@ public class EventPlanItem {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
     }
 }

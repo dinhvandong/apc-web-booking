@@ -27,6 +27,8 @@ const EventCreate = () => {
         name: '',
         subName: '',
         type: 'root',
+        width:50,
+        height:50,
         icon: '',
         eventPlanItemList: []
     });
@@ -191,6 +193,37 @@ const EventCreate = () => {
                                 required
                             />
                         </div>
+
+                        <div className="mb-2">
+                            <label htmlFor="subName" className="block mb-2 font-medium">
+                                Width: <span className="text-lg text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="width"
+                                name="width"
+                                value={formData.width}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
+                                required
+                            />
+                        </div>
+
+                        <div className="mb-2">
+                            <label htmlFor="subName" className="block mb-2 font-medium">
+                                Height: <span className="text-lg text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="height"
+                                name="height"
+                                value={formData.height}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
+                                required
+                            />
+                        </div>
+
                         <div className="mb-2">
                             <label htmlFor="email" className="block mb-2 font-medium">
                                 Icon: <span className="text-lg text-red-500">*</span>
@@ -205,7 +238,7 @@ const EventCreate = () => {
                             </Upload>
                         </div>
                         <div className="mb-2">
-                            <img src={file} className='w-[100px] h-[100px]' />
+                            <img src={file} className={` "w-[" + ${formData.width} + "px]" + "h-["+ ${formData.height} + "px]" `} />
                         </div>
                         <button
                             type="submit"
