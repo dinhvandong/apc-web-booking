@@ -7,6 +7,7 @@ import ic_checkbox from '../assets/ic_checkbox.png';
 import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
 import { AuthContext } from '../AuthProvider';
+import axios from 'axios';
 const SelectCabinNonRefundPage = () => {
 
     const navigate = useNavigate();
@@ -41,15 +42,27 @@ const SelectCabinNonRefundPage = () => {
 
     }, []);
 
-    const gotoPlanFlexible = ()=>{
+    const gotoPlanFlexible = () => {
         navigate('/select-your-cabin/flexible');
 
     }
 
-    const gotoPlanNonRefund= ()=>{
+    const gotoPlanNonRefund = () => {
         navigate('/select-your-cabin/non-refundable');
 
     }
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Non-Refundable Rate')
+            .then(response => {
+                setData(response.data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
     return (
         <div className='flex flex-col items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderSelectCabin />
@@ -87,13 +100,12 @@ const SelectCabinNonRefundPage = () => {
 
 
 
-            <div className='flex flex-col mb-[100px]'>
-                <EventItem />
-                <EventItem />
-                <EventItem />
-                <EventItem />
-                <EventItem />
-                <EventItem />
+            <div className='flex flex-col mt-5 mb-[100px]'>
+
+                {data.map(item => (
+                    <EventItem key={item.id} data={item} />
+                ))}
+
             </div>
             <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-white flex justify-around py-4`}>
 

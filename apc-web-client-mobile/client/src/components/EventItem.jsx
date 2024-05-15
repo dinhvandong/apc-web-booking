@@ -1,27 +1,46 @@
 import React from 'react'
 import menu1 from '../assets/icon-menu1.png';
 import { MdKeyboardArrowUp } from "react-icons/md";
-const EventItem = () => {
+import { API_URL, API_URL_IMAGE } from './../services/api';
+const EventItem = ({ data }) => {
     return (
         <div className=' flex flex-col justify-center mt-5  w-full md:w-[600px] h-auto  '>
 
             <div className='border-[1px] rounded-lg border-[#B2D0C6] flex  justify-center w-full p-5 md:w-[600px]'>
-                <img className='w-[50px] h-[50px]' src={menu1} />
+                <img className='w-[50px] h-[50px]' src={API_URL_IMAGE + data.icon} />
 
                 <div className='flex flex-col w-full h-auto ml-5'>
                     <div className='font-bold text-black'>
                         <p>
-                            Meal On Board
+                            {data.name}
                         </p>
                     </div>
 
                     <div>
-                    <p className='font-thin text-[#9DA4AE]'>
-                            Savor your sumptuous meal on board
+                        <p className='font-thin text-[#9DA4AE]'>
+                            {data.subName}
                         </p>
                     </div>
 
-                    <div className='flex flex-col w-full h-auto mt-5'>
+                    <ul className='mt-5'>
+                        {data.eventPlanItemList.map((item, index) => (
+                            <li key={index}>
+                                <span>{item.icon}</span>
+                                {
+                                    (item.type === 1) ? (<div className='font-bold text-black'>
+                                        <p>
+                                            {item.title}
+                                        </p>
+                                    </div>) : (<p className='font-thin text-[#9DA4AE]'>
+                                        {item.title}
+                                    </p>)
+                                }
+
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* <div className='flex flex-col w-full h-auto mt-5'>
                         <div className='font-bold text-black'>
                             <p>
                                 WELCOME DRINK
@@ -62,7 +81,7 @@ const EventItem = () => {
                                 Additional fee applied
                             </p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 < MdKeyboardArrowUp className='w-[30px] h-[30px] text-brown_color' />
                 {/* <img className='w-[50px] h-[50px' src={menu1}/> */}

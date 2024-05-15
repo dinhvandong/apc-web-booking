@@ -7,13 +7,14 @@ import ic_checkbox from '../assets/ic_checkbox.png';
 import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
 import { AuthContext } from '../AuthProvider';
+import axios from 'axios';
 const SelectCabinPage = () => {
 
     const navigate = useNavigate();
     const { bookingInfo } = useContext(AuthContext);
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
-    const [cruiseType, setCruiseType]= useState('Day Cruise');
+    const [cruiseType, setCruiseType] = useState('Day Cruise');
 
     const gotoContactInfor = () => {
         // if(cruiseType === 'Day Cruise')
@@ -28,27 +29,40 @@ const SelectCabinPage = () => {
 
     }
 
-    const gotoPlanFlexible = ()=>{
+    const gotoPlanFlexible = () => {
         navigate('/select-your-cabin/flexible');
 
     }
 
-    const gotoPlanNonRefund= ()=>{
+    const gotoPlanNonRefund = () => {
         navigate('/select-your-cabin/non-refundable');
 
     }
-    useEffect(()=>{
+    useEffect(() => {
 
         const adult = bookingInfo.adult;
         const children = bookingInfo.children;
         const infant = bookingInfo.infant;
         const price = bookingInfo.price;
-        const count = adult + children*0.75 + infant*0.5 ;
-        setFinalPrice(count*price);
+        const count = adult + children * 0.75 + infant * 0.5;
+        setFinalPrice(count * price);
         setCruiseType(bookingInfo.typeBooking);
         setPrice(price);
 
-    },[]);
+    }, []);
+
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible%20Rate')
+            .then(response => {
+                setData(response.data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
     return (
         <div className='flex flex-col items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderSelectCabin />
@@ -64,33 +78,32 @@ const SelectCabinPage = () => {
 
             <div className='mt-[20px]  text-base_color flex w-full md:w-[600px]'>
 
-              <div className='text-base_color w-1/3 flex  md:w-[200px]'>
-                <img className='w-5 h-5 ml-5' src= {ic_checkbox} />
-                <p>Free/Allowed</p>
+                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+                    <img className='w-5 h-5 ml-5' src={ic_checkbox} />
+                    <p>Free/Allowed</p>
 
-              </div>
-              <div className='text-base_color w-1/3 flex  md:w-[200px]'>
-                <img className='w-5 h-5' src={ic_charge} />
-                <p>Free/Allowed</p>
+                </div>
+                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+                    <img className='w-5 h-5' src={ic_charge} />
+                    <p>Free/Allowed</p>
 
-              </div>
-              <div className='text-[#B77855] w-1/3 flex  md:w-[200px]'>
-                <img className='w-5 h-5 ' src={ic_notpermit} />
-                <p className='mr-5'>Free/Allowed</p>
+                </div>
+                <div className='text-[#B77855] w-1/3 flex  md:w-[200px]'>
+                    <img className='w-5 h-5 ' src={ic_notpermit} />
+                    <p className='mr-5'>Free/Allowed</p>
 
-              </div>
+                </div>
 
             </div>
 
 
 
-            <div className='flex flex-col mb-[100px]'>
-                <EventItem />
-                <EventItem />
-                <EventItem />
-                <EventItem />
-                <EventItem />
-                <EventItem />
+            <div className='flex flex-col mt-5 mb-[100px]'>
+
+                {data.map(item => (
+                    <EventItem key={item.id} data={item} />
+                ))}
+                
             </div>
             <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-white flex justify-around py-4`}>
 
