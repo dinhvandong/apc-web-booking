@@ -145,10 +145,12 @@ const EventTable = () => {
             title: 'Ảnh đại diện',
             dataIndex: 'icon',
             key: 'icon',
-            render: (icon) => <img
+            render: (icon, item) => <img
                 src={API_URL_IMAGE+icon}
                 alt="icon"
-                className="w-10 h-10"
+                style={{ width: `${item.width}px`, height: `${item.height}px` }}
+
+                // className={`w-10 h-10`}
             />,
         },
         {
