@@ -147,7 +147,7 @@ const PlanCruise = (props) => {
     const [headerTime, setHeaderTime] = useState('Jun 2023');
     const [priceByDate, setPriceByDate] = useState(null);
 
-    const {updatePriceDate}  = useContext(AuthContext);
+    const { updatePriceDate } = useContext(AuthContext);
 
     const [dateTimeSelect, setDateTimeSelect] = useState(
         formatDateYYYYMMDD(
@@ -358,7 +358,18 @@ const PlanCruise = (props) => {
             cruiseType: cruiseType,
             flexibleOrNonRefund: true
         };
-        updateBookingInfo(newBookingInfo);
+        console.log("bookingInfo:",adult );
+        updateBookingInfo(newBookingInfo)
+        // updateBookingInfo({ adult: adult });
+        // updateBookingInfo({ children: children });
+        // updateBookingInfo({ infant: infant });
+        // updateBookingInfo({ adult: adult });
+        // updateBookingInfo({
+        //     price: (cruiseType === 'Day Cruise') ? priceByDate.priceDay : priceByDate.priceDinner,
+        // })
+        // updateBookingInfo({ cruiseType: cruiseType });
+        // updateBookingInfo({ flexibleOrNonRefund: true });
+
     };
 
     const nextAction = () => {
@@ -506,7 +517,7 @@ const PlanCruise = (props) => {
                                     }
                                 </div>
 
-                                <div onClick={toggleDate}  className="hover:cursor-pointer flex w-full justify-center items-center text-center py-5 mt-[50px] mb-[50px] font-bold text-white bg-brown_color text-xl">
+                                <div onClick={toggleDate} className="hover:cursor-pointer flex w-full justify-center items-center text-center py-5 mt-[50px] mb-[50px] font-bold text-white bg-brown_color text-xl">
                                     <p>Done</p>
                                 </div>
                             </div>

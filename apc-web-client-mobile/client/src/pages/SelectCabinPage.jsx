@@ -30,6 +30,14 @@ const SelectCabinPage = () => {
         // {
         //     navigate('/contact');
         // }
+
+       updateBookingInfo({ flexibleOrNonRefund: true, price: finalPrice });
+
+      //  updateBookingInfo({ flexibleOrNonRefund: true });
+      //  updateBookingInfo({  price: finalPrice });
+
+
+
         navigate('/contact');
 
     }
@@ -142,7 +150,7 @@ const SelectCabinPage = () => {
                         </div>
 
                         <div>
-                            <p>{price}k VND/person</p>
+                            <p>{finalPrice}k VND/person</p>
                         </div>
 
                     </div>

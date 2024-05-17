@@ -34,9 +34,23 @@ export const AuthProvider = ({ children }) => {
       activeDinner: true
     });
   const [userInfo, setUserInfo] = useState(null);
-  const updateBookingInfo = (newBookingInfo) => {
-    setBookingInfo(newBookingInfo);
+  // const updateBookingInfo = (newBookingInfo) => {
+  //   setBookingInfo(newBookingInfo);
+  // };
+
+  const updateBookingInfo = (updatedFields) => {
+    setBookingInfo((prevBookingInfo) => ({
+      ...prevBookingInfo,
+      ...updatedFields,
+    }));
   };
+
+  // const updateBookingInfo = (fieldName, value) => {
+  //   setBookingInfo((prevBookingInfo) => ({
+  //     ...prevBookingInfo,
+  //     [fieldName]: value,
+  //   }));
+  // };
 
   const updatePriceDate = (priceDate) => {
     setPriceDate(priceDate);

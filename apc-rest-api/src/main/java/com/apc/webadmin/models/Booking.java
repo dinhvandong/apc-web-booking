@@ -18,11 +18,32 @@ public class Booking {
     private String cruiseType;
     private boolean flexibleOrNonRefund;  // true = flexible false = non refund
     private double price;
+
+    private double priceBase;
     private int status;
     private  int adult;
     private  int children;
     private  int infant;
+    private Long bookingDate;
     private Long createdDate;
+
+
+    public double getPriceBase() {
+        return priceBase;
+    }
+
+    public void setPriceBase(double priceBase) {
+        this.priceBase = priceBase;
+    }
+
+    public Long getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Long bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
     public int getAdult() {
         return adult;
     }

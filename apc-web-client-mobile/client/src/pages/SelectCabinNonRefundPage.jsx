@@ -27,7 +27,8 @@ const SelectCabinNonRefundPage = () => {
         // {
         //     navigate('/contact');
         // }
-        updateBookingInfo({ flexibleOrNonRefund: false });
+        updateBookingInfo({ flexibleOrNonRefund: false, price: finalPrice });
+       // updateBookingInfo({  price: finalPrice });
 
         navigate('/contact');
 
@@ -46,7 +47,6 @@ const SelectCabinNonRefundPage = () => {
 
             setPrice(priceDate.priceDayNonRefund);
             const count = adult + children * 0.75 + infant * 0.5;
-
 
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
@@ -137,7 +137,7 @@ const SelectCabinNonRefundPage = () => {
                         </div>
 
                         <div>
-                            <p>{price}k VND/person</p>
+                            <p>{finalPrice}k VND/person</p>
                         </div>
 
                     </div>

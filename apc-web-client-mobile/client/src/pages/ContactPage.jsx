@@ -184,7 +184,7 @@ const ContactPage = () => {
     useEffect(() => {
         console.log("Booking Type:", bookingInfo)
 
-        setCruiseType(bookingInfo.typeBooking);
+        setCruiseType(bookingInfo.cruiseType);
 
         async function fetchData() {
             try {
