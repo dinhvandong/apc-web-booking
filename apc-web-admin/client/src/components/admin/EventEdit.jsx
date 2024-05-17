@@ -28,8 +28,22 @@ const EventEdit = (props) => {
 
     });
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+       // setFormData({ ...formData, [e.target.name]: e.target.value });
+
+       const { name, value } = e.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
     };
+
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData((prevData) => ({
+    //       ...prevData,
+    //       [name]: value,
+    //     }));
+    //   };
     const [file, setFile] = useState(noImage);
     const [items, setItems] = useState([]);
     const addItem = () => {
@@ -83,11 +97,14 @@ const EventEdit = (props) => {
     };
 
     const handleInputChange = (index, field, value) => {
+        console.log("itemSxxx:", field);
         setItems(prevItems => {
             const updatedItems = [...prevItems];
             updatedItems[index][field] = value;
             return updatedItems;
         });
+
+
     };
 
     const handleItemRemove = async index => {
@@ -215,7 +232,7 @@ const EventEdit = (props) => {
                                 Width: <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 id="width"
                                 name="width"
                                 value={formData.width}
@@ -230,7 +247,7 @@ const EventEdit = (props) => {
                                 Height: <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 id="height"
                                 name="height"
                                 value={formData.height}
@@ -253,7 +270,7 @@ const EventEdit = (props) => {
                             </Upload>
                         </div>
                         <div className="mb-2">
-                            <img src={file} className={` "w-[" + ${formData.width} + "px]" + "h-["+ ${formData.height} + "px]" `} />
+                            <img src={file} className={` "w-[" + ${parseInt(formData.width)} + "px]" + "h-["+ ${parseInt(formData.height)} + "px]" `} />
                         </div>
                         <button
                             type="submit"

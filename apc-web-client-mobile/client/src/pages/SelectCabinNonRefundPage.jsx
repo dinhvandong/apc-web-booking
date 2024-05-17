@@ -70,7 +70,7 @@ const SelectCabinNonRefundPage = () => {
                 <div onClick={gotoPlanFlexible} className='hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto ml-2  text-[#2F4842] bg-[#B2D0C6] text-[14px] font-bold'><p className='text-center'>Flexible Rate </p></div>
 
 
-                <div onClick={gotoPlanNonRefund} className=' hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto bg-[#2F4842] text-white text-[14px] font-bold'> <p className='text-center'> Non-Refundable Rate</p> </div>
+                <div onClick={gotoPlanNonRefund} className=' hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto bg-[#2F4842] text-white text-[14px] font-bold ml-2'> <p className='text-center'> Non-Refundable Rate</p> </div>
             </div>
             <div className='font-bold mt-5 text-base_color flex w-full md:w-[600px]'>
 

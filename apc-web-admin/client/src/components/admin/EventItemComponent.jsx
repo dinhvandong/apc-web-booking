@@ -29,7 +29,7 @@ function EventItemComponent({ item, index, handleInputChange, handleImageUpload,
                 accept="image/*"
                 onChange={handleImageChange}
             />
-            <img src={API_URL_IMAGE + icon} className='ml-2 w-[50px] h-[50px]' />
+            <img src={API_URL_IMAGE + icon} className='ml-2 w-[20px] h-[20px]' />
 
             <button className="w-1/5 px-2 py-1 mt-2 mb-5 ml-2 text-white bg-red-500 rounded hover:bg-orange-600" onClick={handleRemoveClick}>Remove</button>
 

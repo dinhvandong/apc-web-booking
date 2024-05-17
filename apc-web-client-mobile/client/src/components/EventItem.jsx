@@ -7,7 +7,7 @@ const EventItem = ({ data }) => {
         <div className=' flex flex-col justify-center mt-5  w-full md:w-[600px] h-auto  '>
 
             <div className='border-[1px] rounded-lg border-[#B2D0C6] flex  justify-center w-full p-5 md:w-[600px]'>
-                <img className='w-[50px] h-[50px]' src={API_URL_IMAGE + data.icon} />
+                <img className='w-[50px] h-[50px]' src={API_URL_IMAGE + data.icon} style={{ width: `${parseInt(data.width)}px`, height: `${parseInt(data.height)}px` }} />
 
                 <div className='flex flex-col w-full h-auto ml-5'>
                     <div className='font-bold text-black'>
@@ -24,8 +24,12 @@ const EventItem = ({ data }) => {
 
                     <ul className='mt-5'>
                         {data.eventPlanItemList.map((item, index) => (
-                            <li key={index}>
-                                <span>{item.icon}</span>
+                            <li className='flex items-center' key={index}>
+                                {/* <span>{item.icon}</span> */}
+                                {item.icon != null? <img
+                                    src={API_URL_IMAGE + item.icon}
+                                    alt="icon"
+                                    className={`w-4 h-4 mr-2`} />:<div></div>}
                                 {
                                     (item.type === 1) ? (<div className='font-bold text-black'>
                                         <p>

@@ -35,13 +35,13 @@ const EventTable = () => {
         // navigate(`/admin/room/update/${id}`)
     };
 
-    const handleBack3=() =>{
+    const handleBack3 = () => {
         setStep(2);
         refreshData2(eventID);
 
     }
 
-    const handleBack2=()=>{
+    const handleBack2 = () => {
 
         setStep(1);
         refreshData();
@@ -60,7 +60,7 @@ const EventTable = () => {
 
     const handleDelete = async (id) => {
         console.log('Delete clicked for ID:', id);
-        const deleteEventModel = {id: id};
+        const deleteEventModel = { id: id };
         const response = await deleteEvent(deleteEventModel);
         refreshData();
         console.log("delete:", response);
@@ -146,11 +146,12 @@ const EventTable = () => {
             dataIndex: 'icon',
             key: 'icon',
             render: (icon, item) => <img
-                src={API_URL_IMAGE+icon}
+                src={API_URL_IMAGE + icon}
                 alt="icon"
-                style={{ width: `${item.width}px`, height: `${item.height}px` }}
+                className={`w-10 h-10`}
 
-                // className={`w-10 h-10`}
+               style={{ width: `${parseInt(item.width)}px`, height: `${parseInt(item.height)}px` }}
+
             />,
         },
         {
@@ -197,10 +198,15 @@ const EventTable = () => {
             title: 'Ảnh đại diện',
             dataIndex: 'icon',
             key: 'icon',
-            render: (icon) => <img
+            render: (icon, item) => <img
                 src={API_URL_IMAGE + icon}
                 alt="icon"
-                className="w-10 h-10 rounded-full"
+                className={`w-10 h-10`}
+
+                // style={{ width: `50px`, height: `50px` }}
+
+                style={{ width: `${parseInt(item.width)}px`, height: `${parseInt(item.height)}px` }}
+
             />,
         },
         {
@@ -233,10 +239,12 @@ const EventTable = () => {
             title: 'Ảnh đại diện',
             dataIndex: 'icon',
             key: 'icon',
-            render: (icon) => <img
-                src={icon}
+            render: (icon, item) => <img
+                src={API_URL_IMAGE + icon}
                 alt="icon"
-                className="w-10 h-10 rounded-full"
+                style={{ width: `${parseInt(item.width)}px`, height: `${parseInt(item.height)}px` }}
+
+            // className={`w-10 h-10`}
             />,
         },
         {
@@ -267,7 +275,7 @@ const EventTable = () => {
                 <div className='w-[100%] flex-col flex'>
                     <div onClick={handleBack2} className='flex item-center hover:cursor-pointer'>
                         <IoReturnUpBackSharp />
-                       <div className='ml-5'>Quay lại</div> 
+                        <div className='ml-5'>Quay lại</div>
                     </div>
                     <Table style={{ width: '100%', fontFamily: 'Courier New ' }} rowClassName={getRowClassName} dataSource={eventsItem} columns={columns2} />
                 </div>
@@ -277,7 +285,7 @@ const EventTable = () => {
                 <div className='w-[100%] flex-col flex'>
                     <div onClick={handleBack3} className='flex item-center hover:cursor-pointer'>
                         <IoReturnUpBackSharp />
-                       <div className='ml-5'>Quay lại</div> 
+                        <div className='ml-5'>Quay lại</div>
                     </div>
                     <Table style={{ width: '100%', fontFamily: 'Courier New ' }} rowClassName={getRowClassName} dataSource={eventsItemChild} columns={columns3} />
                 </div>
