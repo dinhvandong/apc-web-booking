@@ -64,36 +64,53 @@ const BookingTable = () => {
             key: 'id',
         },
         {
-            title: 'Tên sự kiện',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'title',
+            dataIndex: 'title',
+            key: 'title',
 
         },
         {
-            title: 'Mô tả ngắn',
-            dataIndex: 'subName',
-            key: 'subName',
+            title: 'Firstname',
+            dataIndex: 'firstName',
+            key: 'firstName',
+
+        },
+        {
+            title: 'lastName',
+            dataIndex: 'lastName',
+            key: 'lastName',
+
+        },
+        {
+            title: 'cruiseType',
+            dataIndex: 'cruiseType',
+            key: 'cruiseType',
+
+        },
+        {
+            title: 'flexibleOrNonRefund',
+            dataIndex: 'flexibleOrNonRefund',
+            key: 'flexibleOrNonRefund',
 
         },
 
         {
-            title: 'Loại',
-            dataIndex: 'type',
-            key: 'type',
+            title: 'price',
+            dataIndex: 'price',
+            key: 'price',
 
         },
         {
-            title: 'Ảnh đại diện',
-            dataIndex: 'icon',
-            key: 'icon',
-            render: (icon, item) => <img
-                src={API_URL_IMAGE + icon}
-                alt="icon"
-                className={`w-10 h-10`}
+            title: 'createdDate',
+            dataIndex: 'createdDate',
+            key: 'createdDate',
 
-                style={{ width: `${parseInt(item.width)}px`, height: `${parseInt(item.height)}px` }}
+        },
+        {
+            title: 'status',
+            dataIndex: 'status',
+            key: 'status',
 
-            />,
         },
         {
             title: 'Hành động',
@@ -113,7 +130,7 @@ const BookingTable = () => {
     return (
         <div className="w-[100%] flex-col flex justify-center items-center">
             <div className='w-[100%] flex-col flex'>
-                <Table style={{ width: '100%', fontFamily: 'Courier New ' }} rowClassName={getRowClassName} dataSource={events} columns={columns} />
+                <Table style={{ width: '100%', fontFamily: 'Courier New ' }} rowClassName={getRowClassName} dataSource={bookings} columns={columns} />
             </div>
         </div>
     );

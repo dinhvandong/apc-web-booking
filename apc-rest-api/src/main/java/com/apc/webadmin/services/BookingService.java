@@ -27,6 +27,16 @@ public class BookingService {
         return bookingRepository.insert(newBooking);
     }
 
+
+    public boolean deleteAll(){
+        bookingRepository.deleteAll();
+        return true;
+    }
+
+    public boolean deleteById(Long id){
+        bookingRepository.deleteById(id);
+        return true;
+    }
     public Booking update(Booking updateBooking){
         Optional<Booking> optional= bookingRepository.findById(updateBooking.getId());
         if(optional.isEmpty()){

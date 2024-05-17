@@ -6,6 +6,12 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [bookingInfo, setBookingInfo] = useState({
     customerName: '',
+    firstName:'',
+    lastName: '',
+    country:'',
+    countryCode:'',
+    phone:'',
+    email:'',
     adult: 1,
     children: 0,
     infant:0,

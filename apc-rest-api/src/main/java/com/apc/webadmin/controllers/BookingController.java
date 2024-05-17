@@ -30,6 +30,18 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.create(newBooking),"success"));
     }
 
+
+
+    @PostMapping("/deleteById")
+    public ResponseEntity<?> delete(@RequestParam Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.deleteById(id),"success"));
+    }
+
+    @PostMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll(@RequestParam Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.deleteAll(),"success"));
+    }
+
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestBody Booking updateBooking){
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.update(updateBooking),"success"));

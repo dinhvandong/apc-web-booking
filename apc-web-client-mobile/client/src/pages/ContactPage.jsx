@@ -6,6 +6,7 @@ import iconShow from '../assets/icon_hide_password.png';
 import HeaderSignIn from '../components/HeaderSignIn';
 import { AuthContext } from '../AuthProvider';
 import HeaderContactConfirmation from '../components/HeaderContactConfirmation';
+import { createBooking } from '../services/api_booking';
 
 const ContactPage = () => {
     const [countryList, setCountryList] = useState([]);
@@ -178,7 +179,7 @@ const ContactPage = () => {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
-    const [cruiseType, setCruiseType]= useState('Day Cruise');
+    const [cruiseType, setCruiseType] = useState('Day Cruise');
 
     useEffect(() => {
         console.log("Booking Type:", bookingInfo)
@@ -217,9 +218,9 @@ const ContactPage = () => {
         setEmail('');
         setPassword('');
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
 
-        e.preventDefault();
+       // e.preventDefault();
         console.log("email:", email);
         console.log("password:", password);
         console.log("firstName:", firstName);
@@ -227,32 +228,62 @@ const ContactPage = () => {
         console.log("gender:", gender);
         console.log("country:", country);
 
+        /*
+        {
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "title": "Mr",
+    "firstName": "John",
+    "lastName": "Doe",
+    "cruiseType": "Caribbean",
+    "flexibleOrNonRefund": true,
+    "price": 1500.0,
+    "status": 1,
+    "createdDate": 20240520
+}
+        
+        */
+        const bookingDataJson =  {
+            "email": email,
+            "phone": phone,
+            "title": gender,
+            "firstName": firstName,
+            "lastName": lastName,
+            "cruiseType": "Cruise Day",
+            "flexibleOrNonRefund": true,
+            "price": 1500,
+            "status": 1,
+            "createdDate": 20240520
+        }
+
         //firstName, lastName, phone, 
         //country, gender,
         //email, password
-        const result = await registerRequest(firstName, lastName, phone,
-            country, gender, email, password);
-        if (result.success === 200) {
-            const token = result.data.message;
-            const user = result.data
+        //const result = await registerRequest(firstName, lastName, phone,
+        const response = await createBooking(bookingDataJson);
+
+       // country, gender, email, password);
+        if (response.data.success === 200) {
+           // const token = result.data.message;
+            //const user = result.data
             //login(token, user);
-            navigate('/registration-success');
+            // navigate('/registration-success');
 
         } else {
-            console.log("resultLogin:", result);
+            // console.log("resultLogin:", result);
         }
         // navigate('/admin');
         setEmail('');
         setPassword('');
     };
-    const handleNext = ()=>{
+    const handleNext = () => {
 
-         if(cruiseType === 'Day Cruise')
-        {
+        handleSubmit();
+
+        if (cruiseType === 'Day Cruise') {
             navigate('/ancillary');
         }
-        else 
-        {
+        else {
             navigate('/payment-confirm');
         }
     }
@@ -282,7 +313,7 @@ const ContactPage = () => {
     return (
         <div className='flex flex-col items-center justify-center w-full'>
 
-            <HeaderContactConfirmation  />
+            <HeaderContactConfirmation />
 
             <form className=" px-5  w-full md:w-[600px]   flex flex-col mt-[100px] md:ml-5 md:mr-5  rounded">
                 <div className='flex mt-2 mb-2'>

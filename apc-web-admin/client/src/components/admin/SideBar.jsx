@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { BiChevronDown } from "react-icons/bi";
 import { FaLayerGroup } from "react-icons/fa";
+import { IoBook } from "react-icons/io5";
+
 import home1 from "../../assets/home2.png";
 import home2 from "../../assets/home2red.png";
 import text1 from "../../assets/text1.png";
@@ -182,6 +184,10 @@ const Sidebar = (props) => {
     navigate("/admin/time-price");
   }
 
+  function gotoBookingList() {
+    navigate("/admin/bookings");
+  }
+
   const tab = props.menu;
   const styleMenu1 = tab === "tab1" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu2 = tab === "tab2" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
@@ -191,6 +197,7 @@ const Sidebar = (props) => {
   const styleMenu6 = tab === "tab6" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu7 = tab === "tab7" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu8 = tab === "tab8" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu9 = tab === "tab9" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
 
   const [width, setWidth] = useState('w-[200px]');
   const [active, setActive] = useState(true);
@@ -349,6 +356,19 @@ const Sidebar = (props) => {
             <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
             {
               active == true ? <div className="text-sm ">Bảng giá theo thời gian</div> : <div></div>
+
+            }
+          </button>
+
+          <button
+            onClick={() => gotoBookingList()}
+            onMouseEnter={handleMouseEnter9}
+            onMouseLeave={handleMouseLeave9}
+            className={`flex flex-row justify-start items-center ${styleMenu9} hover:text-red-600`}
+          >
+            <IoBook className="w-5 h-5 m-3 text-base_color" />
+            {
+              active == true ? <div className="text-sm ">Bookings</div> : <div></div>
 
             }
           </button>

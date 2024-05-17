@@ -112,7 +112,7 @@ const RoomTable = () => {
       dataIndex: 'thumb',
       key: 'thumb',
       render: (thumb) => <img
-        src={(API_URL_IMAGE + thumb)   || defaultImage}
+        src={(API_URL_IMAGE + thumb)}
         alt="thumb"
         className="w-10 h-10 rounded-full"
       />,

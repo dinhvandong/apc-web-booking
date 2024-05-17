@@ -1,5 +1,3 @@
-import React from 'react'
-
 import React, { useState } from "react";
 import tasks from "../../assets/tasks.png";
 import tickets from "../../assets/tickets.png";
@@ -18,6 +16,7 @@ import RoomTable from "../table/RoomTable";
 import EventTable from "../table/EventTable";
 import EventItemTable from "../table/EventItemTable";
 import EventItemChildTable from "../table/EventItemChildTable";
+import BookingTable from "../table/BookingTable";
 
 const BookingList = () => {
     const [isOn, setIsOn] = useState(false);
@@ -41,7 +40,7 @@ const BookingList = () => {
 
             </div>
             <div className="flex justify-start mt-5 ml-5 md:justify-center sm:justify-center lg:justify-start">
-                <p className="font-bold">Danh sách events</p>
+                <p className="font-bold">Danh sách Bookings</p>
             </div>
             <div className='h-[1px] bg-base_color w-full'></div>
 
@@ -88,7 +87,7 @@ const BookingList = () => {
 
             </div>
             <div className="flex w-[100%] ml-5 flex-row justify-center">
-                <EventTable />
+                <BookingTable />
             </div>
         
         </div>
