@@ -146,6 +146,9 @@ const PlanCruise = (props) => {
     const [selectedDay, setSelectedDay] = useState(-1);
     const [headerTime, setHeaderTime] = useState('Jun 2023');
     const [priceByDate, setPriceByDate] = useState(null);
+
+    const {updatePriceDate}  = useContext(AuthContext);
+
     const [dateTimeSelect, setDateTimeSelect] = useState(
         formatDateYYYYMMDD(
             new Date().getDay(),
@@ -302,6 +305,7 @@ const PlanCruise = (props) => {
             // const jsonData = await response.json();
             // console.log("SetPriceByDate:", response);
             setPriceByDate(response);
+            updatePriceDate(response);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -351,7 +355,8 @@ const PlanCruise = (props) => {
             children: children,
             infant: infant,
             price: (cruiseType === 'Day Cruise') ? priceByDate.priceDay : priceByDate.priceDinner,
-            typeBooking: cruiseType,
+            cruiseType: cruiseType,
+            flexibleOrNonRefund: true
         };
         updateBookingInfo(newBookingInfo);
     };

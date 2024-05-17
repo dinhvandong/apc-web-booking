@@ -30,7 +30,7 @@ const TimePriceTable = () => {
 
       const refreshData = async () => {
         try {
-          const priceList = await getPriceArray(0,100);
+          const priceList = await getPriceArray(0,10000);
           console.log("priceList", priceList);
           setPriceList(priceList);
           setUpdateValue(priceList)

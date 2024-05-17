@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Booking {
     @Id
     private Long id;
-
     @Transient
     public static final String SEQUENCE_NAME = "booking_sequence";
     private String email;
@@ -20,8 +19,33 @@ public class Booking {
     private boolean flexibleOrNonRefund;  // true = flexible false = non refund
     private double price;
     private int status;
-
+    private  int adult;
+    private  int children;
+    private  int infant;
     private Long createdDate;
+    public int getAdult() {
+        return adult;
+    }
+
+    public void setAdult(int adult) {
+        this.adult = adult;
+    }
+
+    public int getChildren() {
+        return children;
+    }
+
+    public void setChildren(int children) {
+        this.children = children;
+    }
+
+    public int getInfant() {
+        return infant;
+    }
+
+    public void setInfant(int infant) {
+        this.infant = infant;
+    }
 
     public Long getCreatedDate() {
         return createdDate;

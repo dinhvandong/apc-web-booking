@@ -11,10 +11,12 @@ import axios from 'axios';
 const SelectCabinNonRefundPage = () => {
 
     const navigate = useNavigate();
+    const { updateBookingInfo } = useContext(AuthContext);
     const { bookingInfo } = useContext(AuthContext);
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
     const [cruiseType, setCruiseType] = useState('Day Cruise');
+    const {priceDate}  = useContext(AuthContext);
 
     const gotoContactInfor = () => {
         // if(cruiseType === 'Day Cruise')
@@ -25,6 +27,8 @@ const SelectCabinNonRefundPage = () => {
         // {
         //     navigate('/contact');
         // }
+        updateBookingInfo({ flexibleOrNonRefund: false });
+
         navigate('/contact');
 
     }
@@ -34,11 +38,28 @@ const SelectCabinNonRefundPage = () => {
         const adult = bookingInfo.adult;
         const children = bookingInfo.children;
         const infant = bookingInfo.infant;
-        const price = bookingInfo.price;
-        const count = adult + children * 0.75 + infant * 0.5;
-        setFinalPrice(count * price);
-        setCruiseType(bookingInfo.typeBooking);
-        setPrice(price);
+
+        if(bookingInfo.cruiseType==='Day Cruise')
+        {
+
+            const price = priceDate.priceDayNonRefund;
+
+            setPrice(priceDate.priceDayNonRefund);
+            const count = adult + children * 0.75 + infant * 0.5;
+
+
+            setFinalPrice(count * price);
+            setCruiseType(bookingInfo.cruiseType);
+
+        }else 
+        {
+            const price = priceDate.priceDinnerNonRefund;
+            const count = adult + children * 0.75 + infant * 0.5;
+            setPrice(priceDate.priceDinnerNonRefund);
+            setFinalPrice(count * price);
+            setCruiseType(bookingInfo.cruiseType);
+        }
+       
 
     }, []);
 

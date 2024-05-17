@@ -11,7 +11,12 @@ import axios from 'axios';
 const SelectCabinPage = () => {
 
     const navigate = useNavigate();
+
+    const { updateBookingInfo } = useContext(AuthContext);
+
     const { bookingInfo } = useContext(AuthContext);
+    const {priceDate}  = useContext(AuthContext);
+
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
     const [cruiseType, setCruiseType] = useState('Day Cruise');
@@ -43,11 +48,34 @@ const SelectCabinPage = () => {
         const adult = bookingInfo.adult;
         const children = bookingInfo.children;
         const infant = bookingInfo.infant;
-        const price = bookingInfo.price;
-        const count = adult + children * 0.75 + infant * 0.5;
-        setFinalPrice(count * price);
-        setCruiseType(bookingInfo.typeBooking);
-        setPrice(price);
+       // const price = bookingInfo.price;
+
+        if(bookingInfo.cruiseType==='Day Cruise')
+        {
+
+            const price = priceDate.priceDay;
+
+            setPrice(priceDate.priceDay);
+            const count = adult + children * 0.75 + infant * 0.5;
+
+            setFinalPrice(count * price);
+            setCruiseType(bookingInfo.cruiseType);
+           
+        }else 
+        {
+            const price = priceDate.priceDinner;
+            const count = adult + children * 0.75 + infant * 0.5;
+
+            setPrice(priceDate.priceDinner);
+            setFinalPrice(count * price);
+            setCruiseType(bookingInfo.cruiseType);
+
+          
+        }
+       
+
+      
+
 
     }, []);
 

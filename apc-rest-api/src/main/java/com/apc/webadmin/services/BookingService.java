@@ -4,6 +4,7 @@ package com.apc.webadmin.services;
 import com.apc.webadmin.database.SequenceGeneratorService;
 import com.apc.webadmin.models.Booking;
 import com.apc.webadmin.repositories.BookingRepository;
+import com.apc.webadmin.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,8 @@ public class BookingService {
     public Booking create(Booking newBooking){
         Long id = sequenceGeneratorService.generateSequence(Booking.SEQUENCE_NAME);
         newBooking.setId(id);
+        newBooking.setStatus(1);
+        newBooking.setCreatedDate(DateUtils.getCurrentDate());
         return bookingRepository.insert(newBooking);
     }
 

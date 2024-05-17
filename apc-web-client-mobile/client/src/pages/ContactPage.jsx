@@ -243,17 +243,22 @@ const ContactPage = () => {
 }
         
         */
+
+
         const bookingDataJson =  {
             "email": email,
             "phone": phone,
             "title": gender,
             "firstName": firstName,
             "lastName": lastName,
-            "cruiseType": "Cruise Day",
-            "flexibleOrNonRefund": true,
-            "price": 1500,
+            "cruiseType": bookingInfo.cruiseType,
+            "flexibleOrNonRefund": bookingInfo.flexibleOrNonRefund,
+            "price": bookingInfo.price,
             "status": 1,
-            "createdDate": 20240520
+            "createdDate": 20240520,
+            "adult": bookingInfo.adult,
+            "children": bookingInfo.children,
+            "infant": bookingInfo.infant,
         }
 
         //firstName, lastName, phone, 
