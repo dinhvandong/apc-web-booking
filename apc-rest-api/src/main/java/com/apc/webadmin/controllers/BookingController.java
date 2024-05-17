@@ -38,7 +38,7 @@ public class BookingController {
     }
 
     @PostMapping("/deleteAll")
-    public ResponseEntity<?> deleteAll(@RequestParam Long id){
+    public ResponseEntity<?> deleteAll(){
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.deleteAll(),"success"));
     }
 
