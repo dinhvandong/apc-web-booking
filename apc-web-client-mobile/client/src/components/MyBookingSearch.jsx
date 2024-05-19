@@ -1,7 +1,12 @@
 import React from 'react'
 import { MdKeyboardArrowUp } from "react-icons/md";
 import CustomerItem from './CustomerItem';
-const MyBookingSearch = () => {
+const MyBookingSearch = (props) => {
+
+  const { bookingCode } = props;
+
+  console.log("BookingCodeA:", bookingCode);
+
   return (
     <div className='flex flex-col items-center flex-1 w-full overflow-y-auto'>
       <div className='text-xl mt-[100px] text-center font-bold text-white'>

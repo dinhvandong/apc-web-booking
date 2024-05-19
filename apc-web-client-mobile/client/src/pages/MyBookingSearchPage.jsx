@@ -3,13 +3,14 @@ import React, { useEffect } from 'react'
 import HeaderSignIn from '../components/HeaderSignIn'
 import SignIn from '../components/SignIn'
 import BottomNavigation from '../components/BottomNavigation'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { isAuthenticated } from '../services/api'
 import MyBookingSearch from '../components/MyBookingSearch'
 
 const MyBookingSearchPage = () => {
 
-
+    const { bookingCode } = useParams();
+    console.log("bookingCode", bookingCode);
     const navigate = useNavigate();
 
     // useEffect(() => {
@@ -29,7 +30,7 @@ const MyBookingSearchPage = () => {
             className={`h-screen  bg-cover bg-center flex flex-col  transition-opacity duration-500`}
 
         >      <HeaderSignIn title={"My Booking"} />
-            <MyBookingSearch />
+            <MyBookingSearch bookingCode = {bookingCode} />
             <BottomNavigation selected={"booking"} />
         </div>
     )

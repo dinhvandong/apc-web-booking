@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import bg_signin from '../assets/bg_signin.png'
 import { loginRequest } from '../services/api';
 import iconWarning from '../assets/icon-warning.png';
+import { getBookingByCode } from '../services/api_booking';
 
 const MyBooking = () => {
 
@@ -41,7 +42,15 @@ const MyBooking = () => {
     e.preventDefault();
     console.log("bookingCode:", bookingCode);
     console.log("lastName:", lastName);
-          navigate('/booking-search');
+
+    const result = await getBookingByCode(bookingCode);
+    console.log("resultxxxx:", result);
+    if(result.success === 200){
+      navigate('/booking-search/' + bookingCode);
+    }else {
+      window.alert('Không tìm thấy mã booking');
+
+    }
 
     // const result = await loginRequest(email, password);
     // if(result.success===200){

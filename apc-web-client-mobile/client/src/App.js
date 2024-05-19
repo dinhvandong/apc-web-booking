@@ -37,8 +37,9 @@ function App() {
         <Route path="/forgot-password2" element={<ForgotPassword2Page />} />
         <Route path="/forgot-password3" element={<ForgotPassword3Page />} />
         <Route path="/my-booking" element={<MyBookingPage />} />
+        {/* <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} /> */}
 
-        <Route path='/booking-search' element={<MyBookingSearchPage />} />
+        <Route path="/booking-search/:bookingCode" element={<MyBookingSearchPage />} />
         <Route path="/home" element={<HomePage />} />
 
         <Route path="/contact" element={<ContactPage />} />

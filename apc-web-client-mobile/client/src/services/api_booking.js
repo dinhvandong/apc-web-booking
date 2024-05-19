@@ -26,4 +26,21 @@ export const createBooking = async (booking) => {
     }
   
   }
+
+
+  export const getBookingByCode = async (bookingCode) => {
+
+    console.log("BOOKING_CODE:", bookingCode);
+    const code = bookingCode.replace(' ','');
+    try {
+      //const token = localStorage.getItem("token");
+      const response = await axios.get(`${API_URL}/booking/findByBookingCode?bookingCode=` + bookingCode);
+      console.log("ZZZZZZ:", response);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  
+  }
+  
   
