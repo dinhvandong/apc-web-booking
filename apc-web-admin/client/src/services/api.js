@@ -223,16 +223,19 @@ export const createTransaction = async (transactionData) => {
   }
 };
 
-
-
-
 export const createRoom = async (roomData) => {
+  console.log("JSONXXX:", roomData);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/room/insert?token=${token}`, {
-      withCredentials: true,
-    },
-      roomData)
+    const response = await axios.post(`${API_URL}/room/insert?token=${token}`,
+      roomData, config)
+
+      console.log("JSONDATA:", response.data);
     return response.data;
   } catch (error) {
     throw error;

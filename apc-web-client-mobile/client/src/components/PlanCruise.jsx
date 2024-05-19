@@ -311,6 +311,15 @@ const PlanCruise = (props) => {
         }
     };
     useEffect(() => {
+
+        if (id === 1) 
+        {
+            setCruiseType('Day Cruise');
+        } else 
+        {
+            setCruiseType('Dinner Cruise');
+        }
+        
         const getData = async (currentMonth) => {
             const result = await getPriceFromMonth(currentMonth);
             console.log("Result:", result);
@@ -348,8 +357,11 @@ const PlanCruise = (props) => {
 
 
     const handleUpdateBookingInfo = () => {
-        console.log("Curise Type:", cruiseType);
+        console.log("dateResultString:", dateResultString);
+       
+
         const newBookingInfo = {
+            bookingDate: parseInt(dateResultString),
             customerName: '',
             adult: adult,
             children: children,
@@ -358,7 +370,7 @@ const PlanCruise = (props) => {
             cruiseType: cruiseType,
             flexibleOrNonRefund: true
         };
-        console.log("bookingInfo:",adult );
+        console.log("bookingInfo:", adult);
         updateBookingInfo(newBookingInfo)
         // updateBookingInfo({ adult: adult });
         // updateBookingInfo({ children: children });

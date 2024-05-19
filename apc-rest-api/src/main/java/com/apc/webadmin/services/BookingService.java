@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class BookingService {
@@ -27,6 +28,10 @@ public class BookingService {
         newBooking.setId(id);
         newBooking.setStatus(1);
         newBooking.setCreatedDate(DateUtils.getCurrentDate());
+
+        String randomKey = UUID.randomUUID().toString();
+        newBooking.setBookingCode("APC"+randomKey);
+
         return bookingRepository.insert(newBooking);
     }
 

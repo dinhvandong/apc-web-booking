@@ -74,7 +74,7 @@ const BookingList = () => {
                         </div>
                     </form>
                 </div>
-                <div onClick={createNewRoom}
+                {/* <div onClick={createNewRoom}
                     className="flex items-center px-2 ml-5 font-bold text-gray-500 scale-105 bg-white border rounded-lg shadow-sm hover:cursor-pointer hover:bg-base_color hover:text-white"
                 >
                     <MdAdd />
@@ -83,7 +83,7 @@ const BookingList = () => {
 
                     </p>
 
-                </div>
+                </div> */}
 
             </div>
             <div className="flex w-[100%] ml-5 flex-row justify-center">

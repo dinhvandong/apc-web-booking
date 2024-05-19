@@ -175,6 +175,7 @@ const ContactPage = () => {
         setEmail(e.target.value);
     };
     const { bookingInfo } = useContext(AuthContext);
+    const {updateBookingInfo} = useContext(AuthContext);
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -220,7 +221,7 @@ const ContactPage = () => {
     };
     const handleSubmit = async () => {
 
-       // e.preventDefault();
+        // e.preventDefault();
         console.log("email:", email);
         console.log("password:", password);
         console.log("firstName:", firstName);
@@ -245,7 +246,7 @@ const ContactPage = () => {
         */
 
 
-        const bookingDataJson =  {
+        const bookingDataJson = {
             "email": email,
             "phone": phone,
             "title": gender,
@@ -255,21 +256,26 @@ const ContactPage = () => {
             "flexibleOrNonRefund": bookingInfo.flexibleOrNonRefund,
             "price": bookingInfo.price,
             "status": 1,
-            "createdDate": 20240520,
+            "bookingDate": bookingInfo.bookingDate,
             "adult": bookingInfo.adult,
             "children": bookingInfo.children,
             "infant": bookingInfo.infant,
         }
 
+
+        updateBookingInfo(bookingDataJson);
+
+
+        console.log("Hehehe:", bookingDataJson);
         //firstName, lastName, phone, 
         //country, gender,
         //email, password
         //const result = await registerRequest(firstName, lastName, phone,
         const response = await createBooking(bookingDataJson);
 
-       // country, gender, email, password);
+        // country, gender, email, password);
         if (response.data.success === 200) {
-           // const token = result.data.message;
+            // const token = result.data.message;
             //const user = result.data
             //login(token, user);
             // navigate('/registration-success');

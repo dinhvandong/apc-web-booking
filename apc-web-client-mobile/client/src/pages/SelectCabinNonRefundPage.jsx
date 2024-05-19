@@ -27,7 +27,7 @@ const SelectCabinNonRefundPage = () => {
         // {
         //     navigate('/contact');
         // }
-        updateBookingInfo({ flexibleOrNonRefund: false, price: finalPrice });
+        updateBookingInfo({ flexibleOrNonRefund: false, price: finalPrice, priceBase: price });
        // updateBookingInfo({  price: finalPrice });
 
         navigate('/contact');
@@ -137,7 +137,7 @@ const SelectCabinNonRefundPage = () => {
                         </div>
 
                         <div>
-                            <p>{finalPrice}k VND/person</p>
+                            <p>{price}k VND/person</p>
                         </div>
 
                     </div>

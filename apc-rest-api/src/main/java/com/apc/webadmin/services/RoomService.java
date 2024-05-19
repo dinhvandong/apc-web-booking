@@ -27,11 +27,11 @@ public class RoomService {
         newRoom.setId(idNew);
         newRoom.setActive(true);
 
-        PriceFolio priceFolio = new PriceFolio();
-        priceFolio.setRoomID(idNew);
-        priceFolio.setRoomType(newRoom.getRoomType());
-        priceFolio.setPriceBase(newRoom.getPriceBase());
-        priceFolioService.create(priceFolio);
+//        PriceFolio priceFolio = new PriceFolio();
+//        priceFolio.setRoomID(idNew);
+//        priceFolio.setRoomType(newRoom.getRoomType());
+//        priceFolio.setPriceBase(newRoom.getPriceBase());
+//        priceFolioService.create(priceFolio);
         return roomRepository.insert(newRoom);
     }
 

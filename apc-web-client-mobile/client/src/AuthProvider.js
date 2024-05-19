@@ -16,7 +16,9 @@ export const AuthProvider = ({ children }) => {
     children: 0,
     infant: 0,
     flexibleOrNonRefund: true,
+    priceBase:0,
     price: 0,
+    bookingDate:0,
     cruiseType: 'Day Cruise',
   });
   const [priceDate, setPriceDate] = useState(
@@ -33,6 +35,8 @@ export const AuthProvider = ({ children }) => {
       activeDay: true,
       activeDinner: true
     });
+
+  const [ancillary, setAncillary] = useState()
   const [userInfo, setUserInfo] = useState(null);
   // const updateBookingInfo = (newBookingInfo) => {
   //   setBookingInfo(newBookingInfo);
@@ -66,8 +70,57 @@ export const AuthProvider = ({ children }) => {
     setUserInfo(null);
   };
 
+
+  const [items, setItems] = useState([]);
+
+  const getService = (service) => {
+    const item = items.find((item) => item.service === service);
+    return item ? item.count : 0;
+  };
+
+  const updateService = (service, count) => {
+    const updatedItems = items.map((item) => {
+      if (item.service === service) {
+        return { ...item, count };
+      }
+      return item;
+    });
+
+    setItems(updatedItems);
+  };
+
+  const addService = (service, price, count) => {
+    // const newItem = { service: service, price:price, count:count };
+    // setItems([...items, newItem]);
+
+    const serviceExists = items.some(item => item.service === service);
+
+    if (!serviceExists) {
+      const newItem = { service, price, count };
+      setItems([...items, newItem]);
+    }else {
+
+      updateService(service, count)
+    }
+  };
+
+  const setArrayService = (newItems) => {
+    setItems(newItems);
+  };
+
+  const getAllServices = () => {
+    return [...items];
+  };
+
   return (
-    <AuthContext.Provider value={{ token, userInfo, signIn, logout, bookingInfo, updateBookingInfo, priceDate, updatePriceDate }}>
+    <AuthContext.Provider value={{
+      token, userInfo, signIn, logout, bookingInfo, updateBookingInfo, priceDate, updatePriceDate,
+      getService,
+      updateService,
+      addService,
+      setArrayService,
+      getAllServices
+    }}>
       {children}
     </AuthContext.Provider>
   );

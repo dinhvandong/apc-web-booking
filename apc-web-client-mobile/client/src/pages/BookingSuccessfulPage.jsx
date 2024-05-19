@@ -51,7 +51,7 @@ const BookingSuccessfulPage = () => {
     return (
         <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderBookingSuccess />
-            <div className=' w-full items-center justify-center md:w-[600px] flex flex-col mb-[10px] h-screen'>
+            <div className=' px-5 w-full items-center justify-center md:w-[600px] flex flex-col mb-[10px] h-screen'>
 
                 <img src={ic_success} className='mt-5 w-[150px] h-[150px]' />
                 <p className='mt-5 ml-5 mr-5 text-center text-black'>

@@ -44,18 +44,18 @@ const RoomCreate = () => {
         console.log("Item_SIZE:", items);
 
         const newItem = {
-            id: (items.length +1), // Generate a unique ID for the new item
-            item: 'Dịch vụ ' + items.length ,
+            id: (items.length + 1), // Generate a unique ID for the new item
+            item: 'Dịch vụ ' + items.length,
             active: true // Initialize the value as an empty string
         };
 
 
-        setFormData((prevData) => ({
-            ...prevData,
-            roomItemList: [...prevData.roomItemList, newItem]
-          }));
+        // setFormData((prevData) => ({
+        //     ...prevData,
+        //     roomItemList: [...prevData.roomItemList, newItem]
+        // }));
 
-       setItems((prevItems) => [...prevItems, newItem]);
+        setItems((prevItems) => [...prevItems, newItem]);
 
         //console.log("Item_SIZE:", items);
     }
@@ -72,7 +72,7 @@ const RoomCreate = () => {
 
         const response = await uploadFile(file);
         const fileResponse = API_URL_IMAGE + response.data;
-        setFile(fileResponse);
+        setFile(response.data);
         console.log("upload-file", response);
 
         setFormData(prevFormData => ({
@@ -85,33 +85,39 @@ const RoomCreate = () => {
 
     function handleInputChangeItem(e, itemId) {
         const updatedItems = items.map((item) => {
-          if (item.id === itemId) {
-            return { ...item, item: e.target.value };
-          }
-          return item;
+            if (item.id === itemId) {
+                return { ...item, item: e.target.value };
+            }
+            return item;
         });
-      
+
         setItems(updatedItems);
         console.log("Items-List:", items);
-      }
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setFormData({avatar: file})
-        console.log("items::", items);
-
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            thumb: file
-        }));
-
-        console.log("roomItemList::", formData);
-        const result = await createRoom(formData);
+        console.log("itemsXXXXX::", items);
+        const updatedFormData = {
+            ...formData,
+            roomItemList: items, // Update the specific field
+        };
+        // setModel(updatedModel);
+        setFormData(updatedFormData);
+        // setFormData((prevData) => ({
+        //     ...prevData,
+        //     roomItemList: [...prevData.roomItemList, items]
+        // }));
+        const jsonData = JSON.stringify(updatedFormData);
+    
+        console.log("roomItemList::", jsonData);
+        const result = await createRoom(jsonData);
         if (result.success === 200) {
             navigate('/admin/room');
         }
 
         // Reset form data
-        setFormData({ name: '', email: '', password: '' });
+        //setFormData({ name: '', email: '', password: '' });
     };
 
     return (
@@ -206,7 +212,7 @@ const RoomCreate = () => {
                             </Upload>
                         </div>
                         <div className="mb-2">
-                            <img src={file} className='w-[100px] h-[100px]' />
+                            <img src={API_URL_IMAGE + file} className='w-[100px] h-[100px]' />
 
                         </div>
 
@@ -221,17 +227,17 @@ const RoomCreate = () => {
 
                         </div>
                         <div className='h-auto '>
-                        <ul>
-                            {items.map((item) => (
-                                <li key={item.id}>
-                                    <input className='w-full mt-5 border-2 border-gray-500'
-                                        type="text"
-                                        value={item.item}
-                                        onChange={(e) => handleInputChangeItem(e, item.id)}
-                                    />
-                                </li>
-                            ))}
-                        </ul>
+                            <ul>
+                                {items.map((item) => (
+                                    <li key={item.id}>
+                                        <input className='w-full mt-5 border-2 border-gray-500'
+                                            type="text"
+                                            value={item.item}
+                                            onChange={(e) => handleInputChangeItem(e, item.id)}
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
 
                         </div>
                         <button

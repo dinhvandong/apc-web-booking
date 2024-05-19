@@ -19,6 +19,8 @@ public class Booking {
     private boolean flexibleOrNonRefund;  // true = flexible false = non refund
     private double price;
 
+    private String bookingCode;
+
     private double priceBase;
     private int status;
     private  int adult;
@@ -27,6 +29,13 @@ public class Booking {
     private Long bookingDate;
     private Long createdDate;
 
+    public String getBookingCode() {
+        return bookingCode;
+    }
+
+    public void setBookingCode(String bookingCode) {
+        this.bookingCode = bookingCode;
+    }
 
     public double getPriceBase() {
         return priceBase;
