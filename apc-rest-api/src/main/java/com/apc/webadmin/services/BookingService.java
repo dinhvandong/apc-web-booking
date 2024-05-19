@@ -63,6 +63,14 @@ public class BookingService {
         return bookingRepository.save(bookingFound);
     }
 
+    public Booking findByBookingCode(String bookingCode){
+
+        Optional<Booking> optional = bookingRepository.findByBookingCode(bookingCode);
+        if(optional.isEmpty()) {
+            return  null;
+        }
+        return optional.get();
+    }
     public List<Booking> findAll(){
         return bookingRepository.findAll();
     }

@@ -228,11 +228,11 @@ const BookingTable = () => {
             dataIndex: 'bookingCode',
             key: 'bookingCode',
         },
-        {
-            title: 'CreatedDate',
-            dataIndex: 'createdDate',
-            key: 'createdDate',
-        },
+        // {
+        //     title: 'CreatedDate',
+        //     dataIndex: 'createdDate',
+        //     key: 'createdDate',
+        // },
         {
             title: 'Status',
             dataIndex: 'status',

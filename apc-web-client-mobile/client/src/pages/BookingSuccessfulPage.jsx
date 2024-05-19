@@ -29,6 +29,9 @@ const BookingSuccessfulPage = () => {
             navigate('/contact');
         }
     }
+
+    const bookingCode = bookingInfo.bookingCode;
+
     useEffect(() => {
         const adult = bookingInfo.adult;
         const children = bookingInfo.children;
@@ -62,7 +65,7 @@ const BookingSuccessfulPage = () => {
                     <p className='text-white'>BOOKING CODE</p>
                     <div className='flex items-center justify-between p-5 mt-5 ml-5 mr-5 bg-white rounded-lg'>
 
-                        <p className='font-bold text-[30px]'>APC1DV</p>
+                        <p className='font-bold text-[30px]'>{bookingCode}</p>
                         <img src={ic_copy} className='w-5 h-5'/>
 
                     </div>

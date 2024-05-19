@@ -5,11 +5,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookingRepository extends MongoRepository<Booking, Long>
 {
 
     List<Booking> findBy(Pageable pageable);
+
+    Optional<Booking> findByBookingCode(String bookingCode);
 
 
 }

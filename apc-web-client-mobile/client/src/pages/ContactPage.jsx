@@ -272,9 +272,12 @@ const ContactPage = () => {
         //email, password
         //const result = await registerRequest(firstName, lastName, phone,
         const response = await createBooking(bookingDataJson);
+        console.log("BookingResponse:", response);
 
         // country, gender, email, password);
-        if (response.data.success === 200) {
+        if (response.success === 200) {
+            updateBookingInfo(response.data);
+
             // const token = result.data.message;
             //const user = result.data
             //login(token, user);

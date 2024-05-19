@@ -25,6 +25,16 @@ public class BookingController {
 
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.getBookingsByPage(pageNumber, pageSize),"success"));
     }
+
+    @GetMapping("/findByBookingCode")
+    public ResponseEntity<?> getBookings(
+            @RequestParam String bookingCode) {
+        Booking booking = bookingService.findByBookingCode(bookingCode);
+        if(booking!= null) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, booking,"success"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"not found"));
+    }
     @PostMapping("/insert")
     public ResponseEntity<?> insert(@RequestBody Booking newBooking){
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.create(newBooking),"success"));
