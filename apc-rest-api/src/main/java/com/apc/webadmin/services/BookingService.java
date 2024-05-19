@@ -30,7 +30,7 @@ public class BookingService {
         newBooking.setCreatedDate(DateUtils.getCurrentDate());
 
         String randomKey = UUID.randomUUID().toString();
-        newBooking.setBookingCode("APC"+randomKey);
+        newBooking.setBookingCode("APC-"+randomKey);
 
         return bookingRepository.insert(newBooking);
     }
