@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     infant: 0,
     flexibleOrNonRefund: true,
     priceBase:0,
+    payMethod:'PayPal',
     price: 0,
     bookingDate:0,
     cruiseType: 'Day Cruise',

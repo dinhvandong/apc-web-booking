@@ -13,6 +13,8 @@ const SelectCabinNonRefundPage = () => {
     const navigate = useNavigate();
     const { updateBookingInfo } = useContext(AuthContext);
     const { bookingInfo } = useContext(AuthContext);
+    console.log("CruiseType1:", bookingInfo.cruiseType);
+
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
     const [cruiseType, setCruiseType] = useState('Day Cruise');
@@ -76,13 +78,27 @@ const SelectCabinNonRefundPage = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Non-Refundable Rate')
+
+        if(bookingInfo.cruiseType==='Day Cruise') {
+
+            axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Non-Refundable Rate')
             .then(response => {
                 setData(response.data.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+        }else {
+
+            axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Non-Refundable Rate Dinner')
+            .then(response => {
+                setData(response.data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+            
     }, []);
     return (
         <div className='flex flex-col items-center justify-center w-full mb-[100px] h-auto'>

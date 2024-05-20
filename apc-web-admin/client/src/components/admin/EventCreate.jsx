@@ -14,7 +14,7 @@ import EventItemList from './EventItemList';
 const EventCreate = () => {
     const navigate = useNavigate();
     //const [items, setItems] = useState([]);
-    const eventTypes = ['Flexible Rate', 'Non-Refundable Rate'];
+    const eventTypes = ['Flexible Rate', 'Non-Refundable Rate', 'Flexible Rate Dinner', 'Non-Refundable Rate Dinner'];
 
     //     id": 1,
     //   "name": "My Event Plan",

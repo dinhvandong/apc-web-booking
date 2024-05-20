@@ -15,7 +15,8 @@ const SelectCabinPage = () => {
     const { updateBookingInfo } = useContext(AuthContext);
 
     const { bookingInfo } = useContext(AuthContext);
-    const {priceDate}  = useContext(AuthContext);
+    console.log("CruiseType2:", bookingInfo.cruiseType);
+    const { priceDate } = useContext(AuthContext);
 
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
@@ -31,10 +32,10 @@ const SelectCabinPage = () => {
         //     navigate('/contact');
         // }
 
-       updateBookingInfo({ flexibleOrNonRefund: true, price: finalPrice, priceBase: price });
+        updateBookingInfo({ flexibleOrNonRefund: true, price: finalPrice, priceBase: price });
 
-      //  updateBookingInfo({ flexibleOrNonRefund: true });
-      //  updateBookingInfo({  price: finalPrice });
+        //  updateBookingInfo({ flexibleOrNonRefund: true });
+        //  updateBookingInfo({  price: finalPrice });
 
 
 
@@ -56,10 +57,9 @@ const SelectCabinPage = () => {
         const adult = bookingInfo.adult;
         const children = bookingInfo.children;
         const infant = bookingInfo.infant;
-       // const price = bookingInfo.price;
+        // const price = bookingInfo.price;
 
-        if(bookingInfo.cruiseType==='Day Cruise')
-        {
+        if (bookingInfo.cruiseType === 'Day Cruise') {
 
             const price = priceDate.priceDay;
 
@@ -68,9 +68,8 @@ const SelectCabinPage = () => {
 
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
-           
-        }else 
-        {
+
+        } else {
             const price = priceDate.priceDinner;
             const count = adult + children * 0.75 + infant * 0.5;
 
@@ -78,11 +77,11 @@ const SelectCabinPage = () => {
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
 
-          
-        }
-       
 
-      
+        }
+
+
+
 
 
     }, []);
@@ -91,13 +90,26 @@ const SelectCabinPage = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible%20Rate')
-            .then(response => {
-                setData(response.data.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
+
+        if (bookingInfo.cruiseType === 'Day Cruise') {
+
+            axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible%20Rate')
+                .then(response => {
+                    setData(response.data.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        } else {
+            axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible%20Rate%20Dinner')
+                .then(response => {
+                    setData(response.data.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+
+        }
     }, []);
     return (
         <div className='flex flex-col items-center justify-center w-full mb-[100px] h-auto'>
@@ -139,7 +151,7 @@ const SelectCabinPage = () => {
                 {data.map(item => (
                     <EventItem key={item.id} data={item} />
                 ))}
-                
+
             </div>
             <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-white flex justify-around py-4`}>
 

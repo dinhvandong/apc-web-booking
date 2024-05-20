@@ -12,7 +12,7 @@ import RoomItem from '../components/RoomItem';
 import bg_payment from '../assets/cabin1.png';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { MdKeyboardArrowDown } from "react-icons/md";
-
+import paypal from '../assets/paypal.png';
 import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
 const PaymentConfirmPage = () => {
 
@@ -158,7 +158,7 @@ const PaymentConfirmPage = () => {
     return (
         <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderPaymentConfirm />
-            <div className='mb-[200px] mt-[100px] w-full md:w-[600px] flex flex-col  h-screen'>
+            <div className='mb-[200px] mt-[100px] w-full md:w-[600px] flex flex-col  h-auto'>
 
                 <div className='w-full flex ml-1 mr-2 px-1 py-1 items-center rounded-lg bg-[#2F4842] h-[180px]'>
 
@@ -310,11 +310,131 @@ const PaymentConfirmPage = () => {
 
 
                 </div>
+
+                <div className='flex flex-col mb-[100px] w-full h-auto p-5 mt-5 ml-2 mr-5 bg-white rounded-lg'>
+
+
+                    <div className='mt-5 font-bold text-brown_color'>
+
+                        <p>Important Notes</p>
+                    </div>
+                    <div className='mt-5 font-bold'>
+
+                        <p>CHECK-IN INSTRUCTIONS</p>
+                    </div>
+                    <div className='flex justify-between mt-5'>
+
+                        <div>For Day Cruise:</div>
+
+                        <div className='flex flex-col'>
+                            <div>Boarding Time: 8:45 AM</div>
+                            <div>Check-out Time: 4:30 PM</div>
+                        </div>
+                    </div>
+
+                    <div className='flex justify-between'>
+
+                        <div>For Dinner Cruise:</div>
+
+                        <div className='flex flex-col'>
+                            <div>Boarding Time: 5:00 PM</div>
+                            <div>Check-out Time: 10:00 PM</div>
+                        </div>
+                    </div>
+
+                    <div className='mt-5'>
+
+                        <p>To ensure a seamless check-in experience and avoid any late check-in charges, please make sure to arrive at the Ambassador Check-in Lounge 30 minutes before Boarding time.</p>
+
+                    </div>
+
+                    <div className='mt-5'>
+
+                        <p>Kindly note that advanced registration is mandatory. Please provide all passenger information (including full name, gender, date of birth, and nationality) at least 24 hours prior to your departure. Failure to supply this information may result in denial of boarding or a late fee of USD 30 per person.</p>
+
+                    </div>
+
+                    <div className='mt-5 font-bold'>
+
+                        <p>SPECIAL REQUEST</p>
+                    </div>
+
+                    <div>
+                        <p>
+                            If you have any special dietary requirements or food allergies, please inform us before your cruise date.
+                        </p>
+                    </div>
+
+                    <div className='mt-5 font-bold'>
+
+                        <p>TRANSPORTATION SERVICE</p>
+                    </div>
+
+                    <div>
+                        <p>If you have reserved our shuttle bus service for Day Cruise:</p>
+                    </div>
+
+                    <div>
+                        <p>Pick-up and drop-off location:Hanoi Towers, 49 Hai Ba Trung str., Hoan Kiem dist., Hanoi.</p>
+                    </div>
+                    <div>
+                        Pick-up time: 6:00 AM
+                    </div>
+                    <div>
+                        Drop-off time: 7:00 PM
+                    </div>
+                    <div>Please note that infants will be seated with adults.</div>
+                    <div className='mt-5 font-bold'>
+
+                        <p>CANCELLATION POLICY FOR FLEXIBLE AND BUSINESS PRICING</p>
+                    </div>
+
+
+                    <div>
+                        <p>Full refund if canceled or modified up to 7 days (For group of 10 to 20 persons) and 3 days (For group of less than 10 persons) prior to the date of arrival.</p>
+
+                    </div>
+
+                    <div>
+                        <p>
+                            50% refund if canceled  or modified from 3 to 7 days (For group of 10 to 20 persons) and 1 to 3 days (For group of less than 10 persons) prior to the date of arrival.
+                        </p>
+                    </div>
+
+                    <div>
+                        Non-refundable if canceled or modified later or in the case of a no-show.
+
+                    </div>
+                    <div>
+                        For group of more than 21 persons, please inform in email in case of cancellation or cruise amendment.
+
+                    </div>
+
+                    <div>
+
+                        For any inquiries regarding your reservation, please feel free to contact us directly on our hotline at <span className="font-bold text-black">+84 19003045</span> or via email at <span className="font-bold text-black">app@ambassadorcruise.com.</span>
+                    </div>
+
+                </div>
             </div>
-            <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-[#bbbbbf] flex justify-around py-4`}>
-                <div className='w-full md:w-[600px] m-5 h-[60px] flex flex-row'>
-                    <div onClick={gotoContactInfor} className='flex items-center justify-center w-full h-full ml-4 mr-4 font-bold text-center text-white rounded hover:cursor-pointer bg-brown_color'>
+            <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-white flex justify-around py-4`}>
+                <div className='w-full md:w-[600px] m-5 h-auto flex flex-col'>
+                    <div className='flex flex-row justify-between m-5'>
+                        <div className='flex flex-col'>
+                            <p className='font-bold text-brown_color'>{priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant)}k VND</p>
+                            <p>Fee tax included</p>
+                        </div>
+
+                        <div className='flex items-center justify-end'>
+                            <img src={paypal} className='mr-5 w-[145px] h-[44px]' />
+                            <button className='font-bold text-brown_color'>Change</button>
+                        </div>
+                    </div>
+                    <div onClick={gotoContactInfor} className='flex items-center justify-center w-full h-[60px] ml-4 mr-4 font-bold text-center text-white rounded hover:cursor-pointer bg-brown_color'>
                         <p>Proceed Payment</p>
+                    </div>
+                    <div className='text-[12px] mt-5'>
+                        <p className='text-center'>By processing payment, you have agreed to Ambassador Cruises' Terms & Condition and Privacy Policy.</p>
                     </div>
                 </div>
             </nav>
