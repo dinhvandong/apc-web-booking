@@ -11,8 +11,15 @@ import { AuthContext } from '../AuthProvider';
 import RoomItem from '../components/RoomItem';
 import bg_payment from '../assets/cabin1.png';
 import { MdKeyboardArrowUp } from 'react-icons/md';
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
 const PaymentConfirmPage = () => {
+
+    const [hidden1, setHidden1] = useState(false);
+    const [hidden2, setHidden2] = useState(false);
+    const [hidden3, setHidden3] = useState(false);
+
     const navigate = useNavigate();
     const { bookingInfo } = useContext(AuthContext);
     const { getAllServices } = useContext(AuthContext);
@@ -87,17 +94,17 @@ const PaymentConfirmPage = () => {
         const year = longValueStr.substr(0, 4);
         const month = longValueStr.substr(4, 2);
         const day = longValueStr.substr(6, 2);
-      
+
         const date = new Date(`${year}-${month}-${day}`);
         const formattedDate = new Intl.DateTimeFormat('en-US', {
-          weekday: 'short',
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
+            weekday: 'short',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
         }).format(date);
-      
+
         return formattedDate;
-      }
+    }
 
     useEffect(() => {
 
@@ -136,6 +143,17 @@ const PaymentConfirmPage = () => {
 
 
 
+    const handleHiddenLayout1 = () => {
+        setHidden1(!hidden1);
+    }
+    const handleHiddenLayout2 = () => {
+        setHidden2(!hidden2);
+    }
+
+    const handleHiddenLayout3 = () => {
+        setHidden3(!hidden3);
+    }
+
 
     return (
         <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
@@ -148,7 +166,7 @@ const PaymentConfirmPage = () => {
 
                     <div className='flex flex-col ml-5 text-white'>
 
-                        <p className='font-bold'>Ambassador Dinner Cruise</p>
+                        <p className='font-bold'>Ambassador {bookingInfo.cruiseType}</p>
                         <p>{currentTime}</p>
                         <p>{adult} Adults, {children} children, {infant} infant</p>
 
@@ -162,43 +180,65 @@ const PaymentConfirmPage = () => {
 
                         <p className='font-bold text-brown_color'>Contact Information</p>
 
-                        < MdKeyboardArrowUp className='w-[30px] h-[30px] text-brown_color' />
+                        {hidden1 == false ? (< MdKeyboardArrowUp onClick={handleHiddenLayout1} className='hover:cursor-pointer w-[30px] h-[30px] text-brown_color' />) :
+
+                            < MdKeyboardArrowDown onClick={handleHiddenLayout1} className=' hover:cursor-pointer w-[30px] h-[30px] text-brown_color' />
+                        }
 
                     </div>
-                    <div className='flex justify-between w-full mt-5'>
-                        <p className='font-bold'>Title</p>
-                        <p>Mr</p>
-                    </div>
-                    <div className='flex justify-between w-full'>
-                        <p className='font-bold'>FirstName</p>
-                        <p>{firstName}</p>
-                    </div>
-                    <div className='flex justify-between w-full'>
-                        <p className='font-bold'>LastName</p>
-                        <p>{lastName}</p>
-                    </div>
+                    {
+                        hidden1 == false ?
+                            <div className='flex flex-col'>
 
-                    <div className='flex justify-between w-full'>
-                        <p className='font-bold'>E-mail</p>
-                        <p>{email}</p>
-                    </div>
-                    <div className='flex justify-between w-full'>
-                        <p className='font-bold'>Phone Number</p>
-                        <p>{phone}</p>
-                    </div>
+                                <div className='flex justify-between w-full mt-5'>
+                                    <p className='font-bold'>Title</p>
+                                    <p>Mr</p>
+                                </div>
+                                <div className='flex justify-between w-full'>
+                                    <p className='font-bold'>FirstName</p>
+                                    <p>{firstName}</p>
+                                </div>
+                                <div className='flex justify-between w-full'>
+                                    <p className='font-bold'>LastName</p>
+                                    <p>{lastName}</p>
+                                </div>
+
+                                <div className='flex justify-between w-full'>
+                                    <p className='font-bold'>E-mail</p>
+                                    <p>{email}</p>
+                                </div>
+                                <div className='flex justify-between w-full'>
+                                    <p className='font-bold'>Phone Number</p>
+                                    <p>{phone}</p>
+                                </div>
+                            </div>
+
+                            : (<div></div>)
+                    }
+
+
                 </div>
 
                 <div className='flex flex-col w-full h-auto p-5 mt-5 ml-2 mr-5 text-black bg-white rounded-lg'>
                     <div className='flex justify-between mb-5'>
                         <p className='font-bold text-brown_color'>Ancillary</p>
-                        < MdKeyboardArrowUp className='w-[30px] h-[30px] text-brown_color' />
-                    </div>
-                    {values.map((item, index) => (
-                        <div className='flex justify-between w-full' key={index}>
-                            <p className='font-bold'>{item.service}</p>
-                            <p>{item.count}</p>
-                        </div>
-                    ))}
+                        {hidden2 == false ? (< MdKeyboardArrowUp onClick={handleHiddenLayout2} className='hover:cursor-pointer w-[30px] h-[30px] text-brown_color' />) :
+
+                            < MdKeyboardArrowDown onClick={handleHiddenLayout2} className='hover:cursor-pointer w-[30px] h-[30px] text-brown_color' />
+                        }                     </div>
+                    {
+                        hidden2 == false ? <div>
+                            {values.map((item, index) => (
+                                <div className='flex justify-between w-full' key={index}>
+                                    <p className='font-bold'>{item.service}</p>
+                                    <p>{item.count}</p>
+                                </div>
+                            ))}
+
+                        </div> : (<div></div>)
+
+                    }
+
                     {/* <div className='flex justify-between w-full'>
                         <p>Shuttle Bus Service</p>
                         <p>02</p>
@@ -218,51 +258,56 @@ const PaymentConfirmPage = () => {
 
                         <p className='font-bold text-brown_color'>Price Details</p>
 
-                        < MdKeyboardArrowUp className='w-[30px] h-[30px] text-brown_color' />
+                        {hidden3 == false ? (< MdKeyboardArrowUp onClick={handleHiddenLayout3} className='hover:cursor-pointer w-[30px] h-[30px] text-brown_color' />) :
 
-                    </div>
-                    <div className='flex justify-between w-full mt-5 font-bold text-black'>
-                        <p>Cruise Package</p>
-                        <p>{(adult * priceBase) + (children * priceBase * 0.75) + (infant * 0.5)} k VND</p>
-                    </div>
-                    <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                        <p>Adults x {adult} </p>
-                        <p>{(adult * priceBase)} k VND</p>
-                    </div>
-                    <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                        <p>Children x {children} </p>
-                        <p>{children * priceBase * 0.75} k VND</p>
-                    </div>
-                    <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                        <p>Infant x{infant * 0.5} </p>
-                        <p>{infant} k VND</p>
+                            < MdKeyboardArrowDown onClick={handleHiddenLayout3} className='hover:cursor-pointer w-[30px] h-[30px] text-brown_color' />
+                        }
                     </div>
 
-                    <div className='flex justify-between w-full mt-5 font-bold text-black'>
-                        <p>Ancillary</p>
-                        <p>{priceService} k VND</p>
-                    </div>
+                    {
+                        hidden3 == false ?
+                            (<div className='flex flex-col'>
+                                <div className='flex justify-between w-full mt-5 font-bold text-black'>
+                                    <p>Cruise Package</p>
+                                    <p>{(adult * priceBase) + (children * priceBase * 0.75) + (infant * priceBase * 0.5)} k VND</p>
+                                </div>
+                                <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
+                                    <p>Adults x {adult} </p>
+                                    <p>{(adult * priceBase)} k VND</p>
+                                </div>
+                                <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
+                                    <p>Children x {children} </p>
+                                    <p>{children * priceBase * 0.75} k VND</p>
+                                </div>
+                                <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
+                                    <p>Infant x{infant * 0.5} </p>
+                                    <p>{infant} k VND</p>
+                                </div>
+
+                                <div className='flex justify-between w-full mt-5 font-bold text-black'>
+                                    <p>Ancillary</p>
+                                    <p>{priceService} k VND</p>
+                                </div>
 
 
-                    {values.map((item, index) => (
-                        <div key={index} className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                            <p>{item.service} x {item.count}</p>
-                            <p>{item.price} VND</p>
-                        </div>
-                    ))}
+                                {values.map((item, index) => (
+                                    <div key={index} className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
+                                        <p>{item.service} x {item.count}</p>
+                                        <p>{item.price} VND</p>
+                                    </div>
+                                ))}
 
-                    {/* <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                        <p>Shuttle Bus x2 </p>
-                        <p>5,457,375 VND</p>
-                    </div>
-                    <div className='flex ml-2 px-2  font-thin text-[#9DA4AE] justify-between w-full'>
-                        <p>Ambassador Deluxe Cabin x2 </p>
-                        <p>5,457,375 VND</p>
-                    </div> */}
-                    <div className='flex justify-between w-full mt-5 font-bold text-black'>
-                        <p>TOTAL</p>
-                        <p>{priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant)}k VND</p>
-                    </div>
+
+                                <div className='flex justify-between w-full mt-5 font-bold text-black'>
+                                    <p>TOTAL</p>
+                                    <p>{priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant)}k VND</p>
+                                </div>
+
+                            </div>) : <div></div>
+
+                    }
+
+
 
                 </div>
             </div>

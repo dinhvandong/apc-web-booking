@@ -54,13 +54,13 @@ const RoomItem = ({ imageSrc, title, description,price, items }) => {
                             <div className='flex justify-end ml-5 mr-2'>
 
                                 <div onClick={handleSubRoom} className='text-[16px] mr-2  font-bold'>
-                                    <RiSubtractFill  className='w-[20px] h-[20px] text-[#B77855]' />
+                                    <RiSubtractFill  className='hover:cursor-pointer w-[20px] h-[20px] text-[#B77855]' />
                                 </div>
                                 <div className='mr-2 font-bold'>
                                     <p>{count}</p>
                                 </div>
                                 <div onClick={handleAddRoom} className='font-bold'>
-                                    <IoIosAdd  className='w-[20px] h-[20px] text-[#B77855]' />
+                                    <IoIosAdd  className='hover:cursor-pointer w-[20px] h-[20px] text-[#B77855]' />
                                 </div>
 
 

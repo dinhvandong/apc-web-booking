@@ -18,6 +18,8 @@ const PlanCruise = (props) => {
     const navigate = useNavigate();
     const { id } = props;
 
+    console.log("ID CRUISE:", id);
+
     const { updateBookingInfo } = useContext(AuthContext);
 
     const [adult, setAdult] = useState(1);
@@ -311,13 +313,17 @@ const PlanCruise = (props) => {
         }
     };
     useEffect(() => {
+        console.log('ID:Xxxx:', id);
 
-        if (id === 1) 
+        if (id ==1) 
         {
             setCruiseType('Day Cruise');
+            console.log('DayCruise');
         } else 
         {
             setCruiseType('Dinner Cruise');
+            console.log('DinnerCruise');
+
         }
         
         const getData = async (currentMonth) => {

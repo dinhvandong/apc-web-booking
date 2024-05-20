@@ -255,6 +255,7 @@ const ContactPage = () => {
             "cruiseType": bookingInfo.cruiseType,
             "flexibleOrNonRefund": bookingInfo.flexibleOrNonRefund,
             "price": bookingInfo.price,
+            "priceBase": bookingInfo.priceBase,
             "status": 1,
             "bookingDate": bookingInfo.bookingDate,
             "adult": bookingInfo.adult,
@@ -440,7 +441,7 @@ const ContactPage = () => {
           </label>
         </div> */}
 
-                <div onClick={handleNext} className="flex items-center justify-center py-4 mt-5 mb-4 font-bold text-white rounded bg-brown_color">
+                <div onClick={handleNext} className="flex items-center justify-center py-4 mt-5 mb-4 font-bold text-white rounded hover:cursor-pointer bg-brown_color">
 
                     <p>Next</p>
                 </div>
