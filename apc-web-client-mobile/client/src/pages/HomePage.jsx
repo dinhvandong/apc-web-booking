@@ -50,7 +50,7 @@ const HomePage = () => {
   }, [images.length]);
   return (
     <div
-      className={`h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
+      className={`h-screen bg-cover bg-center flex flex-col px-5 items-center transition-opacity duration-500`}
       style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
     >
       <Header />

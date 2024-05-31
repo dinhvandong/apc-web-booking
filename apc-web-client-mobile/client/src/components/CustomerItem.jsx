@@ -1,24 +1,16 @@
 import React from 'react'
 import { MdKeyboardArrowUp } from 'react-icons/md'
 
-const CustomerItem = () => {
+const CustomerItem = ({ title, firstName, lastName, dateOfBirth, passport, nation, province, }) => {
     return (
-        <div className='flex flex-col w-full p-5 mt-5  border border-gray-300'>
-
-
+        <div className='flex flex-col w-full p-5 mt-5 border border-gray-300'>
             <div className='flex w-full mt-5 text-[16px] text-black font-bold'>
-
                 <div className='flex items-center justify-start w-1/2'>
-
                     <p>1. Mr. Ding Dong</p>
-
                 </div>
                 <div className='flex items-center justify-end w-1/2 text-end'>
                     <MdKeyboardArrowUp className='w-6 h-6 text-brown_color' />
-
-
                 </div>
-
             </div>
 
             <div className='flex w-full' >
@@ -42,16 +34,16 @@ const CustomerItem = () => {
             <div className='flex w-full' >
 
                 <div className='w-1/3'>
-                    <p>Mr.</p>
+                    <p>{title}.</p>
 
                 </div>
                 <div className='w-1/3'>
-                    <p>Dong</p>
+                    <p>{firstName}</p>
 
                 </div>
 
                 <div className='w-1/3'>
-                    <p>Dinh</p>
+                    <p>{lastName}</p>
 
                 </div>
 
@@ -61,19 +53,25 @@ const CustomerItem = () => {
             <div className='flex flex-col w-full' >
 
                 <label>Date of birth</label>
-                <input className='w-full text-brown_color' />
+                <p className='w-full text-brown_color'>
+                    {dateOfBirth}
+                </p>
             </div>
 
             <div className='flex w-full' >
 
                 <div className='w-1/2'>
-                    <label>Passport</label>
-                    <input className='w-full text-brown_color' />
+                    <label>ID/Passport</label>
+                    <p className='w-full text-brown_color'>
+                        Passport
+                    </p>
 
                 </div>
                 <div className='w-1/2'>
                     <label>Number</label>
-                    <input className='w-full text-brown_color' />
+                    <p className='w-full text-brown_color'>
+                        {passport}
+                    </p>
 
                 </div>
             </div>
@@ -82,12 +80,16 @@ const CustomerItem = () => {
 
                 <div className='w-1/2'>
                     <label>Nationality</label>
-                    <input className='w-full text-brown_color' />
+                    <p className='w-full text-brown_color'>
+                        {nation}
+                    </p>
 
                 </div>
                 <div className='w-1/2'>
                     <label>Province</label>
-                    <input className='w-full text-brown_color' />
+                    <p className='w-full text-brown_color'>
+                        {province}
+                    </p>
 
                 </div>
             </div>

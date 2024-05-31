@@ -49,6 +49,7 @@ const ListMenu = () => {
   };
   const gotoContactus = () => {
     console.log('Button clicked!');
+    navigate('/contactUs');
   };
   const gotoGallary = () => {
     console.log('Button clicked!');
@@ -59,7 +60,7 @@ const ListMenu = () => {
   };
 
   return (
-    <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
+    <div className="grid grid-cols-3 gap-4 md:grid-cols-5">
 
       <ListItem title={iconMenu1} onClick={ gotoManageBooking} description={"Manage Booking"} />
 

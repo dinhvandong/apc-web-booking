@@ -2,11 +2,26 @@ import React from 'react';
 
 const NewsItem = ({ news }) => {
   return (
-    <div className="bg-white p-4 shadow-md rounded-lg">
-      <img src={news.image} alt={news.title} className="w-full h-auto rounded" />
-      <h2 className="text-xl font-semibold">{news.title}</h2>
-      <p className='text-gray-600'>{news.description}</p>
+    <div className='flex flex-col'>
+      <div className="px-3 bg-white">
+        <img src={news.image} alt={news.title} className="w-full h-auto rounded" />
+        <h2 className="text-xl font-semibold">{news.title}</h2>
+        {/* <p className='text-gray-600'>{news.description}</p> */}
+      </div>
+
+      <div className='flex px-4 mt-2 '>
+        <div className='w-1/3'>
+          <p>Travel Guide</p>
+        </div>
+        <div className='w-1/3'>
+          <p>5-minute read</p>
+        </div>
+        <div className='w-1/3'>
+          <p>15th March 2023</p>
+        </div>
+      </div>
     </div>
+
   );
 };
 

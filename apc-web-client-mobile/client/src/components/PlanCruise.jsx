@@ -13,6 +13,7 @@ import { MdOutlineKeyboardArrowLeft, MdSouth } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { getPriceByDate, getPriceFromDateToDate, getPriceFromMonth } from './../services/api_priceday';
 import { AuthContext } from '../AuthProvider';
+import { convertToCurrencyFormat } from '../utils/utils';
 
 const PlanCruise = (props) => {
     const navigate = useNavigate();
@@ -315,17 +316,15 @@ const PlanCruise = (props) => {
     useEffect(() => {
         console.log('ID:Xxxx:', id);
 
-        if (id ==1) 
-        {
+        if (id == 1) {
             setCruiseType('Day Cruise');
             console.log('DayCruise');
-        } else 
-        {
+        } else {
             setCruiseType('Dinner Cruise');
             console.log('DinnerCruise');
 
         }
-        
+
         const getData = async (currentMonth) => {
             const result = await getPriceFromMonth(currentMonth);
             console.log("Result:", result);
@@ -364,7 +363,7 @@ const PlanCruise = (props) => {
 
     const handleUpdateBookingInfo = () => {
         console.log("dateResultString:", dateResultString);
-       
+
 
         const newBookingInfo = {
             bookingDate: parseInt(dateResultString),
@@ -405,17 +404,11 @@ const PlanCruise = (props) => {
         return new Intl.DateTimeFormat('en-US', options).format(date);
     }
     const handleEmptyCell = () => {
-
-
-
         const firstDay = new Date(selectedYear, selectedMonth, 1).getDay();
-
         const firstDayOfWeek = getDayOfWeek(selectedYear, selectedMonth, 1);
-
         console.log("selectedYear:", selectedYear);
         console.log("selectedMonth:", selectedMonth);
         console.log("firstDayOfWeek:", firstDayOfWeek);
-
         //const emptyCells = Array(firstDay === 0 ? 6 : firstDay - 1).fill(null);
         // <div className="font-bold text-center">Sun</div>
         // <div className="font-bold text-center">Mon</div>
@@ -424,7 +417,6 @@ const PlanCruise = (props) => {
         // <div className="font-bold text-center">Thu</div>
         // <div className="font-bold text-center">Fri</div>
         // <div className="font-bold text-center">Sat</div>
-
         //console.log("emptyCells:", emptyCells );
         if (firstDayOfWeek.includes('Sun')) {
             const emptyCells = Array(0).fill(null)
@@ -449,10 +441,7 @@ const PlanCruise = (props) => {
             setEmptyCells(emptyCells);
         }
         console.log("emptyCells:", emptyCells);
-
-
     }
-
     useEffect(() => {
         handleEmptyCell();
     }, [])
@@ -524,10 +513,10 @@ const PlanCruise = (props) => {
 
                                                 className={`flex flex-col p-2 ${day.active == true ? 'bg-white' : ' bg-gray-400'} text-center border  border-gray-300 hover:cursor-pointer  `}
                                             >
-                                                <div className={`text-[20px] font-medium ${dateTimeSelect == ((day.dateTime)) ? 'bg-brown_color rounded-full px-4 py-4 text-white' : 'text-black px-4 py-4'}`}>
-                                                    <p>{extractDayFromDate(day.dateTimeString)}</p>
+                                                <div className={`text-[20px] font-medium ${dateTimeSelect == ((day.dateTime)) ? 'bg-brown_color rounded-full md:px-4 md:py-4 text-white' : 'text-black md:px-4 md:py-4'}`}>
+                                                    <p className='text-center'>{extractDayFromDate(day.dateTimeString)}</p>
                                                 </div>
-                                                <div className={`${dateTimeSelect == ((day.dateTime)) ? 'text-brown_color font-bold' : 'text-black font-normal'} text-[12px] font-thin`}>
+                                                <div className={`${dateTimeSelect == ((day.dateTime)) ? 'text-brown_color font-bold text-center' : 'text-black font-normal text-center'} text-[12px] font-thin`}>
                                                     <p>{day.priceDay}K</p>
                                                 </div>
                                             </div>
@@ -691,7 +680,7 @@ const PlanCruise = (props) => {
                                     <p>Starting from</p>
                                 </div>
                                 <div>
-                                    <p>{priceByDate.priceDay} k VND</p>
+                                    <p>{convertToCurrencyFormat(priceByDate.priceDay)} VND</p>
                                 </div>
                             </div>
                         </div>
@@ -714,7 +703,7 @@ const PlanCruise = (props) => {
                                     <p>Starting from</p>
                                 </div>
                                 <div>
-                                    <p>{priceByDate.priceDinner} k VND</p>
+                                    <p>{convertToCurrencyFormat(priceByDate.priceDinner)} VND</p>
                                 </div>
                             </div>
                         </div>

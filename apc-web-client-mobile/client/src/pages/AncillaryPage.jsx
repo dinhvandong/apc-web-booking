@@ -102,9 +102,9 @@ const AncillaryPage = () => {
     };
 
     return (
-        <div className='flex flex-col bg-[#FCFCFD] items-center justify-center w-full mb-[100px] h-auto'>
+        <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderAncillary />
-            <div className=' mt-[100px] flex flex-col mb-[100px] ml-5 mr-5'>
+            <div className='bg-[#bbbbbf] mt-[100px] flex flex-col mb-[100px] ml-5 mr-5'>
                 {/* <RoomItem imageSrc={imageSrc} title={title} description={description}
                     items={items} />
 

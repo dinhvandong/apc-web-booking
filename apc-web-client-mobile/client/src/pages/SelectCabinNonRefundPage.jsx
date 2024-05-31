@@ -8,12 +8,13 @@ import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
+import { convertToCurrencyFormat } from '../utils/utils';
 const SelectCabinNonRefundPage = () => {
 
     const navigate = useNavigate();
     const { updateBookingInfo } = useContext(AuthContext);
     const { bookingInfo } = useContext(AuthContext);
-    console.log("CruiseType1:", bookingInfo.cruiseType);
+    console.log("CruiseTypexxxyyy:", bookingInfo.cruiseType);
 
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
@@ -53,7 +54,7 @@ const SelectCabinNonRefundPage = () => {
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
 
-        }else 
+        }else  if(bookingInfo.cruiseType==='Dinner Cruise')
         {
             const price = priceDate.priceDinnerNonRefund;
             const count = adult + children * 0.75 + infant * 0.5;
@@ -101,7 +102,7 @@ const SelectCabinNonRefundPage = () => {
             
     }, []);
     return (
-        <div className='flex flex-col items-center justify-center w-full mb-[100px] h-auto'>
+        <div className='flex flex-col items-center justify-center px-5 w-full mb-[100px] h-auto'>
             <HeaderSelectCabin />
             <div className='mt-[100px] flex  w-full md:w-[600px] items-center h-auto flex-row justify-between'>
                 <div onClick={gotoPlanFlexible} className='hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto ml-2  text-[#2F4842] bg-[#B2D0C6] text-[14px] font-bold'><p className='text-center'>Flexible Rate </p></div>
@@ -149,11 +150,11 @@ const SelectCabinNonRefundPage = () => {
                 <div className='w-full md:w-[600px] m-5 h-[60px] flex flex-row'>
                     <div className='flex flex-col w-1/2 font-bold text-brown_color'>
                         <div>
-                            <p>FLEXIBLE RATE</p>
+                            <p>NON-REFUNDABLE RATE</p>
                         </div>
 
                         <div>
-                            <p>{price}k VND/person</p>
+                            <p>{convertToCurrencyFormat(price)} VND/person</p>
                         </div>
 
                     </div>

@@ -89,7 +89,7 @@ const SignIn = () => {
           <input
             type="text"
             id="email"
-            className="w-full px-3 py-1 border rounded"
+            className="w-full px-3 py-3 border rounded"
             value={email}
             onChange={handleEmailChange}
           />
@@ -99,7 +99,7 @@ const SignIn = () => {
           <input
             type="password"
             id="password"
-            className="w-full px-3 py-1 border rounded"
+            className="w-full px-3 py-3 border rounded"
             value={password}
             onChange={handlePasswordChange}
           />
@@ -113,7 +113,7 @@ const SignIn = () => {
         </div>
         <button
           type="submit"
-          className="bg-[#B77855] text-white py-1 px-4 mt-5 rounded hover:bg-[#B77855]"
+          className="bg-[#B77855] text-white py-3 px-4 mt-5 rounded hover:bg-[#B77855]"
           onClick={handleSubmit}
         >
           Sign In

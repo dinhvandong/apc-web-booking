@@ -23,6 +23,10 @@ import AncillaryPage from './pages/AncillaryPage';
 import PaymentConfirmPage from './pages/PaymentConfirmPage';
 import BookingSuccessfulPage from './pages/BookingSuccessfulPage';
 import SelectCabinNonRefundPage from './pages/SelectCabinNonRefundPage';
+import GalleryPage from './pages/GalleryPage';
+import TiktokVideoPage from './pages/TiktokVideoPage';
+import GalleryDetailPage from './pages/GalleryDetailPage';
+import ContactUsPage from './pages/ContactUsPage';
 
 function App() {
   return (
@@ -41,8 +45,14 @@ function App() {
 
         <Route path="/booking-search/:bookingCode" element={<MyBookingSearchPage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/contactUs" element={<ContactUsPage />} />
 
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/galleryDetail" element={<GalleryDetailPage />} />
+
+        <Route path="/tiktok" element={<TiktokVideoPage />} />
+
         <Route path="/ancillary" element={<AncillaryPage />} />
         <Route path="/payment-confirm" element={<PaymentConfirmPage />} />
         <Route path="/booking-success" element={<BookingSuccessfulPage />} />

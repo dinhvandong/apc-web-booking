@@ -35,6 +35,9 @@ import GalleryCreatePage from './pages/GalleryCreatePage';
 import GalleryEditPage from './pages/GalleryEditPage';
 import TimeTablePricePage from './pages/TimeTablePricePage';
 import BookingPage from './pages/BookingPage';
+import NewsPage from './pages/NewsPage';
+import NewsCreatePage from './pages/NewsCreatePage';
+import NewsEditPage from './pages/NewsEditPage';
 
 function App() {
   return (
@@ -86,6 +89,10 @@ function App() {
         <Route path="/admin/gallery/create-new" element={<GalleryCreatePage />} />
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
         <Route path="/admin/time-price" element={<TimeTablePricePage />} />
+
+        <Route path="/admin/news" element={<NewsPage />} />
+        <Route path="/admin/news/create-new" element={<NewsCreatePage />} />
+        <Route path="/admin/news/update/:id" element={<NewsEditPage />} />
 
 
         <Route path="/admin/bookings" element={<BookingPage />} />

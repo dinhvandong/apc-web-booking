@@ -5,6 +5,7 @@ import Sidebar from '../components/admin/SideBar';
 import { isAuthenticated } from '../utils/localStorage';
 import { useNavigate } from 'react-router-dom';
 import NotificationList from '../components/admin/NotificationList';
+import News from '../components/admin/News';
 const NewsPage = () => {
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const NewsPage = () => {
           <Sidebar menu="tab6" />
         </div>
         <div className="flex w-[100%]   flex-row justify-center">     
-          <NotificationList />
+          <News />
         </div>
       </div>
     </div>);

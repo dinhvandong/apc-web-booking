@@ -11,7 +11,7 @@ const PlanCruisePage = () => {
 
   return (
     <div
-      className={`min-h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
+      className={`min-h-screen bg-cover bg-center px-5 flex flex-col  items-center transition-opacity duration-500`}
       style={{ backgroundImage: `url(${bg5})` }}
     >
       <Header />

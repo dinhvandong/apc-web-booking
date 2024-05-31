@@ -22,6 +22,27 @@ export const AuthProvider = ({ children }) => {
     bookingDate:0,
     cruiseType: 'Day Cruise',
   });
+
+  const [myBookingSearch, setMyBookingSearch] = useState({
+    customerName: '',
+    firstName: '',
+    lastName: '',
+    country: '',
+    countryCode: '',
+    phone: '',
+    email: '',
+    adult: 1,
+    children: 0,
+    infant: 0,
+    flexibleOrNonRefund: true,
+    priceBase:0,
+    payMethod:'PayPal',
+    price: 0,
+    bookingDate:0,
+    cruiseType: 'Day Cruise',
+    bookingDate:0
+  });
+
   const [priceDate, setPriceDate] = useState(
     {
       id: 0,
@@ -39,9 +60,6 @@ export const AuthProvider = ({ children }) => {
 
   const [ancillary, setAncillary] = useState()
   const [userInfo, setUserInfo] = useState(null);
-  // const updateBookingInfo = (newBookingInfo) => {
-  //   setBookingInfo(newBookingInfo);
-  // };
 
   const updateBookingInfo = (updatedFields) => {
     setBookingInfo((prevBookingInfo) => ({
@@ -50,12 +68,12 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
-  // const updateBookingInfo = (fieldName, value) => {
-  //   setBookingInfo((prevBookingInfo) => ({
-  //     ...prevBookingInfo,
-  //     [fieldName]: value,
-  //   }));
-  // };
+  const updateBookingSearch = (updatedFields) => {
+    setMyBookingSearch((prevBookingInfo) => ({
+      ...prevBookingInfo,
+      ...updatedFields,
+    }));
+  };
 
   const updatePriceDate = (priceDate) => {
     setPriceDate(priceDate);
@@ -120,7 +138,7 @@ export const AuthProvider = ({ children }) => {
       updateService,
       addService,
       setArrayService,
-      getAllServices
+      getAllServices, myBookingSearch, updateBookingSearch
     }}>
       {children}
     </AuthContext.Provider>

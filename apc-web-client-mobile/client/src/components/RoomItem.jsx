@@ -3,6 +3,7 @@ import r_checkbox from '../assets/r_checkbox.png';
 import { RiSubtractFill } from 'react-icons/ri';
 import { IoIosAdd } from 'react-icons/io';
 import { AuthContext } from '../AuthProvider';
+import { convertToCurrencyFormat } from '../utils/utils';
 
 const RoomItem = ({ imageSrc, title, description,price, items }) => {
     const { updateService } = useContext(AuthContext);
@@ -35,8 +36,8 @@ const RoomItem = ({ imageSrc, title, description,price, items }) => {
 
     }
     return (
-        <div className="flex w-full px-1 mt-5 md:w-[600px] items-center justify-center">
-            <div className="w-full mx-auto bg-white rounded-lg shadow-md">
+        <div className="flex w-full  bg-white py-5 px-2 mt-5 mb-5 md:w-[600px] items-center justify-center">
+            <div className="w-full mx-auto ">
                 <div className='flex'>
 
                     <img
@@ -44,12 +45,12 @@ const RoomItem = ({ imageSrc, title, description,price, items }) => {
                         alt="Example Image"
                         className="w-1/3 md:w-[200px] mb-4 rounded-lg"
                     />
-                    <div className='ml-2'>
+                    <div className='ml-5'>
                         <h1 className="mb-4 text-[#B77855] text-2xl font-bold">{title}</h1>
                         <p className="mb-4 text-gray-700">{description}</p>
 
                         <div className='flex justify-between'>
-                            <p className='font-bold text-black'>{price}k VND</p>
+                            <p className='font-bold text-black'>{convertToCurrencyFormat(price)} VND</p>
 
                             <div className='flex justify-end ml-5 mr-2'>
 
@@ -73,10 +74,10 @@ const RoomItem = ({ imageSrc, title, description,price, items }) => {
 
                 </div>
 
-                <ul className="pl-6 list-disc">
+                <ul className="pl-6 list-disc ">
                     {items.map((item, index) => (
-                        <div className='flex'>
-                            <img src={r_checkbox} className='h-[18px] w-[16px]' />
+                        <div className='flex items-center'>
+                            <img src={r_checkbox} className='h-[14px] w-[14px]' />
 
                             <p className='ml-1'>{item.item}</p>
 

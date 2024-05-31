@@ -8,6 +8,7 @@ import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
+import { convertToCurrencyFormat } from '../utils/utils';
 const SelectCabinPage = () => {
 
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ const SelectCabinPage = () => {
     const { updateBookingInfo } = useContext(AuthContext);
 
     const { bookingInfo } = useContext(AuthContext);
-    console.log("CruiseType2:", bookingInfo.cruiseType);
+    console.log("CruiseTypexxxyyy:", bookingInfo.cruiseType);
     const { priceDate } = useContext(AuthContext);
 
     const [finalPrice, setFinalPrice] = useState(0);
@@ -69,7 +70,7 @@ const SelectCabinPage = () => {
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
 
-        } else {
+        } else  if (bookingInfo.cruiseType === 'Dinner Cruise')  {
             const price = priceDate.priceDinner;
             const count = adult + children * 0.75 + infant * 0.5;
 
@@ -93,7 +94,7 @@ const SelectCabinPage = () => {
 
         if (bookingInfo.cruiseType === 'Day Cruise') {
 
-            axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible%20Rate')
+            axios.get("http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible Rate")
                 .then(response => {
                     setData(response.data.data);
                 })
@@ -101,7 +102,7 @@ const SelectCabinPage = () => {
                     console.error('Error fetching data:', error);
                 });
         } else {
-            axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible%20Rate%20Dinner')
+            axios.get("http://163.44.206.118:8080/api/event-plan/findAllByType?type=Flexible Rate Dinner")
                 .then(response => {
                     setData(response.data.data);
                 })
@@ -112,7 +113,7 @@ const SelectCabinPage = () => {
         }
     }, []);
     return (
-        <div className='flex flex-col items-center justify-center w-full mb-[100px] h-auto'>
+        <div className='flex flex-col px-5 items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderSelectCabin />
             <div className='mt-[100px] flex  w-full md:w-[600px] items-center h-auto flex-row justify-between'>
                 <div onClick={gotoPlanFlexible} className=' hover:cursor-pointer items-center  p-4 rounded-md md:w-[300px] w-1/2 h-auto bg-[#2F4842] text-white text-[14px] font-bold'> <p className='text-center'>Flexible Rate </p> </div>
@@ -162,7 +163,7 @@ const SelectCabinPage = () => {
                         </div>
 
                         <div>
-                            <p>{price}k VND/person</p>
+                            <p>{convertToCurrencyFormat(price)} VND/person</p>
                         </div>
 
                     </div>

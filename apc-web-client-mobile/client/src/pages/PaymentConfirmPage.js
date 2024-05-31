@@ -12,8 +12,9 @@ import RoomItem from '../components/RoomItem';
 import bg_payment from '../assets/cabin1.png';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { MdKeyboardArrowDown } from "react-icons/md";
-import paypal from '../assets/paypal.png';
+import paypal from '../assets/paypal_icon.png';
 import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
+import { convertToCurrencyFormat } from '../utils/utils';
 const PaymentConfirmPage = () => {
 
     const [hidden1, setHidden1] = useState(false);
@@ -156,11 +157,11 @@ const PaymentConfirmPage = () => {
 
 
     return (
-        <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
+        <div className='flex flex-col px-5 bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderPaymentConfirm />
             <div className='mb-[200px] mt-[100px] w-full md:w-[600px] flex flex-col  h-auto'>
 
-                <div className='w-full flex ml-1 mr-2 px-1 py-1 items-center rounded-lg bg-[#2F4842] h-[180px]'>
+                <div className='w-full flex  py-1 items-center rounded-lg bg-[#2F4842] h-[180px]'>
 
                     <img src={bg_payment} className='ml-1 rounded-xl w-[200px] h-[150px]' />
 
@@ -174,7 +175,7 @@ const PaymentConfirmPage = () => {
 
                 </div>
 
-                <div className='flex flex-col w-full h-auto p-5 mt-5 ml-2 mr-5 text-black bg-white rounded-lg'>
+                <div className='flex flex-col w-full h-auto p-5 mt-5 text-black bg-white rounded-lg'>
 
                     <div className='flex justify-between'>
 
@@ -219,7 +220,7 @@ const PaymentConfirmPage = () => {
 
                 </div>
 
-                <div className='flex flex-col w-full h-auto p-5 mt-5 ml-2 mr-5 text-black bg-white rounded-lg'>
+                <div className='flex flex-col w-full h-auto p-5 mt-5 text-black bg-white rounded-lg'>
                     <div className='flex justify-between mb-5'>
                         <p className='font-bold text-brown_color'>Ancillary</p>
                         {hidden2 == false ? (< MdKeyboardArrowUp onClick={handleHiddenLayout2} className='hover:cursor-pointer w-[30px] h-[30px] text-brown_color' />) :
@@ -252,7 +253,7 @@ const PaymentConfirmPage = () => {
                         <p>0</p>
                     </div> */}
                 </div>
-                <div className='flex flex-col w-full h-auto p-5 mt-5 ml-2 mr-5 bg-white rounded-lg'>
+                <div className='flex flex-col w-full h-auto p-5 mt-5 bg-white rounded-lg'>
 
                     <div className='flex justify-between'>
 
@@ -311,7 +312,7 @@ const PaymentConfirmPage = () => {
 
                 </div>
 
-                <div className='flex flex-col mb-[100px] w-full h-auto p-5 mt-5 ml-2 mr-5 bg-white rounded-lg'>
+                <div className='flex flex-col mb-[100px] w-full h-auto p-5 mt-5 bg-white rounded-lg'>
 
 
                     <div className='mt-5 font-bold text-brown_color'>
@@ -421,12 +422,12 @@ const PaymentConfirmPage = () => {
                 <div className='w-full md:w-[600px] m-5 h-auto flex flex-col'>
                     <div className='flex flex-row justify-between m-5'>
                         <div className='flex flex-col'>
-                            <p className='font-bold text-brown_color'>{priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant)}k VND</p>
+                            <p className='font-bold text-brown_color'>{convertToCurrencyFormat (priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant))} VND</p>
                             <p>Fee tax included</p>
                         </div>
 
                         <div className='flex items-center justify-end'>
-                            <img src={paypal} className='mr-5 w-[145px] h-[44px]' />
+                            <img src={paypal} className='mr-5 w-[94px] h-[65px]' />
                             <button className='font-bold text-brown_color'>Change</button>
                         </div>
                     </div>

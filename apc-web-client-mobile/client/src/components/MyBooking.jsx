@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import bg_signin from '../assets/bg_signin.png'
 import { loginRequest } from '../services/api';
 import iconWarning from '../assets/icon-warning.png';
 import { getBookingByCode } from '../services/api_booking';
+import { AuthContext } from '../AuthProvider';
 
 const MyBooking = () => {
+  const { updateBookingSearch } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
@@ -44,11 +46,11 @@ const MyBooking = () => {
     console.log("lastName:", lastName);
 
     const result = await getBookingByCode(bookingCode);
-    console.log("resultxxxx:", result);
     if(result.success === 200){
+      updateBookingSearch(result.data)
       navigate('/booking-search/' + bookingCode);
     }else {
-      window.alert('Không tìm thấy mã booking');
+      window.alert('Cannot found BookingCode');
 
     }
 
@@ -99,7 +101,7 @@ const MyBooking = () => {
           <input
             type="text"
             id="bookingCode"
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-3 border rounded-md"
             value={bookingCode}
             onChange={handleBookingCodeChange}
           />
@@ -109,7 +111,7 @@ const MyBooking = () => {
           <input
             type="text"
             id="lastName"
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-3 border rounded-md"
             value={lastName}
             onChange={handleLastNameChange}
           />
@@ -127,7 +129,7 @@ const MyBooking = () => {
        
         <button
           type="submit"
-          className="bg-[#B77855] text-white py-2 px-4 mt-5 rounded hover:bg-[#B77855]"
+          className="bg-[#B77855] text-white py-3 px-4 mt-5 rounded hover:bg-[#B77855]"
           onClick={handleSubmit}
         >
           Search
