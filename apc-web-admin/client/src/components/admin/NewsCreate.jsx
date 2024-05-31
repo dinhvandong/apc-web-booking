@@ -13,6 +13,27 @@ const NewsCreate = () => {
     setEditorState(state);
   };
 
+  const [title, setTitle] = useState('');
+  const [subTitle, setSubTitle] = useState('');
+  const [jsonData, setJsonData] = useState('');
+  const [category, setCategory] = useState('');
+
+
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleSubTitleChange  = (e)=>{
+    setSubTitle(e.target.value);
+
+  }
+
+  const handleCategoryChange  = (e)=>{
+    setCategory(e.target.value);
+
+  }
+
   const categories = [
     { name: 'The Cruise' },
     { name: 'Cabin' },
@@ -22,6 +43,15 @@ const NewsCreate = () => {
 
     // Add more category objects as needed
   ];
+
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    // Do something with the selected category in the parent component
+    console.log('Selected category:', category);
+  };
   const saveContent = async () => {
     const contentState = editorState.getCurrentContent();
     const rawContentState = convertToRaw(contentState);
@@ -32,10 +62,18 @@ const NewsCreate = () => {
       //   content: JSON.stringify(rawContentState),
       // });
 
-      const news = {
+      const jsonNews = {
         content: JSON.stringify(rawContentState),
       }
 
+      setJsonData(jsonNews);
+
+      const news = {
+        title: title,
+        subTitle: subTitle,
+        jsonData: jsonNews,
+        category: category,
+      }
       const response = await createNews(news);
       console.log('Content saved:', response.data);
     } catch (error) {
@@ -49,27 +87,22 @@ const NewsCreate = () => {
       <div className='mt-5'>
 
         <label>Title</label>
-        <input className='w-full py-3 border border-gray-600 ' />
+        <input onChange={handleTitleChange} className='w-full py-3 border border-gray-600 ' />
       </div>
 
-      <div>
+      <div className='mt-5'>
 
         <label>Sub Title</label>
-        <input className='w-full py-3 border border-gray-600 ' />
+        <input onChange={handleSubTitleChange} className='w-full py-3 border border-gray-600 ' />
       </div>
 
 
 
-      <div>
+      <div className='mt-5'>
       <label>Select Category</label>
 
-      <CategoryNewsList categories={categories} />
-
-
-
+      <CategoryNewsList categories={categories} handleCategoryClick={handleCategoryClick}     />
       </div>
-
-
       <h3 className="mt-4 text-lg font-bold">Content Draft</h3>
       <Editor
         editorState={editorState}

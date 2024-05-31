@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
-const CategoryNewsList = ({ categories }) => {
+const CategoryNewsList = ({ categories , handleCategoryClick  }) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
+    handleCategoryClick(category); // Call the prop function with the selected category
+
   };
 
   return (

@@ -27,6 +27,14 @@ public class NewsService {
         return newsRepository.insert(news);
     }
 
+
+    public News findById(Long id){
+        Optional<News> optional = newsRepository.findById(id);
+        if(optional.isEmpty()) return null;
+
+        return optional.get();
+    }
+
     public News update(News news){
         Optional<News> optional = newsRepository.findById(news.getId());
         if(optional.isEmpty()) return null;

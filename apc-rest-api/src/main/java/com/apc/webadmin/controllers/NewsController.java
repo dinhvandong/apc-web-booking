@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81","http://localhost:3001"})
 @RestController
 @RequestMapping("/api/news")
 public class NewsController {
@@ -26,6 +26,14 @@ public class NewsController {
     public ResponseEntity<?> findAll()
     {
         List<News> response =  newsService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
+
+    }
+
+    @GetMapping("/findById")
+    public ResponseEntity<?> findById(@RequestParam Long id)
+    {
+        News response =  newsService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
 
     }
