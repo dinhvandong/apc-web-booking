@@ -3,10 +3,15 @@ import React, { useState } from 'react';
 const CategoryNewsList = ({ categories , handleCategoryClick  }) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
-  const handleCategoryClick = (category) => {
+//   const handleCategoryClick = (category) => {
+//     setSelectedCategory(category);
+//     handleCategoryClick(category); // Call the prop function with the selected category
+
+//   };
+
+const handleClick = (category) => {
     setSelectedCategory(category);
     handleCategoryClick(category); // Call the prop function with the selected category
-
   };
 
   return (
@@ -17,7 +22,7 @@ const CategoryNewsList = ({ categories , handleCategoryClick  }) => {
           className={`px-4 py-2 rounded cursor-pointer ${
             selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-white'
           }`}
-          onClick={() => handleCategoryClick(category)}
+          onClick={() => handleClick(category)}
         >
           {category.name}
         </div>

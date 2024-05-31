@@ -15,7 +15,7 @@ const NewsCreate = () => {
 
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
-  const [jsonData, setJsonData] = useState('');
+  const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
 
 
@@ -66,14 +66,15 @@ const NewsCreate = () => {
         content: JSON.stringify(rawContentState),
       }
 
-      setJsonData(jsonNews);
+      setContent(JSON.stringify(rawContentState));
 
       const news = {
         title: title,
         subTitle: subTitle,
-        jsonData: jsonNews,
+        content: JSON.stringify(rawContentState),
         category: category,
       }
+      console.log("JSON_NEWS:", news);
       const response = await createNews(news);
       console.log('Content saved:', response.data);
     } catch (error) {

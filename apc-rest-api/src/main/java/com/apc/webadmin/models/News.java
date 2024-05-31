@@ -16,7 +16,7 @@ public class News {
 
     private String subTitle;
 
-    private String jsonData;
+    private String content;
 
     private Long createdDate;
 
@@ -32,12 +32,12 @@ public class News {
         this.id = id;
     }
 
-    public String getJsonData() {
-        return jsonData;
+    public String getContent() {
+        return content;
     }
 
-    public void setJsonData(String jsonData) {
-        this.jsonData = jsonData;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getCreatedDate() {

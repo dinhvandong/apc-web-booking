@@ -43,7 +43,7 @@ public class NewsService {
         found.setTitle(news.getTitle());
         found.setSubTitle(news.getSubTitle());
         found.setCategory(news.getCategory());
-        found.setJsonData(news.getJsonData());
+        found.setContent(news.getContent());
         return newsRepository.save(found);
     }
 
