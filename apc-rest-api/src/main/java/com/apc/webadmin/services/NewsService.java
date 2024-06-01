@@ -20,6 +20,10 @@ public class NewsService {
     public List<News> findAll(){
         return newsRepository.findAll();
     }
+
+    public List<News> findAllByCategory(String category){
+        return newsRepository.findAllByCategory(category);
+    }
     public News create(News news){
         Long id = sequenceGeneratorService.generateSequence(News.SEQUENCE_NAME);
         news.setId(id);

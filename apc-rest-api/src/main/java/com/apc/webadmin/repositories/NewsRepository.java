@@ -10,6 +10,7 @@ import java.util.List;
 public interface NewsRepository extends MongoRepository<News, Long>
 {
     List<News> findBy(Pageable pageable);
+    List<News> findAllByCategory(String category);
 
 
 }

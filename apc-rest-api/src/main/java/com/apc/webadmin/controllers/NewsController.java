@@ -24,6 +24,15 @@ public class NewsController {
 
     }
 
+    @PostMapping("/findAllByCategory")
+    public ResponseEntity<?> findAllByCategory(@RequestParam String category)
+    {
+        List<News> response =  newsService.findAllByCategory(category);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
+
+    }
+
+
 
     @PostMapping("/deleteAll")
     public ResponseEntity<?> deleteAll()
