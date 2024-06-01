@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+//import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
+//import { Editor } from 'react-draft-wysiwyg';
+//import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
 import { createNews } from '../../services/api_news';
 import CategoryNewsList from './CategoryNewsList';
 
-const NewsCreate = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
 
-  const handleEditorChange = (state) => {
-    setEditorState(state);
-  };
+const NewsCreate = () => {
 
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
@@ -24,12 +22,12 @@ const NewsCreate = () => {
     setTitle(e.target.value);
   };
 
-  const handleSubTitleChange  = (e)=>{
+  const handleSubTitleChange = (e) => {
     setSubTitle(e.target.value);
 
   }
 
-  const handleCategoryChange  = (e)=>{
+  const handleCategoryChange = (e) => {
     setCategory(e.target.value);
 
   }
@@ -44,34 +42,25 @@ const NewsCreate = () => {
     // Add more category objects as needed
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
 
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategory(category.name);
+    setCategory(category.name);
     // Do something with the selected category in the parent component
     console.log('Selected category:', category);
   };
   const saveContent = async () => {
-    const contentState = editorState.getCurrentContent();
-    const rawContentState = convertToRaw(contentState);
+    //const contentState = editorState.getCurrentContent();
+    //const rawContentState = convertToRaw(contentState);
 
     try {
-      // Make a POST request to your REST API to save the content
-      // const response = await axios.post('YOUR_API_ENDPOINT', {
-      //   content: JSON.stringify(rawContentState),
-      // });
-
-      const jsonNews = {
-        content: JSON.stringify(rawContentState),
-      }
-
-      setContent(JSON.stringify(rawContentState));
 
       const news = {
         title: title,
         subTitle: subTitle,
-        content: JSON.stringify(rawContentState),
+        content: content,
         category: category,
       }
       console.log("JSON_NEWS:", news);
@@ -82,32 +71,66 @@ const NewsCreate = () => {
     }
   };
 
+
+  const handleContentChange = (content) => {
+    setContent(content);
+  };
+
   return (
     <div>
 
       <div className='mt-5'>
 
         <label>Title</label>
-        <input onChange={handleTitleChange} className='w-full py-3 border border-gray-600 ' />
+        <input onChange={handleTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
       </div>
 
       <div className='mt-5'>
 
         <label>Sub Title</label>
-        <input onChange={handleSubTitleChange} className='w-full py-3 border border-gray-600 ' />
+        <input onChange={handleSubTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
       </div>
 
 
 
       <div className='mt-5'>
-      <label>Select Category</label>
+        <label>Select Category</label>
 
-      <CategoryNewsList categories={categories} handleCategoryClick={handleCategoryClick}     />
+        <div className="flex  md:text-[14px] text-[12px] w-full md:w-[600px] p-2 bg-white">
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className={`px-4 py-2 rounded cursor-pointer ${selectedCategory === category.name ? 'bg-blue-500 text-white' : 'bg-white'
+                }`}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category.name}
+            </div>
+          ))}
+        </div>
+
+        {/* <CategoryNewsList categories={categories} handleCategoryClick={handleCategoryClick} /> */}
       </div>
       <h3 className="mt-4 text-lg font-bold">Content Draft</h3>
-      <Editor
+      {/* <Editor
         editorState={editorState}
         onEditorStateChange={handleEditorChange}
+      /> */}
+
+      <SunEditor
+        setOptions={{
+          buttonList: [
+            ['undo', 'redo'],
+            ['font', 'fontSize', 'formatBlock'],
+            ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+            ['removeFormat'],
+            ['outdent', 'indent'],
+            ['align', 'horizontalRule', 'list', 'table'],
+            ['link', 'image', 'video'],
+            ['fullScreen', 'showBlocks', 'codeView'],
+          ],
+        }}
+        onChange={handleContentChange}
       />
       <button
         className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"

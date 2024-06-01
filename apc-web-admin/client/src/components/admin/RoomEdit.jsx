@@ -172,15 +172,7 @@ const RoomEdit = (props) => {
                             <label htmlFor="name" className="block mb-2 font-medium">
                                 Loại phòng: <span className="text-lg text-red-500">*</span>
                             </label>
-                            {/* <input
-                                type="text"
-                                id="username"
-                                name="username"
-                                value={formData.username}
-                                onChange={handleChange}
-                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
-                                required
-                            /> */}
+                         
 
                             <select
                                 name="roomType"

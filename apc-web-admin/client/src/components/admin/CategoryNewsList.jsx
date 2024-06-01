@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CategoryNewsList = ({ categories , handleCategoryClick  }) => {
+const CategoryNewsList = ({ categories , handleCategoryClick   }) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
 //   const handleCategoryClick = (category) => {

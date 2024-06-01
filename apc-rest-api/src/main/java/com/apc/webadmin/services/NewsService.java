@@ -28,6 +28,13 @@ public class NewsService {
     }
 
 
+    public boolean deleteAll()
+    {
+        newsRepository.deleteAll();
+        return true;
+    }
+
+
     public News findById(Long id){
         Optional<News> optional = newsRepository.findById(id);
         if(optional.isEmpty()) return null;
