@@ -26,7 +26,20 @@ export const createBooking = async (booking) => {
     }
   
   }
+  export const getBookingByCodeAndLastName = async (bookingCode, lastName) => {
 
+    console.log("BOOKING_CODE:", bookingCode);
+    const code = bookingCode.replace(' ','');
+    try {
+      //const token = localStorage.getItem("token");
+      const response = await axios.get(`${API_URL}/booking/findByBookingCodeAndLastName?bookingCode=` + bookingCode + `&lastName=${lastName}`);
+      console.log("ZZZZZZ:", response);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  
+  }
 
   export const getBookingByCode = async (bookingCode) => {
 

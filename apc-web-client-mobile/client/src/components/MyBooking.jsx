@@ -45,7 +45,7 @@ const MyBooking = () => {
     console.log("bookingCode:", bookingCode);
     console.log("lastName:", lastName);
 
-    const result = await getBookingByCode(bookingCode);
+    const result = await getBookingByCodeAndLastName(bookingCode, lastName);
     if(result.success === 200){
       updateBookingSearch(result.data)
       navigate('/booking-search/' + bookingCode);
