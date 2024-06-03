@@ -14,8 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81"})
-@RestController
+
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81",        "http://ambassadordaycruise.com/"
+})@RestController
 @RequestMapping("/api/user")
 public class UserController {
     private  final UserService userService;

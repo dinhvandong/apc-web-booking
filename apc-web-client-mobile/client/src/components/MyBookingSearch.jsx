@@ -359,7 +359,7 @@ const MyBookingSearch = (props) => {
         </div>
 
         <button className='w-full mt-5 h-[50px] rounded-md text-white font-bold bg-brown_color'>Complete Passenger Information</button>
-
+{/* 
         <div className='flex flex-col w-full p-5 mt-5 bg-white rounded-md'>
           <div className='flex w-full mt-5 text-[16px] text-black font-bold'>
             <p>Seems missing something?</p>
@@ -432,7 +432,7 @@ const MyBookingSearch = (props) => {
 
           </div>
 
-        </div>
+        </div> */}
       </div>
 
     </div>

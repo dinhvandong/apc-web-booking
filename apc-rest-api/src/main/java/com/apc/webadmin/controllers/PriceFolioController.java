@@ -16,7 +16,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/priceFolio")
-@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81"})
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81",        "http://ambassadordaycruise.com/"
+})
 
 public class PriceFolioController {
 

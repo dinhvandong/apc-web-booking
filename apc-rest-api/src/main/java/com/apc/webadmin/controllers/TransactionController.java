@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81"})
-@RestController
+
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81",        "http://ambassadordaycruise.com/"
+})@RestController
 @RequestMapping("/api/transaction")
 public class TransactionController {
 

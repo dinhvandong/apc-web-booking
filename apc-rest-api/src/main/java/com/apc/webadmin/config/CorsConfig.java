@@ -24,6 +24,7 @@ public class CorsConfig implements WebMvcConfigurer {
                         "localhost:3000",
                         "150.95.113.18:80",
                         "150.95.113.18",
+                        "ambassadordaycruise.com",
 
                         "localhost",
                         "150.95.110.230",

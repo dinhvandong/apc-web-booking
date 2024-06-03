@@ -17,6 +17,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pricetimes")
+
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81",        "http://ambassadordaycruise.com/"
+})
 public class PriceTimeController {
 
     @Autowired

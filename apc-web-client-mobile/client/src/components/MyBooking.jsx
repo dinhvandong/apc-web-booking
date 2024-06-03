@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import bg_signin from '../assets/bg_signin.png'
 import { loginRequest } from '../services/api';
 import iconWarning from '../assets/icon-warning.png';
-import { getBookingByCode } from '../services/api_booking';
+import { getBookingByCode, getBookingByCodeAndLastName } from '../services/api_booking';
 import { AuthContext } from '../AuthProvider';
 
 const MyBooking = () => {

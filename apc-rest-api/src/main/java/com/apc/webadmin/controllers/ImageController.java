@@ -20,7 +20,9 @@ import java.util.Optional;
         "http://163.44.206.118:80",
         "http://163.44.206.118:81",
         "http://localhost:3001",
-        "http://localhost:3000"
+        "http://localhost:3000",
+        "http://ambassadordaycruise.com/"
+
 })
 @RestController
 @RequestMapping("/api/images")

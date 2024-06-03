@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81"})
+@CrossOrigin(origins = {"http://163.44.206.118:80", "http://163.44.206.118:81",
+        "http://ambassadordaycruise.com/"
+})
 @RestController
 @RequestMapping("/api/notification")
 public class NotificationController {
