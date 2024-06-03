@@ -24,11 +24,22 @@ export const createNews = async (news) => {
     }
   };
 
+  export const deleteNews = async (news) => {
+    try {
+      const response = await axios.post(`${API_URL}/news/update`,
+      news)
+      return response.data;
+    } catch (error) 
+    {
+      throw error;
+    }
+  };
+
 
   export const getNews = async () => {
     try {
       //const token = localStorage.getItem("token");
-      const response = await axios.get(`${API_URL}/booking/findAll`, {
+      const response = await axios.post(`${API_URL}/news/findAll`, {
         withCredentials: true,
       });
       return response.data.data;

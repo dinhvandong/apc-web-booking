@@ -16,6 +16,8 @@ public class News {
 
     private String subTitle;
 
+    private String thumb;
+
     private String content;
 
     private Long createdDate;
@@ -23,6 +25,15 @@ public class News {
     private boolean active;
 
     private String category;
+
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
 
     public Long getId() {
         return id;

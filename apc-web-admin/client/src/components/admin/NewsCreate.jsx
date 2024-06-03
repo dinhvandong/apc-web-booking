@@ -8,6 +8,9 @@ import CategoryNewsList from './CategoryNewsList';
 
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
+import { API_URL_IMAGE, uploadFile } from '../../services/api';
+import { Button, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 const NewsCreate = () => {
 
@@ -62,6 +65,7 @@ const NewsCreate = () => {
         subTitle: subTitle,
         content: content,
         category: category,
+        thumb: file
       }
       console.log("JSON_NEWS:", news);
       const response = await createNews(news);
@@ -76,6 +80,25 @@ const NewsCreate = () => {
     setContent(content);
   };
 
+  const [file, setFile] = useState(null);
+
+  const handleFileUpload = async (file) => {
+    // Handle the file upload logic here
+    console.log(file);
+
+    const response = await uploadFile(file);
+    //const fileResponse = API_URL_IMAGE + response.data;
+    setFile(response.data);
+    console.log("upload-file", response);
+
+    // setFormData(prevFormData => ({
+    //     ...prevFormData,
+    //     thumb: response.data
+    // }));
+
+
+};
+
   return (
     <div>
 
@@ -89,6 +112,25 @@ const NewsCreate = () => {
 
         <label>Sub Title</label>
         <input onChange={handleSubTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
+      </div>
+
+
+      <div className="mt-5">
+        <label htmlFor="email" className="block mb-2 font-medium">
+          Thumb Image: <span className="text-lg text-red-500">*</span>
+        </label>
+        <Upload
+          id='thumb' name='thumb'
+          beforeUpload={() => false} // Prevent automatic file upload
+          onChange={(info) => handleFileUpload(info.file)}
+          maxCount={1}
+        >
+          <Button icon={<UploadOutlined />}>Select File</Button>
+        </Upload>
+      </div>
+      <div className="mt-2">
+        <img src={API_URL_IMAGE + file} className='w-[100px] h-[100px]' />
+
       </div>
 
 

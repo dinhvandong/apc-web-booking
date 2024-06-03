@@ -25,7 +25,7 @@ const NewsPage = () => {
       <HeaderAdmin />
       <div className="flex flex-row w-full">
       <div>
-          <Sidebar menu="tab6" />
+          <Sidebar menu="tab5" />
         </div>
         <div className="flex w-[100%]   flex-row justify-center">     
           <News />

@@ -6,7 +6,7 @@ import Sidebar from '../components/admin/SideBar';
 import UserEdit from '../components/admin/UserEdit';
 import CategoryEdit from '../components/admin/CategoryEdit';
 import NotificationEdit from './../components/admin/NotificationEdit';
-import NewsEdit from '../components/admin/NewsEdit';
+import NewsEdit from '../components/admin/NewsEditCopy';
 const NewsEditPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();

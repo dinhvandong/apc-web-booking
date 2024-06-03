@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { findNewsById } from '../../services/api_news';
 import DisplayContent from './DisplayContent';
 import SunEditor from 'suneditor-react';
-const NewsEdit = (props) => {
+const NewsEditCopy = (props) => {
   const [content, setContent] = useState(null);
   const { id } = props;
 
@@ -44,4 +44,4 @@ const NewsEdit = (props) => {
 };
 
 
-export default NewsEdit
+export default NewsEditCopy

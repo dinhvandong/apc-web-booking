@@ -175,6 +175,10 @@ const Sidebar = (props) => {
     navigate("/admin/notifications");
   }
 
+  function gotoNews() {
+    navigate("/admin/news");
+  }
+
   function gotoGallery() {
     navigate("/admin/gallery");
   }
@@ -295,7 +299,7 @@ const Sidebar = (props) => {
             }
           </button>
           <button
-            onClick={() => gotoNotification()}
+            onClick={() => gotoNews()}
             onMouseEnter={handleMouseEnter5}
             onMouseLeave={handleMouseLeave5}
             className={`flex flex-row justify-start items-center ${styleMenu5} hover:text-red-600`}
