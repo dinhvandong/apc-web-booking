@@ -71,6 +71,20 @@ public class BookingService {
         }
         return optional.get();
     }
+
+    public Booking findByBookingCodeAndLastName(String bookingCode, String lastName){
+
+        Optional<Booking> optional = bookingRepository.findByBookingCode(bookingCode);
+        if(optional.isEmpty()) {
+            return  null;
+        }
+        Booking booking =  optional.get();
+
+        if(booking.getLastName().equals(lastName)){
+            return booking;
+        }
+        return  null;
+    }
     public List<Booking> findAll(){
         return bookingRepository.findAll();
     }

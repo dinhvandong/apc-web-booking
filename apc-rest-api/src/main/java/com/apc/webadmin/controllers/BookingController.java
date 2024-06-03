@@ -35,6 +35,16 @@ public class BookingController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"not found"));
     }
+
+    @GetMapping("/findByBookingCodeAndLastName")
+    public ResponseEntity<?> findByBookingCodeAndLastName(
+            @RequestParam String bookingCode, @RequestParam String lastName) {
+        Booking booking = bookingService.findByBookingCodeAndLastName(bookingCode, lastName);
+        if(booking!= null) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, booking,"success"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"not found"));
+    }
     @PostMapping("/insert")
     public ResponseEntity<?> insert(@RequestBody Booking newBooking){
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.create(newBooking),"success"));

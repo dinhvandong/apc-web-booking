@@ -27,6 +27,7 @@ import GalleryPage from './pages/GalleryPage';
 import TiktokVideoPage from './pages/TiktokVideoPage';
 import GalleryDetailPage from './pages/GalleryDetailPage';
 import ContactUsPage from './pages/ContactUsPage';
+import NewsDetailPage from './pages/NewsDetailPage';
 
 function App() {
   return (
@@ -63,6 +64,8 @@ function App() {
         <Route path="/plan-cruise/:id" element={<PlanCruisePage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/news-detail" element={<NewsDetailPage />} />
+
         <Route path="/select-your-cabin/flexible" element={<SelectCabinPage />} />
         <Route path="/select-your-cabin/non-refundable" element={<SelectCabinNonRefundPage />} />
 
