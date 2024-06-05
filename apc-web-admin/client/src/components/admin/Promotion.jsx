@@ -19,7 +19,7 @@ const Promotion = () => {
     setIsOn(!isOn);
   };
   const handleInsert = () => {
-    navigate("/admin/news/create-new");
+    navigate("/admin/promotion/create-new");
   };
   const handleSearch = () => {
 
@@ -30,7 +30,7 @@ const Promotion = () => {
 
       </div>
       <div className="flex justify-start m-5 md:justify-center sm:justify-center lg:justify-start">
-        <p className="font-bold">NEWS LIST</p>
+        <p className="font-bold">PROMOTIONS LIST</p>
       </div>
       <Button className="w-[160px] ml-5 font-bold text-center mb-5 bg-blue-500" type="primary" onClick={handleInsert}>
         Create News

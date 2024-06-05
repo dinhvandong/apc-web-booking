@@ -8,6 +8,7 @@ import CategoryNewsList from './CategoryNewsList';
 
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
+import { findPromotionById, updatePromotion } from '../../services/api_promotion';
 
 const PromotionEdit = (props) => {
   const { id } = props;
@@ -69,7 +70,7 @@ const PromotionEdit = (props) => {
         category: category,
       }
       console.log("JSON_NEWS:", news);
-      const response = await updateNews(news);
+      const response = await updatePromotion(news);
       console.log('Content saved:', response.data);
     } catch (error) {
       console.error('Error saving content:', error);
@@ -81,7 +82,7 @@ const PromotionEdit = (props) => {
     const fetchContent = async () => {
       try {
         // Make a GET request to your REST API to fetch the content
-        const responseValue = await findNewsById(id);
+        const responseValue = await findPromotionById(id);
         console.log("JSON_RESPONSE_NEW:", responseValue);
         const contentValue = responseValue.content;
         console.log("contentValue:", contentValue);

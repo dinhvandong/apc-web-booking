@@ -37,8 +37,6 @@ public class PromotionController {
 
     }
 
-
-
     @PostMapping("/deleteAll")
     public ResponseEntity<?> deleteAll()
     {
@@ -54,6 +52,7 @@ public class PromotionController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
 
     }
+
     @PostMapping("/insert")
     public ResponseEntity<?> insert(@RequestBody Promotion news)
     {

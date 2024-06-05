@@ -11,6 +11,7 @@ import 'suneditor/dist/css/suneditor.min.css';
 import { API_URL_IMAGE, uploadFile } from '../../services/api';
 import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { createPromotion } from '../../services/api_promotion';
 
 const PromotionCreate = () => {
 
@@ -68,7 +69,7 @@ const PromotionCreate = () => {
         thumb: file.toString()
       }
       console.log("JSON_NEWS:", news);
-      const response = await createNews(news);
+      const response = await createPromotion(news);
       console.log('Content saved:', response.data);
     } catch (error) {
       console.error('Error saving content:', error);

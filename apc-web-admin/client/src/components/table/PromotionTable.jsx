@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { convertDateFormat, deleteUser, getAllNotification, getCategory, getUsers } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { getNews } from '../../services/api_news';
+import { getPromotion } from '../../services/api_promotion';
 const PromotionTable = () => {
     const [newsList, setNewsList] = useState([]);
     const navigate = useNavigate();
   
     const handleEdit = (id) => {
       console.log('Edit clicked for ID:', id);
-      navigate(`/admin/news/update/${id}`)
+      navigate(`/admin/promotion/update/${id}`)
     };
   
     const handleDelete = async (id) => {
@@ -21,7 +22,7 @@ const PromotionTable = () => {
   
     const refreshData = async()=>{
       try {
-        const newsList = await getNews();
+        const newsList = await getPromotion();
         console.log("newsList", newsList);
         setNewsList(newsList);
       } catch (error) {
@@ -37,7 +38,7 @@ const PromotionTable = () => {
     useEffect(() => {
       const fetNewsList = async () => {
         try {
-          const newsList = await getNews();
+          const newsList = await getPromotion();
           console.log("newsList", newsList);
           setNewsList(newsList);
         } catch (error) {
