@@ -29,10 +29,22 @@ const ContactUsPage = () => {
     // }, []);
     return (
         <div
-            className={`h-screen  bg-cover bg-center flex flex-col  transition-opacity duration-500`}
+            // className='flex flex-col w-full '
+            className={`min-h-screen bg-cover bg-center flex flex-col justify-center items-center transition-opacity duration-500`}
+        // className={`h-screen  bg-cover bg-center flex flex-col  transition-opacity duration-500`}
 
-        >      <HeaderContactUs title={"Contact Us"} />
+        >
+
+            <HeaderContactUs />
+            {/* <div className='w-full h-[80px]' >
+
+               
+
+            </div> */}
+            {/* <HeaderContactUs title={"Contact Us"} /> */}
             <Contact bookingCode = {bookingCode} />
+
+            
             <BottomNavigation selected={"booking"} />
         </div>
     )

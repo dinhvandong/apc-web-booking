@@ -3,9 +3,12 @@ import HeaderNews from '../components/HeaderNews';
 import { findNewsById } from '../services/api_news';
 import DisplayContent from '../components/DisplayContent';
 import HeaderNewsDetail from '../components/HeaderNewsDetail';
+import { useParams } from 'react-router-dom';
 
 const NewsDetailPage = () => {
-  const id = 19;
+  //const id = 19;
+  const { id } = useParams();
+
   const [content, setContent] = useState(null);
 
   useEffect(() => {

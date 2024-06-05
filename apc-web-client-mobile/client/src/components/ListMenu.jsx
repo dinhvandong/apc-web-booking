@@ -53,6 +53,8 @@ const ListMenu = () => {
   };
   const gotoGallary = () => {
     console.log('Button clicked!');
+    navigate('/gallery');
+
   };
 
   const gotoSetting = () => {

@@ -4,19 +4,21 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "news")
-public class News {
+@Document(collection = "promotion")
+public class Promotion {
     @Id
     private Long id;
 
     @Transient
-    public static final String SEQUENCE_NAME = "news_sequence";
+    public static final String SEQUENCE_NAME = "promotion_sequence";
 
     private String title;
 
     private String subTitle;
 
     private String thumb;
+
+    private float price;
 
     private String content;
 
@@ -26,7 +28,13 @@ public class News {
 
     private String category;
 
+    public float getPrice() {
+        return price;
+    }
 
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
     public String getThumb() {
         return thumb;

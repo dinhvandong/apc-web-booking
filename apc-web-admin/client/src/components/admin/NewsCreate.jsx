@@ -65,7 +65,7 @@ const NewsCreate = () => {
         subTitle: subTitle,
         content: content,
         category: category,
-        thumb: file
+        thumb: file.toString()
       }
       console.log("JSON_NEWS:", news);
       const response = await createNews(news);
@@ -89,7 +89,7 @@ const NewsCreate = () => {
     const response = await uploadFile(file);
     //const fileResponse = API_URL_IMAGE + response.data;
     setFile(response.data);
-    console.log("upload-file", response);
+    console.log("upload-file", response.data);
 
     // setFormData(prevFormData => ({
     //     ...prevFormData,

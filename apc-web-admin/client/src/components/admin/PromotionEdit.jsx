@@ -9,7 +9,7 @@ import CategoryNewsList from './CategoryNewsList';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 
-const NewsEdit = (props) => {
+const PromotionEdit = (props) => {
   const { id } = props;
 
   const [title, setTitle] = useState('');
@@ -153,4 +153,4 @@ const NewsEdit = (props) => {
   );
 };
 
-export default NewsEdit;
+export default PromotionEdit;

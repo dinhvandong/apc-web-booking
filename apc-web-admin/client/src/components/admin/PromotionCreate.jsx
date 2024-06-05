@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 //import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
 //import { Editor } from 'react-draft-wysiwyg';
 //import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
-import { createNews, findNewsById, updateNews } from '../../services/api_news';
+import { createNews } from '../../services/api_news';
 import CategoryNewsList from './CategoryNewsList';
 
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
+import { API_URL_IMAGE, uploadFile } from '../../services/api';
+import { Button, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
-const NewsEdit = (props) => {
-  const { id } = props;
+const PromotionCreate = () => {
 
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
 
 
@@ -48,67 +50,91 @@ const NewsEdit = (props) => {
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.name);
+    setCategory(category.name);
     // Do something with the selected category in the parent component
     console.log('Selected category:', category);
   };
-
-  // const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  // const handleCategoryClick = (category) => {
-  //   setSelectedCategory(category);
-  //   // Do something with the selected category in the parent component
-  //   console.log('Selected category:', category);
-  // };
   const saveContent = async () => {
+    //const contentState = editorState.getCurrentContent();
+    //const rawContentState = convertToRaw(contentState);
+
     try {
-  
+
       const news = {
-        id: id,
         title: title,
         subTitle: subTitle,
         content: content,
         category: category,
+        thumb: file.toString()
       }
       console.log("JSON_NEWS:", news);
-      const response = await updateNews(news);
+      const response = await createNews(news);
       console.log('Content saved:', response.data);
     } catch (error) {
       console.error('Error saving content:', error);
     }
   };
 
-  
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        // Make a GET request to your REST API to fetch the content
-        const responseValue = await findNewsById(id);
-        console.log("JSON_RESPONSE_NEW:", responseValue);
-        const contentValue = responseValue.content;
-        console.log("contentValue:", contentValue);
-        setContent(contentValue);
-        setCategory(responseValue.category)
-      } catch (error) {
-        console.error('Error fetching content:', error);
-      }
-    };
-
-    fetchContent();
-  }, []);
 
   const handleContentChange = (content) => {
     setContent(content);
   };
 
+  const [file, setFile] = useState(null);
+
+  const handleFileUpload = async (file) => {
+    // Handle the file upload logic here
+    console.log(file);
+
+    const response = await uploadFile(file);
+    //const fileResponse = API_URL_IMAGE + response.data;
+    setFile(response.data);
+    console.log("upload-file", response.data);
+
+    // setFormData(prevFormData => ({
+    //     ...prevFormData,
+    //     thumb: response.data
+    // }));
+
+
+};
+
   return (
     <div>
-      <div className='mt-5 '>
+
+      <div className='mt-5'>
+
         <label>Title</label>
         <input onChange={handleTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
       </div>
+
       <div className='mt-5'>
+
         <label>Sub Title</label>
         <input onChange={handleSubTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
       </div>
+
+
+      <div className="mt-5">
+        <label htmlFor="email" className="block mb-2 font-medium">
+          Thumb Image: <span className="text-lg text-red-500">*</span>
+        </label>
+        <Upload
+          id='thumb' name='thumb'
+          beforeUpload={() => false} // Prevent automatic file upload
+          onChange={(info) => handleFileUpload(info.file)}
+          maxCount={1}
+        >
+          <Button icon={<UploadOutlined />}>Select File</Button>
+        </Upload>
+      </div>
+      <div className="mt-2">
+        <img src={API_URL_IMAGE + file} className='w-[100px] h-[100px]' />
+
+      </div>
+
+
+
       <div className='mt-5'>
         <label>Select Category</label>
 
@@ -124,9 +150,15 @@ const NewsEdit = (props) => {
             </div>
           ))}
         </div>
+
         {/* <CategoryNewsList categories={categories} handleCategoryClick={handleCategoryClick} /> */}
       </div>
       <h3 className="mt-4 text-lg font-bold">Content Draft</h3>
+      {/* <Editor
+        editorState={editorState}
+        onEditorStateChange={handleEditorChange}
+      /> */}
+
       <SunEditor
         setOptions={{
           buttonList: [
@@ -141,7 +173,6 @@ const NewsEdit = (props) => {
           ],
         }}
         onChange={handleContentChange}
-        setContents={content}
       />
       <button
         className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
@@ -153,4 +184,4 @@ const NewsEdit = (props) => {
   );
 };
 
-export default NewsEdit;
+export default PromotionCreate;

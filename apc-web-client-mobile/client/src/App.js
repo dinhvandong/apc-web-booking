@@ -64,7 +64,7 @@ function App() {
         <Route path="/plan-cruise/:id" element={<PlanCruisePage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/news" element={<NewsPage />} />
-        <Route path="/news-detail" element={<NewsDetailPage />} />
+        <Route path="/news-detail/:id" element={<NewsDetailPage />} />
 
         <Route path="/select-your-cabin/flexible" element={<SelectCabinPage />} />
         <Route path="/select-your-cabin/non-refundable" element={<SelectCabinNonRefundPage />} />
