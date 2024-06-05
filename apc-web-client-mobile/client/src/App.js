@@ -28,6 +28,8 @@ import TiktokVideoPage from './pages/TiktokVideoPage';
 import GalleryDetailPage from './pages/GalleryDetailPage';
 import ContactUsPage from './pages/ContactUsPage';
 import NewsDetailPage from './pages/NewsDetailPage';
+import PromotionPage from './pages/PromotionPage';
+import PromotionDetailPage from './pages/PromotionDetailPage';
 
 function App() {
   return (
@@ -63,8 +65,14 @@ function App() {
         <Route path="/term-condition" element={<TermConditionPage />} />
         <Route path="/plan-cruise/:id" element={<PlanCruisePage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
+
+
         <Route path="/news" element={<NewsPage />} />
         <Route path="/news-detail/:id" element={<NewsDetailPage />} />
+
+        <Route path="/promotion" element={<PromotionPage />} />
+        <Route path="/promotion-detail/:id" element={<PromotionDetailPage />} />
+
 
         <Route path="/select-your-cabin/flexible" element={<SelectCabinPage />} />
         <Route path="/select-your-cabin/non-refundable" element={<SelectCabinNonRefundPage />} />
