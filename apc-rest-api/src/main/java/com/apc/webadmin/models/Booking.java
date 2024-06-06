@@ -4,6 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Document(collection = "bookings")
 public class Booking {
     @Id
@@ -28,6 +31,16 @@ public class Booking {
     private  int infant;
     private Long bookingDate;
     private Long createdDate;
+
+    private List<Passenger> passengerList = new ArrayList<Passenger>();
+
+    public List<Passenger> getPassengerList() {
+        return passengerList;
+    }
+
+    public void setPassengerList(List<Passenger> passengerList) {
+        this.passengerList = passengerList;
+    }
 
     public String getBookingCode() {
         return bookingCode;

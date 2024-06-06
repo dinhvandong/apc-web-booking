@@ -17,6 +17,11 @@ const Header = () => {
 
     }
 
+    const gotoNotification = ()=>{
+        navigate("/notification");
+
+    }
+
 
     const gotoTiktok = ()=>{
         navigate("/tiktok");
@@ -35,7 +40,7 @@ const Header = () => {
                 <button className="flex flex-col items-center text-gray-600">
                     <img className="w-8 h-8 mb-1 text-white" src={item3} />
                 </button>
-                <button className="flex flex-col items-center text-gray-600">
+                <button onClick={gotoNotification} className="flex flex-col items-center text-gray-600">
                     <img className="w-8 h-8 mb-1 text-white" src={item4}/>
                 </button>
             </div>

@@ -179,6 +179,10 @@ const Sidebar = (props) => {
     navigate("/admin/news");
   }
 
+  function gotoPromotion() {
+    navigate("/admin/promotion");
+  }
+
   function gotoGallery() {
     navigate("/admin/gallery");
   }
@@ -202,6 +206,7 @@ const Sidebar = (props) => {
   const styleMenu7 = tab === "tab7" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu8 = tab === "tab8" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu9 = tab === "tab9" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu10 = tab === "tab9" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
 
   const [width, setWidth] = useState('w-[200px]');
   const [active, setActive] = useState(true);
@@ -373,6 +378,19 @@ const Sidebar = (props) => {
             <IoBook className="w-5 h-5 m-3 text-base_color" />
             {
               active == true ? <div className="text-sm ">Bookings</div> : <div></div>
+
+            }
+          </button>
+
+          <button
+            onClick={() => gotoPromotion()}
+            onMouseEnter={handleMouseEnter10}
+            onMouseLeave={handleMouseLeave10}
+            className={`flex flex-row justify-start items-center ${styleMenu10} hover:text-red-600`}
+          >
+            <IoBook className="w-5 h-5 m-3 text-base_color" />
+            {
+              active == true ? <div className="text-sm ">Promotion</div> : <div></div>
 
             }
           </button>

@@ -3,6 +3,7 @@ package com.apc.webadmin.controllers;
 import com.apc.webadmin.dto.ResponseObject;
 import com.apc.webadmin.models.Booking;
 import com.apc.webadmin.models.EventPlan;
+import com.apc.webadmin.models.Passenger;
 import com.apc.webadmin.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @CrossOrigin(origins = {"http://163.44.206.118:80",
@@ -41,7 +43,17 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"not found"));
     }
 
-    @GetMapping("/findByBookingCodeAndLastName")
+    @PostMapping("/insertListPassengers")
+    public ResponseEntity<?> insert(@RequestParam Long idBooking,
+                                    @RequestBody List<Passenger> passengerList)
+    {
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.addListPassenger(idBooking, passengerList),"success"));
+
+    }
+
+
+        @GetMapping("/findByBookingCodeAndLastName")
     public ResponseEntity<?> findByBookingCodeAndLastName(
             @RequestParam String bookingCode, @RequestParam String lastName) {
         Booking booking = bookingService.findByBookingCodeAndLastName(bookingCode, lastName);

@@ -30,6 +30,7 @@ import ContactUsPage from './pages/ContactUsPage';
 import NewsDetailPage from './pages/NewsDetailPage';
 import PromotionPage from './pages/PromotionPage';
 import PromotionDetailPage from './pages/PromotionDetailPage';
+import NotificationPage from './pages/NotificationPage';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         <Route path="/ancillary" element={<AncillaryPage />} />
         <Route path="/payment-confirm" element={<PaymentConfirmPage />} />
         <Route path="/booking-success" element={<BookingSuccessfulPage />} />
+        <Route path="/notification" element={<NotificationPage />} />
 
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/faq" element={<FaqPage />} />

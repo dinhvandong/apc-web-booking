@@ -4,18 +4,18 @@ import NewsList from '../components/NewsList';
 import CategoriesList from '../components/CategoriesList';
 import CategoryNewsList from '../components/CategoryNewsList';
 import PromotionList from '../components/PromotionList';
+import HeaderPromotion from '../components/HeaderPromotion';
 
 const PromotionPage = () => {
 
     const categories = [
-        { name: 'Newest' },
-        { name: 'Travel Guide' },
-        { name: 'Cruise' },
-        { name: 'News' },
-    ];
+        { name: 'All' },
+        { name: 'Day Cruise' },
+        { name: 'Overnight Cruise' }
+        ];
     return (
         <div className='flex flex-col items-center justify-center'>
-            <HeaderNews />
+            <HeaderPromotion />
             <CategoryNewsList categories={categories} />
 
             {/* <CategoriesList/> */}

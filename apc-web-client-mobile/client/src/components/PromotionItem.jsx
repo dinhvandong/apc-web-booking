@@ -18,17 +18,7 @@ const PromotionItem = ({ news }) => {
 
         {/* <img src={news.image} alt={news.title} className="w-full h-auto rounded" /> */}
 
-        <div className='flex px-4 mt-2 '>
-          <div className='w-1/3'>
-            <p>Travel Guide</p>
-          </div>
-          <div className='w-1/3'>
-            <p>5-minute read</p>
-          </div>
-          <div className='w-1/3'>
-            <p>15th March 2023</p>
-          </div>
-        </div>
+       
       </div>
 
       <h2 className="flex px-4 mt-2 text-xl font-semibold">{news.title}</h2>

@@ -19,6 +19,7 @@ const PromotionCreate = () => {
   const [subTitle, setSubTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
+  const [price, setPrice] = useState(0);
 
 
 
@@ -34,6 +35,10 @@ const PromotionCreate = () => {
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
 
+  }
+
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value);
   }
 
   const categories = [
@@ -66,7 +71,8 @@ const PromotionCreate = () => {
         subTitle: subTitle,
         content: content,
         category: category,
-        thumb: file.toString()
+        thumb: file.toString(),
+        price: price
       }
       console.log("JSON_NEWS:", news);
       const response = await createPromotion(news);
@@ -98,7 +104,7 @@ const PromotionCreate = () => {
     // }));
 
 
-};
+  };
 
   return (
     <div>
@@ -115,6 +121,11 @@ const PromotionCreate = () => {
         <input onChange={handleSubTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
       </div>
 
+      <div className='mt-5'>
+
+        <label>Price</label>
+        <input onChange={handlePriceChange} type='number' className='w-full p-2 py-3 border border-gray-600 ' />
+      </div>
 
       <div className="mt-5">
         <label htmlFor="email" className="block mb-2 font-medium">

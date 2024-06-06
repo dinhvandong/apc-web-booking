@@ -25,7 +25,7 @@ const PromotionPage = () => {
       <HeaderAdmin />
       <div className="flex flex-row w-full">
       <div>
-          <Sidebar menu="tab5" />
+          <Sidebar menu="tab10" />
         </div>
         <div className="flex w-[100%]   flex-row justify-center">     
           <Promotion />

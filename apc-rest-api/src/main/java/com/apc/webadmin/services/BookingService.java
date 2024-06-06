@@ -3,6 +3,7 @@ package com.apc.webadmin.services;
 
 import com.apc.webadmin.database.SequenceGeneratorService;
 import com.apc.webadmin.models.Booking;
+import com.apc.webadmin.models.Passenger;
 import com.apc.webadmin.repositories.BookingRepository;
 import com.apc.webadmin.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -63,6 +65,30 @@ public class BookingService {
         return bookingRepository.save(bookingFound);
     }
 
+
+
+    public Booking addListPassenger(Long idBooking, List<Passenger> passengerList){
+
+        Optional<Booking> optional= bookingRepository.findById(idBooking);
+        if(optional.isEmpty()){
+            return  null;
+        }
+
+        Booking bookingFound = optional.get();
+
+        List<Passenger> passengers = bookingFound.getPassengerList();
+
+        for(Passenger p: passengerList)
+        {
+            Long idPassenger = sequenceGeneratorService.generateSequence(Passenger.SEQUENCE_NAME);
+            p.setId(idPassenger);
+            passengers.add(p);
+        }
+
+        bookingFound.setPassengerList(passengers);
+        return bookingRepository.save(bookingFound);
+    }
+
     public Booking findByBookingCode(String bookingCode){
 
         Optional<Booking> optional = bookingRepository.findByBookingCode(bookingCode);
@@ -80,7 +106,7 @@ public class BookingService {
         }
         Booking booking =  optional.get();
 
-        if(booking.getLastName().equals(lastName)){
+        if(booking.getLastName().equalsIgnoreCase(lastName.toLowerCase())){
             return booking;
         }
         return  null;

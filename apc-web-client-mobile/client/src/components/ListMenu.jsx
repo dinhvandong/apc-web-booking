@@ -21,6 +21,8 @@ const ListMenu = () => {
   };
   const gotoPromotion = () => {
     console.log('Button clicked!');
+    navigate("/promotion");
+
   };
   const gotoVoucher = () => {
     console.log('Button clicked!');
