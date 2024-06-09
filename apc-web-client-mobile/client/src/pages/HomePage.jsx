@@ -56,6 +56,8 @@ const HomePage = () => {
 
     return () => clearInterval(interval);
   }, [images.length]);
+
+  const [visible, setVisible] = useState(false);
   return (
     <div
       className={`h-screen bg-cover bg-center flex flex-col px-5 items-center transition-opacity duration-500`}
@@ -64,52 +66,53 @@ const HomePage = () => {
       <Header />
       <Home topic={topicArray[currentImageIndex]} detail={detailArray[currentImageIndex]} />
       <BottomNavigation selected={"home"} />
-      <div className='absolute flex flex-col items-center justify-center w-full h-full bg-black opacity-50'>
+
+      {visible == true ? (<div className='absolute flex flex-col items-center justify-center w-full h-full bg-black opacity-50'>
+      </div>) : <div></div>}
 
 
+      {
+        visible == true ? (<div className='absolute flex flex-col items-center justify-center w-full h-full '>
 
+          <div className='w-[400px] px-5 py-3 bg-white rounded-md'>
 
-      </div>
+            <div className='font-bold text-black mt-6 text-[16px]'>
+              Language
+            </div>
+            <div className='flex w-full mt-7'>
 
-      <div className='absolute flex flex-col items-center justify-center w-full h-full '>
+              <img src={flag_english} />
+              <p className='w-full ml-5'>English</p>
+              <IoCheckmark className='w-6 h-6 text-black' />
 
-        <div className='w-[400px] px-5 py-3 bg-white rounded-md'>
+            </div>
+            <div className='flex w-full mt-7'>
 
-          <div className='font-bold text-black mt-6 text-[16px]'>
-            Language
+              <img src={flag_vietnam} />
+              <p className='w-full ml-5'>Vietnamese</p>
+              <IoCheckmark className='w-6 h-6 text-black' />
+
+            </div>
+            <div className='flex w-full mt-7'>
+
+              <img src={flag_korean} />
+              <p className='w-full ml-5'>Korean</p>
+              <IoCheckmark className='w-6 h-6 text-black' />
+
+            </div>
+
+            <div className='flex w-full mb-5 mt-7'>
+
+              <img src={flag_chines} />
+              <p className='w-full ml-5'>Chines</p>
+              <IoCheckmark className='w-6 h-6 text-black' />
+
+            </div>
+
           </div>
-          <div className='flex w-full mt-7'>
+        </div>) : <div></div>
+      }
 
-            <img src={flag_english} />
-            <p className='w-full ml-5'>English</p>
-            <IoCheckmark className='w-6 h-6 text-black' />
-
-          </div>
-          <div className='flex w-full mt-7'>
-
-            <img src={flag_vietnam} />
-            <p className='w-full ml-5'>Vietnamese</p>
-            <IoCheckmark className='w-6 h-6 text-black' />
-
-          </div>
-          <div className='flex w-full mt-7'>
-
-            <img src={flag_korean} />
-            <p className='w-full ml-5'>Korean</p>
-            <IoCheckmark className='w-6 h-6 text-black' />
-
-          </div>
-
-          <div className='flex w-full mb-5 mt-7'>
-
-            <img src={flag_chines} />
-            <p className='w-full ml-5'>Chines</p>
-            <IoCheckmark className='w-6 h-6 text-black' />
-
-          </div>
-
-        </div>
-      </div>
     </div>
 
   )

@@ -14,6 +14,18 @@ export const createBooking = async (booking) => {
   };
 
 
+  export const addPassenger = async (idBooking, passengerList) => {
+    try {
+      //const token = localStorage.getItem("token");
+      const response = await axios.post(`${API_URL}/booking/insertListPassengers?idBooking=${idBooking}`,
+        passengerList)
+      return response.data;
+    } catch (error) 
+    {
+      throw error;
+    }
+  };
+
   export const getBookings = async () => {
     try {
       //const token = localStorage.getItem("token");

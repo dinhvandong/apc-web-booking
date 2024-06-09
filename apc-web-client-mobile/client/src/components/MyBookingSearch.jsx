@@ -6,13 +6,19 @@ import CustomerItem from './CustomerItem';
 import { getBookingByCode } from '../services/api_booking';
 import { AuthContext } from '../AuthProvider';
 import { convertToCurrencyFormat } from '../utils/utils';
+import { useNavigate } from 'react-router-dom';
 const MyBookingSearch = (props) => {
   const { bookingCode } = props;
   const [customers, setCustomers] = useState([]);
   const [booking, setBooking] = useState(null);
   console.log("BookingCodeA:", bookingCode);
   const { updateBookingSearch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
+  const gotoMyBooking2 = () =>{
+    navigate('/my-booking2')
+
+  }
   const getBooking = async () => {
     const result = await getBookingByCode(bookingCode);
     if (result.success === 200) {
@@ -358,7 +364,7 @@ const MyBookingSearch = (props) => {
 
         </div>
 
-        <button className='w-full mt-5 h-[50px] rounded-md text-white font-bold bg-brown_color'>Complete Passenger Information</button>
+        <button onClick={gotoMyBooking2} className='w-full mt-5 h-[50px] rounded-md text-white font-bold bg-brown_color'>Complete Passenger Information</button>
 {/* 
         <div className='flex flex-col w-full p-5 mt-5 bg-white rounded-md'>
           <div className='flex w-full mt-5 text-[16px] text-black font-bold'>
