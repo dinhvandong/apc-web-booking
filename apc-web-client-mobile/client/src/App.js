@@ -33,6 +33,8 @@ import PromotionDetailPage from './pages/PromotionDetailPage';
 import NotificationPage from './pages/NotificationPage';
 import MyBooking2Page from './pages/MyBooking2Page';
 import MyBooking3Page from './pages/MyBooking3Page';
+import ItineraryPage from './pages/ItineraryPage';
+import ItineraryDetailPage from './pages/ItineraryDetailPage';
 
 function App() {
   return (
@@ -80,6 +82,8 @@ function App() {
         <Route path="/promotion" element={<PromotionPage />} />
         <Route path="/promotion-detail/:id" element={<PromotionDetailPage />} />
 
+        <Route path="/itinerary" element={<ItineraryPage />} />
+        <Route path="/itinerary-detail/:id" element={<ItineraryDetailPage />} />
 
         <Route path="/select-your-cabin/flexible" element={<SelectCabinPage />} />
         <Route path="/select-your-cabin/non-refundable" element={<SelectCabinNonRefundPage />} />

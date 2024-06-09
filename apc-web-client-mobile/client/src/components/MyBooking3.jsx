@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import bg_signin from '../assets/bg_signin.png'
 import { loginRequest } from '../services/api';
 import iconWarning from '../assets/icon-warning.png';
-import { getBookingByCode, getBookingByCodeAndLastName } from '../services/api_booking';
+import { addPassenger, getBookingByCode, getBookingByCodeAndLastName } from '../services/api_booking';
 import { AuthContext } from '../AuthProvider';
 import { FaRegUser } from "react-icons/fa6";
 import { HiOutlineUserGroup } from "react-icons/hi";
@@ -18,12 +18,24 @@ const MyBooking3 = (props) => {
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState('Vietnam');
+  const [province, setProvince] = useState('');
+
   //const [bookingCode, setBookingCode] = useState('');
+  const [passengerList, setPassengerList] = useState([]);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [personIdType, setPersonIdType] = useState('ID');
+
+  const personIdTypes = ['ID','Passport'];
+
+  const [personIdNumber, setPersonIdNumber] = useState('');
+
   const [gender, setGender] = useState('Mr');
   const genderList = ['Mr', 'Ms'];
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const [note, setNote] = useState('');
   const handleGenderChange = event => {
     const gender = event.target.value;
     setGender(gender);
@@ -166,13 +178,45 @@ const MyBooking3 = (props) => {
   // const [isLogin, setIsLogin] = useState(false);
 
 
-
-  const handleBookingCodeChange = (e) => {
+  const handleProvinceChange = (e) => {
     //setBookingCode(e.target.value);
+    const province = e.target.value;
+    setProvince(e.target.value);
+
+    
+  };
+  const handleNoteChange = (e) => {
+    //setBookingCode(e.target.value);
+    const note = e.target.value;
+    setNote(e.target.value);
+   
   };
 
   const handleLastNameChange = (e) => {
+    const lastName = e.target.value;
     setLastName(e.target.value);
+    
+  };
+
+  const handlePersonIdTypeChange = (e)=>{
+    const personIdType = e.target.value;
+    setPersonIdType(e.target.value);
+    
+    
+  }
+  const handlePersonIdNumberChange = (e)=>{
+    const personIdNumber = e.target.value;
+    setPersonIdNumber(e.target.value);
+
+    
+    
+  }
+  
+  const handleFirstNameChange = (e) => {
+    const firstName = e.target.value;
+    setFirstName(e.target.value);
+
+    
   };
 
   const gotoForgotPassword = () => {
@@ -203,16 +247,54 @@ const MyBooking3 = (props) => {
     setLastName('');
   };
 
-  const [selectedDate, setSelectedDate] = useState(null);
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+
+
+  // const handleDateChange = (date) => {
+  //   setSelectedDate(date);
+  // };
+  const handleDateChange = (date, dateString) => {
+    setSelectedDate(dateString);
   };
 
-  const handleCreatePassenger = () => {
+  const handleCreateNew = (e) =>{
+    e.preventDefault();
 
-
-    
+    setCountry('Vietnam');
+    setFirstName('');
+    setLastName('');
+    setGender('Mr');
+    setNote('');
+    setPersonIdNumber('');
+    setPersonIdType('');
+    setProvince('');
+  }
+  const handleCreatePassenger = async (e) => {
+    e.preventDefault();
+    const newPassenger = {
+      firstName: firstName,
+      lastName: lastName,
+      title: gender,
+      dateOfBirth: selectedDate,
+      personIdType: personIdType,
+      personIdNumber: personIdNumber,
+      nation: country,
+      province: province,
+      note: note
+    }
+    //setPassengerList([...passengerList, newPassenger]);
+    const arrayPassenger = [newPassenger];
+    const jsonString = JSON.stringify(arrayPassenger, null, 2);
+    console.log(jsonString); // Print the updated passengerList
+    const response = await addPassenger(bookingCode, jsonString);
+    console.log("passenger_response:", response);
+    if(response.success ===200){
+      window.alert('Add passenger successful');
+     
+    }else {
+      window.alert('Add passenger fail');
+    }
+    //addPassenger
   }
 
   const handleCountryChange = event => {
@@ -223,6 +305,7 @@ const MyBooking3 = (props) => {
 
       if (item.CODE === countryCode) {
         setCountry(item.NAME);
+        console.log("Country:", item.NAME);
         setSelectedCountry(item);
 
       }
@@ -231,14 +314,14 @@ const MyBooking3 = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-        try {
-            setCountryList(jsonDataCountries);
-        } catch (error) {
-            console.error('Error:', error);
-        }
+      try {
+        setCountryList(jsonDataCountries);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
     fetchData();
-}, []);
+  }, []);
   return (
     <div className='mb-[100px] flex flex-col px-5 md:w-[600px] items-center w-full flex-1 overflow-y-auto'>
       {/* <div className='text-xl mt-[100px] text-center font-bold text-white'>
@@ -280,12 +363,12 @@ const MyBooking3 = (props) => {
 
         <div className='flex flex-col w-1/3 ml-2'>
           <p>FirstName</p>
-          <input className='w-full px-4 py-2 border border-1' />
+          <input onChange={handleFirstNameChange} className='w-full px-4 py-2 border border-1' />
 
         </div>
         <div className='flex flex-col w-1/3 ml-2'>
           <p>LastName</p>
-          <input className='w-full px-4 py-2 border border-1' />
+          <input onChange={handleLastNameChange} className='w-full px-4 py-2 border border-1' />
 
         </div>
 
@@ -307,14 +390,20 @@ const MyBooking3 = (props) => {
         <div className='flex flex-col w-1/2'>
           <p>ID/ Passport*</p>
 
-          <input className='w-full px-4 py-2 border border-1 ' />
+          <select onChange={handlePersonIdTypeChange} value={personIdType} id="personIdType" name="personIdType" className="w-full px-4 py-2 border rounded border-1">
+            {personIdTypes.map((personIdType, index) => (
+              <option key={index} value={personIdType}>{personIdType}</option>
+            ))}
+          </select>
+
+          {/* <input onChange={handlePersonIdTypeChange} className='w-full px-4 py-2 border border-1 ' /> */}
 
         </div>
 
         <div className='flex flex-col w-1/2 ml-2'>
           <p>Number*</p>
 
-          <input className='w-full px-4 py-2 border border-1' />
+          <input onChange={handlePersonIdNumberChange} className='w-full px-4 py-2 border border-1' />
 
         </div>
       </div>
@@ -343,20 +432,20 @@ const MyBooking3 = (props) => {
         <div className='flex flex-col w-1/2 ml-2'>
           <p>Province</p>
 
-          <input className='w-full px-4 py-2 border border-1' />
+          <input onChange={handleProvinceChange} className='w-full px-4 py-2 border border-1' />
 
         </div>
       </div>
 
       <div className='flex flex-col w-full mt-5'>
         <p>Special Dietary Request</p>
-        <input className='w-full px-3 py-2 border border-1' />
+        <input onChange={handleNoteChange} className='w-full px-3 py-2 border border-1' />
       </div>
 
       <div className='flex flex-col w-full mt-5'>
 
         <button onClick={handleCreatePassenger} className='w-full py-2 font-bold text-white rounded-md bg-brown_color'> Save </button>
-        <button className='w-full py-2 mt-5 font-bold text-white rounded-md bg-brown_color'> Add New</button>
+        <button onClick={handleCreateNew} className='w-full py-2 mt-5 font-bold text-white rounded-md bg-brown_color'> Create New Passenger</button>
       </div>
     </div>
   )

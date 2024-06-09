@@ -28,6 +28,9 @@ const ListMenu = () => {
     console.log('Button clicked!');
   };
   const gotoItinerary = () => {
+
+    navigate("/itinerary");
+
     console.log('Button clicked!');
   };
   const gotoTc = () => {

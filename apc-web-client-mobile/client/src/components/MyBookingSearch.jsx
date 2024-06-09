@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { GrNext } from "react-icons/gr";
 
 import CustomerItem from './CustomerItem';
@@ -15,7 +15,7 @@ const MyBookingSearch = (props) => {
   const { updateBookingSearch } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const gotoMyBooking2 = () =>{
+  const gotoMyBooking2 = () => {
     navigate(`/my-booking2/${bookingCode}`)
 
   }
@@ -24,6 +24,7 @@ const MyBookingSearch = (props) => {
     if (result.success === 200) {
       updateBookingSearch(result.data);
       setBooking(result.data);
+      setCustomers(result.data.passengerList);
       console.log("myBooking:", result.data);
 
 
@@ -54,7 +55,11 @@ const MyBookingSearch = (props) => {
   }
 
   const [hiddenPrice, setHiddenPrice] = useState(false);
+  const [hiddenPassenger, setHiddenPassenger] = useState(false);
 
+  const handleHiddenPassenger = () => {
+    setHiddenPassenger(!hiddenPassenger);
+  }
   const hiddenPriceDetail = () => {
 
     setHiddenPrice(!hiddenPrice);
@@ -205,9 +210,12 @@ const MyBookingSearch = (props) => {
 
             </div>
             <div onClick={hiddenPriceDetail} className='flex items-center justify-end w-1/2 text-end'>
-              <MdKeyboardArrowUp className='w-6 h-6 text-brown_color' />
-
-
+              {
+                hiddenPrice === false ?
+                  <MdKeyboardArrowUp className='w-6 h-6 text-brown_color' />
+                  :
+                  <MdKeyboardArrowDown className='w-6 h-6 text-brown_color' />
+              }
             </div>
 
           </div>
@@ -346,9 +354,16 @@ const MyBookingSearch = (props) => {
 
             </div>
             <div className='flex items-center justify-end w-1/2 text-end'>
-              <MdKeyboardArrowUp className='w-6 h-6 text-brown_color' />
+              {
+                hiddenPassenger == false ?
+                  <MdKeyboardArrowUp onClick={handleHiddenPassenger} className='w-6 h-6 text-brown_color' />
+
+                  :
+                  <MdKeyboardArrowDown onClick={handleHiddenPassenger} className='w-6 h-6 text-brown_color' />
 
 
+
+              }
             </div>
 
           </div>
@@ -356,16 +371,26 @@ const MyBookingSearch = (props) => {
           <div className='flex flex-col w-full mt-5  text-[16px] text-black font-bold'>
 
             <div>
-              {customers.map((customer) => (
-                <CustomerItem key={customer.id} title={customer.title} firstName={customer.firstName} lastName={customer.lastName} dateOfBirth={customer.dateOfBirth} nation={customer.nation} province={customer.province} />
-              ))}
+              {hiddenPassenger === false ? customers.map((customer) => (
+                <CustomerItem key={customer.id}
+                  title={customer.title}
+                  firstName={customer.firstName}
+                  lastName={customer.lastName}
+                  dateOfBirth={customer.dateOfBirth}
+                  nation={customer.nation}
+                  province={customer.province}
+                  personIdType={customer.personIdType}
+                  personIdNumber={customer.personIdNumber}
+                  note={customer.note}
+                />
+              )) : <div></div>}
             </div>
           </div>
 
         </div>
 
         <button onClick={gotoMyBooking2} className='w-full mt-5 h-[50px] rounded-md text-white font-bold bg-brown_color'>Complete Passenger Information</button>
-{/* 
+        {/* 
         <div className='flex flex-col w-full p-5 mt-5 bg-white rounded-md'>
           <div className='flex w-full mt-5 text-[16px] text-black font-bold'>
             <p>Seems missing something?</p>
