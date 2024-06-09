@@ -47,8 +47,8 @@ function App() {
         <Route path="/forgot-password2" element={<ForgotPassword2Page />} />
         <Route path="/forgot-password3" element={<ForgotPassword3Page />} />
         <Route path="/my-booking" element={<MyBookingPage />} />
-        <Route path="/my-booking2" element={<MyBooking2Page />} />
-        <Route path="/my-booking3" element={<MyBooking3Page />} />
+        <Route path="/my-booking2/:bookingCode" element={<MyBooking2Page />} />
+        <Route path="/my-booking3/:bookingCode" element={<MyBooking3Page />} />
 
         {/* <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} /> */}
 

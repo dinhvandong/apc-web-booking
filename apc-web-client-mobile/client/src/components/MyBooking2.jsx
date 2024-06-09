@@ -8,7 +8,10 @@ import { AuthContext } from '../AuthProvider';
 import { FaRegUser } from "react-icons/fa6";
 import { HiOutlineUserGroup } from "react-icons/hi";
 
-const MyBooking2 = () => {
+const MyBooking2 = (props) => {
+
+  const { bookingCode } = props;
+
   const { updateBookingSearch } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -21,11 +24,11 @@ const MyBooking2 = () => {
   // const [userInfo, setUserInfo] = useState({});
   // const [isLogin, setIsLogin] = useState(false);
 
-  const [bookingCode, setBookingCode] = useState('');
+  //const [bookingCode, setBookingCode] = useState('');
   const [lastName, setLastName] = useState('');
 
   const handleBookingCodeChange = (e) => {
-    setBookingCode(e.target.value);
+   // setBookingCode(e.target.value);
   };
 
   const handleLastNameChange = (e) => {
@@ -38,7 +41,7 @@ const MyBooking2 = () => {
   }
 
   const gotoInsertPassenger = () =>{
-    navigate('/my-booking3');
+    navigate(`/my-booking3/${bookingCode}`);
   }
   const gotoSignUp = () => {
 
@@ -71,7 +74,7 @@ const MyBooking2 = () => {
     //   console.log("resultLogin:", result);
     // }
     // navigate('/admin');
-    setBookingCode('');
+    //setBookingCode('');
     setLastName('');
   };
 
@@ -97,7 +100,7 @@ const MyBooking2 = () => {
       </div> */}
 
       <div className='flex flex-col text-gray-600 justify-center mt-[100px]'>
-        <p className='text-center'>Booking Code: APC1DV</p>
+        <p className='text-center'>Booking Code: {bookingCode}</p>
 
       </div>
 

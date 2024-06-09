@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import HeaderSignIn from '../components/HeaderSignIn'
 import SignIn from '../components/SignIn'
 import BottomNavigation from '../components/BottomNavigation'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { isAuthenticated } from '../services/api'
 import MyBooking from '../components/MyBooking'
 import MyBooking2 from '../components/MyBooking2'
@@ -10,6 +10,7 @@ import HeaderProfile from '../components/HeaderProfile'
 import HeaderBooking from '../components/HeaderBooking'
 
 const MyBooking2Page = () => {
+    const { bookingCode } = useParams();
 
 
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ const MyBooking2Page = () => {
          {/* <HeaderSignIn title={"My Booking"} /> */}
          <HeaderBooking/>
 
-            <MyBooking2 />
+            <MyBooking2 bookingCode={bookingCode} />
             <BottomNavigation selected={"booking"} />
         </div>
     )

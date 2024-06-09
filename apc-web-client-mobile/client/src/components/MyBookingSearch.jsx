@@ -16,7 +16,7 @@ const MyBookingSearch = (props) => {
   const navigate = useNavigate();
 
   const gotoMyBooking2 = () =>{
-    navigate('/my-booking2')
+    navigate(`/my-booking2/${bookingCode}`)
 
   }
   const getBooking = async () => {

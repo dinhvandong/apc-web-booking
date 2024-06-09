@@ -13,8 +13,8 @@ public class Passenger {
     private String firstName;
     private String lastName;
     private String title;
-    private Long dateOfBirth;
-    private int personIdType;
+    private String dateOfBirth;
+    private String personIdType;
     private String personIdNumber;
     private String nation;
     private String province;
@@ -23,19 +23,6 @@ public class Passenger {
     public Passenger()
     {
 
-    }
-
-    public Passenger(Long id, String firstName, String lastName, String title, Long dateOfBirth, int personIdType, String personIdNumber, String nation, String province, String note) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.title = title;
-        this.dateOfBirth = dateOfBirth;
-        this.personIdType = personIdType;
-        this.personIdNumber = personIdNumber;
-        this.nation = nation;
-        this.province = province;
-        this.note = note;
     }
 
     public Long getId() {
@@ -70,19 +57,19 @@ public class Passenger {
         this.title = title;
     }
 
-    public Long getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Long dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getPersonIdType() {
+    public String getPersonIdType() {
         return personIdType;
     }
 
-    public void setPersonIdType(int personIdType) {
+    public void setPersonIdType(String personIdType) {
         this.personIdType = personIdType;
     }
 

@@ -9,8 +9,9 @@ import { FaRegUser } from "react-icons/fa6";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { DatePicker } from 'antd';
 
-const MyBooking3 = () => {
+const MyBooking3 = (props) => {
   const { updateBookingSearch } = useContext(AuthContext);
+  const { bookingCode } = props;
 
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
@@ -18,7 +19,9 @@ const MyBooking3 = () => {
     setIsChecked(!isChecked);
   };
   const [country, setCountry] = useState('');
-
+  //const [bookingCode, setBookingCode] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [gender, setGender] = useState('Mr');
   const genderList = ['Mr', 'Ms'];
   const handleGenderChange = event => {
@@ -162,12 +165,10 @@ const MyBooking3 = () => {
   // const [userInfo, setUserInfo] = useState({});
   // const [isLogin, setIsLogin] = useState(false);
 
-  const [bookingCode, setBookingCode] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [firstName, setFirstName] = useState('');
+
 
   const handleBookingCodeChange = (e) => {
-    setBookingCode(e.target.value);
+    //setBookingCode(e.target.value);
   };
 
   const handleLastNameChange = (e) => {
@@ -198,18 +199,7 @@ const MyBooking3 = () => {
 
     }
 
-    // const result = await loginRequest(email, password);
-    // if(result.success===200){
-    //   const token = result.data.message;
-    //   const user = result.data
-    //   //login(token, user);
-    //   navigate('/profile-page');
-
-    // }else {
-    //   console.log("resultLogin:", result);
-    // }
-    // navigate('/admin');
-    setBookingCode('');
+    //setBookingCode('');
     setLastName('');
   };
 
@@ -221,6 +211,8 @@ const MyBooking3 = () => {
 
   const handleCreatePassenger = () => {
 
+
+    
   }
 
   const handleCountryChange = event => {
@@ -256,7 +248,7 @@ const MyBooking3 = () => {
       </div> */}
 
       <div className='flex flex-col text-gray-600 justify-center mt-[100px]'>
-        <p className='text-center'>Booking Code: APC1DV</p>
+        <p className='text-center'>Booking Code: {bookingCode}</p>
 
       </div>
 
