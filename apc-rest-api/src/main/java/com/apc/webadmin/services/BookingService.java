@@ -67,9 +67,9 @@ public class BookingService {
 
 
 
-    public Booking addListPassenger(Long idBooking, List<Passenger> passengerList){
+    public Booking addListPassenger(String bookingCode, List<Passenger> passengerList){
 
-        Optional<Booking> optional= bookingRepository.findById(idBooking);
+        Optional<Booking> optional= bookingRepository.findByBookingCode(bookingCode);
         if(optional.isEmpty()){
             return  null;
         }

@@ -44,11 +44,11 @@ public class BookingController {
     }
 
     @PostMapping("/insertListPassengers")
-    public ResponseEntity<?> insert(@RequestParam Long idBooking,
+    public ResponseEntity<?> insert(@RequestParam String bookingCode,
                                     @RequestBody List<Passenger> passengerList)
     {
 
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.addListPassenger(idBooking, passengerList),"success"));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.addListPassenger(bookingCode, passengerList),"success"));
 
     }
 
