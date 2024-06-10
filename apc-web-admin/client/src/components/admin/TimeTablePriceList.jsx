@@ -208,9 +208,9 @@ const TimeTablePriceList = () => {
                                 className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholderText="Select start date"
                                 dateFormat='YYYY-MM-DD'
-                                selectsStart
-                                startDate={startDate}
-                                endDate={endDate}
+                                // selectsStart
+                                // startDate={startDate}
+                                // endDate={startDate}
                             />
                         </div>
                         <div className="mb-2">
@@ -220,10 +220,10 @@ const TimeTablePriceList = () => {
                                 className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholderText="Select end date"
                                 dateFormat='YYYY-MM-DD'
-                                selectsEnd
-                                startDate={startDate}
-                                endDate={endDate}
-                                minDate={startDate}
+                                // selectsEnd
+                                // startDate={endDate}
+                                // endDate={endDate}
+                                // minDate={endDate}
                             />
                         </div>
 
