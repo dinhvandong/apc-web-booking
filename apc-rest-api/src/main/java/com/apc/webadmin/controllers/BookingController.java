@@ -22,7 +22,9 @@ import java.util.List;
         "http://localhost:3001",
         "http://localhost:3000",
         "http://150.95.113.18",
-        "http://ambassadordaycruise.com/"
+        "http://ambassadordaycruise.com/",
+        "http://admin.ambassadordaycruise.com/"
+
 })
 @RestController
 @RequestMapping("/api/booking")

@@ -24,9 +24,10 @@ import java.util.Optional;
         "http://localhost:3001",
         "http://localhost:3000",
         "http://150.95.113.18",
-        "http://ambassadordaycruise.com/"
-})
+        "http://ambassadordaycruise.com/",
+        "http://admin.ambassadordaycruise.com/"
 
+})
 public class PriceFolioController {
 
     @Autowired

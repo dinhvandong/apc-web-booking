@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/room")
-
 @CrossOrigin(origins = {
         "http://163.44.206.118:83",
         "http://163.44.206.118:80",
@@ -24,7 +23,9 @@ import java.util.Optional;
         "http://localhost:3001",
         "http://localhost:3000",
         "http://150.95.113.18",
-        "http://ambassadordaycruise.com/"
+        "http://ambassadordaycruise.com/",
+        "http://admin.ambassadordaycruise.com/"
+
 })
 public class RoomController {
     @Autowired
