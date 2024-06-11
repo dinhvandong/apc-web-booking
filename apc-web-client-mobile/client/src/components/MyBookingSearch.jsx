@@ -371,8 +371,9 @@ const MyBookingSearch = (props) => {
           <div className='flex flex-col w-full mt-5  text-[16px] text-black font-bold'>
 
             <div>
-              {hiddenPassenger === false ? customers.map((customer) => (
+              {hiddenPassenger === false ? customers.map((customer, index) => (
                 <CustomerItem key={customer.id}
+                index={ index}
                   title={customer.title}
                   firstName={customer.firstName}
                   lastName={customer.lastName}

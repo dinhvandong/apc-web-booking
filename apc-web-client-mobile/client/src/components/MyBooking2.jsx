@@ -39,6 +39,10 @@ const MyBooking2 = (props) => {
     navigate('/forgot-password1');
 
   }
+  const gotoMyBookingImportExcel = ()=>{
+    navigate(`/my-booking-import-excel/${bookingCode}`);
+
+  }
 
   const gotoInsertPassenger = () =>{
     navigate(`/my-booking3/${bookingCode}`);
@@ -124,7 +128,7 @@ const MyBooking2 = (props) => {
       </div>
 
       <div className='w-full mt-5'>
-        <button className='flex w-full px-4 py-2 rounded-md bg-brown_color'>
+        <button onClick={gotoMyBookingImportExcel} className='flex w-full px-4 py-2 rounded-md bg-brown_color'>
 
           <HiOutlineUserGroup className='w-5 h-5 text-white' />
           <p className='px-5 font-bold text-white'>

@@ -1,12 +1,12 @@
 import React from 'react'
 import { MdKeyboardArrowUp } from 'react-icons/md'
 
-const CustomerItem = ({ title, firstName, lastName, dateOfBirth, personIdType, personIdNumber, nation, province, note }) => {
+const CustomerItem = ({ index, title, firstName, lastName, dateOfBirth, personIdType, personIdNumber, nation, province, note }) => {
     return (
         <div className='flex flex-col w-full p-5 mt-5 border border-gray-300'>
             <div className='flex w-full mt-2 text-[16px] text-black'>
                 <div className='flex items-center justify-start w-1/2'>
-                    <p>{title}. {lastName} {firstName}</p>
+                    <p>{(index + 1)}.{title}. {lastName} {firstName}</p>
                 </div>
                 <div className='flex items-center justify-end w-1/2 text-end'>
                     <MdKeyboardArrowUp className='w-6 h-6 text-brown_color' />

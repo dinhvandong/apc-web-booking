@@ -8,16 +8,12 @@ import MyBooking from '../components/MyBooking'
 import MyBooking2 from '../components/MyBooking2'
 import HeaderProfile from '../components/HeaderProfile'
 import HeaderBooking from '../components/HeaderBooking'
+import MyBookingImportExcel from '../components/MyBookingImportExcel'
 import { FaArrowLeft } from 'react-icons/fa'
 
-const MyBooking2Page = () => {
+const MyBookingImportExcelPage = () => {
     const { bookingCode } = useParams();
-    const handleBackClick = () => {
-        // Add your logic here for handling the back button click
-        console.log("Back button clicked");
-        // navigate(`/my-booking2/${bookingCode}`)
-        navigate('/booking-search/' + bookingCode);
-    };
+
 
     const navigate = useNavigate();
 
@@ -33,6 +29,13 @@ const MyBooking2Page = () => {
     //         // eslint-disable-next-line react-hooks/exhaustive-deps
     //       checkAuthentication();
     //     }, []);
+
+    const handleBackClick = () => {
+        // Add your logic here for handling the back button click
+        console.log("Back button clicked");
+        navigate(`/my-booking2/${bookingCode}`)
+
+      };
     return (
         <div
             className={`h-screen  bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
@@ -50,10 +53,10 @@ const MyBooking2Page = () => {
                 <div className="mr-4"></div> {/* Add any other elements on the right side */}
             </header>
 
-            <MyBooking2 bookingCode={bookingCode} />
+            <MyBookingImportExcel bookingCode={bookingCode} />
             <BottomNavigation selected={"booking"} />
         </div>
     )
 }
 
-export default MyBooking2Page
+export default MyBookingImportExcelPage
