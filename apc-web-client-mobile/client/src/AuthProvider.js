@@ -16,10 +16,10 @@ export const AuthProvider = ({ children }) => {
     children: 0,
     infant: 0,
     flexibleOrNonRefund: true,
-    priceBase:0,
-    payMethod:'PayPal',
+    priceBase: 0,
+    payMethod: 'PayPal',
     price: 0,
-    bookingDate:0,
+    bookingDate: 0,
     cruiseType: 'Day Cruise',
   });
 
@@ -35,12 +35,12 @@ export const AuthProvider = ({ children }) => {
     children: 0,
     infant: 0,
     flexibleOrNonRefund: true,
-    priceBase:0,
-    payMethod:'PayPal',
+    priceBase: 0,
+    payMethod: 'PayPal',
     price: 0,
-    bookingDate:0,
+    bookingDate: 0,
     cruiseType: 'Day Cruise',
-    bookingDate:0
+    bookingDate: 0
   });
 
   const [priceDate, setPriceDate] = useState(
@@ -117,11 +117,21 @@ export const AuthProvider = ({ children }) => {
     if (!serviceExists) {
       const newItem = { service, price, count };
       setItems([...items, newItem]);
-    }else {
+    } else {
 
       updateService(service, count)
     }
   };
+
+  const [language, setLanguage] = useState('English');
+
+  const setLang = (language) => {
+    setLanguage(language);
+  }
+  const getLang = ()=>{
+    return language;
+  }
+
 
   const setArrayService = (newItems) => {
     setItems(newItems);
@@ -138,7 +148,7 @@ export const AuthProvider = ({ children }) => {
       updateService,
       addService,
       setArrayService,
-      getAllServices, myBookingSearch, updateBookingSearch
+      getAllServices, myBookingSearch, updateBookingSearch, setLang, getLang
     }}>
       {children}
     </AuthContext.Provider>

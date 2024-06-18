@@ -8,7 +8,7 @@ import item4 from '../assets/item4.png';
 import { useNavigate } from 'react-router-dom';
 
 
-const Header = () => {
+const Header = ({ onClick }) => {
     const navigate = useNavigate();
 
 
@@ -37,7 +37,7 @@ const Header = () => {
                 <button onClick={gotoTiktok} className="flex flex-col items-center text-gray-600">
                     <img className="w-8 h-8 mb-1 text-white" src={item2} />
                 </button>
-                <button className="flex flex-col items-center text-gray-600">
+                <button onClick={onClick} className="flex flex-col items-center text-gray-600">
                     <img className="w-8 h-8 mb-1 text-white" src={item3} />
                 </button>
                 <button onClick={gotoNotification} className="flex flex-col items-center text-gray-600">

@@ -12,8 +12,12 @@ import iconMenu8 from '../assets/icon-menu8.png'
 import iconMenu9 from '../assets/icon-menu9.png'
 import iconMenu10 from '../assets/icon-menu10.png'
 import iconMenu11 from '../assets/icon-menu11.png'
+import { useTranslation } from 'react-i18next';
 
 const Menu = () => {
+
+    const { t } = useTranslation();
+
     const jsonData = [
         {
             "title": {iconMenu1},
@@ -63,7 +67,7 @@ const Menu = () => {
 
     return (
         <div className='flex flex-col m-5'>
-            <p className='mt-5 text-4xl mb-5 font-bold text-white'>
+            <p className='mt-5 mb-5 text-4xl font-bold text-white'>
                 <h1> Menu</h1>
             </p>
 

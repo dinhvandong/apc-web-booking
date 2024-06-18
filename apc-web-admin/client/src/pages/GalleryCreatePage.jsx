@@ -7,6 +7,7 @@ import UserCreate from '../components/admin/UserCreate';
 import { isAuthenticated } from '../utils/localStorage';
 import CategoryCreate from '../components/admin/CategoryCreate';
 import NotificationCreate from '../components/admin/NotificationCreate';
+import GalleryFolderCreate from './../components/admin/GalleryFolderCreate';
 const GalleryCreatePage = () => {
     const navigate = useNavigate();
 
@@ -26,10 +27,10 @@ const GalleryCreatePage = () => {
         <HeaderAdmin />
         <div className="flex flex-row w-full">
           <div >
-            <Sidebar menu="tab5" />
+            <Sidebar menu="tab7" />
           </div>
           <div className="flex w-[100%] flex-row justify-center">     
-               <NotificationCreate />
+               <GalleryFolderCreate />
           </div>
         </div>
       </div>

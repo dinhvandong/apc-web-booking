@@ -14,8 +14,12 @@ import iconMyBookingSelected from '../assets/menu-my-booking-icon-selected.png';
 import iconPlanYourCruiseSelected from '../assets/menu-plan-your-cruise-icon-selected.png';
 import iconSettingSelected from '../assets/menu-setting-icon-selected.png';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 function BottomNavigation(props) {
   const { selected } = props;
+  const { t } = useTranslation();
+
   const [css1 , setCss1] = useState('font-light');
   const [css2 , setCss2] = useState('font-light');
   const [css3 , setCss3] = useState('font-light');
@@ -95,23 +99,26 @@ function BottomNavigation(props) {
     <button className={`flex flex-col items-center text-sm  ${css1} `} onClick={gotoHome}>
       <img className="h-[15px] w-[15px] " 
       src={selected==='home' ?iconHomeSelected: iconHomeDefault} />
-      Home
+      {t('menuHome')}
     </button>
     <button onClick={gotoMyBooking} className={`flex flex-col items-center  text-sm  ${css2}`}>
       <img className="h-[15px] w-[15px] " src={selected ==='booking'?iconMyBookingSelected: iconMyBookingDefault} />
-      My Booking
+      {t('menuMyBooking')}
+
     </button>
     <button className={`flex flex-col items-center  text-sm  ${css3}`} onClick={gotoPlanCruise}>
       <img className="h-[15px] w-[15px]" src={selected==='plan'? iconPlanYourCruiseSelected: iconPlanYourCruiseDefault} />
-      Plan Your Cruise
+      {t('menuPlanYourCruise')}
     </button>
     <button className={`flex flex-col items-center text-sm  ${css4}`} onClick={gotoAccount}>
       <img className="h-[15px] w-[15px] " src={selected==='account'?iconAccountSelected: iconAccountDefault} />
-      Account
+      {t('menuAccount')}
+
     </button>
     <button className={`flex flex-col items-center  text-sm  ${css5}`} onClick={gotoMenu}>
       <img className="h-[15px] w-[15px] " src={selected==='menu'?iconSettingSelected: iconSettingDefault} />
-      Menu
+      {t('menuMenu')}
+
     </button>
   </nav>
 

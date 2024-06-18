@@ -103,7 +103,7 @@ const UserTable = () => {
       dataIndex: 'avatar',
       key: 'avatar',
       render: (avatar) => <img
-        src={API_URL_IMAGE + avatar || defaultImage}
+        src={API_URL_IMAGE + avatar}
         alt="avatar"
         className="w-10 h-10 rounded-full"
       />,

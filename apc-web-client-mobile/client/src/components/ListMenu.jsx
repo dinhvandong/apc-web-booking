@@ -11,7 +11,12 @@ import iconMenu9 from '../assets/icon-menu9.png'
 import iconMenu10 from '../assets/icon-menu10.png'
 import iconMenu11 from '../assets/icon-menu11.png'
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 const ListMenu = () => {
+
+  const { t } = useTranslation();
+
   // const { data } = props;
   // console.log("data:"+ data);
   const navigate = useNavigate();
@@ -66,30 +71,41 @@ const ListMenu = () => {
     console.log('Button clicked!');
   };
 
+  // btnMn_ManageBooking:"管理预订",
+  // btnMn_Promotion: "促销",
+  // btnMn_Vouchers:"优惠券",
+  // btnMn_Itinerary:"行程",
+  // btnMn_Tc:"条款和条件",
+  // btnMn_News :"新闻",
+  // btnMn_Privacy:"隐私",
+  // btnMn_FaQ:"常见问题",
+  // btnMn_ContactUs:"联系我们",
+  // btnMn_Gallery:"图库",
+  // btn_Setting:"设置"
   return (
     <div className="grid grid-cols-3 gap-4 md:grid-cols-5">
 
-      <ListItem title={iconMenu1} onClick={ gotoManageBooking} description={"Manage Booking"} />
+      <ListItem title={iconMenu1} onClick={ gotoManageBooking} description={ t(`btnMn_ManageBooking`)} />
 
-      <ListItem title={iconMenu2} onClick={gotoPromotion } description={"Promotion"} />
+      <ListItem title={iconMenu2} onClick={gotoPromotion } description={t(`btnMn_Promotion`)} />
 
-      <ListItem title={iconMenu3} onClick={gotoVoucher } description={"Vouchers"} />
+      <ListItem title={iconMenu3} onClick={gotoVoucher } description={t(`btnMn_Vouchers`)} />
 
-      <ListItem title={iconMenu4} onClick={ gotoItinerary} description={"Itinerary"} />
+      <ListItem title={iconMenu4} onClick={ gotoItinerary} description={t(`btnMn_Itinerary`)} />
 
-      <ListItem title={iconMenu5} onClick={gotoTc } description={"T&C"} />
+      <ListItem title={iconMenu5} onClick={gotoTc } description={t(`btnMn_Tc`)} />
 
-      <ListItem title={iconMenu6} onClick={gotoNews } description={"News"} />
+      <ListItem title={iconMenu6} onClick={gotoNews } description={t(`btnMn_News`)} />
 
-      <ListItem title={iconMenu7} onClick={gotoPrivacy } description={"Privacy"} />
+      <ListItem title={iconMenu7} onClick={gotoPrivacy } description={t(`btnMn_Privacy`)} />
 
-      <ListItem title={iconMenu8} onClick={ gotoFq} description={"F&Q"} />
+      <ListItem title={iconMenu8} onClick={ gotoFq} description={t(`btnMn_FaQ`)} />
 
-      <ListItem title={iconMenu9} onClick={ gotoContactus} description={"Contact Us"} />
+      <ListItem title={iconMenu9} onClick={ gotoContactus} description={t(`btnMn_ContactUs`)} />
 
-      <ListItem title={iconMenu10} onClick={gotoGallary } description={"Gallery"} />
+      <ListItem title={iconMenu10} onClick={gotoGallary } description={t(`btnMn_Gallery`)} />
 
-      <ListItem title={iconMenu11} onClick={gotoSetting } description={"Setting"} />
+      <ListItem title={iconMenu11} onClick={gotoSetting } description={t(`btn_Setting`)} />
 
       {/* {data.map((item, index) => (
         ))} */}

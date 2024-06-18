@@ -342,7 +342,7 @@ const Sidebar = (props) => {
             }
           </button>
 
-          <button
+          {/* <button
             onClick={() => gotoGallery()}
             onMouseEnter={handleMouseEnter7}
             onMouseLeave={handleMouseLeave7}
@@ -353,7 +353,7 @@ const Sidebar = (props) => {
               active == true ? <div className="text-sm ">Thư viện ảnh</div> : <div></div>
 
             }
-          </button>
+          </button> */}
 
 
           <button

@@ -22,7 +22,7 @@ const GalleryFolderList = () => {
     setIsOn(!isOn);
   };
   const handleInsert = () => {
-    navigate("/admin/notifications/create-new");
+    navigate("/admin/gallery/create-new");
   };
   const handleSearch = () => {
 
@@ -74,13 +74,12 @@ const GalleryFolderList = () => {
         {/* <GalleryFolderTable /> */}
 
         <div className="w-1/2">
-                    <GalleryFolderTable  onChildCallback={handleChildCallback}  />
+          <GalleryFolderTable onChildCallback={handleChildCallback} />
+        </div>
+        <div className="flex-row justify-center w-1/2 ml-5">
+          <GalleryItemTable galleryID={galleryID} />
 
-                </div>
-                <div className="flex-row justify-center w-1/2 ml-5">
-                    <GalleryItemTable galleryID = {galleryID}/>
-
-                </div>
+        </div>
 
       </div>
 

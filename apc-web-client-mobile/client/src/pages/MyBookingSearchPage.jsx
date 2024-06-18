@@ -6,12 +6,20 @@ import BottomNavigation from '../components/BottomNavigation'
 import { useNavigate, useParams } from 'react-router-dom'
 import { isAuthenticated } from '../services/api'
 import MyBookingSearch from '../components/MyBookingSearch'
+import { FaArrowLeft } from 'react-icons/fa6'
 
 const MyBookingSearchPage = () => {
+    const navigate = useNavigate();
 
     const { bookingCode } = useParams();
     console.log("bookingCode", bookingCode);
-    const navigate = useNavigate();
+
+    const handleBackClick = () => {
+        // Add your logic here for handling the back button click
+        console.log("Back button clicked");
+        navigate(`/my-booking`)
+
+      };
 
     // useEffect(() => {
     //     const checkAuthentication = async () => {
@@ -29,7 +37,17 @@ const MyBookingSearchPage = () => {
         <div
             className={`h-screen  bg-cover bg-center flex flex-col  transition-opacity duration-500`}
 
-        >      <HeaderSignIn title={"My Booking"} />
+        >      
+        {/* <HeaderSignIn title={"My Booking"} /> */}
+
+        <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-white">
+                <button className="mr-5 " onClick={handleBackClick}>
+                    {/* Add your back icon here */}
+                    <FaArrowLeft className='text-red-600' />
+                </button>
+                <h1 className="text-xl font-bold">My Booking</h1>
+                <div className="mr-4"></div> {/* Add any other elements on the right side */}
+            </header>
             <MyBookingSearch bookingCode = {bookingCode} />
             <BottomNavigation selected={"booking"} />
         </div>

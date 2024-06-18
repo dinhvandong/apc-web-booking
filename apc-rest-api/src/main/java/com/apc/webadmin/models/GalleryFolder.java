@@ -14,10 +14,27 @@ public class GalleryFolder {
     @Transient
     public static final String SEQUENCE_NAME = "gallery_folder_sequence";
     private String topic;
-
     private String shortDesc;
-
+    private String category;
+    private String thumb;
     private List<GalleryItem> galleryItemList;
+
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public Long getId() {
         return id;
