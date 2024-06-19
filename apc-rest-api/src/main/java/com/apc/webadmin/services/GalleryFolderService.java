@@ -61,8 +61,9 @@ public class GalleryFolderService {
 
             galleryFolder.setGalleryItemList(galleryItems);
         }
+        assert galleryFolder != null;
+        return galleryFolderRepository.save(galleryFolder);
 
-        return galleryFolder;
     }
 
 
@@ -90,7 +91,8 @@ public class GalleryFolderService {
             galleryFolder.setGalleryItemList(galleryItems);
         }
 
-        return galleryFolder;
+        assert galleryFolder != null;
+        return galleryFolderRepository.save(galleryFolder);
     }
 
 
@@ -115,7 +117,8 @@ public class GalleryFolderService {
             galleryFolder.setGalleryItemList(galleryItems);
         }
 
-        return galleryFolder;
+        assert galleryFolder != null;
+        return galleryFolderRepository.save(galleryFolder);
     }
 
 

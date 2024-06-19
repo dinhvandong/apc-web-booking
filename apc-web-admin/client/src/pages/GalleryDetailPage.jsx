@@ -4,7 +4,7 @@ import CategoriesList from '../components/admin/CategoriesList';
 import HeaderAdmin from '../components/admin/HeaderAdmin';
 import Sidebar from '../components/admin/SideBar';
 import { isAuthenticated } from '../utils/localStorage';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import NotificationList from '../components/admin/NotificationList';
 import GalleryFolderList from '../components/admin/GalleryFolderList';
 import GalleryDetailList from '../components/admin/GalleryDetailList';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { convertDateFormat, deleteUser, getGalleryById, getGalleryItemsById, getPricesByRoomID, getRooms, getUsers } from '../../services/api'
+import { API_URL_IMAGE, convertDateFormat, deleteUser, getGalleryById, getGalleryItemsById, getPricesByRoomID, getRooms, getUsers } from '../../services/api'
 import { Button, Space, Table, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
@@ -29,7 +29,7 @@ const GalleryItemTable = (props) => {
   const refreshData = async () => {
     try {
       const response = await getGalleryItemsById(galleryID);
-      console.log("items", items);
+      console.log("response", response);
       setGalleryItemList(response.data);
       //setUpdateValue(priceList)
     } catch (error) {
@@ -68,9 +68,7 @@ const GalleryItemTable = (props) => {
       dataIndex: 'shortDesc',
       key: 'shortDesc',
       // width: '20%'
-
     },
-
     {
       title: 'Ảnh Thumb',
       dataIndex: 'thumb',

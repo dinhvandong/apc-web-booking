@@ -41,6 +41,7 @@ import NewsEditPage from './pages/NewsEditPage';
 import PromotionCreatePage from './pages/PromotionCreatePage';
 import PromotionEditPage from './pages/PromotionEditPage';
 import PromotionPage from './pages/PromotionPage';
+import GalleryDetailPage from './pages/GalleryDetailPage';
 
 function App() {
   return (
@@ -93,7 +94,7 @@ function App() {
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
         <Route path="/admin/time-price" element={<TimeTablePricePage />} />
 
-        <Route path="/admin/gallery_detail/:id" element={<GalleryPage />} />
+        <Route path="/admin/gallery_detail/:id" element={<GalleryDetailPage />} />
         <Route path="/admin/gallery_detail/create-new" element={<GalleryCreatePage />} />
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
 
