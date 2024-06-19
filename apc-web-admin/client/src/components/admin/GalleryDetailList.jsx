@@ -8,7 +8,9 @@ import NotificationTable from '../table/NotificationTable';
 import GalleryFolderTable from '../table/GalleryFolderTable';
 import GalleryItemTable from '../table/GalleryItemTable';
 
-const GalleryFolderList = () => {
+const GalleryDetailList = (props) => {
+
+  const id = props.id;
   const [isOn, setIsOn] = useState(false);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
@@ -74,7 +76,7 @@ const GalleryFolderList = () => {
         {/* <GalleryFolderTable /> */}
 
         <div className="w-full px-5">
-          <GalleryFolderTable onChildCallback={handleChildCallback} />
+          <GalleryItemTable galleryID={id} onChildCallback={handleChildCallback} />
         </div>
         {/* <div className="flex-row justify-center w-1/2 ml-5">
           <GalleryItemTable galleryID={galleryID} />
@@ -88,4 +90,4 @@ const GalleryFolderList = () => {
 }
 
 
-export default GalleryFolderList
+export default GalleryDetailList

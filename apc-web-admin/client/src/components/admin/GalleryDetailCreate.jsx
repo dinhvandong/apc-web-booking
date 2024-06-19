@@ -13,7 +13,7 @@ import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-const GalleryFolderCreate = () => {
+const GalleryDetailCreate = () => {
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [content, setContent] = useState('');
@@ -160,4 +160,4 @@ const GalleryFolderCreate = () => {
   )
 }
 
-export default GalleryFolderCreate
+export default GalleryDetailCreate

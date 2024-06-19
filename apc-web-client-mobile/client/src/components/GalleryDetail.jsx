@@ -22,7 +22,6 @@ const GalleryDetail = ({ arrayImages }) => {
     }
 
     const handleClose = () => {
-
         navigate("/gallery");
     }
     return (
@@ -43,11 +42,8 @@ const GalleryDetail = ({ arrayImages }) => {
                             <MdArrowBackIos onClick={handlePrevious} className='w-5 h-5 text-white hover:cursor-pointer' />
                             <p className='ml-5 mr-5 font-bold text-white'>{currentIndex + 1} / {arrayImages.length}</p>
                             <GrNext onClick={handleNext} className='w-5 h-5 text-white hover:cursor-pointer' />
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
             <div className="flex flex-col mt-5 justify-between items-center mb-[150px] px-5">

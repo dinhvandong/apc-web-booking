@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "gallery")
@@ -17,7 +18,7 @@ public class GalleryFolder {
     private String shortDesc;
     private String category;
     private String thumb;
-    private List<GalleryItem> galleryItemList;
+    private List<GalleryItem> galleryItemList = new ArrayList<>();
 
 
     public String getThumb() {

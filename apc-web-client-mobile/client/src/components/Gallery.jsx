@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import CategoryGalleryList from './CategoryGalleryList';
 import { useNavigate } from 'react-router-dom';
+import { API_URL_IMAGE, getGalleries } from '../services/api';
 
 const Gallery = () => {
 
     const [data1, setData1] = useState([]);
     const [data2, setData2] = useState([]);
+
+    const [data, setData] = useState([]);
+
+    const [firstItem, setFirstItem] = useState(null);
+    const [remainingItems, setRemainingItems] = useState([]);
+
 
     const dataFirst = [
         {
@@ -65,7 +72,24 @@ const Gallery = () => {
         // Add more items as needed...
     ];
 
+
+    const getGalleryList = async () => {
+        const result = await getGalleries();
+        if (result.success === 200) {
+            setData(result.data);
+            const firstItem = result.data[0];
+            const remainingItems = result.data.slice(1);
+            console.log("remainItems:", remainingItems);
+            setFirstItem(firstItem);
+            setRemainingItems(remainingItems);
+        }
+        else {
+        }
+    }
+
     useEffect(() => {
+
+        getGalleryList();
 
 
 
@@ -80,36 +104,38 @@ const Gallery = () => {
         { name: 'Spa' },
 
         // Add more category objects as needed
-      ];
-      const navigate = useNavigate();
+    ];
+    const navigate = useNavigate();
 
-    const gotoGalleryDetail = ()=>{
+    const gotoGalleryDetail = () => {
         navigate('/galleryDetail');
-        
-    }  
+
+    }
     return (
         <div className='flex flex-col mt-[100px] mb-[100px] bg-[#fff] items-center flex-1 w-full overflow-y-auto'>
 
             <CategoryGalleryList categories={categories} />
 
             <div className="flex flex-col md:w-[600px] w-full ">
-                {dataFirst.map((item) => (
-                    <div onClick={gotoGalleryDetail} key={item.id} className="px-2.5 flex flex-col md:w-[600px] w-full items-center">
-                        <img src={item.icon} alt="" className="w-full hover:cursor-pointer" />
-                        <span className="mt-2 font-bold text-black">{item.name}</span>
-                        <span className="mt-2">{item.subName}</span>
 
-                    </div>
-                ))}
+                {firstItem!= null && (<div onClick={gotoGalleryDetail} key={firstItem.id} className="px-2.5 flex flex-col md:w-[600px] w-full items-center">
+                    <img src={API_URL_IMAGE + firstItem.thumb} alt="" className="w-full hover:cursor-pointer" />
+                    <span className="mt-2 font-bold text-black">{firstItem.topic}</span>
+                    <span className="mt-2">{firstItem.shortDesc}</span>
+
+                </div>)}
+                {/* {dataFirst.map((item) => (
+                    
+                ))} */}
             </div>
 
 
             <div className="grid grid-cols-2 gap-4 mt-5">
-                {dataSecond.map((item) => (
+                {remainingItems.length>0 && remainingItems.map((item) => (
                     <div onClick={gotoGalleryDetail} key={item.id} className="px-2.5 flex flex-col md:w-[292px] w-full items-center">
-                        <img src={item.icon} alt="" className="w-full rounded-md hover:cursor-pointer" />
-                        <span className="mt-2 font-bold text-black">{item.name}</span>
-                        <span className="mt-2">{item.subName}</span>
+                        <img src={API_URL_IMAGE + item.thumb} alt="" className="w-full rounded-md hover:cursor-pointer" />
+                        <span className="mt-2 font-bold text-black">{item.topic}</span>
+                        <span className="mt-2">{item.shortDesc}</span>
 
                     </div>
                 ))}

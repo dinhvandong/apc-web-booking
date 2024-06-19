@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { convertDateFormat, deleteUser, getGalleryById, getPricesByRoomID, getRooms, getUsers } from '../../services/api'
+import { convertDateFormat, deleteUser, getGalleryById, getGalleryItemsById, getPricesByRoomID, getRooms, getUsers } from '../../services/api'
 import { Button, Space, Table, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
@@ -28,9 +28,9 @@ const GalleryItemTable = (props) => {
 
   const refreshData = async () => {
     try {
-      const gallery = await getGalleryById(props.galleryID);
-      console.log("gallery", gallery);
-      setGalleryItemList(gallery.galleryItemList);
+      const response = await getGalleryItemsById(galleryID);
+      console.log("items", items);
+      setGalleryItemList(response.data);
       //setUpdateValue(priceList)
     } catch (error) {
       // Handle error
@@ -54,55 +54,43 @@ const GalleryItemTable = (props) => {
   }, []);
 
   const  handlePriceChange = (value, id, index)=> {
-    // console.log(`New age for record ${index} ${id}: ${value}`);
-
-    
-    // setUpdateValue(value??0);
-    // setIndex(index);
-
-
   }
   const columns = [
     {
-      title: 'id',
+      title: 'ID',
       dataIndex: 'id',
       key: 'id',
       // width: '10%'
     },
 
     {
-        title: 'Mô tả',
-        dataIndex: 'description',
-        key: 'description',
-        // width: '10%'
-      },
+      title: 'Mô tả',
+      dataIndex: 'shortDesc',
+      key: 'shortDesc',
+      // width: '20%'
+
+    },
 
     {
-      title: 'url',
-      dataIndex: 'url',
-      key: 'url',
-
-      render: (_, record, index2) => (
-        <Input
-          value={(updateValue && index2 == index)?updateValue: record.url}
-          onChange={(e) => handlePriceChange(e.target.value, record.url, index2)}
-        />
+      title: 'Ảnh Thumb',
+      dataIndex: 'thumb',
+      key: 'thumb',
+      render: (thumb) => <img
+        src={API_URL_IMAGE + thumb}
+        alt="thumb"
+        className="w-10 h-10 rounded"
+      />,
+    },
+    {
+      title: 'Hành động',
+      key: 'actions',
+      render: (text, record) => (
+        <Space size="middle">
+          <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Chỉnh sửa</Button>
+          <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
+        </Space>
       ),
-      width: '50%'
-
-    }
-    ,
-    // {
-    //   title: 'Hành động',
-    //   key: 'actions',
-    //   render: (text, record) => (
-    //     <Space size="middle">
-    //       <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Cập nhật</Button>
-    //       <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
-
-    //     </Space>
-    //   ),
-    // },
+    },
     // Add more columns as needed
   ];
   return (

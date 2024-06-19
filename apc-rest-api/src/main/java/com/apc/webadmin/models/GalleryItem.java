@@ -1,12 +1,20 @@
 package com.apc.webadmin.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 public class GalleryItem {
     @Id
     private Long id;
-    private String url;
     private String description;
+
+    private String topic;
+    private String shortDesc;
+
+    private String thumb;
+
+    @Transient
+    public static final String SEQUENCE_NAME = "gallery_item_sequence";
     public Long getId() {
         return id;
     }
@@ -15,12 +23,28 @@ public class GalleryItem {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getShortDesc() {
+        return shortDesc;
+    }
+
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 
     public String getDescription() {

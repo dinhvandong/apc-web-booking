@@ -93,6 +93,12 @@ function App() {
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
         <Route path="/admin/time-price" element={<TimeTablePricePage />} />
 
+        <Route path="/admin/gallery_detail/:id" element={<GalleryPage />} />
+        <Route path="/admin/gallery_detail/create-new" element={<GalleryCreatePage />} />
+        <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
+
+
+
         <Route path="/admin/promotion" element={<PromotionPage />} />
         <Route path="/admin/promotion/create-new" element={<PromotionCreatePage />} />
         <Route path="/admin/promotion/update/:id" element={<PromotionEditPage />} />

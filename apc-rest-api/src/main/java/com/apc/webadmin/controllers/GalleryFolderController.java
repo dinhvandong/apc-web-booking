@@ -4,6 +4,7 @@ package com.apc.webadmin.controllers;
 import com.apc.webadmin.dto.ResponseObject;
 import com.apc.webadmin.models.EventPlan;
 import com.apc.webadmin.models.GalleryFolder;
+import com.apc.webadmin.models.GalleryItem;
 import com.apc.webadmin.services.GalleryFolderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,33 @@ public class GalleryFolderController {
     public ResponseEntity<?> findAll()
     {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.findAll(),"success"));
+    }
+
+    @GetMapping("/findAllGalleryItems")
+    public ResponseEntity<?> findAllGalleryItems(@RequestParam Long galleryID)
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.findGalleryItems(galleryID),"success"));
+    }
+
+    @PostMapping("/addItem")
+    public ResponseEntity<?> addItem(@RequestParam Long id,  @RequestBody GalleryItem item){
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.addGalleryItem(id,item),"success"));
+
+    }
+
+    @PostMapping("/updateItem")
+    public ResponseEntity<?> updateItem(@RequestParam Long id,  @RequestBody GalleryItem item){
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.updateGalleryItem(id,item),"success"));
+
+    }
+
+    @PostMapping("/deleteItem")
+    public ResponseEntity<?> deleteItem(@RequestParam Long id,  @RequestParam Long idItem){
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.deleteGalleryItem(id,idItem),"success"));
+
     }
     @GetMapping("/deleteAll")
     public ResponseEntity<?> deleteAll()

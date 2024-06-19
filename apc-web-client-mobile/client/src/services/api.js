@@ -340,7 +340,7 @@ export const getGalleries = async () => {
     //const token = localStorage.getItem("token");
     const response = await axios.get(`${API_URL}/galleryFolder/findAll`,
     );
-    return response.data.data;
+    return response.data;
   } catch (error) {
     throw error;
   }

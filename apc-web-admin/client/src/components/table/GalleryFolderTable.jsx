@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { convertDateFormat, createGallery, deleteUser, getGalleries, getRooms, getUsers } from '../../services/api'
+import { API_URL_IMAGE, convertDateFormat, createGallery, deleteUser, getGalleries, getRooms, getUsers } from '../../services/api'
 import { Button, Space, Table } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
@@ -8,13 +8,13 @@ import './UserTable.css'; // Import your custom CSS file
 const GalleryFolderTable = (props) => {
   const [galleries, setGalleries] = useState([]);
   const navigate = useNavigate();
+  const gotoGalleryItem =(id) =>{
+    navigate("/admin/gallery_detail/"+ id);
+  }
 
   const handleEdit = (id) => {
     console.log('Edit clicked for ID:', id);
-    //navigate(`/admin/room/update/${id}`)
-
     props.onChildCallback(id);
-
   };
 
   const handleDelete = async (id) => {
@@ -36,7 +36,7 @@ const GalleryFolderTable = (props) => {
   }
 
   const getRowClassName = (record, index) => {
-    return index %2===1 ? 'row-even' : 'row-odd';
+    return index % 2 === 1 ? 'row-even' : 'row-odd';
   };
 
   useEffect(() => {
@@ -68,13 +68,24 @@ const GalleryFolderTable = (props) => {
     },
 
     {
-        title: 'Mô tả',
-        dataIndex: 'shortDesc',
-        key: 'shortDesc',
-        // width: '20%'
-  
-      },
-//shortDesc
+      title: 'Mô tả',
+      dataIndex: 'shortDesc',
+      key: 'shortDesc',
+      // width: '20%'
+
+    },
+
+    {
+      title: 'Ảnh Thumb',
+      dataIndex: 'thumb',
+      key: 'thumb',
+      render: (thumb) => <img
+        src={API_URL_IMAGE + thumb}
+        alt="thumb"
+        className="w-10 h-10 rounded"
+      />,
+    },
+    //shortDesc
     // {
     //   title: 'Ngày tạo',
     //   dataIndex: 'createdDate',
@@ -88,6 +99,7 @@ const GalleryFolderTable = (props) => {
       key: 'actions',
       render: (text, record) => (
         <Space size="middle">
+          <Button className="text-white bg-edit" type="primary" onClick={() => gotoGalleryItem(record.id)}>Xem nội dung</Button>
           <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Chỉnh sửa</Button>
           <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
           {/* <Button className="mr-5 text-white bg-emerald-500" type="danger" onClick={() => handleDelete(record.id)}>Kích hoạt</Button> */}
