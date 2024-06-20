@@ -77,15 +77,6 @@ const UserTable = () => {
       // width: '20%'
 
     },
-    // {
-    //   title: 'Status',
-    //   dataIndex: 'status',
-    //   key: 'status',
-    //   //width: '20%',
-    //   render: (status) => (status === 1 ? 'Active' : 'Inactive'),
-
-
-    // },
     {
       title: 'Trạng thái',
       dataIndex: 'status',
@@ -103,7 +94,7 @@ const UserTable = () => {
       dataIndex: 'avatar',
       key: 'avatar',
       render: (avatar) => <img
-        src={API_URL_IMAGE + avatar}
+        src={(avatar!= null)?(API_URL_IMAGE + avatar): defaultImage}
         alt="avatar"
         className="w-10 h-10 rounded-full"
       />,
@@ -123,9 +114,7 @@ const UserTable = () => {
         <Space size="middle">
           <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Chỉnh sửa</Button>
           <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
-          {/* <Button className="mr-5 text-white bg-emerald-500" type="danger" onClick={() => handleDelete(record.id)}>Kích hoạt</Button> */}
-          {/* <Button className="mr-5 text-white bg-history" type="danger" onClick={() => handleDelete(record.id)}>Xem lịch sử</Button> */}
-
+       
         </Space>
       ),
     },

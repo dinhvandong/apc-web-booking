@@ -41,8 +41,8 @@ const GalleryFolderList = () => {
       <div className="flex justify-start m-5 md:justify-center sm:justify-center lg:justify-start">
         <p className="font-bold">Gallery photo</p>
       </div>
-      <Button className="w-[160px] ml-5 font-bold text-center mb-5 bg-blue-500" type="primary" onClick={handleInsert}>
-        New photo
+      <Button className="w-[160px] ml-5 font-bold text-center mb-5 bg-base_color" type="primary" onClick={handleInsert}>
+        Create New Gallery
       </Button>
       <div className='flex flex-row m-5'>
         <div className='flex items-center gap-3'>

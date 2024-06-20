@@ -42,6 +42,7 @@ import PromotionCreatePage from './pages/PromotionCreatePage';
 import PromotionEditPage from './pages/PromotionEditPage';
 import PromotionPage from './pages/PromotionPage';
 import GalleryDetailPage from './pages/GalleryDetailPage';
+import GalleryDetailCreatePage from './pages/GalleryDetailCreatePage';
 
 function App() {
   return (
@@ -95,7 +96,7 @@ function App() {
         <Route path="/admin/time-price" element={<TimeTablePricePage />} />
 
         <Route path="/admin/gallery_detail/:id" element={<GalleryDetailPage />} />
-        <Route path="/admin/gallery_detail/create-new" element={<GalleryCreatePage />} />
+        <Route path="/admin/gallery_detail/create-new/:id" element={<GalleryDetailCreatePage />} />
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
 
 

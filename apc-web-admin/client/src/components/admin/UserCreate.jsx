@@ -48,21 +48,21 @@ const UserCreate = () => {
         setFormData(prevFormData => ({
             ...prevFormData,
             avatar: response.data
-          }));
+        }));
 
-       
+
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-       // setFormData({avatar: file})
-       console.log("file",file);
+        // setFormData({avatar: file})
+        console.log("file", file);
 
-       setFormData(prevFormData => ({
-        ...prevFormData,
-        avatar: file
-      }));
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            avatar: file
+        }));
 
-        console.log("formData",formData);
+        console.log("formData", formData);
         const result = await createUser(formData);
         if (result.success === 200) {
             navigate('/admin/users');
@@ -73,11 +73,18 @@ const UserCreate = () => {
     };
 
     return (
-        <div className='flex flex-col w-full h-auto p-3'>
+        <div className='flex flex-col w-full h-auto'>
+
+            <div className="w-full h-[50px] bg-base_color">
+
+            </div>
+            <div className="flex justify-start mt-5 ml-5 md:justify-center sm:justify-center lg:justify-start">
+                <p className="font-bold">Tạo tài khoản đăng ký</p>
+            </div>
             {/* <p className='ml-10 text-sm'> <span className='text-gray-500'>Trang chủ /</span>&nbsp;Quản trị viên</p> */}
-            <div className='flex items-center gap-3 my-5'>
+            <div className='flex items-center gap-3 my-5 ml-5'>
                 <button onClick={gotoUserList} className='text-lg font-semibold'>Danh sách</button>
-                <button className='flex items-center justify-center w-24 p-4 text-gray-500 bg-white border-black rounded h-9 hover:shadow-lg'>Tạo mới</button>
+                <button className='flex items-center justify-center w-24 p-4 text-white border-black rounded bg-base_color h-9 hover:shadow-lg'>Tạo mới</button>
             </div>
 
             <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto overflow-auto">

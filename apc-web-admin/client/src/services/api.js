@@ -304,7 +304,7 @@ export const getGalleryById = async (galleryID) => {
 export const getGalleryItemsById = async (galleryID) => {
   try {
     //const token = localStorage.getItem("token");
-    const response = await axios.get(`${API_URL}/findAllGalleryItems?galleryID=${galleryID}`,
+    const response = await axios.get(`${API_URL}/galleryFolder/findAllGalleryItems?galleryID=${galleryID}`,
     );
     return response.data;
   } catch (error) {

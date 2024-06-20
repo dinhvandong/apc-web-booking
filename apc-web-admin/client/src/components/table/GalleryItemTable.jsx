@@ -16,7 +16,7 @@ const GalleryItemTable = (props) => {
 
   const handleEdit = (id) => {
     console.log('Edit clicked for ID:', id);
-    navigate(`/admin/price/update/${id}`)
+    navigate(`/admin/price/update/${galleryID}`)
   };
 
   const handleDelete = async (id) => {

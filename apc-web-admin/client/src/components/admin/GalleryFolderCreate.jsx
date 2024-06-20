@@ -100,7 +100,11 @@ const GalleryFolderCreate = () => {
 };
 
   return (
-    <div>
+    <div className='flex flex-col w-full h-auto'>
+    <div className="w-full h-[50px] bg-base_color">
+
+    </div>
+    <div className='flex flex-col px-5 py-5 w-[50%] h-auto'>
 
       <div className='mt-5'>
 
@@ -156,6 +160,8 @@ const GalleryFolderCreate = () => {
         onClick={saveContent}>
         Save Content
       </button>
+
+      </div>
     </div>
   )
 }

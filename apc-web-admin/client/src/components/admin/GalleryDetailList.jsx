@@ -24,7 +24,7 @@ const GalleryDetailList = (props) => {
     setIsOn(!isOn);
   };
   const handleInsert = () => {
-    navigate("/admin/gallery/create-new");
+    navigate("/admin/gallery_detail/create-new/"+ id);
   };
   const handleSearch = () => {
 
@@ -41,10 +41,10 @@ const GalleryDetailList = (props) => {
 
       </div>
       <div className="flex justify-start m-5 md:justify-center sm:justify-center lg:justify-start">
-        <p className="font-bold">Gallery photo</p>
+        <p className="font-bold">Gallery Items List</p>
       </div>
       <Button className="w-[160px] ml-5 font-bold text-center mb-5 bg-blue-500" type="primary" onClick={handleInsert}>
-        New photo
+        New  Gallery Item
       </Button>
       <div className='flex flex-row m-5'>
         <div className='flex items-center gap-3'>

@@ -100,7 +100,10 @@ const GalleryDetailCreate = () => {
 };
 
   return (
-    <div>
+    <div className='flex flex-col w-full h-auto'>
+      <div className="w-full h-[50px] bg-base_color">
+      </div>
+      <div className='flex flex-col px-5 py-5 w-[50%] h-auto'>
 
       <div className='mt-5'>
 
@@ -131,7 +134,7 @@ const GalleryDetailCreate = () => {
       <div className="mt-2">
         <img src={API_URL_IMAGE + file} className='w-[100px] h-[100px]' />
       </div>
-      <div className='mt-5'>
+      {/* <div className='mt-5'>
         <label>Select Category</label>
         <div className="flex  md:text-[14px] text-[12px] w-full md:w-[600px] p-2 bg-white">
           {categories.map((category, index) => (
@@ -145,17 +148,14 @@ const GalleryDetailCreate = () => {
             </div>
           ))}
         </div>
-        {/* <CategoryNewsList categories={categories} handleCategoryClick={handleCategoryClick} /> */}
-      </div>
-      {/* <Editor
-        editorState={editorState}
-        onEditorStateChange={handleEditorChange}
-      /> */}
+      </div> */}
+    
       <button
         className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
         onClick={saveContent}>
         Save Content
       </button>
+      </div>
     </div>
   )
 }
