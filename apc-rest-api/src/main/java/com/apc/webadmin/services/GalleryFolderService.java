@@ -95,6 +95,11 @@ public class GalleryFolderService {
         return galleryFolderRepository.save(galleryFolder);
     }
 
+    public boolean delete(Long id){
+
+        galleryFolderRepository.deleteById(id);
+        return  true;
+    }
 
     public GalleryFolder deleteGalleryItem(Long id, Long idItem){
 

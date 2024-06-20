@@ -36,6 +36,13 @@ public class GalleryFolderController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.create(galleryFolder),"success"));
 
     }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteItem(@RequestParam Long id){
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.delete(id),"success"));
+
+    }
     @GetMapping("/findAll")
     public ResponseEntity<?> findAll()
     {

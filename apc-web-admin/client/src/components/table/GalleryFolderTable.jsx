@@ -4,6 +4,7 @@ import { Button, Space, Table } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
 import './UserTable.css'; // Import your custom CSS file
+import { deleteGallery } from '../../services/api_gallery';
 //import './tableStyle.css';
 const GalleryFolderTable = (props) => {
   const [galleries, setGalleries] = useState([]);
@@ -19,14 +20,14 @@ const GalleryFolderTable = (props) => {
 
   const handleDelete = async (id) => {
     console.log('Delete clicked for ID:', id);
-    const response = await deleteUser(id);
+    const response = await deleteGallery(id);
     refreshData();
     console.log("delete:", response);
   };
 
   const refreshData = async () => {
     try {
-      const galleryList = await createGallery();
+      const galleryList = await fetGallery();
       console.log("galleryList", galleryList);
       setGalleries(galleryList);
     } catch (error) {
@@ -38,18 +39,18 @@ const GalleryFolderTable = (props) => {
   const getRowClassName = (record, index) => {
     return index % 2 === 1 ? 'row-even' : 'row-odd';
   };
-
+  const fetGallery = async () => {
+    try {
+      const galleryList = await getGalleries();
+      console.log("galleryList", galleryList);
+      setGalleries(galleryList);
+    } catch (error) {
+      // Handle error
+      console.error('Error:', error);
+    }
+  };
   useEffect(() => {
-    const fetGallery = async () => {
-      try {
-        const galleryList = await getGalleries();
-        console.log("galleryList", galleryList);
-        setGalleries(galleryList);
-      } catch (error) {
-        // Handle error
-        console.error('Error:', error);
-      }
-    };
+   
     fetGallery();
   }, []);
   const columns = [

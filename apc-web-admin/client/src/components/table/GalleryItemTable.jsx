@@ -4,6 +4,7 @@ import { Button, Space, Table, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
 import './UserTable.css'; // Import your custom CSS file
+import { deleteGalleryItem } from '../../services/api_gallery';
 //import './tableStyle.css';
 const GalleryItemTable = (props) => {
   const [galleryItemList, setGalleryItemList] = useState([]);
@@ -19,9 +20,9 @@ const GalleryItemTable = (props) => {
     navigate(`/admin/price/update/${galleryID}`)
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, idItem) => {
     console.log('Delete clicked for ID:', id);
-    const response = await deleteUser(id);
+    const response = await deleteGalleryItem(id, idItem);
     refreshData();
     console.log("delete:", response);
   };
@@ -62,7 +63,12 @@ const GalleryItemTable = (props) => {
       key: 'id',
       // width: '10%'
     },
-
+    {
+      title: 'Tiêu đề',
+      dataIndex: 'topic',
+      key: 'topic',
+      // width: '20%'
+    },
     {
       title: 'Mô tả',
       dataIndex: 'shortDesc',
@@ -85,7 +91,7 @@ const GalleryItemTable = (props) => {
       render: (text, record) => (
         <Space size="middle">
           <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Chỉnh sửa</Button>
-          <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
+          <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(galleryID,record.id)}>Xóa</Button>
         </Space>
       ),
     },

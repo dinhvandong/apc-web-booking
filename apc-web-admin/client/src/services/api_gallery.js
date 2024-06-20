@@ -24,10 +24,19 @@ export const createGallery = async (news) => {
     }
   };
 
-  export const deleteGallery = async (news) => {
+  export const deleteGallery = async (id) => {
     try {
-      const response = await axios.post(`${API_URL}/galleryFolder/update`,
-      news)
+      const response = await axios.post(`${API_URL}/galleryFolder/delete?id=${id}`)
+      return response.data;
+    } catch (error) 
+    {
+      throw error;
+    }
+  };
+
+  export const deleteGalleryItem = async (id, idItem) => {
+    try {
+      const response = await axios.post(`${API_URL}/galleryFolder/deleteItem?id=${id}&idItem=${idItem}`)
       return response.data;
     } catch (error) 
     {
