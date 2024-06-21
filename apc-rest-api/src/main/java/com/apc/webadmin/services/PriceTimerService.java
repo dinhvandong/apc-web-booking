@@ -257,7 +257,7 @@ public class PriceTimerService {
                 priceTime.setPriceDinnerNonRefund(priceTime.getPriceWeekEnd());
 
             }
-            
+
             if(priceTime.getDateTime() < DateUtils.getCurrentDate())
             {
 
