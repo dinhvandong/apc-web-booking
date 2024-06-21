@@ -72,6 +72,9 @@ const TimeTablePriceList = () => {
     const [priceDayNonRefund, setPriceDayNonRefund] = useState(0);
     const [priceDinnerNonRefund, setPriceDinnerNonRefund] = useState(0);
 
+    const [priceWeekDay, setPriceWeekDay]= useState(0);
+    const [priceWeekEnd, setPriceWeekEnd] = useState(0);
+
     // const handleStartDateChange = (date) => {
     //     setStartDate(date);
     // };
@@ -79,7 +82,6 @@ const TimeTablePriceList = () => {
     // const handleEndDateChange = (date) => {
     //     setEndDate(date);
     // };
-
 
     function formatDateTime(dateString) {
         const parts = dateString.split('-');
@@ -117,6 +119,15 @@ const TimeTablePriceList = () => {
 
     const handlePriceDinnerNonRefundChange = (e) => {
         setPriceDinnerNonRefund(e.target.value);
+    }
+
+
+    const handlePriceWeekDayChange = (e) => {
+        setPriceWeekDay(e.target.value);
+    }
+
+    const handlePriceWeekEndChange = (e) => {
+        setPriceWeekEnd(e.target.value);
     }
     const handleRefresh = () => {
         window.location.reload();
@@ -282,6 +293,37 @@ const TimeTablePriceList = () => {
                                 name="priceDinnerNonRefund"
                                 value={priceDinnerNonRefund}
                                 onChange={handlePriceDinnerNonRefundChange}
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
+                                required
+                            />
+                        </div>
+
+
+                        <div className="mb-2">
+                            <label htmlFor="priceWeekDay" className="block mb-2 font-medium">
+                                Giá ban đêm (WeekDay): <span className="text-lg text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                id="priceWeekDay"
+                                name="priceWeekDay"
+                                value={priceWeekDay}
+                                onChange={handlePriceWeekDayChange}
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
+                                required
+                            />
+                        </div>
+
+                        <div className="mb-2">
+                            <label htmlFor="priceWeekEnd" className="block mb-2 font-medium">
+                                Giá ban đêm (WeekEnd): <span className="text-lg text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                id="priceWeekEnd"
+                                name="priceWeekEnd"
+                                value={priceWeekEnd}
+                                onChange={handlePriceWeekEndChange}
                                 className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
                                 required
                             />

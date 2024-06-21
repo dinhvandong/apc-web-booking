@@ -25,6 +25,27 @@ public class PriceTime {
 
     private double priceDinnerNonRefund;
 
+
+    private double priceWeekDay;
+
+    private double priceWeekEnd;
+
+    public double getPriceWeekDay() {
+        return priceWeekDay;
+    }
+
+    public void setPriceWeekDay(double priceWeekDay) {
+        this.priceWeekDay = priceWeekDay;
+    }
+
+    public double getPriceWeekEnd() {
+        return priceWeekEnd;
+    }
+
+    public void setPriceWeekEnd(double priceWeekEnd) {
+        this.priceWeekEnd = priceWeekEnd;
+    }
+
     private boolean active;
 
     private boolean activeDay;

@@ -95,7 +95,11 @@ public class PriceTimeController {
 
                                         @RequestParam double priceDayNonRefund,
 
-                                        @RequestParam double priceDinnerNonRefund)
+                                        @RequestParam double priceDinnerNonRefund,
+
+                                        @RequestParam double priceWeekDay,
+
+                                        @RequestParam double priceWeekEnd)
     {
         List<String> arrayDate = DateUtils.getDatesBetween(dateFrom,dateTo);
         List<PriceTime> priceTimeList = new ArrayList<>();
@@ -107,6 +111,8 @@ public class PriceTimeController {
             priceTime.setPriceDinner(priceDinner);
             priceTime.setPriceDayNonRefund(priceDayNonRefund);
             priceTime.setPriceDinnerNonRefund(priceDinnerNonRefund);
+            priceTime.setPriceWeekDay(priceWeekDay);
+            priceTime.setPriceWeekEnd(priceWeekEnd);
             priceTime.setDateTimeString(date);
             Long dateLong = Long.parseLong(date.replace("/",""));
             priceTime.setDateTime(dateLong);
