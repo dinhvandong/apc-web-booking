@@ -111,21 +111,31 @@ const TimePriceTable = () => {
                 />
             ),
             width: '20%'
+        },
+        {
+            title: 'Giá trong tuần (WeekDay)',
+            dataIndex: 'priceWeekDay',
+            key: 'priceWeekDay',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceWeekDay}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceWeekDay, index2)}
+                />
+            ),
+            width: '20%'
+        },
+        {
+            title: 'Giá cuối tuần (WeekEnd)',
+            dataIndex: 'priceWeekEnd',
+            key: 'priceWeekEnd',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceWeekEnd}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceWeekEnd, index2)}
+                />
+            ),
+            width: '20%'
         }
-
-        ,
-        // {
-        //   title: 'Hành động',
-        //   key: 'actions',
-        //   render: (text, record) => (
-        //     <Space size="middle">
-        //       <Button className="text-white bg-edit" type="primary" onClick={() => handleEdit(record.id)}>Cập nhật</Button>
-        //       <Button className="mr-5 text-white bg-delete" type="danger" onClick={() => handleDelete(record.id)}>Xóa</Button>
-
-        //     </Space>
-        //   ),
-        // },
-        // Add more columns as needed
     ];
     return (
         <div className="flex items-center justify-center w-full">
