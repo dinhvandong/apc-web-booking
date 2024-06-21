@@ -138,7 +138,7 @@ const TimeTablePriceList = () => {
 
         const result = await createPriceArray(startDate, endDate,
              priceDay, priceDinner
-            , priceDayNonRefund, priceDinnerNonRefund);
+            , priceDayNonRefund, priceDinnerNonRefund, priceWeekDay, priceWeekEnd);
         console.log("Data_Response:", result.data);
 
         handleRefresh();
@@ -301,7 +301,7 @@ const TimeTablePriceList = () => {
 
                         <div className="mb-2">
                             <label htmlFor="priceWeekDay" className="block mb-2 font-medium">
-                                Giá ban đêm (WeekDay): <span className="text-lg text-red-500">*</span>
+                                Giá trong tuần (WeekDay): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
                                 type="number"
@@ -316,7 +316,7 @@ const TimeTablePriceList = () => {
 
                         <div className="mb-2">
                             <label htmlFor="priceWeekEnd" className="block mb-2 font-medium">
-                                Giá ban đêm (WeekEnd): <span className="text-lg text-red-500">*</span>
+                                Giá cuối tuần (WeekEnd): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
                                 type="number"

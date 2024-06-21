@@ -9,7 +9,7 @@ export function removeEmptyStringsFromURL(url) {
 
   return cleanedURL;
 }
-export const createPriceArray = async (dateFrom, dateTo, priceDay, priceDinner, priceDayNonRefund,priceDinnerNonRefund ) => 
+export const createPriceArray = async (dateFrom, dateTo, priceDay, priceDinner, priceDayNonRefund,priceDinnerNonRefund, priceWeekDay, priceWeekEnd ) => 
 {
     try 
     {
@@ -18,7 +18,7 @@ export const createPriceArray = async (dateFrom, dateTo, priceDay, priceDinner, 
     
     console.log("DateFrom:", dateFrom);
     console.log("DateTo:", dateTo);
-    const response = await axios.post(`${API_URL}/pricetimes/insertMulti2?dateFrom=${dateFrom}&dateTo=${dateTo}&priceDay=${priceDay}&priceDinner=${priceDinner}&priceDayNonRefund=${priceDayNonRefund}&priceDinnerNonRefund=${priceDinnerNonRefund}`,
+    const response = await axios.post(`${API_URL}/pricetimes/insertMulti2?dateFrom=${dateFrom}&dateTo=${dateTo}&priceDay=${priceDay}&priceDinner=${priceDinner}&priceDayNonRefund=${priceDayNonRefund}&priceDinnerNonRefund=${priceDinnerNonRefund}&priceWeekDay=${priceWeekDay}&priceWeekEnd=${priceWeekEnd}`,
       {
         withCredentials: true,
       },)

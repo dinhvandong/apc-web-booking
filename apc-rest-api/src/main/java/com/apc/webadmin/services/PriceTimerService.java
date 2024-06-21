@@ -25,6 +25,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.DecimalFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -164,6 +165,18 @@ public class PriceTimerService {
     }
 
 
+    public static boolean isWeekday(String dateStr) {
+        LocalDate date = LocalDate.parse(dateStr);
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        return dayOfWeek.getValue() >= 1 && dayOfWeek.getValue() <= 4;
+    }
+
+    public static boolean isWeekend(String dateStr) {
+        LocalDate date = LocalDate.parse(dateStr);
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        return dayOfWeek.getValue() >= 5 && dayOfWeek.getValue() <= 7;
+    }
+
     DecimalFormat decimalFormat = new DecimalFormat("#.##");
     public List<PriceTime> findAllByMonthTimeString(String monthTime){
 
@@ -234,6 +247,17 @@ public class PriceTimerService {
                 priceTime.setPriceDay(priceFlex);
             }
 
+            if(isWeekday(dayTime)){
+
+                priceTime.setPriceDinner(priceTime.getPriceWeekDay());
+                priceTime.setPriceDinnerNonRefund(priceTime.getPriceWeekDay());
+
+            }else if(isWeekend(dayTime)){
+                priceTime.setPriceDinner(priceTime.getPriceWeekEnd());
+                priceTime.setPriceDinnerNonRefund(priceTime.getPriceWeekEnd());
+
+            }
+            
             if(priceTime.getDateTime() < DateUtils.getCurrentDate())
             {
 
