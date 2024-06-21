@@ -158,7 +158,7 @@ public class PriceTimerService {
     }
     public List<PriceTime> findAllByMonthTimeString(String monthTime){
 
-        YearMonth yearMonth = YearMonth.parse(monthTime, DateTimeFormatter.ofPattern("yyyy-MM"));
+        YearMonth yearMonth = YearMonth.parse(monthTime, DateTimeFormatter.ofPattern("yyyyMM"));
 
         LocalDate startDate = yearMonth.atDay(1);
         LocalDate endDate = yearMonth.atEndOfMonth();
