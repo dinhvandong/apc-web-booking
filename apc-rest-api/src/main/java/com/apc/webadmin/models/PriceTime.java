@@ -13,7 +13,7 @@ public class PriceTime {
     public static final String SEQUENCE_NAME = "price_time_sequence";
     private Long dateTime;
 
-    private String dateTimeString;
+    private String dateTimeString; //yyyy-MM-dd
 
     private String monthTimeString; //202402 = 2024-02
 

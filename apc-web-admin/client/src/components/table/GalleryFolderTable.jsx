@@ -21,7 +21,7 @@ const GalleryFolderTable = (props) => {
   const handleDelete = async (id) => {
     console.log('Delete clicked for ID:', id);
     const response = await deleteGallery(id);
-    refreshData();
+    fetGallery();
     console.log("delete:", response);
   };
 
