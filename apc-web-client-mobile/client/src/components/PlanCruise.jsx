@@ -517,7 +517,7 @@ const PlanCruise = (props) => {
                                                     <p className='text-center'>{extractDayFromDate(day.dateTimeString)}</p>
                                                 </div>
                                                 <div className={`${dateTimeSelect == ((day.dateTime)) ? 'text-brown_color font-bold text-center' : 'text-black font-normal text-center'} text-[12px] font-thin`}>
-                                                    <p>{day.priceDay}K</p>
+                                                    <p>{(cruiseType === 'Day Cruise') ? day.priceDay : day.priceDinner}K</p>
                                                 </div>
                                             </div>
                                         ))

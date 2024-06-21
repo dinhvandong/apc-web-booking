@@ -51,7 +51,85 @@ public class PriceTimerService {
         return null;
     }
     public PriceTime getPriceTimeByDateTime(Long dateTime) {
-        return priceTimeRepository.findByDateTime(dateTime);
+
+        PriceTime priceTime = null;
+        priceTime = priceTimeRepository.findByDateTime(dateTime);
+
+//        String dayTime = priceTime.getDateTimeString().replace("/","-");
+//
+//        DayData dayData = getDayData(apiResponse, dayTime);
+//
+//        List< RoomAvai> roomAvaiList = dayData.getRoomAvai();
+//
+//        int slotEmpty = 0;
+//
+//        for(RoomAvai roomAvai: roomAvaiList){
+//
+//            if( (roomAvai.getIdRoom().equals("6")) || (roomAvai.getIdRoom().equals("7"))
+//                    || roomAvai.getIdRoom().equals("16"))
+//            {
+//                if(roomAvai.getQty()>=0){
+//                    slotEmpty += roomAvai.getQty();
+//                }
+//            }
+//
+//        }
+//        float discount = 1;
+//
+//        if(slotEmpty>0){
+//
+//            float percentage = (float) ((460 - slotEmpty) * 100) /460.0f;
+//            if(percentage>80)
+//            {
+//                discount = 0.15f;
+//            }else if(percentage>=50)
+//            {
+//                discount = 0.2f;
+//            }else
+//            {
+//                discount = 0.25f;
+//            }
+//
+//            //  String roundedValue = decimalFormat.format(x);
+//
+//            double priceNonRefund = Double.parseDouble(decimalFormat.format(priceTime.getPriceDayNonRefund()*(1-discount)));
+//
+//            priceTime.setPriceDayNonRefund(priceNonRefund);
+//
+//        }else {
+//
+//            discount = 0.05f;
+//
+//            double priceFlex = Double.parseDouble(decimalFormat.format(priceTime.getPriceDay()*(1-discount)));
+//
+//            priceTime.setPriceDay(priceFlex);
+//        }
+//
+//        if(isWeekday(dayTime)){
+//
+//            priceTime.setPriceDinner(priceTime.getPriceWeekDay());
+//            priceTime.setPriceDinnerNonRefund(priceTime.getPriceWeekDay());
+//
+//        }else if(isWeekend(dayTime)){
+//            priceTime.setPriceDinner(priceTime.getPriceWeekEnd());
+//            priceTime.setPriceDinnerNonRefund(priceTime.getPriceWeekEnd());
+//
+//        }
+//
+//        if(priceTime.getDateTime() < DateUtils.getCurrentDate())
+//        {
+//
+//            priceTime.setActive(false);
+//
+//        }else
+//        {
+//
+//            boolean check = cruisePMSService.checkAvaiableSlot(priceTime.getDateTimeString().replace("/","-"),1);
+//
+//            priceTime.setActive(check);
+//        }
+
+        return priceTime;
     }
 
     public List<PriceTime> createMulti(List<PriceTime> priceTimeList){
@@ -252,7 +330,9 @@ public class PriceTimerService {
                 priceTime.setPriceDinner(priceTime.getPriceWeekDay());
                 priceTime.setPriceDinnerNonRefund(priceTime.getPriceWeekDay());
 
-            }else if(isWeekend(dayTime)){
+            }
+
+            if(isWeekend(dayTime)){
                 priceTime.setPriceDinner(priceTime.getPriceWeekEnd());
                 priceTime.setPriceDinnerNonRefund(priceTime.getPriceWeekEnd());
 
