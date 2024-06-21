@@ -24,6 +24,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -114,6 +115,8 @@ public class PriceTimerService {
 
     private static DayData getDayData(ApiResponse apiResponse , String day){
 
+        System.out.println("apiResponse:"+ apiResponse);
+        System.out.println("day:"+ day);
 
         if (apiResponse != null) {
             // Access the data
@@ -143,7 +146,10 @@ public class PriceTimerService {
 
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            String jsonResponse = response.body();
+           // String jsonResponse = response.body();
+
+            String jsonResponse = response.body().replaceAll("\uFEFF", ""); // Remove the BOM character
+
 
             // Create an ObjectMapper instance
             ObjectMapper objectMapper = new ObjectMapper();
@@ -156,6 +162,9 @@ public class PriceTimerService {
 
         return apiResponse;
     }
+
+
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
     public List<PriceTime> findAllByMonthTimeString(String monthTime){
 
         YearMonth yearMonth = YearMonth.parse(monthTime, DateTimeFormatter.ofPattern("yyyyMM"));
@@ -168,6 +177,7 @@ public class PriceTimerService {
 
         String url = "https://apc.skysoft.vn/apc2022/api2/1.availableWeb_v2.php?from="+ startDate.toString() +"&to="+ endDate.toString() + "&cruiseID=10";
 
+        System.out.println("URL:"+ url);
         ApiResponse apiResponse = callRestApi(url);
 
         List<PriceTime> returnList = new ArrayList<>();
@@ -209,13 +219,19 @@ public class PriceTimerService {
                     discount = 0.25f;
                 }
 
-                priceTime.setPriceDayNonRefund(priceTime.getPriceDayNonRefund()*(1-discount));
+              //  String roundedValue = decimalFormat.format(x);
+
+                double priceNonRefund = Double.parseDouble(decimalFormat.format(priceTime.getPriceDayNonRefund()*(1-discount)));
+
+                priceTime.setPriceDayNonRefund(priceNonRefund);
 
             }else {
 
                 discount = 0.05f;
 
-                priceTime.setPriceDay(priceTime.getPriceDay()*(1-discount));
+                double priceFlex = Double.parseDouble(decimalFormat.format(priceTime.getPriceDay()*(1-discount)));
+
+                priceTime.setPriceDay(priceFlex);
             }
 
             if(priceTime.getDateTime() < DateUtils.getCurrentDate())

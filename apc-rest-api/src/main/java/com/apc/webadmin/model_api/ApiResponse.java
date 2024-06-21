@@ -1,7 +1,9 @@
 package com.apc.webadmin.model_api;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponse {
     private List<DayData> data;
 
