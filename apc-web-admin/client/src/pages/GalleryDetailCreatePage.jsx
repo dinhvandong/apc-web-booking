@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import HeaderAdmin from '../components/admin/HeaderAdmin';
 import Sidebar from '../components/admin/SideBar';
 import UserCreate from '../components/admin/UserCreate';
@@ -11,6 +11,7 @@ import GalleryFolderCreate from '../components/admin/GalleryFolderCreate';
 import GalleryDetailCreate from '../components/admin/GalleryDetailCreate';
 const GalleryDetailCreatePage = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
 
     useEffect(() => {
       const checkAuthentication = async () => {
@@ -31,7 +32,7 @@ const GalleryDetailCreatePage = () => {
             <Sidebar menu="tab7" />
           </div>
           <div className="flex w-[100%] flex-row justify-center">     
-               <GalleryDetailCreate />
+               <GalleryDetailCreate id = {id} />
           </div>
         </div>
       </div>

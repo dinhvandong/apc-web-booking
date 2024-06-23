@@ -135,4 +135,8 @@ public class GalleryFolderService {
         return galleryFolderRepository.findAll();
     }
 
+    public List<GalleryFolder> findAllByCategory( String category){
+        return galleryFolderRepository.findAllByCategory(category);
+    }
+
 }

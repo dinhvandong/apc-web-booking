@@ -64,7 +64,7 @@ function App() {
 
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/galleryDetail" element={<GalleryDetailPage />} />
+        <Route path="/galleryDetail/:id" element={<GalleryDetailPage />} />
 
         <Route path="/tiktok" element={<TiktokVideoPage />} />
 

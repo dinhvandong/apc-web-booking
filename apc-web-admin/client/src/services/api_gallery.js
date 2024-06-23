@@ -12,6 +12,17 @@ export const createGallery = async (news) => {
     }
   };
 
+  export const createGalleryItem = async (id,item) => {
+    try {
+      const response = await axios.post(`${API_URL}/galleryFolder/addItem?id=${id}`,
+        item)
+      return response.data;
+    } catch (error) 
+    {
+      throw error;
+    }
+  };
+
 
   export const updateGallery = async (news) => {
     try {

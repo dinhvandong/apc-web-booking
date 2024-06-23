@@ -12,8 +12,10 @@ import { API_URL_IMAGE, createGallery, uploadFile } from '../../services/api';
 import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { createGalleryItem } from '../../services/api_gallery';
 
-const GalleryDetailCreate = () => {
+const GalleryDetailCreate = (props) => {
+  const id = props.id;
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [content, setContent] = useState('');
@@ -69,7 +71,7 @@ const GalleryDetailCreate = () => {
         thumb: file.toString()
       }
       console.log("gallery:", gallery);
-      const response = await createGallery(gallery);
+      const response = await createGalleryItem(id, gallery);
       console.log('Content saved:', response.data);
     } catch (error) {
       console.error('Error saving content:', error);

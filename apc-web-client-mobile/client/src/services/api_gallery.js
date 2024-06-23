@@ -50,6 +50,17 @@ export const createGallery = async (news) => {
   }
 
 
+  export const getGalleryItemsById = async (galleryID) => {
+    try {
+      //const token = localStorage.getItem("token");
+      const response = await axios.get(`${API_URL}/galleryFolder/findAllGalleryItems?galleryID=${galleryID}`,
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   export const findGalleryById = async (id) => {
     try {
       //const token = localStorage.getItem("token");

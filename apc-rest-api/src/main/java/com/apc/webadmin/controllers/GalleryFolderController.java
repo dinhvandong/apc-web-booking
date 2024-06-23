@@ -49,6 +49,12 @@ public class GalleryFolderController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.findAll(),"success"));
     }
 
+    @GetMapping("/findAllByCategory")
+    public ResponseEntity<?> findAllByCategory(@RequestParam String category)
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.findAllByCategory(category),"success"));
+    }
+
     @GetMapping("/findAllGalleryItems")
     public ResponseEntity<?> findAllGalleryItems(@RequestParam Long galleryID)
     {
