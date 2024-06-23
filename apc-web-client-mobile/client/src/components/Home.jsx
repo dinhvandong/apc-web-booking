@@ -38,11 +38,11 @@ const Home = (props) => {
                 <p>{t('message')}</p>
             </div> */}
             <div className="flex justify-center items-center  md:justify-center md:w-[600px] w-full mt-4">
-                <button onClick={gotoDayCruise} className=" w-1/2 md:w-[300px] flex items-center space-x-2 text-[20px] bg-brown_color text-white px-2 py-3 rounded-lg">
+                <button onClick={gotoDayCruise} className=" w-1/2 md:w-[300px] flex items-center space-x-2 text-[14px] md:text-[20px] bg-brown_color text-white px-2 py-3 rounded-lg">
                     <img className='w-[25px] h-[25px]' src={btnDayCruise} />
                     <p>{t('buttonPlansCruise')}</p>
                 </button>
-                <button onClick={gotoDinnerCruise} className="ml-5 w-1/2 md:w-[300px] flex items-center space-x-2 text-[20px] bg-brown_color text-white px-2 py-3 rounded-lg">
+                <button onClick={gotoDinnerCruise} className="ml-5 w-1/2 md:w-[300px] flex items-center space-x-2 text-[14px] md:text-[20px] bg-brown_color text-white px-2 py-3 rounded-lg">
                     <img className='w-[25px] h-[25px]' src={btnOvernightCruise} />
                     <p>{t('buttonOvernightCruise')}</p>
                 </button>

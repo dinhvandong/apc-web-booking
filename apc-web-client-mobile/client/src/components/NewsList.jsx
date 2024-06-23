@@ -23,7 +23,7 @@ const NewsList = () => {
   }, []);
 
   return (
-    <div className="space-y-4 mt-5 w-full flex flex-col justify-center md:w-[600px]">
+    <div className="space-y-4  mt-5 w-full flex flex-col justify-center md:w-[600px]">
       {data.map((news, index) => (
         <NewsItem key={index} news={news} />
       ))}

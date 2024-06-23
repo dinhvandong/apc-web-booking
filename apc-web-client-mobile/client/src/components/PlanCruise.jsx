@@ -513,10 +513,10 @@ const PlanCruise = (props) => {
 
                                                 className={`flex flex-col p-2 ${day.active == true ? 'bg-white' : ' bg-gray-400'} text-center border  border-gray-300 hover:cursor-pointer  `}
                                             >
-                                                <div className={`text-[20px] font-medium ${dateTimeSelect == ((day.dateTime)) ? 'bg-brown_color rounded-full md:px-4 md:py-4 text-white' : 'text-black md:px-4 md:py-4'}`}>
+                                                <div className={`text-[16px] font-medium ${dateTimeSelect == ((day.dateTime)) ? 'bg-brown_color rounded-full md:px-4 md:py-4 text-white' : 'text-black md:px-4 md:py-4'}`}>
                                                     <p className='text-center'>{extractDayFromDate(day.dateTimeString)}</p>
                                                 </div>
-                                                <div className={`${dateTimeSelect == ((day.dateTime)) ? 'text-brown_color font-bold text-center' : 'text-black font-normal text-center'} text-[12px] font-thin`}>
+                                                <div className={`${dateTimeSelect == ((day.dateTime)) ? 'text-brown_color font-bold text-center' : 'text-black font-normal text-center'} text-[8px] font-thin`}>
                                                     <p>{(cruiseType === 'Day Cruise') ? day.priceDay : day.priceDinner}K</p>
                                                 </div>
                                             </div>

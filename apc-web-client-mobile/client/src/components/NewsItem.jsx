@@ -12,7 +12,7 @@ const NewsItem = ({ news }) => {
     navigate(`/news-detail/${news.id}`);
   }
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col '>
       <div className="px-3 bg-white">
         <img onClick={gotoNewsDetail} src={API_URL_IMAGE + news.thumb} alt={news.title} className="w-full h-auto rounded hover:cursor-pointer" />
 

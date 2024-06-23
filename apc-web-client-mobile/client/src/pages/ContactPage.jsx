@@ -338,7 +338,7 @@ const ContactPage = () => {
                         <label htmlFor="username" className="text-[14px] block mb-2 text-black">Title*</label>
 
 
-                        <select onChange={handleGenderChange} value={gender} id="country" name="country" className="w-auto px-2 py-2 ml-1 mr-1 border border-gray-300 rounded">
+                        <select onChange={handleGenderChange} value={gender} id="country" name="country" className="w-auto px-4 py-2 border border-gray-300 rounded">
                             {genderList.map((gender, index) => (
                                 <option key={index} value={gender}>{gender}</option>
                             ))}
@@ -353,7 +353,7 @@ const ContactPage = () => {
                         <input
                             type="text"
                             id="firstName"
-                            className="w-full px-3 py-1 border border-gray-300 rounded"
+                            className="w-full px-4 py-2 border border-gray-300 rounded"
                             value={firstName}
                             onChange={handleFirstNameChange}
                         />
@@ -364,7 +364,7 @@ const ContactPage = () => {
                         <input
                             type="text"
                             id="lastName"
-                            className="w-full px-3 py-1 border border-gray-300 rounded"
+                            className="w-full px-4 py-2 border border-gray-300 rounded"
                             value={lastName}
                             onChange={handleLastNameChange}
                         />
@@ -379,7 +379,7 @@ const ContactPage = () => {
                         <select
                             value={selectedCountry ? selectedCountry.NAME : ''}
                             onChange={handleCountryChange}
-                            className="w-auto px-2 py-2 ml-1 mr-1 border border-gray-300 rounded"
+                            className="w-auto px-4 py-2 border border-gray-300 rounded"
                         >
                             <option value="">Select Country</option>
                             {countryList.map(country => (
@@ -401,7 +401,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         id="email"
-                        className="w-full px-3 py-1 border border-gray-300 rounded"
+                        className="w-full px-4 py-2 border border-gray-300 rounded"
                         value={email}
                         onChange={handleEmailChange}
                     />
@@ -419,7 +419,7 @@ const ContactPage = () => {
                         <select
                             value={selectedCountry ? selectedCountry.CODE : ''}
                             onChange={handleCountryChange}
-                            className="w-full px-2 py-2 ml-1 mr-1 border border-gray-300 rounded "
+                            className="w-full px-4 py-2 ml-1 mr-1 border border-gray-300 rounded "
                         >
                             <option value="">Select Country</option>
                             {countryList.map(country => (

@@ -16,7 +16,7 @@ const NotificationItem = ({ news }) => {
   return (
     <div className='flex items-center justify-center w-full px-4'>
       <img src= {menuIcon} className='w-[35px] h-[35px]'/>
-      <div className='px-5 text-[14px] flex flex-col w-full'>
+      <div className='px-5 text-[16px] flex flex-col w-full'>
         <p className='font-bold text-black'>
           {news.title}
         </p>

@@ -346,6 +346,18 @@ export const getGalleries = async () => {
   }
 };
 
+
+export const getGalleriesByCategory = async (category) => {
+  try {
+    //const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_URL}/galleryFolder/findAllByCategory?category=${category}`,
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getGalleryById = async (galleryID) => {
   try {
     //const token = localStorage.getItem("token");

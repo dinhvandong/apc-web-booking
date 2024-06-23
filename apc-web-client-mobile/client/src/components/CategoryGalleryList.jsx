@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const CategoryGalleryList = ({ categories }) => {
+const CategoryGalleryList = ({ onClick, categories }) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [isFirst, setIsFirst] = useState(false);
 
@@ -12,6 +12,7 @@ const CategoryGalleryList = ({ categories }) => {
   });
 
   const handleCategoryClick = (category) => {
+    onClick(category);
     setSelectedCategory(category);
   };
 

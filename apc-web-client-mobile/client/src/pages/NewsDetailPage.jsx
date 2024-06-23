@@ -36,7 +36,7 @@ const NewsDetailPage = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       <HeaderNewsDetail />
-      <div className="p-4 w-full mt-[100px] md:w-[600px] flex justify-center items-center">
+      <div className="py-4 px-5 ml-5 mr-5 w-full mt-[100px] md:w-[600px] flex justify-center items-center">
 
       <DisplayContent htmlContent={content} />
       </div>
