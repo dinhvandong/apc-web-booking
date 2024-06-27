@@ -3,9 +3,9 @@ import HeaderSelectCabin from '../components/HeaderSelectCabin'
 // import SelectCabin from '../components/SelectCabin'
 import EventItem from '../components/EventItem'
 import { useNavigate } from 'react-router-dom'
-import ic_checkbox from '../assets/ic_checkbox.png';
-import ic_charge from '../assets/ic_charge.png';
-import ic_notpermit from '../assets/ic_notpermit.png';
+import ic_checkbox from '../assets/checkbox.png';
+import ic_charge from '../assets/dollar.png';
+import ic_notpermit from '../assets/cancel.png';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 import { convertToCurrencyFormat } from '../utils/utils';
@@ -19,7 +19,7 @@ const SelectCabinNonRefundPage = () => {
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
     const [cruiseType, setCruiseType] = useState('Day Cruise');
-    const {priceDate}  = useContext(AuthContext);
+    const { priceDate } = useContext(AuthContext);
 
     const gotoContactInfor = () => {
         // if(cruiseType === 'Day Cruise')
@@ -31,7 +31,7 @@ const SelectCabinNonRefundPage = () => {
         //     navigate('/contact');
         // }
         updateBookingInfo({ flexibleOrNonRefund: false, price: finalPrice, priceBase: price });
-       // updateBookingInfo({  price: finalPrice });
+        // updateBookingInfo({  price: finalPrice });
 
         navigate('/contact');
 
@@ -43,8 +43,7 @@ const SelectCabinNonRefundPage = () => {
         const children = bookingInfo.children;
         const infant = bookingInfo.infant;
 
-        if(bookingInfo.cruiseType==='Day Cruise')
-        {
+        if (bookingInfo.cruiseType === 'Day Cruise') {
 
             const price = priceDate.priceDayNonRefund;
 
@@ -54,15 +53,14 @@ const SelectCabinNonRefundPage = () => {
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
 
-        }else  if(bookingInfo.cruiseType==='Dinner Cruise')
-        {
+        } else if (bookingInfo.cruiseType === 'Dinner Cruise') {
             const price = priceDate.priceDinnerNonRefund;
             const count = adult + children * 0.75 + infant * 0.5;
             setPrice(priceDate.priceDinnerNonRefund);
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
         }
-       
+
 
     }, []);
 
@@ -80,26 +78,26 @@ const SelectCabinNonRefundPage = () => {
 
     useEffect(() => {
 
-        if(bookingInfo.cruiseType==='Day Cruise') {
+        if (bookingInfo.cruiseType === 'Day Cruise') {
 
             axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Non-Refundable Rate')
-            .then(response => {
-                setData(response.data.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-        }else {
+                .then(response => {
+                    setData(response.data.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        } else {
 
             axios.get('http://163.44.206.118:8080/api/event-plan/findAllByType?type=Non-Refundable Rate Dinner')
-            .then(response => {
-                setData(response.data.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
+                .then(response => {
+                    setData(response.data.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
         }
-            
+
     }, []);
     return (
         <div className='flex flex-col items-center justify-center px-5 w-full mb-[100px] h-auto'>
@@ -118,21 +116,22 @@ const SelectCabinNonRefundPage = () => {
 
             <div className='mt-[20px]  text-base_color flex w-full md:w-[600px]'>
 
-                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+                <div className='text-base_color w-1/3  flex items-center md:w-[200px]'>
                     <img className='w-5 h-5 ml-5' src={ic_checkbox} />
-                    <p>Free/Allowed</p>
+                    <p className='ml-2'>Free/Allowed</p>
 
                 </div>
-                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+                <div className='text-brown_color w-1/3 flex items-center  md:w-[200px]'>
                     <img className='w-5 h-5' src={ic_charge} />
-                    <p>Free/Allowed</p>
+                    <p className='ml-2'>Charge</p>
 
                 </div>
-                <div className='text-[#B77855] w-1/3 flex  md:w-[200px]'>
+                <div className='text-red-600 w-1/3 flex items-center  md:w-[200px]'>
                     <img className='w-5 h-5 ' src={ic_notpermit} />
-                    <p className='mr-5'>Free/Allowed</p>
+                    <p className='ml-2'>Not permitted</p>
 
                 </div>
+
 
             </div>
 

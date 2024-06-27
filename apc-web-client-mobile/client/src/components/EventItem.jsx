@@ -4,7 +4,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { API_URL, API_URL_IMAGE } from './../services/api';
 const EventItem = ({ data }) => {
 
-    const [hidden, setHidden] = useState(false);
+    const [hidden, setHidden] = useState(true);
 
     const handleHiddenLayout = () => {
         setHidden(!hidden);

@@ -50,10 +50,10 @@ public class PriceTimerService {
         }
         return null;
     }
-    public PriceTime getPriceTimeByDateTime(Long dateTime) {
+    public PriceTime getPriceTimeByDateTime(String dateTime) {
 
         PriceTime priceTime = null;
-        priceTime = priceTimeRepository.findByDateTime(dateTime);
+        priceTime = priceTimeRepository.findByDateTimeString(dateTime);
 
 //        String dayTime = priceTime.getDateTimeString().replace("/","-");
 //
@@ -150,7 +150,7 @@ public class PriceTimerService {
             }
             else
             {
-             PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTime());
+             PriceTime priceTime2 = getPriceTimeByDateTime(priceTime.getDateTimeString());
              priceTime.setId(priceTime2.getId());
              PriceTime priceTimeResult = priceTimeRepository.save(priceTime);
              listReturn.add(priceTimeResult);

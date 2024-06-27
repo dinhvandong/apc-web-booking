@@ -45,7 +45,7 @@ public class PriceTimeController {
     }
 
     @GetMapping("/getPriceByDate")
-    public PriceTime getPriceByDate(@RequestParam Long date){
+    public PriceTime getPriceByDate(@RequestParam String date){
 
         return priceTimeService.getPriceTimeByDateTime(date);
     }

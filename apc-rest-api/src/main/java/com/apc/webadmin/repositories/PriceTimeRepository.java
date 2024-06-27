@@ -12,7 +12,7 @@ public interface PriceTimeRepository extends MongoRepository<PriceTime, Long>
 {
     boolean existsByDateTime(Long dateTime);
     Page<PriceTime> findAll(Pageable pageable);
-    PriceTime findByDateTime(Long dateTime);
+    PriceTime findByDateTimeString(String dateTime);
 
 
 //    List<PriceTime> findAllByDateTimeGreaterThanEqualAndDateTimeLessThanEqual(Long startDateTime, Long endDateTime);

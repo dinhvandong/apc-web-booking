@@ -32,6 +32,7 @@ const PaymentConfirmPage = () => {
     const values = getAllServices();
     console.log("getAllServices", values);
 
+    const title = bookingInfo.title;
     const adult = bookingInfo.adult;
     const children = bookingInfo.children;
     const infant = bookingInfo.infant;
@@ -193,7 +194,7 @@ const PaymentConfirmPage = () => {
 
                                 <div className='flex justify-between w-full mt-5'>
                                     <p className='font-bold'>Title</p>
-                                    <p>Mr</p>
+                                    <p>{title}</p>
                                 </div>
                                 <div className='flex justify-between w-full'>
                                     <p className='font-bold'>FirstName</p>

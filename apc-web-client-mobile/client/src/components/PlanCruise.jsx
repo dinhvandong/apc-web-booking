@@ -144,9 +144,18 @@ const PlanCruise = (props) => {
     // }
 
     //====================DATE PICKER HERE ==========================================
-    const [selectedMonth, setSelectedMonth] = useState(1);
-    const [selectedYear, setSelectedYear] = useState(2024);
-    const [selectedDay, setSelectedDay] = useState(-1);
+    const currentDate = new Date();
+    const currentMonth0 = currentDate.getMonth() + 1; // Adding 1 to get the month in the range 1-12
+    const currentYear0 = currentDate.getFullYear();
+    const currentDay0 = currentDate.getDate();
+  
+    const [selectedMonth, setSelectedMonth] = useState(currentMonth0);
+    const [selectedYear, setSelectedYear] = useState(currentYear0);
+    const [selectedDay, setSelectedDay] = useState(currentDay0);
+   
+    // const [selectedMonth, setSelectedMonth] = useState(1);
+    // const [selectedYear, setSelectedYear] = useState(2024);
+    // const [selectedDay, setSelectedDay] = useState(-1);
     const [headerTime, setHeaderTime] = useState('Jun 2023');
     const [priceByDate, setPriceByDate] = useState(null);
 

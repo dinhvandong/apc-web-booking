@@ -210,7 +210,7 @@ const PriceEdit = (props) => {
                                 Giá cơ bản: <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="priceBase"
                                 name="priceBase"
                                 value={formData.priceBase}

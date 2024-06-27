@@ -3,9 +3,9 @@ import HeaderSelectCabin from '../components/HeaderSelectCabin'
 // import SelectCabin from '../components/SelectCabin'
 import EventItem from '../components/EventItem'
 import { useNavigate } from 'react-router-dom'
-import ic_checkbox from '../assets/ic_checkbox.png';
-import ic_charge from '../assets/ic_charge.png';
-import ic_notpermit from '../assets/ic_notpermit.png';
+import ic_checkbox from '../assets/checkbox.png';
+import ic_charge from '../assets/dollar.png';
+import ic_notpermit from '../assets/cancel.png';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 import { convertToCurrencyFormat } from '../utils/utils';
@@ -24,24 +24,8 @@ const SelectCabinPage = () => {
     const [cruiseType, setCruiseType] = useState('Day Cruise');
 
     const gotoContactInfor = () => {
-        // if(cruiseType === 'Day Cruise')
-        // {
-        //     navigate('/ancillary');
-        // }
-        // else 
-        // {
-        //     navigate('/contact');
-        // }
-
         updateBookingInfo({ flexibleOrNonRefund: true, price: finalPrice, priceBase: price });
-
-        //  updateBookingInfo({ flexibleOrNonRefund: true });
-        //  updateBookingInfo({  price: finalPrice });
-
-
-
         navigate('/contact');
-
     }
 
     const gotoPlanFlexible = () => {
@@ -127,19 +111,19 @@ const SelectCabinPage = () => {
 
             <div className='mt-[20px]  text-base_color flex w-full md:w-[600px]'>
 
-                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+            <div className='text-base_color w-1/3  flex items-center md:w-[200px]'>
                     <img className='w-5 h-5 ml-5' src={ic_checkbox} />
-                    <p>Free/Allowed</p>
+                    <p className='ml-2'>Free/Allowed</p>
 
                 </div>
-                <div className='text-base_color w-1/3 flex  md:w-[200px]'>
+                <div className='text-brown_color w-1/3 flex items-center  md:w-[200px]'>
                     <img className='w-5 h-5' src={ic_charge} />
-                    <p>Free/Allowed</p>
+                    <p className='ml-2'>Charge</p>
 
                 </div>
-                <div className='text-[#B77855] w-1/3 flex  md:w-[200px]'>
+                <div className='text-red-600 w-1/3 flex items-center  md:w-[200px]'>
                     <img className='w-5 h-5 ' src={ic_notpermit} />
-                    <p className='mr-5'>Free/Allowed</p>
+                    <p className='ml-2'>Not permitted</p>
 
                 </div>
 

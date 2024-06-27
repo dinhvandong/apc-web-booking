@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { API_URL_IMAGE, createRoom, createUser, uploadFile } from '../../services/api';
 import { IoMdSearch } from 'react-icons/io';
@@ -9,7 +9,8 @@ import UserTable from '../table/UserTable';
 import { MdAdd } from 'react-icons/md';
 import RoomTable from '../table/RoomTable';
 import TimePriceTable from '../table/TimePriceTable';
-import { createPriceArray } from '../../services/api_price_by_date';
+import { createPriceArray, getPriceArray, getPriceByDate } from '../../services/api_price_by_date';
+import { IoSearchCircle } from "react-icons/io5";
 
 const TimeTablePriceList = () => {
     const navigate = useNavigate();
@@ -72,8 +73,11 @@ const TimeTablePriceList = () => {
     const [priceDayNonRefund, setPriceDayNonRefund] = useState(0);
     const [priceDinnerNonRefund, setPriceDinnerNonRefund] = useState(0);
 
-    const [priceWeekDay, setPriceWeekDay]= useState(0);
+    const [priceWeekDay, setPriceWeekDay] = useState(0);
     const [priceWeekEnd, setPriceWeekEnd] = useState(0);
+
+    const [dateTime, setDateTime] = useState(null);
+    const [priceList, setPriceList] = useState([]);
 
     // const handleStartDateChange = (date) => {
     //     setStartDate(date);
@@ -86,14 +90,15 @@ const TimeTablePriceList = () => {
     function formatDateTime(dateString) {
         const parts = dateString.split('-');
         const formattedDate = `${parts[0]}/${parts[1]}/${parts[2]}`;
-      
+
         return formattedDate;
-      }
+    }
 
     const handleStartDateChange = (date, dateString) => {
         const formattedDate = formatDateTime(dateString)
         console.log(formattedDate);
         setStartDate(formattedDate);
+
     };
 
 
@@ -107,7 +112,9 @@ const TimeTablePriceList = () => {
         setPriceDay(e.target.value);
 
     }
-
+    useEffect(() => {
+        refreshData();
+    }, []);
     const handlePriceDayNonRefundChange = (e) => {
         setPriceDayNonRefund(e.target.value);
 
@@ -119,6 +126,11 @@ const TimeTablePriceList = () => {
 
     const handlePriceDinnerNonRefundChange = (e) => {
         setPriceDinnerNonRefund(e.target.value);
+    }
+
+    const handleTextSearchChange = (e) => {
+        setDateTime(e.target.value);
+
     }
 
 
@@ -133,11 +145,37 @@ const TimeTablePriceList = () => {
         window.location.reload();
     };
 
+    const handleSearchByDate = async () => {
+        //getPriceByDate
+        try {
+            const priceDate = await getPriceByDate(dateTime);
+            console.log("priceDate", priceDate);
+            setPriceList([priceDate.data]);
+            // setUpdateValue(priceList)
+        } catch (error) {
+            // Handle error
+            console.error('Error:', error);
+        }
+
+    }
+
+    const refreshData = async () => {
+        try {
+            const priceList = await getPriceArray(0, 10000);
+            console.log("priceList", priceList);
+            setPriceList(priceList);
+            // setUpdateValue(priceList)
+        } catch (error) {
+            // Handle error
+            console.error('Error:', error);
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const result = await createPriceArray(startDate, endDate,
-             priceDay, priceDinner
+            priceDay, priceDinner
             , priceDayNonRefund, priceDinnerNonRefund, priceWeekDay, priceWeekEnd);
         console.log("Data_Response:", result.data);
 
@@ -207,6 +245,11 @@ const TimeTablePriceList = () => {
                 <p className="font-bold">Tạo mới bảng giá</p>
             </div>
             <div className='h-[1px] bg-base_color w-full'></div>
+            <div className='flex justify-end px-5 mt-5'>
+                <input onChange={handleTextSearchChange} className='w-[300px] border border-1 px-3 py-2' placeholder='YYYY/MM/DD' />
+                <button onClick={handleSearchByDate} className='px-3 py-2 text-white rounded-md bg-base_color'>Tìm kiếm</button>
+            </div>
+
             <div className="flex w-full h-auto m-5 mx-auto">
 
                 <div className='flex flex-col w-[30%] h-auto m-2'>
@@ -219,9 +262,9 @@ const TimeTablePriceList = () => {
                                 className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholderText="Select start date"
                                 dateFormat='YYYY-MM-DD'
-                                // selectsStart
-                                // startDate={startDate}
-                                // endDate={startDate}
+                            // selectsStart
+                            // startDate={startDate}
+                            // endDate={startDate}
                             />
                         </div>
                         <div className="mb-2">
@@ -231,10 +274,10 @@ const TimeTablePriceList = () => {
                                 className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholderText="Select end date"
                                 dateFormat='YYYY-MM-DD'
-                                // selectsEnd
-                                // startDate={endDate}
-                                // endDate={endDate}
-                                // minDate={endDate}
+                            // selectsEnd
+                            // startDate={endDate}
+                            // endDate={endDate}
+                            // minDate={endDate}
                             />
                         </div>
 
@@ -244,7 +287,7 @@ const TimeTablePriceList = () => {
                                 Giá ban ngày (Flexible): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="priceBase"
                                 name="priceBase"
                                 value={priceDay}
@@ -259,7 +302,7 @@ const TimeTablePriceList = () => {
                                 Giá ban ngày (Non-refund): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="priceDayNonRefund"
                                 name="priceDayNonRefund"
                                 value={priceDayNonRefund}
@@ -273,7 +316,7 @@ const TimeTablePriceList = () => {
                                 Giá ban đêm (Flexible): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="description"
                                 name="description"
                                 value={priceDinner}
@@ -288,7 +331,7 @@ const TimeTablePriceList = () => {
                                 Giá ban đêm (Non-refund): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="priceDinnerNonRefund"
                                 name="priceDinnerNonRefund"
                                 value={priceDinnerNonRefund}
@@ -304,7 +347,7 @@ const TimeTablePriceList = () => {
                                 Giá trong tuần (WeekDay): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="priceWeekDay"
                                 name="priceWeekDay"
                                 value={priceWeekDay}
@@ -319,7 +362,7 @@ const TimeTablePriceList = () => {
                                 Giá cuối tuần (WeekEnd): <span className="text-lg text-red-500">*</span>
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="priceWeekEnd"
                                 name="priceWeekEnd"
                                 value={priceWeekEnd}
@@ -343,7 +386,7 @@ const TimeTablePriceList = () => {
                 </div>
                 <div className='flex flex-col w-[68%] h-auto ml-5'>
                     <div className="flex w-[100%] ml-5 mr-2 flex-row justify-center">
-                        <TimePriceTable />
+                        <TimePriceTable priceList={priceList} />
                     </div>
                 </div>
             </div>

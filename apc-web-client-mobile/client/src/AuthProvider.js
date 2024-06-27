@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [bookingInfo, setBookingInfo] = useState({
+    title:'',
     customerName: '',
     firstName: '',
     lastName: '',
