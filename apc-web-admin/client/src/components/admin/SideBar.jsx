@@ -161,6 +161,12 @@ const Sidebar = (props) => {
 
   }
 
+  function gotoVideo() {
+
+    navigate("/admin/video");
+
+  }
+
   function gotoPrice() {
 
     navigate("/admin/price");
@@ -393,6 +399,19 @@ const Sidebar = (props) => {
             <IoBook className="w-5 h-5 m-3 text-base_color" />
             {
               active == true ? <div className="text-sm ">Promotion</div> : <div></div>
+
+            }
+          </button>
+
+          <button
+            onClick={() => gotoVideo()}
+            onMouseEnter={handleMouseEnter11}
+            onMouseLeave={handleMouseLeave11}
+            className={`flex flex-row justify-start items-center ${styleMenu11} hover:text-red-600`}
+          >
+            <IoBook className="w-5 h-5 m-3 text-base_color" />
+            {
+              active == true ? <div className="text-sm ">Video List</div> : <div></div>
 
             }
           </button>

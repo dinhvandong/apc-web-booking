@@ -5,9 +5,11 @@ import { GrCaretPrevious } from "react-icons/gr";
 import HeaderGallery from './HeaderGallery';
 import HeaderVideoPlayer from './HeaderVideoPlayer';
 
-const VideoPlayer = ({ videos }) => {
+const VideoPlayer = ({videos}) => {
 
 
+  // const videos = props.videos;
+  console.log("VIDEOS:", videos);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleSwipe = (event) => {
@@ -55,7 +57,7 @@ const VideoPlayer = ({ videos }) => {
           <HeaderVideoPlayer/>
       </div>
       <video controls autoPlay className="w-full mb-[10px] h-screen"
-        src={videos[currentIndex]}
+        src={videos.at(currentIndex).link}
         key={currentIndex}
 
       // src={videoUrl}
@@ -77,8 +79,8 @@ const VideoPlayer = ({ videos }) => {
             <img src={icon} className="h-8 w-9" alt="Ambassador Icon" />
           </div>
           <div className="flex flex-col justify-center ml-5 text-white">
-            <p className="text-left">Ambassador Cruise</p>
-            <p className="text-left">My Trips</p>
+            <p className="text-left">{videos.at(currentIndex).title}</p>
+            <p className="text-left">{videos.at(currentIndex).desc}</p>
           </div>
 
         </div>

@@ -6,29 +6,30 @@ import { isAuthenticated } from '../utils/localStorage';
 import { useNavigate } from 'react-router-dom';
 import NotificationList from '../components/admin/NotificationList';
 import GalleryFolderList from '../components/admin/GalleryFolderList';
+import VideoList from '../components/admin/VideoList';
 const VideoPage = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      const authenticated = await isAuthenticated();
-      if (!authenticated) {
-         navigate('/login');
-      } else {
-      }
-    };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    checkAuthentication();
-  }, []);
+//   useEffect(() => {
+//     const checkAuthentication = async () => {
+//       const authenticated = await isAuthenticated();
+//       if (!authenticated) {
+//          navigate('/login');
+//       } else {
+//       }
+//     };
+//       // eslint-disable-next-line react-hooks/exhaustive-deps
+//     checkAuthentication();
+//   }, []);
   return (
     <div>
       <HeaderAdmin />
       <div className="flex flex-row w-full">
       <div>
-          <Sidebar menu="tab7" />
+          <Sidebar menu="tab11" />
         </div>
         <div className="flex w-[100%]   flex-row justify-center">     
-          <GalleryFolderList />
+          <VideoList />
         </div>
       </div>
     </div>);

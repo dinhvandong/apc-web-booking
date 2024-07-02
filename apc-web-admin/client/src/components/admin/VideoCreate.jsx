@@ -12,7 +12,7 @@ import { API_URL_IMAGE, createGallery, uploadFile } from '../../services/api';
 import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { createVideo } from '../../services/api_video';
+import { createVideo } from './../../services/api_video';
 
 const VideoCreate = () => {
     const [title, setTitle] = useState('');
@@ -47,7 +47,7 @@ const VideoCreate = () => {
                 link: link
             }
             console.log("video:", video);
-            const response = await gotoVideoList(video);
+            const response = await createVideo(video);
             console.log('Content saved:', response.data);
         } catch (error) {
             console.error('Error saving content:', error);

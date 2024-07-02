@@ -7,6 +7,7 @@ import CategoryTable from '../table/CategoryTable';
 import NotificationTable from '../table/NotificationTable';
 import GalleryFolderTable from '../table/GalleryFolderTable';
 import GalleryItemTable from '../table/GalleryItemTable';
+import VideoTable from '../table/VideoTable';
 
 const VideoList = () => {
     const [isOn, setIsOn] = useState(false);
@@ -22,7 +23,7 @@ const VideoList = () => {
         setIsOn(!isOn);
     };
     const handleInsert = () => {
-        navigate("/admin/gallery/create-new");
+        navigate("/admin/video/create-new");
     };
     const handleSearch = () => {
 
@@ -38,10 +39,10 @@ const VideoList = () => {
 
             </div>
             <div className="flex justify-start m-5 md:justify-center sm:justify-center lg:justify-start">
-                <p className="font-bold">Gallery photo</p>
+                <p className="font-bold">Video List</p>
             </div>
             <Button className="w-[160px] ml-5 font-bold text-center mb-5 bg-base_color" type="primary" onClick={handleInsert}>
-                Create New Gallery
+                Create Video
             </Button>
             <div className='flex flex-row m-5'>
                 <div className='flex items-center gap-3'>
@@ -71,7 +72,7 @@ const VideoList = () => {
             </div>
             <div className="flex w-[100%]   flex-row justify-center">
                 <div className="w-full px-5">
-                    <GalleryFolderTable onChildCallback={handleChildCallback} />
+                    <VideoTable onChildCallback={handleChildCallback} />
                 </div>
             </div>
 
