@@ -30,7 +30,21 @@ public class GalleryFolderService {
         return galleryFolderRepository.insert(galleryFolder);
     }
 
+    public GalleryFolder update(GalleryFolder galleryFolder){
+       // Long id = sequenceGeneratorService.generateSequence(GalleryFolder.SEQUENCE_NAME);
+       // galleryFolder.setId(id);
 
+        Optional<GalleryFolder> optional = galleryFolderRepository.findById(galleryFolder.getId());
+        if(optional.isEmpty()){
+            return null;
+        }
+        GalleryFolder found = optional.get();
+        found.setCategory(galleryFolder.getCategory());
+        found.setTopic(galleryFolder.getTopic());
+        found.setShortDesc(galleryFolder.getShortDesc());
+        found.setThumb(galleryFolder.getThumb());
+        return galleryFolderRepository.save(found);
+    }
     public boolean deleteAll()
     {
         galleryFolderRepository.deleteAll();
@@ -43,6 +57,9 @@ public class GalleryFolderService {
         if(optional.isEmpty()) return  null;
         return optional.get();
     }
+
+
+
 
 
     public GalleryFolder addGalleryItem(Long id, GalleryItem galleryItem){

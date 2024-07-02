@@ -37,6 +37,13 @@ public class GalleryFolderController {
 
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@RequestBody GalleryFolder galleryFolder){
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, galleryFolderService.update(galleryFolder),"success"));
+
+    }
+
     @PostMapping("/delete")
     public ResponseEntity<?> deleteItem(@RequestParam Long id){
 

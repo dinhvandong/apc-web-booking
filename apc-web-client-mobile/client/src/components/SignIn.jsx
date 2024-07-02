@@ -41,9 +41,10 @@ const SignIn = () => {
     console.log("email:", email);
     console.log("password:", password);
     const result = await loginRequest(email, password);
+    console.log("Result Login:", result);
     if(result.success===200){
       const token = result.data.message;
-      const user = result.data
+      const user = result.data;
       //login(token, user);
       navigate('/profile-page');
       

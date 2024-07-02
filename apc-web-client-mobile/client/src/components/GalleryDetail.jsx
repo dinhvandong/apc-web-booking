@@ -79,7 +79,7 @@ const GalleryDetail = ({ id, arrayImages }) => {
                     </p>
                 </div>
                 <div>
-                    <p>
+                    <p className=''>
 
                         {galleryItemList.length > 0 && galleryItemList[currentIndex].shortDesc}
 

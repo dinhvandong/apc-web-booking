@@ -36,6 +36,7 @@ import MyBooking3Page from './pages/MyBooking3Page';
 import ItineraryPage from './pages/ItineraryPage';
 import ItineraryDetailPage from './pages/ItineraryDetailPage';
 import MyBookingImportExcelPage from './pages/MyBookingImportExcelPage';
+import HistoryBookingPage from './pages/HistoryBookingPage';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         <Route path="/forgot-password3" element={<ForgotPassword3Page />} />
         <Route path="/my-booking" element={<MyBookingPage />} />
         <Route path="/my-booking2/:bookingCode" element={<MyBooking2Page />} />
+        <Route path="/history-booking" element={<HistoryBookingPage />} />
 
         <Route path="/my-booking-import-excel/:bookingCode" element={<MyBookingImportExcelPage />} />
 

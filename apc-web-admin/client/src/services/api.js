@@ -253,7 +253,16 @@ export const createGallery = async (galleryData) => {
   }
 };
 
-
+export const updateGallery = async (galleryData) => {
+  try {
+    //const token = localStorage.getItem("token");
+    const response = await axios.post(`${API_URL}/galleryFolder/insert`,
+      galleryData)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const updateRoom = async (roomData) => {
   try {

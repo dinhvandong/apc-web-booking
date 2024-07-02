@@ -127,8 +127,8 @@ const Gallery = () => {
             <CategoryGalleryList onClick={handleChildClick} categories={categories} />
 
             <div className="flex flex-col md:w-[600px] w-full ">
-
-                {firstItem != null && (<div onClick={() => gotoGalleryDetail(firstItem.id)} key={firstItem.id} className="px-2.5 flex flex-col md:w-[600px] w-full items-center">
+            {/* onClick={() => gotoGalleryDetail(firstItem.id)} */}
+                {firstItem != null && (<div  key={firstItem.id} className="px-2.5 flex flex-col md:w-[600px] w-full items-center">
                     <img src={API_URL_IMAGE + firstItem.thumb} alt="" className="w-full max-h-full"
                     />
                     <span className="mt-2 font-bold text-black">{firstItem.topic}</span>
@@ -143,11 +143,11 @@ const Gallery = () => {
 
             <div className="grid grid-cols-2 gap-4 mt-5">
                 {remainingItems.length > 0 && remainingItems.map((item) => (
-                    <div onClick={() => gotoGalleryDetail(item.id)} key={item.id} className="px-2.5 flex flex-col md:w-[292px] w-full items-center">
+                    <div  key={item.id} className="px-2.5 flex flex-col md:w-[292px] w-full items-center">
                         <img src={API_URL_IMAGE + item.thumb} alt="" className="w-full rounded-md hover:cursor-pointer" />
-                        <span className="mt-2 font-bold text-black">{item.topic}</span>
-                        <span className="mt-2">{item.shortDesc}</span>
-
+                        <span className="mt-2 font-bold text-center text-black">{item.topic}</span>
+                        <span className="mt-2 text-center">{item.shortDesc}</span>
+                        {/* onClick={() => gotoGalleryDetail(item.id)} */}
                     </div>
                 ))}
             </div>

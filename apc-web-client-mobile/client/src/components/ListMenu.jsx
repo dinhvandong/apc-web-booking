@@ -12,8 +12,27 @@ import iconMenu10 from '../assets/icon-menu10.png'
 import iconMenu11 from '../assets/icon-menu11.png'
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from "react";
+import { authenticated } from "../services/api";
 
 const ListMenu = () => {
+
+  const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+          const authentic = await authenticated();
+          console.log("authentic", authentic);
+          if (!authentic || authentic == null) {
+            // navigate('/sign-in');
+            setUser(null);
+          } else {
+            setUser(authentic);
+          }
+        };
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+        checkAuthentication();
+      }, []);
 
   const { t } = useTranslation();
 
@@ -23,6 +42,13 @@ const ListMenu = () => {
 
   const gotoManageBooking = () => {
     console.log('Button clicked!');
+    if(user != null){
+      navigate("/history-booking");
+
+    }else {
+
+      alert("You must login before go to history booking!")
+    }
   };
   const gotoPromotion = () => {
     console.log('Button clicked!');

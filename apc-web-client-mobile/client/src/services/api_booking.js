@@ -38,6 +38,20 @@ export const getBookings = async () => {
   } catch (error) {
     throw error;
   }
+}
+
+export const getBookingsByEmail = async (email) => {
+
+  console.log("Email-Pass2:", email);
+  try {
+    //const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_URL}/booking/findAllByEmail?email=${email}`, {
+      withCredentials: true,
+    });
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
 
 }
 export const getBookingByCodeAndLastName = async (bookingCode, lastName) => {

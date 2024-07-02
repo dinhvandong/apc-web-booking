@@ -17,7 +17,7 @@ const GalleryFolderCreate = () => {
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [content, setContent] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('The Cruise');
   const navigate = useNavigate();
 
 
@@ -49,7 +49,7 @@ const GalleryFolderCreate = () => {
     // Add more category objects as needed
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
+  const [selectedCategory, setSelectedCategory] = useState('The Cruise');
 
 
   const handleCategoryClick = (category) => {

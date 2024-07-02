@@ -44,7 +44,7 @@ export const isAuthenticated = async () => {
           withCredentials: true,
         },);
       const user = response.data;
-      console.log("USER:" + user);
+      // console.log("USER:" + user);
 
       if (user.data) {
         return true;
@@ -66,14 +66,14 @@ export const loginRequest = async (email, password) => {
     password: password,
   };
 
-  console.log("dataLogin:", data);
+  // console.log("dataLogin:", data);
 
   try {
     const response = await axios.post(`${API_URL}/auth/signin`, data, 
     {
       withCredentials: true,
     },);
-    console.log("login:", response);
+    // console.log("loginResoibse:", response.data);
     if (response.data.success === 200) 
     {
       const token = response.data.message;

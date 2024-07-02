@@ -2,7 +2,14 @@ import React from 'react'
 import bg_signin from '../assets/bg_signin.png'
 import bg_signin2 from '../assets/background-profile1.png'
 import iconBooking from '../assets/icon-menu1.png';
+import { useNavigate } from 'react-router-dom';
 const Profile = () => {
+    const navigate = useNavigate();
+
+    const gotoManageBooking =()=>{
+        navigate("/history-booking");
+
+    }
     return (
         <div className='flex flex-col items-center justify-center w-full h-[1000px] p-5 overflow-y-auto' style={{
             backgroundImage: `url(${bg_signin})`, backgroundRepeat: 'no-repeat',
@@ -17,11 +24,11 @@ const Profile = () => {
                 </p>
             </div>
 
-            <div className='mt-5 bg-white rounded justify-center items-center flex flex-col w-full m-5 p-2 md:m-5 md:w-[600px]'>
+            <div onClick={gotoManageBooking} className='hover:cursor-pointer mt-5 bg-white rounded justify-center items-center flex flex-col w-full m-5 p-2 md:m-5 md:w-[600px]'>
 
                 <img src={iconBooking} className='w-[50px] h-[50px]' />
 
-                <div className='mt-4 text-black hover:cursor-pointer'>
+                <div   className='mt-4 text-black hover:cursor-pointer'>
                     <p>
                         Manage Booking
                     </p>
