@@ -21,7 +21,7 @@ const Profile = () => {
 
                 <img src={iconBooking} className='w-[50px] h-[50px]' />
 
-                <div className='mt-4 text-black'>
+                <div className='mt-4 text-black hover:cursor-pointer'>
                     <p>
                         Manage Booking
                     </p>
@@ -33,13 +33,13 @@ const Profile = () => {
 
             <div className=' md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
 
-                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[300px] bg-white'>
+                <div className=' hover:cursor-pointer w-1/2 items-center flex rounded h-[60px] md:w-[300px] bg-white'>
 
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Manage-Sub User</p>
                     </div>
                 </div>
-                <div className='w-1/2 flex items-center rounded h-[60px] md:w-[300px] ml-5 bg-white '>
+                <div className=' hover:cursor-pointer w-1/2 flex items-center rounded h-[60px] md:w-[300px] ml-5 bg-white '>
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Promotion</p>
                     </div>
@@ -49,13 +49,13 @@ const Profile = () => {
 
             <div className=' md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
 
-                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[300px] bg-white'>
+                <div className=' hover:cursor-pointer w-1/2 items-center flex rounded h-[60px] md:w-[300px] bg-white'>
 
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Voucher</p>
                     </div>
                 </div>
-                <div className='w-1/2 items-center flex rounded h-[60px] md:w-[300px] ml-5 bg-white '>
+                <div className=' hover:cursor-pointer w-1/2 items-center flex rounded h-[60px] md:w-[300px] ml-5 bg-white '>
                     <img src={iconBooking} className='w-6 h-6 ml-2' />
                     <div className='ml-5'><p>Settings</p>
                     </div>
@@ -69,11 +69,11 @@ const Profile = () => {
            
             </div>
 
-            <div className='hover:cursor-pointer h-[60px] text-white bg-[#B77855] md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
+            {/* <div className='hover:cursor-pointer h-[60px] text-white bg-[#B77855] md:w-[600px] w-full flex flex-row items-center justify-center mt-5 rounded'>
            
            <p>Upgrade To Business Account</p>
            
-            </div>
+            </div> */}
         </div>);
 }
 

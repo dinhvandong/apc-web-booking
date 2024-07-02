@@ -15,7 +15,7 @@ const RoomCreate = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedType, setSelectedType] = useState('');
 
-    const roomTypes = ['Deluxe', 'Superior', 'Standard', 'Suite'];
+    const roomTypes = ['Deluxe',  'Premium', 'Suite'];
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
@@ -83,6 +83,12 @@ const RoomCreate = () => {
 
     };
 
+    const handleRemoveByIndex = (index) => {
+        const newArray = [...items]; // Create a new array to avoid mutating the state directly
+        newArray.splice(index, 1); // Remove the element at the given index
+        setItems(newArray); // Update the state with the new array
+    }
+    
     function handleInputChangeItem(e, itemId) {
         const updatedItems = items.map((item) => {
             if (item.id === itemId) {
@@ -109,7 +115,7 @@ const RoomCreate = () => {
         //     roomItemList: [...prevData.roomItemList, items]
         // }));
         const jsonData = JSON.stringify(updatedFormData);
-    
+
         console.log("roomItemList::", jsonData);
         const result = await createRoom(jsonData);
         if (result.success === 200) {
@@ -133,7 +139,7 @@ const RoomCreate = () => {
             <div className='h-[1px] bg-base_color w-full'></div>
             <div className="flex w-full h-auto m-5 mx-auto">
 
-                <div className='flex flex-col w-1/3 h-auto m-2'>
+                <div className='flex flex-col w-1/2 h-auto m-2'>
                     <form onSubmit={handleSubmit} className="w-full mx-auto mt-2 ml-5 mr-5">
                         <div className="mb-2">
                             <label htmlFor="name" className="block mb-2 font-medium">
@@ -212,7 +218,7 @@ const RoomCreate = () => {
                             </Upload>
                         </div>
                         <div className="mb-2">
-                            <img src={API_URL_IMAGE + file} className='w-[100px] h-[100px]' />
+                            <img src={API_URL_IMAGE + file} className='w-[200px] h-[200px]' />
 
                         </div>
 
@@ -228,7 +234,18 @@ const RoomCreate = () => {
                         </div>
                         <div className='h-auto '>
                             <ul>
-                                {items.map((item) => (
+
+                                {items.map((item, index) => (
+                                    <li className='flex items-center px-5 mt-5' key={item.id}>
+                                        <input className='w-full border-2 border-gray-500'
+                                            type="text"
+                                            value={item.item}
+                                            onChange={(e) => handleInputChangeItem(e, item.id)}
+                                        />
+                                        <button onClick={() => handleRemoveByIndex(index)} className='ml-5 w-[100px] h-[30px] text-white bg-red-700'>Remove</button>
+                                    </li>
+                                ))}
+                                {/* {items.map((item) => (
                                     <li key={item.id}>
                                         <input className='w-full mt-5 border-2 border-gray-500'
                                             type="text"
@@ -236,7 +253,7 @@ const RoomCreate = () => {
                                             onChange={(e) => handleInputChangeItem(e, item.id)}
                                         />
                                     </li>
-                                ))}
+                                ))} */}
                             </ul>
 
                         </div>
@@ -248,12 +265,12 @@ const RoomCreate = () => {
                         </button>
                     </form>
                 </div>
-                <div className='flex flex-col w-2/3 h-auto'>
+                {/* <div className='flex flex-col w-2/3 h-auto'>
 
                     <div className="flex w-[100%] ml-5 mr-2 flex-row justify-center">
                         <RoomTable />
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
 

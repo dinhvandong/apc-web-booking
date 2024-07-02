@@ -206,7 +206,9 @@ const Sidebar = (props) => {
   const styleMenu7 = tab === "tab7" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu8 = tab === "tab8" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu9 = tab === "tab9" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
-  const styleMenu10 = tab === "tab9" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu10 = tab === "tab10" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu11 = tab === "tab11" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu12 = tab === "tab10" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
 
   const [width, setWidth] = useState('w-[200px]');
   const [active, setActive] = useState(true);
@@ -292,7 +294,7 @@ const Sidebar = (props) => {
             }
           </button>
 
-          <button
+          {/* <button
             onClick={() => gotoPrice()}
             onMouseEnter={handleMouseEnter4}
             onMouseLeave={handleMouseLeave4}
@@ -302,7 +304,7 @@ const Sidebar = (props) => {
             {
               active == true ? <div className="text-sm ">Giá</div> : <div></div>
             }
-          </button>
+          </button> */}
           <button
             onClick={() => gotoNews()}
             onMouseEnter={handleMouseEnter5}

@@ -27,7 +27,7 @@ const TimeTablePricePage = () => {
       <HeaderAdmin />
       <div className="flex flex-row w-full">
       <div>
-          <Sidebar menu="tab2" />
+          <Sidebar menu="tab8" />
         </div>
         <div className="flex w-[100%]   flex-row justify-center">     
           <TimeTablePriceList />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API_URL_IMAGE, convertDateFormat, deleteUser, getRooms, getUsers } from '../../services/api'
+import { API_URL_IMAGE, convertDateFormat, deleteRoom, deleteUser, getRooms, getUsers } from '../../services/api'
 import { Button, Space, Table } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import defaultImage from '../../assets/avata.png'
@@ -16,7 +16,7 @@ const RoomTable = () => {
 
   const handleDelete = async (id) => {
     console.log('Delete clicked for ID:', id);
-    const response = await deleteUser(id);
+    const response = await deleteRoom(id);
     refreshData();
     console.log("delete:", response);
   };

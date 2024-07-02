@@ -16,7 +16,7 @@ const RoomEdit = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedType, setSelectedType] = useState('');
 
-    const roomTypes = ['Deluxe', 'Superior', 'Standard', 'Suite'];
+    const roomTypes = ['Deluxe',  'Premium', 'Suite'];
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
@@ -25,16 +25,16 @@ const RoomEdit = (props) => {
         console.log("Item_SIZE:", items);
 
         const newItem = {
-            id: (items.length +1), // Generate a unique ID for the new item
-            item: 'Dịch vụ ' + items.length ,
+            id: (items.length + 1), // Generate a unique ID for the new item
+            item: 'Dịch vụ ' + items.length,
             active: true // Initialize the value as an empty string
         };
         setFormData((prevData) => ({
             ...prevData,
             roomItemList: [...prevData.roomItemList, newItem]
-          }));
+        }));
 
-       setItems((prevItems) => [...prevItems, newItem]);
+        setItems((prevItems) => [...prevItems, newItem]);
     }
 
     useEffect(() => {
@@ -109,7 +109,7 @@ const RoomEdit = (props) => {
 
         const response = await uploadFile(file);
         const fileResponse = API_URL_IMAGE + response.data;
-        setFile(fileResponse);
+        setFile(response.data);
         console.log("upload-file", response);
 
         setFormData(prevFormData => ({
@@ -122,27 +122,40 @@ const RoomEdit = (props) => {
 
     function handleInputChangeItem(e, itemId) {
         const updatedItems = items.map((item) => {
-          if (item.id === itemId) {
-            return { ...item, item: e.target.value };
-          }
-          return item;
+            if (item.id === itemId) {
+                return { ...item, item: e.target.value };
+            }
+            return item;
         });
-      
+
         setItems(updatedItems);
         console.log("Items-List:", items);
-      }
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setFormData({avatar: file})
         console.log("file", file);
         const convertedPriceBase = parseFloat(formData.priceBase);
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            thumb: file, priceBase:convertedPriceBase
-        }));
+        console.log("items-xxx:", items);
+        // setFormData(prevFormData => ({
+        //     ...prevFormData,
+        //     thumb: file, priceBase: convertedPriceBase, roomItemList: items
+        // }));
 
-        console.log("updateRoom", formData);
-        const result = await updateRoom(formData);
+
+        // Update the formData state
+        const updatedFormData = {
+            ...formData,
+            thumb: file,
+            priceBase: convertedPriceBase,
+            roomItemList: items
+        };
+        setFormData(updatedFormData);
+        const jsonData = JSON.stringify(updatedFormData);
+        // const jsonData = JSON.stringify(formData);
+        console.log("jsonData", jsonData);
+
+        const result = await updateRoom(jsonData);
         console.log("result_updateRoom:", result);
 
         if (result.success === 200) {
@@ -153,6 +166,11 @@ const RoomEdit = (props) => {
         setFormData({ name: '', email: '', password: '' });
     };
 
+    const handleRemoveByIndex = (index) => {
+        const newArray = [...items]; // Create a new array to avoid mutating the state directly
+        newArray.splice(index, 1); // Remove the element at the given index
+        setItems(newArray); // Update the state with the new array
+    }
     return (
         <div className='flex flex-col w-full h-auto'>
 
@@ -166,13 +184,13 @@ const RoomEdit = (props) => {
             <div className='h-[1px] bg-base_color w-full'></div>
             <div className="flex w-full h-auto m-5 mx-auto">
 
-                <div className='flex flex-col w-1/3 h-auto m-2'>
+                <div className='flex flex-col w-1/2 h-auto m-2'>
                     <form onSubmit={handleSubmit} className="w-full mx-auto mt-2 ml-5 mr-5">
                         <div className="mb-2">
                             <label htmlFor="name" className="block mb-2 font-medium">
                                 Loại phòng: <span className="text-lg text-red-500">*</span>
                             </label>
-                         
+
 
                             <select
                                 name="roomType"
@@ -237,7 +255,7 @@ const RoomEdit = (props) => {
                             </Upload>
                         </div>
                         <div className="mb-2">
-                            <img src={file} className='w-[100px] h-[100px]' />
+                            <img src={(API_URL_IMAGE + file)} className='w-[200px] h-[200px]' />
 
                         </div>
 
@@ -247,26 +265,22 @@ const RoomEdit = (props) => {
                             <MdAdd />
                             <p>
                                 Thêm options
-
                             </p>
-
                         </div>
-
                         <div className='h-auto '>
-                        <ul>
-                            {items.map((item) => (
-                                <li key={item.id}>
-                                    <input className='w-full mt-5 border-2 border-gray-500'
-                                        type="text"
-                                        value={item.item}
-                                        onChange={(e) => handleInputChangeItem(e, item.id)}
-                                    />
-                                </li>
-                            ))}
-                        </ul>
-
+                            <ul>
+                                {items.map((item, index) => (
+                                    <li className='flex items-center px-5 mt-5' key={item.id}>
+                                        <input className='w-full border-2 border-gray-500'
+                                            type="text"
+                                            value={item.item}
+                                            onChange={(e) => handleInputChangeItem(e, item.id)}
+                                        />
+                                        <button onClick={() => handleRemoveByIndex(index)} className='ml-5 w-[100px] h-[30px] text-white bg-red-700'>Remove</button>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-
                         <button
                             type="submit"
                             className="w-full px-4 py-2 mt-5 text-white rounded bg-base_color hover:bg-orange-600"
@@ -275,13 +289,13 @@ const RoomEdit = (props) => {
                         </button>
                     </form>
                 </div>
-                <div className='flex flex-col w-2/3 h-auto'>
+                {/* <div className='flex flex-col w-2/3 h-auto'>
 
                     <div className="flex w-[100%] ml-5 mr-2 flex-row justify-center">
                         <RoomTable />
                     </div>
 
-                </div>
+                </div> */}
 
             </div>
 

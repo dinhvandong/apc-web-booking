@@ -12,6 +12,29 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; // Replace '
 axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'; // Specify the allowed HTTP methods
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'; // Specify the allowed headers
 
+
+export const authenticated = async () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      const response = await axios.get(`${API_URL}/user/findToken?token=${token}`
+        , {
+          withCredentials: true,
+        },);
+      const user = response.data;
+      console.log("USER:" + user);
+
+      if (user.data) {
+        return user.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+  return null;
+};
 export const isAuthenticated = async () => {
   const token = localStorage.getItem('token');
   if (token) {

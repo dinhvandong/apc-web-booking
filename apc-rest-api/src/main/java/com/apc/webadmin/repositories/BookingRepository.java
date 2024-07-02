@@ -12,6 +12,8 @@ public interface BookingRepository extends MongoRepository<Booking, Long>
 
     List<Booking> findBy(Pageable pageable);
 
+    List<Booking> findAllByEmail(String email);
+
     Optional<Booking> findByBookingCode(String bookingCode);
 
 

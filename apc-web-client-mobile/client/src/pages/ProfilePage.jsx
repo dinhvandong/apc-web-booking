@@ -1,20 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderProfile from '../components/HeaderProfile'
 import Profile from '../components/Profile'
 import BottomNavigation from '../components/BottomNavigation'
-import {isAuthenticated} from '../services/api';
+import {authenticated, isAuthenticated} from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
     const navigate = useNavigate();
 
+    const [user, setUser] = useState(null);
+
     useEffect(() => {
         const checkAuthentication = async () => {
-          const authenticated = await isAuthenticated();
-          console.log("authenticated", authenticated);
-          if (!authenticated) {
+          const authentic = await authenticated();
+          console.log("authentic", authentic);
+          if (!authentic || authentic == null) {
              navigate('/sign-in');
           } else {
+            setUser(authentic);
           }
         };
           // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,7 +27,8 @@ const ProfilePage = () => {
         <div
             className={`min-h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
 
-        >      <HeaderProfile />
+        >      
+            <HeaderProfile  firstName =  {(user!=null) && user.firstName} lastName = { (user!=null) && user.lastName}  />
             <Profile />
             <BottomNavigation selected={"account"} />
         </div>

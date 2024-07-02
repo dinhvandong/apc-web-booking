@@ -98,6 +98,12 @@ public class BookingService {
         return optional.get();
     }
 
+
+    public List<Booking> findAllByEmail(String email){
+
+        return bookingRepository.findAllByEmail(email);
+    }
+
     public Booking findByBookingCodeAndLastName(String bookingCode, String lastName){
 
         Optional<Booking> optional = bookingRepository.findByBookingCode(bookingCode);

@@ -49,6 +49,17 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"not found"));
     }
 
+
+    @GetMapping("/findAllByEmail")
+    public ResponseEntity<?> findAllByEmail(
+            @RequestParam String email) {
+        Booking booking = bookingService.findByBookingCode(email);
+        if(booking!= null) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, booking,"success"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"not found"));
+    }
+
     @PostMapping("/insertListPassengers")
     public ResponseEntity<?> insert(@RequestParam String bookingCode,
                                     @RequestBody List<Passenger> passengerList)

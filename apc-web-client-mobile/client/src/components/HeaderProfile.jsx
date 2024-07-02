@@ -5,7 +5,9 @@ import avatar from '../assets/avatar.png';
 import apc_badge from '../assets/apc_badge.png';
 import { FaArrowRight } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from "react-icons/md";
-const HeaderProfile = () => {
+const HeaderProfile = (props) => {
+   const firstName = props.firstName;
+   const lastName = props.lastName;
     const navigate = useNavigate();
     const handleBackClick = () => {
         // Add your logic here for handling the back button click
@@ -21,7 +23,7 @@ const HeaderProfile = () => {
                     <img src={avatar} className='w-[60px] h-[60px]' />
                 </div>
                 <div className='flex flex-col w-[400px] '>
-                    <p className='w-full'>Chunie Nguyen</p>
+                    <p className='w-full'>{firstName + " "+ lastName}</p>
                     <div className='w-[400px]  bg-[#9DA4AE] rounded-2xl flex p-2 flex-row item-center '>
                         <img src={apc_badge} className='w-[25px] h-[25px]' alt='logo-ambassador-account' />
                         <p> Ambassador Account</p>

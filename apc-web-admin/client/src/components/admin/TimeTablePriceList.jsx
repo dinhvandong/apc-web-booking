@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { API_URL_IMAGE, createRoom, createUser, uploadFile } from '../../services/api';
 import { IoMdSearch } from 'react-icons/io';
-import { Button, DatePicker, Upload } from 'antd';
+import { Button, DatePicker, Table, Upload, Input } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import noImage from '../../assets/avatar-default-icon.png'
 import UserTable from '../table/UserTable';
@@ -11,6 +11,7 @@ import RoomTable from '../table/RoomTable';
 import TimePriceTable from '../table/TimePriceTable';
 import { createPriceArray, getPriceArray, getPriceByDate } from '../../services/api_price_by_date';
 import { IoSearchCircle } from "react-icons/io5";
+//import { Button, Space, Table, Input } from 'antd';
 
 const TimeTablePriceList = () => {
     const navigate = useNavigate();
@@ -79,6 +80,7 @@ const TimeTablePriceList = () => {
     const [dateTime, setDateTime] = useState(null);
     const [priceList, setPriceList] = useState([]);
 
+    const [first, setFirst] = useState(true);
     // const handleStartDateChange = (date) => {
     //     setStartDate(date);
     // };
@@ -113,7 +115,13 @@ const TimeTablePriceList = () => {
 
     }
     useEffect(() => {
-        refreshData();
+
+        if (first) {
+
+            refreshData();
+
+            setFirst(false);
+        }
     }, []);
     const handlePriceDayNonRefundChange = (e) => {
         setPriceDayNonRefund(e.target.value);
@@ -128,8 +136,22 @@ const TimeTablePriceList = () => {
         setPriceDinnerNonRefund(e.target.value);
     }
 
-    const handleTextSearchChange = (e) => {
+    const handleTextSearchChange = async (e) => {
         setDateTime(e.target.value);
+        const dateTime = e.target.value;
+        if (dateTime != null && dateTime != "" && String(dateTime).length > 0 ) 
+            {
+                try {
+                    const priceDate = await getPriceByDate(dateTime);
+                    const myArray = [];
+                    const updatedArray = [...myArray, priceDate];
+                    setPriceList(updatedArray);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            } else {
+                refreshData();
+            }
 
     }
 
@@ -145,18 +167,22 @@ const TimeTablePriceList = () => {
         window.location.reload();
     };
 
-    const handleSearchByDate = async () => {
-        //getPriceByDate
-        try {
-            const priceDate = await getPriceByDate(dateTime);
-            console.log("priceDate", priceDate);
-            setPriceList([priceDate.data]);
-            // setUpdateValue(priceList)
-        } catch (error) {
-            // Handle error
-            console.error('Error:', error);
-        }
 
+    const handleSearchByDate = async () => {
+
+        if (dateTime != null && dateTime != "" && String(dateTime).length > 0 ) 
+        {
+            try {
+                const priceDate = await getPriceByDate(dateTime);
+                const myArray = [];
+                const updatedArray = [...myArray, priceDate];
+                setPriceList(updatedArray);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        } else {
+            refreshData();
+        }
     }
 
     const refreshData = async () => {
@@ -180,21 +206,103 @@ const TimeTablePriceList = () => {
         console.log("Data_Response:", result.data);
 
         handleRefresh();
-        //createPriceArray = async (dateFrom, dateTo, priceDay, priceDinner)
 
-        // console.log("items::", items);
-        // setFormData(prevFormData => ({
-        //     ...prevFormData,
-        //     thumb: file
-        // }));
-        // console.log("roomItemList::", formData);
-        // const result = await createRoom(formData);
-        // if (result.success === 200) {
-        //     navigate('/admin/room');
-        // }
-        // // Reset form data
-        // setFormData({ name: '', email: '', password: '' });
     };
+
+    const [index, setIndex] = useState(-1);
+    const [updateValue, setUpdateValue] = useState();
+
+    const getRowClassName = (record, index) => {
+        return index % 2 === 1 ? 'row-even' : 'row-odd';
+    };
+
+
+
+    const handlePriceChange = (value, id, index) => {
+        console.log(`New age for record ${index} ${id}: ${value}`);
+        setUpdateValue(value ?? 0);
+        setIndex(index);
+    }
+    const columns = [
+        {
+            title: 'Thời gian',
+            dataIndex: 'dateTimeString',
+            key: 'dateTimeString',
+            width: '20%'
+        },
+        {
+            title: 'Giá ngày (Flexible)',
+            dataIndex: 'priceDay',
+            key: 'priceDay',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceDay}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceDay, index2)}
+                />
+            ),
+            width: '20%'
+        },
+        {
+            title: 'Giá ngày (Non-Refund)',
+            dataIndex: 'priceDayNonRefund',
+            key: 'priceDayNonRefund',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceDayNonRefund}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceDayNonRefund, index2)}
+                />
+            ),
+            width: '20%'
+        },
+        {
+            title: 'Giá đêm (Flexible)',
+            dataIndex: 'priceDinner',
+            key: 'priceDinner',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceDinner}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceDinner, index2)}
+                />
+            ),
+            width: '20%'
+        },
+        {
+            title: 'Giá đêm (Non-Refund)',
+            dataIndex: 'priceDinnerNonRefund',
+            key: 'priceDinnerNonRefund',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceDinnerNonRefund}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceDinnerNonRefund, index2)}
+                />
+            ),
+            width: '20%'
+        },
+        {
+            title: 'Giá trong tuần (WeekDay)',
+            dataIndex: 'priceWeekDay',
+            key: 'priceWeekDay',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceWeekDay}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceWeekDay, index2)}
+                />
+            ),
+            width: '20%'
+        },
+        {
+            title: 'Giá cuối tuần (WeekEnd)',
+            dataIndex: 'priceWeekEnd',
+            key: 'priceWeekEnd',
+            render: (_, record, index2) => (
+                <Input
+                    value={(updateValue && index2 == index) ? updateValue : record.priceWeekEnd}
+                    onChange={(e) => handlePriceChange(e.target.value, record.priceWeekEnd, index2)}
+                />
+            ),
+            width: '20%'
+        }
+    ];
 
     return (
         <div className='flex flex-col w-full h-auto'>
@@ -245,9 +353,9 @@ const TimeTablePriceList = () => {
                 <p className="font-bold">Tạo mới bảng giá</p>
             </div>
             <div className='h-[1px] bg-base_color w-full'></div>
-            <div className='flex justify-end px-5 mt-5'>
+            <div className='flex justify-end px-5 mt-5 mr-5'>
                 <input onChange={handleTextSearchChange} className='w-[300px] border border-1 px-3 py-2' placeholder='YYYY/MM/DD' />
-                <button onClick={handleSearchByDate} className='px-3 py-2 text-white rounded-md bg-base_color'>Tìm kiếm</button>
+                <button onClick={() => handleSearchByDate()} className='px-3 py-2 text-white rounded-md bg-base_color'>Tìm kiếm</button>
             </div>
 
             <div className="flex w-full h-auto m-5 mx-auto">
@@ -386,7 +494,11 @@ const TimeTablePriceList = () => {
                 </div>
                 <div className='flex flex-col w-[68%] h-auto ml-5'>
                     <div className="flex w-[100%] ml-5 mr-2 flex-row justify-center">
-                        <TimePriceTable priceList={priceList} />
+                        {/* <TimePriceTable key={priceList.length} priceList={priceList} /> */}
+
+                        <div className="flex items-center justify-center w-full">
+                            <Table style={{ border: '1px', borderColor: '#2F4842', width: '90%', fontFamily: 'Courier New ', marginRight: '20px', backgroundColor: '#2F4842' }} rowClassName={getRowClassName} dataSource={priceList} columns={columns} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -7,8 +7,10 @@ import { getPriceArray } from '../../services/api_price_by_date'
 
 import './UserTable.css'; // Import your custom CSS file
 //import './tableStyle.css';
-const TimePriceTable = () => {
-    const [priceList, setPriceList] = useState([]);
+const TimePriceTable = (props) => {
+
+    const priceList = props.priceList;
+    //const [priceList, setPriceList] = useState([]);
     const [updateValue, setUpdateValue] = useState();
     const [index, setIndex] = useState(-1);
     const navigate = useNavigate();
@@ -32,7 +34,7 @@ const TimePriceTable = () => {
         try {
           const priceList = await getPriceArray(0,10000);
           console.log("priceList", priceList);
-          setPriceList(priceList);
+         // setPriceList(priceList);
           setUpdateValue(priceList)
         } catch (error) {
           // Handle error
@@ -44,13 +46,7 @@ const TimePriceTable = () => {
         return index % 2 === 1 ? 'row-even' : 'row-odd';
     };
 
-    // useEffect(() => {
-    //     console.log('Reloading data...');
-    //     refreshData();
-    // }, [props.roomID]);
-    useEffect(() => {
-        refreshData();
-    }, []);
+    
 
     const handlePriceChange = (value, id, index) => {
         console.log(`New age for record ${index} ${id}: ${value}`);

@@ -235,7 +235,7 @@ export const createRoom = async (roomData) => {
     const response = await axios.post(`${API_URL}/room/insert?token=${token}`,
       roomData, config)
 
-      console.log("JSONDATA:", response.data);
+    console.log("JSONDATA:", response.data);
     return response.data;
   } catch (error) {
     throw error;
@@ -253,13 +253,39 @@ export const createGallery = async (galleryData) => {
   }
 };
 
+
+
 export const updateRoom = async (roomData) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${API_URL}/room/update?token=${token}`, {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    console.log("AAAXXXUUU:", roomData);
+    const response = await axios.post(`${API_URL}/room/update?token=${token}`,
+      roomData, config)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+export const deleteRoom = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await axios.post(`${API_URL}/room/delete?token=${token}&id=${id}`,
+       {
       withCredentials: true,
-    },
-      roomData)
+    })
     return response.data;
   } catch (error) {
     throw error;
@@ -403,8 +429,8 @@ export const deleteEvent = async (eventID) => {
 export const deleteEventItem = async (eventID, eventItemID) => {
   //console.log("delete_eventID:", eventItemID);
   try {
-    const response = 
-    await axios.post(`${API_URL}/event-plan/remove-event-plan-item?id=` + eventID + "&itemID=" + eventItemID)
+    const response =
+      await axios.post(`${API_URL}/event-plan/remove-event-plan-item?id=` + eventID + "&itemID=" + eventItemID)
     return response.data;
   } catch (error) {
     throw error;

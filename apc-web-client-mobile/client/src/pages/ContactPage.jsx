@@ -220,7 +220,6 @@ const ContactPage = () => {
         setPassword('');
     };
     const handleSubmit = async () => {
-
         // e.preventDefault();
         console.log("email:", email);
         console.log("password:", password);
@@ -228,7 +227,6 @@ const ContactPage = () => {
         console.log("lastName:", lastName);
         console.log("gender:", gender);
         console.log("country:", country);
-
         /*
         {
     "email": "john.doe@example.com",

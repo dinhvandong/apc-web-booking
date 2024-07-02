@@ -50,7 +50,7 @@ const MyBooking = () => {
       updateBookingSearch(result.data)
       navigate('/booking-search/' + bookingCode);
     }else {
-      window.alert('Cannot found BookingCode');
+      window.alert('Your reservation code is not found!');
 
     }
 

@@ -102,16 +102,12 @@ const MyBooking2 = (props) => {
           My Booking
         </h1>
       </div> */}
-
       <div className='flex flex-col text-gray-600 justify-center mt-[100px]'>
         <p className='text-center'>Booking Code: {bookingCode}</p>
-
       </div>
-
       <div className='mt-5 font-bold text-black text-[22px]'>
         <p className='text-center'>Passenger Information</p>
       </div>
-
       <div>
         <p className='mt-2 text-center text-gray-600'>Complete your passenger information by selecting the option below</p>
       </div>
@@ -126,7 +122,6 @@ const MyBooking2 = (props) => {
           </p>
         </button>
       </div>
-
       <div className='w-full mt-5'>
         <button onClick={gotoMyBookingImportExcel} className='flex w-full px-4 py-2 rounded-md bg-brown_color'>
 
@@ -136,9 +131,6 @@ const MyBooking2 = (props) => {
           </p>
         </button>
       </div>
-
-
-
     </div>
   )
 }
