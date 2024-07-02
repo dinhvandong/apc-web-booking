@@ -7,6 +7,7 @@ import com.apc.webadmin.models.User;
 import com.apc.webadmin.repositories.UserRepository;
 import com.apc.webadmin.security.PasswordEncoder;
 import com.apc.webadmin.services.AuthService;
+import com.apc.webadmin.services.EmailService;
 import com.apc.webadmin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,9 @@ public class AuthController {
     AuthService authService;
     @Autowired
     UserService userService;
+
+    @Autowired
+    EmailService emailService;
     @Autowired
     UserRepository userRepository;
     @PostMapping("/signup")
@@ -53,6 +57,9 @@ public class AuthController {
         requestUser.setGender(userDTO.getGender());
         requestUser.setStatus(1);
         User user = userService.createUser(requestUser);
+
+        emailService.sendEmailRegisterSuccess(userDTO.getEmail(), userDTO.getFirstName() + " "+ userDTO.getLastName());
+
         return ResponseEntity.status(HttpStatus.OK).body
                 (new ResponseObject(200, user, "success"));
     }
