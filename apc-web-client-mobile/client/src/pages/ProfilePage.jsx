@@ -28,7 +28,7 @@ const ProfilePage = () => {
             className={`min-h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
 
         >      
-            <HeaderProfile  firstName =  {(user!=null) && user.firstName} lastName = { (user!=null) && user.lastName}  />
+           {user!= null && <HeaderProfile  firstName =  {user.firstName} lastName = { user.lastName}  />} 
             <Profile />
             <BottomNavigation selected={"account"} />
         </div>

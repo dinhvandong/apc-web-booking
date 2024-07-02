@@ -31,6 +31,15 @@ const BookingSuccessfulPage = () => {
     }
 
     const bookingCode = bookingInfo.bookingCode;
+    const handleCopy = () => {
+        navigator.clipboard.writeText(bookingCode)
+          .then(() => {
+           alert('BookingCode copied to clipboard');
+          })
+          .catch((error) => {
+           alert('Error copying text to clipboard:', error);
+          });
+      };
 
     useEffect(() => {
         const adult = bookingInfo.adult;
@@ -66,7 +75,7 @@ const BookingSuccessfulPage = () => {
                     <div className='flex items-center justify-between p-5 mt-5 ml-5 mr-5 bg-white rounded-lg'>
 
                         <p className='font-bold text-[30px]'>{bookingCode}</p>
-                        <img src={ic_copy} className='w-5 h-5'/>
+                        <img onClick={handleCopy} src={ic_copy} className='w-5 h-5'/>
 
                     </div>
 
