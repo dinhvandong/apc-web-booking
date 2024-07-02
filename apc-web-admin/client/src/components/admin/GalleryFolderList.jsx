@@ -76,11 +76,6 @@ const GalleryFolderList = () => {
         <div className="w-full px-5">
           <GalleryFolderTable onChildCallback={handleChildCallback} />
         </div>
-        {/* <div className="flex-row justify-center w-1/2 ml-5">
-          <GalleryItemTable galleryID={galleryID} />
-
-        </div> */}
-
       </div>
 
     </div>

@@ -11,6 +11,16 @@ public class Video {
     private String title;
     private String desc;
 
+    private String link;
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     public Long getId() {
         return id;
     }

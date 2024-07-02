@@ -43,6 +43,9 @@ import PromotionEditPage from './pages/PromotionEditPage';
 import PromotionPage from './pages/PromotionPage';
 import GalleryDetailPage from './pages/GalleryDetailPage';
 import GalleryDetailCreatePage from './pages/GalleryDetailCreatePage';
+import VideoPage from './pages/VideoPage';
+import VideoCreatePage from './pages/VideoCreatePage';
+import VideoEditPage from './pages/VideoEditPage';
 
 function App() {
   return (
@@ -94,6 +97,12 @@ function App() {
         <Route path="/admin/gallery/create-new" element={<GalleryCreatePage />} />
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
         <Route path="/admin/time-price" element={<TimeTablePricePage />} />
+
+        <Route path="/admin/video" element={<VideoPage />} />
+        <Route path="/admin/video/create-new" element={<VideoCreatePage />} />
+        <Route path="/admin/video/update/:id" element={<VideoEditPage />} />
+     
+
 
         <Route path="/admin/gallery_detail/:id" element={<GalleryDetailPage />} />
         <Route path="/admin/gallery_detail/create-new/:id" element={<GalleryDetailCreatePage />} />
