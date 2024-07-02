@@ -53,9 +53,9 @@ public class BookingController {
     @GetMapping("/findAllByEmail")
     public ResponseEntity<?> findAllByEmail(
             @RequestParam String email) {
-        Booking booking = bookingService.findByBookingCode(email);
-        if(booking!= null) {
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, booking,"success"));
+        List<Booking> bookings = bookingService.findAllByEmail(email);
+        if(bookings!= null) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookings,"success"));
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"not found"));
     }
