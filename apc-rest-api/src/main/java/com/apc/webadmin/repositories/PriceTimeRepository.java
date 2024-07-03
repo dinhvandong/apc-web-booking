@@ -14,6 +14,9 @@ public interface PriceTimeRepository extends MongoRepository<PriceTime, Long>
     Page<PriceTime> findAll(Pageable pageable);
     PriceTime findByDateTimeString(String dateTime);
 
+    PriceTime findByDateTime(Long dateTime);
+
+
 
 //    List<PriceTime> findAllByDateTimeGreaterThanEqualAndDateTimeLessThanEqual(Long startDateTime, Long endDateTime);
 

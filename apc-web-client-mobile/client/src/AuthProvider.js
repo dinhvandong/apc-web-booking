@@ -22,8 +22,17 @@ export const AuthProvider = ({ children }) => {
     price: 0,
     bookingDate: 0,
     cruiseType: 'Day Cruise',
+    roomBookingList:[]
+
   });
 
+
+  const updatePrice = (newPrice) => {
+    setBookingInfo(prevBookingInfo => ({
+      ...prevBookingInfo,
+      price: newPrice
+    }));
+  };
   const [myBookingSearch, setMyBookingSearch] = useState({
     customerName: '',
     firstName: '',
@@ -41,7 +50,8 @@ export const AuthProvider = ({ children }) => {
     price: 0,
     bookingDate: 0,
     cruiseType: 'Day Cruise',
-    bookingDate: 0
+    bookingDate: 0,
+    roomBookingList:[]
   });
 
   const [priceDate, setPriceDate] = useState(
@@ -56,7 +66,8 @@ export const AuthProvider = ({ children }) => {
       priceDinnerNonRefund: 1400.0,
       active: true,
       activeDay: true,
-      activeDinner: true
+      activeDinner: true,
+
     });
 
   const [ancillary, setAncillary] = useState()

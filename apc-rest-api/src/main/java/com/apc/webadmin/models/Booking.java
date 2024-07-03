@@ -21,9 +21,7 @@ public class Booking {
     private String cruiseType;
     private boolean flexibleOrNonRefund;  // true = flexible false = non refund
     private double price;
-
     private String bookingCode;
-
     private double priceBase;
     private int status;
     private  int adult;
@@ -31,8 +29,16 @@ public class Booking {
     private  int infant;
     private Long bookingDate;
     private Long createdDate;
-
     private List<Passenger> passengerList = new ArrayList<Passenger>();
+    private List<RoomBooking> roomBookingList = new ArrayList<>();
+
+    public List<RoomBooking> getRoomBookingList() {
+        return roomBookingList;
+    }
+
+    public void setRoomBookingList(List<RoomBooking> roomBookingList) {
+        this.roomBookingList = roomBookingList;
+    }
 
     public List<Passenger> getPassengerList() {
         return passengerList;

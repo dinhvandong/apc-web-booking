@@ -22,7 +22,7 @@ public class ConfirmCodeService {
 
     public ConfirmCode create(ConfirmCode news)
     {
-        Long id = sequenceGeneratorService.generateSequence(Video.SEQUENCE_NAME);
+        Long id = sequenceGeneratorService.generateSequence(ConfirmCode.SEQUENCE_NAME);
         news.setId(id);
         return confirmCodeRepository.insert(news);
     }

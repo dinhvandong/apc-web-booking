@@ -13,7 +13,7 @@ import { MdOutlineKeyboardArrowLeft, MdSouth } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { getPriceByDate, getPriceFromDateToDate, getPriceFromMonth } from './../services/api_priceday';
 import { AuthContext } from '../AuthProvider';
-import { convertToCurrencyFormat } from '../utils/utils';
+import { convertToCurrencyFormat, formatDateTime } from '../utils/utils';
 
 const PlanCruise = (props) => {
     const navigate = useNavigate();
@@ -312,10 +312,13 @@ const PlanCruise = (props) => {
     // }, []);
 
     const fetchDataPriceByDate = async (dateString) => {
+
+        const dateConvert = formatDateTime(dateString);
         try {
-            const response = await getPriceByDate(dateString);
+            const response = await getPriceByDate(dateConvert);
             // const jsonData = await response.json();
-            // console.log("SetPriceByDate:", response);
+            console.log("dateString:", dateConvert);
+            console.log("SetPriceByDate:", response);
             setPriceByDate(response);
             updatePriceDate(response);
         } catch (error) {

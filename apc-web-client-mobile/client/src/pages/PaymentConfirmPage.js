@@ -22,7 +22,9 @@ const PaymentConfirmPage = () => {
     const [hidden3, setHidden3] = useState(false);
 
     const navigate = useNavigate();
-    const { bookingInfo } = useContext(AuthContext);
+    //const { bookingInfo } = useContext(AuthContext);
+    const { bookingInfo, setBookingInfo } = useContext(AuthContext);
+
     const { getAllServices } = useContext(AuthContext);
     const [finalPrice, setFinalPrice] = useState(0);
 
@@ -77,6 +79,13 @@ const PaymentConfirmPage = () => {
     }
 
 
+    const updatePrice = (newPrice) => {
+        setBookingInfo(prevBookingInfo => ({
+          ...prevBookingInfo,
+          price: newPrice
+        }));
+      };
+
     const calculateTotalPrice = () => {
         let totalPrice = 0;
 
@@ -87,6 +96,8 @@ const PaymentConfirmPage = () => {
         }
 
         setPriceService(totalPrice);
+        updatePrice(totalPrice);
+
     };
 
     function formatDate(longValue) {

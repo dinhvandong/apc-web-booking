@@ -31,7 +31,7 @@ public class EmailService {
 
         String subject = "Register new  account successful ";
 
-        String body ="Dear" + fullName+ ",\n" +
+        String body ="Dear " + fullName+ ",\n" +
                 "\n" +
                 "We are thrilled to welcome you to our AmbassadorCruise Booking System! Thank you for choosing us to be your trusted platform for booking your next unforgettable adventure. We can't wait to help you create amazing memories.\n" +
                 "\n" +

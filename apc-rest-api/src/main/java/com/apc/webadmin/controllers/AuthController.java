@@ -1,14 +1,18 @@
 package com.apc.webadmin.controllers;
 
+import com.apc.webadmin.database.SequenceGeneratorService;
 import com.apc.webadmin.dto.ResponseObject;
 import com.apc.webadmin.dto.UserDTO;
 import com.apc.webadmin.jwt.JwtTokenStore;
+import com.apc.webadmin.models.ConfirmCode;
 import com.apc.webadmin.models.User;
 import com.apc.webadmin.repositories.UserRepository;
 import com.apc.webadmin.security.PasswordEncoder;
 import com.apc.webadmin.services.AuthService;
+import com.apc.webadmin.services.ConfirmCodeService;
 import com.apc.webadmin.services.EmailService;
 import com.apc.webadmin.services.UserService;
+import com.apc.webadmin.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +40,13 @@ public class AuthController {
     UserService userService;
 
     @Autowired
+    ConfirmCodeService confirmCodeService;
+
+    @Autowired
     EmailService emailService;
+
+    @Autowired
+    SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     UserRepository userRepository;
     @PostMapping("/signup")
@@ -110,5 +120,17 @@ public class AuthController {
         JwtTokenStore.getInstance().storeToken(userDTO.getEmail(), token);
         return ResponseEntity.status(HttpStatus.OK).body
                 (new ResponseObject(200,user,token));
+    }
+
+
+    @PostMapping("/requestCodeChangePassword")
+    public ResponseEntity<?> requestCodeChangePassword(@RequestBody ConfirmCode confirmCode){
+        Long id = sequenceGeneratorService.generateSequence(ConfirmCode.SEQUENCE_NAME);
+        confirmCode.setType("CHANGE_PASSWORD");
+        confirmCode.setId(id);
+        confirmCode.setCreatedTime(DateUtils.getCurrentDate());
+        ConfirmCode confirmCode1 = confirmCodeService.create(confirmCode);
+        
+
     }
 }
