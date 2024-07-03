@@ -6,10 +6,11 @@ import com.apc.webadmin.models.Video;
 import com.apc.webadmin.repositories.ConfirmCodeRepository;
 import com.apc.webadmin.repositories.VideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class ConfirmCodeService {
 
     @Autowired
