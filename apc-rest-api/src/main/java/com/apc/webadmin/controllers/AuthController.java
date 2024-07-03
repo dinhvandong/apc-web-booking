@@ -130,7 +130,8 @@ public class AuthController {
         confirmCode.setId(id);
         confirmCode.setCreatedTime(DateUtils.getCurrentDate());
         ConfirmCode confirmCode1 = confirmCodeService.create(confirmCode);
-        
+        return ResponseEntity.status(HttpStatus.OK).body
+                (new ResponseObject(200,confirmCode1,"success"));
 
     }
 }
