@@ -30,7 +30,6 @@ const SelectCabinPage = () => {
 
     const gotoPlanFlexible = () => {
         navigate('/select-your-cabin/flexible');
-
     }
 
     const gotoPlanNonRefund = () => {
@@ -43,32 +42,20 @@ const SelectCabinPage = () => {
         const children = bookingInfo.children;
         const infant = bookingInfo.infant;
         // const price = bookingInfo.price;
-
         if (bookingInfo.cruiseType === 'Day Cruise') {
-
             const price = priceDate.priceDay;
-
             setPrice(priceDate.priceDay);
             const count = adult + children * 0.75 + infant * 0.5;
-
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
 
         } else  if (bookingInfo.cruiseType === 'Dinner Cruise')  {
             const price = priceDate.priceDinner;
             const count = adult + children * 0.75 + infant * 0.5;
-
             setPrice(priceDate.priceDinner);
             setFinalPrice(count * price);
             setCruiseType(bookingInfo.cruiseType);
-
-
         }
-
-
-
-
-
     }, []);
 
 

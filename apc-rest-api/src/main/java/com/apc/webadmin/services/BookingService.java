@@ -59,7 +59,7 @@ public class BookingService {
         bookingFound.setPhone(updateBooking.getPhone());
         bookingFound.setLastName(bookingFound.getLastName());
         bookingFound.setFirstName(bookingFound.getFirstName());
-        bookingFound.setPrice(bookingFound.getPrice());
+        bookingFound.setPrice(updateBooking.getPrice());
         bookingFound.setStatus(bookingFound.getStatus());
 
         return bookingRepository.save(bookingFound);

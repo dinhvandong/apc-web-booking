@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [bookingInfo, setBookingInfo] = useState({
+    id:0,
     title:'',
     customerName: '',
     firstName: '',
@@ -157,6 +158,8 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{
       token, userInfo, signIn, logout, bookingInfo, updateBookingInfo, priceDate, updatePriceDate,
       getService,
+      setBookingInfo,
+      updatePrice,
       updateService,
       addService,
       setArrayService,

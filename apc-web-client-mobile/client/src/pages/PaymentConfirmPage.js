@@ -15,6 +15,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import paypal from '../assets/paypal_icon.png';
 import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
 import { convertToCurrencyFormat } from '../utils/utils';
+import { createBooking, updateBooking } from '../services/api_booking';
 const PaymentConfirmPage = () => {
 
     const [hidden1, setHidden1] = useState(false);
@@ -49,6 +50,10 @@ const PaymentConfirmPage = () => {
     console.log("Children:", children);
     console.log("Infant:", infant);
     console.log("PriceBase:", priceBase);
+    console.log("Price:", price);
+
+    // updatePrice(100);
+
     // customerName: '',
     // firstName: '',
     // lastName: '',
@@ -68,8 +73,34 @@ const PaymentConfirmPage = () => {
 
     // console.log("itemsxxx:", items);
     // const [cruiseType, setCruiseType] = useState('Day Cruise');
-    const gotoContactInfor = () => {
-        navigate('/booking-success')
+    const gotoContactInfor = async () => {
+
+       // Call updateBooking 
+
+        //const result = await registerRequest(firstName, lastName, phone,
+        const response = await updateBooking(bookingInfo);
+        console.log("BookingResponse:", response);
+        console.log("bookingInfo:", bookingInfo);
+
+        // country, gender, email, password);
+        if (response.success === 200) {
+            setBookingInfo(response.data);
+            navigate('/booking-success')
+
+            // const token = result.data.message;
+            //const user = result.data
+            //login(token, user);
+            // navigate('/registration-success');
+
+        } else {
+            // console.log("resultLogin:", result);
+        }
+
+
+
+
+
+        
         // if (cruiseType === 'Day Cruise') {
         //     navigate('/contact');
         // }
@@ -81,10 +112,10 @@ const PaymentConfirmPage = () => {
 
     const updatePrice = (newPrice) => {
         setBookingInfo(prevBookingInfo => ({
-          ...prevBookingInfo,
-          price: newPrice
+            ...prevBookingInfo,
+            price: newPrice
         }));
-      };
+    };
 
     const calculateTotalPrice = () => {
         let totalPrice = 0;
@@ -96,7 +127,12 @@ const PaymentConfirmPage = () => {
         }
 
         setPriceService(totalPrice);
-        updatePrice(totalPrice);
+
+        const total = priceService + (priceBase * adult + priceBase * children * 0.7 + (infant>1)?(priceBase * (infant-1)* 0.7):0);
+        console.log("TotalPrice:", priceService);
+        console.log("TotalPrice:", total);
+
+        updatePrice(total);
 
     };
 
@@ -434,7 +470,7 @@ const PaymentConfirmPage = () => {
                 <div className='w-full md:w-[600px] m-5 h-auto flex flex-col'>
                     <div className='flex flex-row justify-between m-5'>
                         <div className='flex flex-col'>
-                            <p className='font-bold text-brown_color'>{convertToCurrencyFormat (priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant))} VND</p>
+                            <p className='font-bold text-brown_color'>{convertToCurrencyFormat(priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant))} VND</p>
                             <p>Fee tax included</p>
                         </div>
 
