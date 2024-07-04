@@ -9,8 +9,8 @@ import java.util.List;
 public interface TransactionSepayRepository extends MongoRepository<TransactionSePay, String>
 {
 
-    List<TransactionSePay> findAllByTransactionContent(String transactionContent);
-    List<TransactionSePay> findFirst100ByIdNotNull(Pageable pageable);
+//    List<TransactionSePay> findAllByTransactionContent(String transactionContent);
+//    List<TransactionSePay> findFirst100ByIdNotNull(Pageable pageable);
 
 
 }

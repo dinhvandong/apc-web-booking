@@ -117,6 +117,7 @@ public class BookingService {
 
     @Scheduled(fixedRate = 20000) // Execute every minute (60000 milliseconds)
     public void updateStatus(){
+        System.out.println("Scan Booking:");
         List<Booking> bookingList = findAll();
         for(Booking item: bookingList){
             if(item.getStatus()== Booking.BOOKING_PENDING){
@@ -124,7 +125,9 @@ public class BookingService {
                 sePayList = transactionSepayService.findAll();
                         //transactionSepayService.getTransactionsByContent(item.getBookingCode());
                 for (TransactionSePay sePay: sePayList){
-                    if(sePay.getTransactionContent().equals(item.getBookingCode())){
+                    System.out.println("Scan TransactionSePay:" + sePay.getTransaction_content());
+
+                    if(sePay.getTransaction_content().equals(item.getBookingCode())){
                         double amountIn = Double.parseDouble(sePay.getAmount_in());
                         if(amountIn >= (item.getPrice())){
                             item.setStatus(Booking.BOOKING_DONE);

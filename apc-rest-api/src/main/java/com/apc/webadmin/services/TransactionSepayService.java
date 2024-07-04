@@ -76,18 +76,18 @@ public class TransactionSepayService {
             if(optional.isEmpty()){
 
                 //TransactionSePay newItem = item;
-                if(item.getTransactionContent().contains("QR"))
+                if(item.getTransaction_content().contains("QR"))
                 {
-                    String content = item.getTransactionContent();
+                    String content = item.getTransaction_content();
                     String [] arrayContent = content.split(" ");
-                    item.setTransactionContent(arrayContent[1]);
+                    item.setTransaction_content(arrayContent[1]);
 
                 }else
                 {
 
-                    String content = item.getTransactionContent();
+                    String content = item.getTransaction_content();
                     String [] arrayContent = content.split(" ");
-                    item.setTransactionContent(arrayContent[0]);
+                    item.setTransaction_content(arrayContent[0]);
                 }
 
                 create(item);
@@ -95,14 +95,18 @@ public class TransactionSepayService {
         }
     }
 
-    public List<TransactionSePay> getTransactionsByContent(String transactionContent) {
-        return transactionSepayRepository.findAllByTransactionContent(transactionContent);
+    public boolean deleteAll(){
+        transactionSepayRepository.deleteAll();
+        return true;
     }
+//    public List<TransactionSePay> getTransactionsByContent(String transactionContent) {
+//        return transactionSepayRepository.findAllByTransactionContent(transactionContent);
+//    }
 
 
 
-    public List<TransactionSePay> getFirst100Transactions() {
-        Pageable pageable = PageRequest.of(0, 100);
-        return transactionSepayRepository.findFirst100ByIdNotNull(pageable);
-    }
+//    public List<TransactionSePay> getFirst100Transactions() {
+//        Pageable pageable = PageRequest.of(0, 100);
+//        return transactionSepayRepository.findFirst100ByIdNotNull(pageable);
+//    }
 }

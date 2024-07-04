@@ -40,6 +40,14 @@ public class TransactionSepayController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
 
     }
+
+    @PostMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll()
+    {
+        boolean check =  transactionSepayService.deleteAll();
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, check,"success"));
+
+    }
     @GetMapping("/list")
     public ApiResponse getTransactions() {
         return transactionSepayService.getTransactions();
