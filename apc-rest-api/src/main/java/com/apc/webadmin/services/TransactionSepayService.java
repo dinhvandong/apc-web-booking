@@ -91,7 +91,7 @@ public class TransactionSepayService {
 
                 //TransactionSePay newItem = item;
                 String value = extractValue(item.getTransaction_content());
-                item.setTransaction_content(value);
+                item.setTransaction_content("DC"+value);
 //                if(item.getTransaction_content().contains("QR"))
 //                {
 //                    String content = item.getTransaction_content();
