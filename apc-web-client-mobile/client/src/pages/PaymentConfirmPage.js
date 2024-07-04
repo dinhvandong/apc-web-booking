@@ -15,7 +15,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import paypal from '../assets/paypal_icon.png';
 import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
 import { convertToCurrencyFormat } from '../utils/utils';
-import { createBooking, updateBooking } from '../services/api_booking';
+import { createBooking, getBookingByCode, updateBooking } from '../services/api_booking';
 const PaymentConfirmPage = () => {
     const { bookingCode } = useParams();
 
@@ -114,18 +114,29 @@ const PaymentConfirmPage = () => {
         return formattedDate;
     }
 
-    useEffect(() => {
-        const count = adult + children * 0.75 + infant * 0.5;
-        setFinalPrice(count * price);
 
-        const currentDate = new Date().toLocaleDateString('en-US', {
-            weekday: 'short',
-            month: '2-digit',
-            day: '2-digit',
-            year: 'numeric'
-        });
-        setCurrentTime(formatDate(bookingDate));
-        calculateTotalPrice();
+    const getBooking = async () => {
+        const result = await getBookingByCode(bookingCode);
+        if (result.success === 200) {
+            setBookingData(result.data);
+            setCurrentTime(formatDate(result.data.bookingDate));
+
+        }
+    }
+
+    useEffect(() => {
+
+        getBooking();
+        // const count = adult + children * 0.75 + infant * 0.5;
+        // setFinalPrice(count * price);
+
+        // const currentDate = new Date().toLocaleDateString('en-US', {
+        //     weekday: 'short',
+        //     month: '2-digit',
+        //     day: '2-digit',
+        //     year: 'numeric'
+        // });
+        // calculateTotalPrice();
 
     }, []);
 
@@ -155,8 +166,8 @@ const PaymentConfirmPage = () => {
                     <div className='flex flex-col ml-5 text-white'>
 
                         <p className='font-bold'>Ambassador {bookingInfo.cruiseType}</p>
-                        <p>{currentTime}</p>
-                        <p>{adult} Adults, {children} children, {infant} infant</p>
+                        <p>{ bookingData!= null &&currentTime}</p>
+                        <p>{ bookingData!= null && bookingData.adult} Adults, {bookingData!= null &&bookingData.children} children, {bookingData!= null && bookingData.infant} infant</p>
 
                     </div>
 
@@ -180,24 +191,24 @@ const PaymentConfirmPage = () => {
 
                                 <div className='flex justify-between w-full mt-5'>
                                     <p className='font-bold'>Title</p>
-                                    <p>{title}</p>
+                                    <p>{bookingData!= null &&bookingData.title}</p>
                                 </div>
                                 <div className='flex justify-between w-full'>
                                     <p className='font-bold'>FirstName</p>
-                                    <p>{firstName}</p>
+                                    <p>{bookingData!= null &&bookingData.firstName}</p>
                                 </div>
                                 <div className='flex justify-between w-full'>
                                     <p className='font-bold'>LastName</p>
-                                    <p>{lastName}</p>
+                                    <p>{bookingData!= null &&bookingData.lastName}</p>
                                 </div>
 
                                 <div className='flex justify-between w-full'>
                                     <p className='font-bold'>E-mail</p>
-                                    <p>{email}</p>
+                                    <p>{bookingData!= null &&bookingData.email}</p>
                                 </div>
                                 <div className='flex justify-between w-full'>
                                     <p className='font-bold'>Phone Number</p>
-                                    <p>{phone}</p>
+                                    <p>{bookingData!= null &&bookingData.phone}</p>
                                 </div>
                             </div>
 
@@ -216,9 +227,9 @@ const PaymentConfirmPage = () => {
                         }                     </div>
                     {
                         hidden2 == false ? <div>
-                            {values.map((item, index) => (
+                            {bookingData!= null && bookingData.roomBookingList.map((item, index) => (
                                 <div className='flex justify-between w-full' key={index}>
-                                    <p className='font-bold'>{item.service}</p>
+                                    <p className='font-bold'>{item.roomType}</p>
                                     <p>{item.count}</p>
                                 </div>
                             ))}
@@ -226,19 +237,6 @@ const PaymentConfirmPage = () => {
                         </div> : (<div></div>)
 
                     }
-
-                    {/* <div className='flex justify-between w-full'>
-                        <p>Shuttle Bus Service</p>
-                        <p>02</p>
-                    </div>
-                    <div className='flex justify-between w-full'>
-                        <p>Ambassador Deluxe Cabin</p>
-                        <p>01</p>
-                    </div>
-                    <div className='flex justify-between w-full'>
-                        <p>Ambassador Premium Cabin</p>
-                        <p>0</p>
-                    </div> */}
                 </div>
                 <div className='flex flex-col w-full h-auto p-5 mt-5 bg-white rounded-lg'>
 
@@ -254,22 +252,22 @@ const PaymentConfirmPage = () => {
 
                     {
                         hidden3 == false ?
-                            (<div className='flex flex-col'>
+                        bookingData!= null && (<div className='flex flex-col'>
                                 <div className='flex justify-between w-full mt-5 font-bold text-black'>
                                     <p>Cruise Package</p>
-                                    <p>{(adult * priceBase) + (children * priceBase * 0.75) + (infant * priceBase * 0.5)} k VND</p>
+                                    <p>{(bookingData.adult * bookingData.priceBase) + (bookingData.children * bookingData.priceBase * 0.7) + (bookingData.infant * bookingData.priceBase * 0.5)} k VND</p>
                                 </div>
                                 <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                                    <p>Adults x {adult} </p>
-                                    <p>{(adult * priceBase)} k VND</p>
+                                    <p>Adults x {bookingData.adult} </p>
+                                    <p>{(bookingData.adult * bookingData.priceBase)} k VND</p>
                                 </div>
                                 <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                                    <p>Children x {children} </p>
-                                    <p>{children * priceBase * 0.75} k VND</p>
+                                    <p>Children x {bookingData.children} </p>
+                                    <p>{bookingData.children * bookingData.priceBase * 0.75} k VND</p>
                                 </div>
                                 <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                                    <p>Infant x{infant * 0.5} </p>
-                                    <p>{infant} k VND</p>
+                                    <p>Infant x{bookingData.infant * 0.5} </p>
+                                    <p>{bookingData.infant} k VND</p>
                                 </div>
 
                                 <div className='flex justify-between w-full mt-5 font-bold text-black'>
@@ -278,9 +276,9 @@ const PaymentConfirmPage = () => {
                                 </div>
 
 
-                                {values.map((item, index) => (
+                                {bookingData!= null && bookingData.roomBookingList.map((item, index) => (
                                     <div key={index} className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                                        <p>{item.service} x {item.count}</p>
+                                        <p>{item.roomType} x {item.count}</p>
                                         <p>{item.price} VND</p>
                                     </div>
                                 ))}
@@ -409,7 +407,7 @@ const PaymentConfirmPage = () => {
                 <div className='w-full md:w-[600px] m-5 h-auto flex flex-col'>
                     <div className='flex flex-row justify-between m-5'>
                         <div className='flex flex-col'>
-                            <p className='font-bold text-brown_color'>{convertToCurrencyFormat(priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant))} VND</p>
+                            <p className='font-bold text-brown_color'>{bookingData!=null && convertToCurrencyFormat(bookingData.price)} VND</p>
                             <p>Fee tax included</p>
                         </div>
 

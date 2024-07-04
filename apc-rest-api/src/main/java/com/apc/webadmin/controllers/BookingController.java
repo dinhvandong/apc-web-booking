@@ -35,7 +35,7 @@ public class BookingController {
     @GetMapping("/findAll")
     public ResponseEntity<?> getBookings(
             @RequestParam(defaultValue = "0") int pageNumber,
-            @RequestParam(defaultValue = "10") int pageSize) {
+            @RequestParam(defaultValue = "1000") int pageSize) {
 
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.getBookingsByPage(pageNumber, pageSize),"success"));
     }
