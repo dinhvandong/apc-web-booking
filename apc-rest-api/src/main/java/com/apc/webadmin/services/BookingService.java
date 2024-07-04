@@ -117,18 +117,22 @@ public class BookingService {
 
     @Scheduled(fixedRate = 20000) // Execute every minute (60000 milliseconds)
     public void updateStatus(){
-        List<Booking> bookingList = getLast100Bookings();
+        List<Booking> bookingList = findAll();
         for(Booking item: bookingList){
             if(item.getStatus()== Booking.BOOKING_PENDING){
                 List<TransactionSePay> sePayList = new ArrayList<>();
-                sePayList = transactionSepayService.getTransactionsByContent(item.getBookingCode());
+                sePayList = transactionSepayService.findAll();
+                        //transactionSepayService.getTransactionsByContent(item.getBookingCode());
                 for (TransactionSePay sePay: sePayList){
-                    double amountIn = Double.parseDouble(sePay.getAmount_in());
-                    if(amountIn >= (item.getPrice())){
-                        item.setStatus(Booking.BOOKING_DONE);
-                        bookingRepository.save(item);
-                        break;
+                    if(sePay.getTransactionContent().equals(item.getBookingCode())){
+                        double amountIn = Double.parseDouble(sePay.getAmount_in());
+                        if(amountIn >= (item.getPrice())){
+                            item.setStatus(Booking.BOOKING_DONE);
+                            bookingRepository.save(item);
+                            break;
+                        }
                     }
+
                 }
             }
         }
