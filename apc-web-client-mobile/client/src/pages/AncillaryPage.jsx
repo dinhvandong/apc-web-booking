@@ -11,10 +11,15 @@ import { AuthContext } from '../AuthProvider';
 import RoomItem from '../components/RoomItem';
 import HeaderAncillary from '../components/HeaderAncillary';
 import { API_URL_IMAGE, getRooms } from '../services/api';
+import { getBookingByCode } from '../services/api_booking';
 const AncillaryPage = () => {
+    const { bookingCode } = useParams();
 
     const navigate = useNavigate();
-    const { bookingInfo } = useContext(AuthContext);
+
+    const { bookingInfo, setBookingInfo } = useContext(AuthContext);
+
+    const { booking, setBooking } = useState(null);
     const { getAllServices } = useContext(AuthContext);
     const { addService } = useContext(AuthContext);
     const [finalPrice, setFinalPrice] = useState(0);
@@ -28,7 +33,22 @@ const AncillaryPage = () => {
     const infant = bookingInfo.infant;
     const count = adult + children * 0.75 + infant * 0.5;
 
+
+
+    const getBooking = async () => {
+        const result = await getBookingByCode(bookingCode);
+        if (result.success === 200) {
+          setBooking(result.data);
+         
+        } else {
+          window.alert('Không tìm thấy mã booking');
+    
+        }
+    
+      }
     useEffect(() => {
+
+        getBooking();
         const price = bookingInfo.price;
         setFinalPrice(count * price);
         setPrice(price);

@@ -59,18 +59,5 @@ public class TransactionSepayController {
         }
 
     }
-//    @PostMapping("/insert")
-//    public ResponseEntity<?> insert(@RequestBody TransactionSePay news)
-//    {
-//        TransactionSePay response =  transactionSepayService.insert(news);
-//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
-//    }
-//
-//    @PostMapping("/update")
-//    public ResponseEntity<?> update(@RequestBody TransactionSePay updateNews)
-//    {
-//        TransactionSePay response =  transactionSepayService.update(updateNews);
-//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"Ok"));
-//
-//    }
+
 }

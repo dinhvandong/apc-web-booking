@@ -13,6 +13,16 @@ public class Booking {
     private Long id;
     @Transient
     public static final String SEQUENCE_NAME = "booking_sequence";
+
+    @Transient
+    public static final int BOOKING_PENDING = 1;
+
+    @Transient
+    public static final int BOOKING_CANCEL = 0;
+
+    @Transient
+    public static final int BOOKING_DONE = 2;
+
     private String email;
     private String phone;
     private String title;

@@ -12,7 +12,10 @@ public class TransactionSePay {
     private String amount_out;
     private String amount_in;
     private String accumulated;
-    private String transaction_content;
+
+
+    @JsonProperty("transaction_content")
+    private String transactionContent;
     private String reference_number;
     private String code;
     private String sub_account;
@@ -74,12 +77,12 @@ public class TransactionSePay {
         this.accumulated = accumulated;
     }
 
-    public String getTransaction_content() {
-        return transaction_content;
+    public String getTransactionContent() {
+        return transactionContent;
     }
 
-    public void setTransaction_content(String transaction_content) {
-        this.transaction_content = transaction_content;
+    public void setTransactionContent(String transactionContent) {
+        this.transactionContent = transactionContent;
     }
 
     public String getReference_number() {

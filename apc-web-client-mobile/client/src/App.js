@@ -70,7 +70,7 @@ function App() {
 
         <Route path="/tiktok" element={<TiktokVideoPage />} />
 
-        <Route path="/ancillary" element={<AncillaryPage />} />
+        <Route path="/ancillary/:bookingCode" element={<AncillaryPage />} />
         <Route path="/payment-confirm" element={<PaymentConfirmPage />} />
         <Route path="/booking-success" element={<BookingSuccessfulPage />} />
         <Route path="/notification" element={<NotificationPage />} />

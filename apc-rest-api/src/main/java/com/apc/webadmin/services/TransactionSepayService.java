@@ -8,6 +8,9 @@ import com.apc.webadmin.models.TransactionSePay;
 import com.apc.webadmin.repositories.TransactionSepayRepository;
 import com.apc.webadmin.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,17 +26,7 @@ public class TransactionSepayService {
 
     @Autowired
     TransactionSepayRepository transactionSepayRepository;
-//
-//    @Autowired
-//    SequenceGeneratorService sequenceGeneratorService;
-//
-//    public TransactionSePay insert(TransactionSePay notification)
-//    {
-//        Long id = sequenceGeneratorService.generateSequence(TransactionSePay.SEQUENCE_NAME);
-//        notification.setId(id);
-//        return  transactionSepayRepository.insert(notification);
-//    }
-//
+
     public List<TransactionSePay> findAll()
     {
         return  transactionSepayRepository.findAll();
@@ -41,18 +34,6 @@ public class TransactionSepayService {
 //
 
 
-//
-//
-//
-//    public TransactionSePay update(TransactionSePay notification)
-//    {
-//        Optional<TransactionSePay> optionalNotification =
-//                transactionSepayRepository.findById(notification.getId());
-//        if(optionalNotification.isEmpty()) {
-//            return null;
-//        }
-//        return  transactionSepayRepository.save(notification);
-//    }
 
 
     private final WebClient webClient;
@@ -95,22 +76,33 @@ public class TransactionSepayService {
             if(optional.isEmpty()){
 
                 //TransactionSePay newItem = item;
-                if(item.getTransaction_content().contains("QR"))
+                if(item.getTransactionContent().contains("QR"))
                 {
-                    String content = item.getTransaction_content();
+                    String content = item.getTransactionContent();
                     String [] arrayContent = content.split(" ");
-                    item.setTransaction_content(arrayContent[1]);
+                    item.setTransactionContent(arrayContent[1]);
 
                 }else
                 {
 
-                    String content = item.getTransaction_content();
+                    String content = item.getTransactionContent();
                     String [] arrayContent = content.split(" ");
-                    item.setTransaction_content(arrayContent[0]);
+                    item.setTransactionContent(arrayContent[0]);
                 }
 
                 create(item);
             }
         }
+    }
+
+    public List<TransactionSePay> getTransactionsByContent(String transactionContent) {
+        return transactionSepayRepository.findAllByTransactionContent(transactionContent);
+    }
+
+
+
+    public List<TransactionSePay> getFirst100Transactions() {
+        Pageable pageable = PageRequest.of(0, 100);
+        return transactionSepayRepository.findFirst100ByIdNotNull(pageable);
     }
 }

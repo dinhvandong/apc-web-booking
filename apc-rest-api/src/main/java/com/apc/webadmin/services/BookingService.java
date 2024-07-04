@@ -4,12 +4,15 @@ package com.apc.webadmin.services;
 import com.apc.webadmin.database.SequenceGeneratorService;
 import com.apc.webadmin.models.Booking;
 import com.apc.webadmin.models.Passenger;
+import com.apc.webadmin.models.RoomBooking;
+import com.apc.webadmin.models.TransactionSePay;
 import com.apc.webadmin.repositories.BookingRepository;
 import com.apc.webadmin.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,12 +22,29 @@ import java.util.UUID;
 
 @Service
 public class BookingService {
+//    @Autowired
+//    BookingRepository bookingRepository;
+//    @Autowired
+//    SequenceGeneratorService sequenceGeneratorService;
+//
+//
     @Autowired
-    BookingRepository bookingRepository;
+    TransactionSepayService transactionSepayService;
+
+    private final BookingRepository bookingRepository;
+    private final SequenceGeneratorService sequenceGeneratorService;
+//    private final TransactionSepayService transactionSepayService;
+
     @Autowired
-    SequenceGeneratorService sequenceGeneratorService;
-
-
+    public BookingService(
+            BookingRepository bookingRepository,
+            SequenceGeneratorService sequenceGeneratorService,
+            TransactionSepayService transactionSepayService
+    ) {
+        this.bookingRepository = bookingRepository;
+        this.sequenceGeneratorService = sequenceGeneratorService;
+        this.transactionSepayService = transactionSepayService;
+    }
     public Booking create(Booking newBooking){
         Long id = sequenceGeneratorService.generateSequence(Booking.SEQUENCE_NAME);
         newBooking.setId(id);
@@ -65,7 +85,29 @@ public class BookingService {
         return bookingRepository.save(bookingFound);
     }
 
+    @Scheduled(fixedRate = 20000) // Execute every minute (60000 milliseconds)
+    public void updateStatus(){
+        List<Booking> bookingList = getLast100Bookings();
+        for(Booking item: bookingList){
+            if(item.getStatus()== Booking.BOOKING_PENDING){
+                List<TransactionSePay> sePayList = new ArrayList<>();
+                sePayList = transactionSepayService.getTransactionsByContent(item.getBookingCode());
+                for (TransactionSePay sePay: sePayList){
+                    double amountIn = Double.parseDouble(sePay.getAmount_in());
+                    if(amountIn == (item.getPrice())){
+                        item.setStatus(Booking.BOOKING_DONE);
+                        bookingRepository.save(item);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
+    public List<Booking> getLast100Bookings() {
+        Pageable pageable = PageRequest.of(0, 100, Sort.by(Sort.Direction.DESC, "createdDate"));
+        return bookingRepository.findTop100ByOrderByCreatedDateDesc(pageable);
+    }
 
     public Booking addListPassenger(String bookingCode, List<Passenger> passengerList){
 
@@ -86,6 +128,24 @@ public class BookingService {
         }
 
         bookingFound.setPassengerList(passengers);
+        return bookingRepository.save(bookingFound);
+    }
+
+
+    public Booking addRoomBooking(String bookingCode, List<RoomBooking> roomBookings){
+
+        Optional<Booking> optional= bookingRepository.findByBookingCode(bookingCode);
+        if(optional.isEmpty()){
+            return  null;
+        }
+
+        Booking bookingFound = optional.get();
+
+        List<RoomBooking> roomBookingList = bookingFound.getRoomBookingList();
+
+        roomBookingList.addAll(roomBookings);
+
+        bookingFound.setRoomBookingList(roomBookingList);
         return bookingRepository.save(bookingFound);
     }
 

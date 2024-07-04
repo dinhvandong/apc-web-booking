@@ -4,6 +4,7 @@ import com.apc.webadmin.dto.ResponseObject;
 import com.apc.webadmin.models.Booking;
 import com.apc.webadmin.models.EventPlan;
 import com.apc.webadmin.models.Passenger;
+import com.apc.webadmin.models.RoomBooking;
 import com.apc.webadmin.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,11 +62,21 @@ public class BookingController {
     }
 
     @PostMapping("/insertListPassengers")
-    public ResponseEntity<?> insert(@RequestParam String bookingCode,
+    public ResponseEntity<?> insertListPassengers(@RequestParam String bookingCode,
                                     @RequestBody List<Passenger> passengerList)
     {
 
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.addListPassenger(bookingCode, passengerList),"success"));
+
+    }
+
+
+    @PostMapping("/insertListRoom")
+    public ResponseEntity<?> insertListRoom(@RequestParam String bookingCode,
+                                    @RequestBody List<RoomBooking> bookingList)
+    {
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.addRoomBooking(bookingCode, bookingList),"success"));
 
     }
 

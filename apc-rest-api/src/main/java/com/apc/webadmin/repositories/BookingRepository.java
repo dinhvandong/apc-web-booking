@@ -16,5 +16,6 @@ public interface BookingRepository extends MongoRepository<Booking, Long>
 
     Optional<Booking> findByBookingCode(String bookingCode);
 
+    List<Booking> findTop100ByOrderByCreatedDateDesc(Pageable pageable);
 
 }
