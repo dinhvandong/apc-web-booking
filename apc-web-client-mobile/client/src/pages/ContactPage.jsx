@@ -174,7 +174,7 @@ const ContactPage = () => {
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
-    const { bookingInfo } = useContext(AuthContext);
+    const { bookingInfo, setBookingInfo } = useContext(AuthContext);
     const {updateBookingInfo} = useContext(AuthContext);
 
     const handlePasswordChange = (e) => {
@@ -275,7 +275,7 @@ const ContactPage = () => {
 
         // country, gender, email, password);
         if (response.success === 200) {
-            updateBookingInfo(response.data);
+            setBookingInfo(response.data);
 
             // const token = result.data.message;
             //const user = result.data
