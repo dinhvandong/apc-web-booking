@@ -130,8 +130,10 @@ public class BookingService {
                     if(sePay.getTransaction_content().equals(item.getBookingCode())){
                         double amountIn = Double.parseDouble(sePay.getAmount_in());
                         if(amountIn >= (item.getPrice())){
-                            item.setStatus(Booking.BOOKING_DONE);
-                            bookingRepository.save(item);
+                            Booking newBooking = null;
+                            newBooking = item;
+                            newBooking.setStatus(Booking.BOOKING_DONE);
+                            Booking updateBooking =  bookingRepository.save(newBooking);
                             break;
                         }
                     }
