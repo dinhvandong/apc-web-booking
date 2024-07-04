@@ -116,7 +116,7 @@ public class BookingService {
     }
 
     @Scheduled(fixedRate = 20000) // Execute every minute (60000 milliseconds)
-    public void updateStatus(){
+    public boolean updateStatus(){
         System.out.println("Scan Booking:");
         List<Booking> bookingList = findAll();
         for(Booking item: bookingList){
@@ -139,6 +139,7 @@ public class BookingService {
                 }
             }
         }
+        return  true;
     }
 
     public List<Booking> getLast100Bookings() {

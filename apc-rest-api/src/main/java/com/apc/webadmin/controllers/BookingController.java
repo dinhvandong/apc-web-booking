@@ -40,6 +40,12 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.getBookingsByPage(pageNumber, pageSize),"success"));
     }
 
+    @GetMapping("/scan")
+    public ResponseEntity<?> scan() {
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, bookingService.updateStatus(),"success"));
+    }
+
     @GetMapping("/findByBookingCode")
     public ResponseEntity<?> getBookings(
             @RequestParam String bookingCode) {
