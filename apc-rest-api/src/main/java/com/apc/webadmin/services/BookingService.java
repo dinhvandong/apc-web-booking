@@ -126,7 +126,6 @@ public class BookingService {
                         //transactionSepayService.getTransactionsByContent(item.getBookingCode());
                 for (TransactionSePay sePay: sePayList){
                     System.out.println("Scan TransactionSePay:" + sePay.getTransaction_content());
-
                     if(sePay.getTransaction_content().equals(item.getBookingCode())){
                         double amountIn = Double.parseDouble(sePay.getAmount_in());
                         if(amountIn >= (item.getPrice())){
@@ -137,7 +136,6 @@ public class BookingService {
                             break;
                         }
                     }
-
                 }
             }
         }
