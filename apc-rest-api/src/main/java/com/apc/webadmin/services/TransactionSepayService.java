@@ -10,6 +10,7 @@ import com.apc.webadmin.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -20,8 +21,8 @@ import java.util.Optional;
 @Service
 public class TransactionSepayService {
 
-//    @Autowired
-//    TransactionSepayRepository transactionSepayRepository;
+    @Autowired
+    TransactionSepayRepository transactionSepayRepository;
 //
 //    @Autowired
 //    SequenceGeneratorService sequenceGeneratorService;
@@ -73,5 +74,45 @@ public class TransactionSepayService {
                 .retrieve()
                 .bodyToMono(ApiResponse.class)
                 .block();
+    }
+
+    public TransactionSePay create (TransactionSePay item){
+
+        return transactionSepayRepository.insert(item);
+    }
+
+
+
+    Optional<TransactionSePay> findById(String id){
+        return transactionSepayRepository.findById(id);
+    }
+
+    @Scheduled(fixedRate = 60000) // Execute every minute (60000 milliseconds)
+    public void updateDb(){
+        ApiResponse apiResponse = getTransactions();
+        List<TransactionSePay> transactionSePays = apiResponse.getTransactions();
+        for(TransactionSePay item: transactionSePays){
+
+            Optional<TransactionSePay> optional = findById(item.getId());
+            if(optional.isEmpty()){
+
+                //TransactionSePay newItem = item;
+                if(item.getTransaction_content().contains("QR"))
+                {
+                    String content = item.getTransaction_content();
+                    String [] arrayContent = content.split(" ");
+                    item.setTransaction_content(arrayContent[1]);
+
+                }else
+                {
+
+                    String content = item.getTransaction_content();
+                    String [] arrayContent = content.split(" ");
+                    item.setTransaction_content(arrayContent[0]);
+                }
+
+                create(item);
+            }
+        }
     }
 }

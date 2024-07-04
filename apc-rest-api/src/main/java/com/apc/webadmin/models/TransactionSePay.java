@@ -2,9 +2,9 @@ package com.apc.webadmin.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+@Document(collection = "transaction_sepay")
 public class TransactionSePay {
-
+    @Id
     private String id;
     private String bank_brand_name;
     private String account_number;
