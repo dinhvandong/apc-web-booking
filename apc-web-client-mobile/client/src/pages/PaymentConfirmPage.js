@@ -165,7 +165,7 @@ const PaymentConfirmPage = () => {
 
                     <div className='flex flex-col ml-5 text-white'>
 
-                        <p className='font-bold'>Ambassador {bookingInfo.cruiseType}</p>
+                        <p className='font-bold'>Ambassador {bookingData!= null &&bookingData.cruiseType}</p>
                         <p>{ bookingData!= null &&currentTime}</p>
                         <p>{ bookingData!= null && bookingData.adult} Adults, {bookingData!= null &&bookingData.children} children, {bookingData!= null && bookingData.infant} infant</p>
 

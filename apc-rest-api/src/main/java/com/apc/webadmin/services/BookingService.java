@@ -101,7 +101,7 @@ public class BookingService {
         int children = bookingFound.getChildren();
         int infant = bookingFound.getInfant();
 
-        double priceGuest = bookingFound.getPrice() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
+        double priceGuest = bookingFound.getPriceBase() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
 
 
         List<RoomBooking> roomBookingList = bookingFound.getRoomBookingList();
@@ -164,7 +164,7 @@ public class BookingService {
         int children = bookingFound.getChildren();
         int infant = bookingFound.getInfant();
 
-        double priceGuest = bookingFound.getPrice() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
+        double priceGuest = bookingFound.getPriceBase() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
 
 
         List<RoomBooking> roomBookingList = bookingFound.getRoomBookingList();
@@ -197,7 +197,7 @@ public class BookingService {
         int children = bookingFound.getChildren();
         int infant = bookingFound.getInfant();
 
-        double priceGuest = bookingFound.getPrice() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
+        double priceGuest = bookingFound.getPriceBase() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
         List<RoomBooking> roomList = bookingFound.getRoomBookingList();
         double priceRoom = 0;
         for(RoomBooking item: roomList){

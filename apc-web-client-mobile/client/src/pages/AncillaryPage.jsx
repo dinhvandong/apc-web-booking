@@ -106,18 +106,13 @@ const AncillaryPage = () => {
     //     'En-suite bathroom with standing shower'];
 
     const gotoPaymentConfirm = async () => {
-
         const items = getAllServices();
         console.log("ITEMXXX:", items);
-
-
         const response = await addListRoom(bookingCode, items);
         console.log("BookingResponse:", response);
         // country, gender, email, password);
         if (response.success === 200) {
-            
             navigate(`/payment-confirm/${bookingCode}`);
-
         }
 
 
