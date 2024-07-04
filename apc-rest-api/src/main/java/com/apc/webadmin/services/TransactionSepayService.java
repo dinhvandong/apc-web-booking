@@ -34,15 +34,13 @@ public class TransactionSepayService {
 //        return  transactionSepayRepository.insert(notification);
 //    }
 //
-//    public List<TransactionSePay> findAll()
-//    {
-//        return  transactionSepayRepository.findAll();
-//    }
+    public List<TransactionSePay> findAll()
+    {
+        return  transactionSepayRepository.findAll();
+    }
 //
-//    public Optional<TransactionSePay> findById(Long id){
-//        return  transactionSepayRepository.findById(id);
-//    }
-//
+
+
 //
 //
 //
@@ -83,11 +81,11 @@ public class TransactionSepayService {
 
 
 
-    Optional<TransactionSePay> findById(String id){
+    public Optional<TransactionSePay> findById(String id){
         return transactionSepayRepository.findById(id);
     }
 
-    @Scheduled(fixedRate = 60000) // Execute every minute (60000 milliseconds)
+    @Scheduled(fixedRate = 10000) // Execute every minute (60000 milliseconds)
     public void updateDb(){
         ApiResponse apiResponse = getTransactions();
         List<TransactionSePay> transactionSePays = apiResponse.getTransactions();
