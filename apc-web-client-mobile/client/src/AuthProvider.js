@@ -23,7 +23,8 @@ export const AuthProvider = ({ children }) => {
     price: 0,
     bookingDate: 0,
     cruiseType: 'Day Cruise',
-    roomBookingList:[]
+    roomBookingList:[],
+    passengerList:[]
 
   });
 

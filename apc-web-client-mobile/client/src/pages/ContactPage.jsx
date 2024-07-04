@@ -175,6 +175,29 @@ const ContactPage = () => {
         setEmail(e.target.value);
     };
     const { bookingInfo, setBookingInfo } = useContext(AuthContext);
+    const {booking, setBooking} = useState({
+        id:0,
+        title:'',
+        customerName: '',
+        firstName: '',
+        lastName: '',
+        country: '',
+        countryCode: '',
+        phone: '',
+        email: '',
+        adult: 1,
+        children: 0,
+        infant: 0,
+        flexibleOrNonRefund: true,
+        priceBase: 0,
+        payMethod: 'PayPal',
+        price: 0,
+        bookingDate: 0,
+        cruiseType: 'Day Cruise',
+        roomBookingList:[],
+        passengerList:[]
+    
+      });
     const {updateBookingInfo} = useContext(AuthContext);
 
     const handlePasswordChange = (e) => {
@@ -227,23 +250,7 @@ const ContactPage = () => {
         console.log("lastName:", lastName);
         console.log("gender:", gender);
         console.log("country:", country);
-        /*
-        {
-    "email": "john.doe@example.com",
-    "phone": "1234567890",
-    "title": "Mr",
-    "firstName": "John",
-    "lastName": "Doe",
-    "cruiseType": "Caribbean",
-    "flexibleOrNonRefund": true,
-    "price": 1500.0,
-    "status": 1,
-    "createdDate": 20240520
-}
-        
-        */
-
-
+    
         const bookingDataJson = {
             "email": email,
             "phone": phone,
@@ -260,32 +267,24 @@ const ContactPage = () => {
             "children": bookingInfo.children,
             "infant": bookingInfo.infant,
         }
-
-
         updateBookingInfo(bookingDataJson);
-
-
         console.log("Hehehe:", bookingDataJson);
-        //firstName, lastName, phone, 
-        //country, gender,
-        //email, password
-        //const result = await registerRequest(firstName, lastName, phone,
         const response = await createBooking(bookingDataJson);
         console.log("BookingResponse:", response);
-
         // country, gender, email, password);
         if (response.success === 200) {
             setBookingInfo(response.data);
-
-            // const token = result.data.message;
-            //const user = result.data
-            //login(token, user);
-            // navigate('/registration-success');
-
+           // setBooking(response.data);
+            const bookingNew = response.data;
+            console.log("BookingNew:", bookingNew.bookingCode);
+            if (cruiseType === 'Day Cruise') {
+                navigate(`/ancillary/`+ bookingNew.bookingCode);
+            }
+            else {
+                navigate(`/payment-confirm/` + bookingNew.bookingCode);
+            }
         } else {
-            // console.log("resultLogin:", result);
         }
-        // navigate('/admin');
         setEmail('');
         setPassword('');
     };
@@ -293,12 +292,7 @@ const ContactPage = () => {
 
         handleSubmit();
 
-        if (cruiseType === 'Day Cruise') {
-            navigate('/ancillary');
-        }
-        else {
-            navigate('/payment-confirm');
-        }
+       
     }
     const handleGenderChange = event => {
         const gender = event.target.value;

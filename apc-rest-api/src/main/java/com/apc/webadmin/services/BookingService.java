@@ -51,6 +51,21 @@ public class BookingService {
         newBooking.setStatus(1);
         newBooking.setCreatedDate(DateUtils.getCurrentDate());
 
+        int adult = newBooking.getAdult();
+        int children = newBooking.getChildren();
+        int infant = newBooking.getInfant();
+
+        double priceGuest = newBooking.getPrice() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
+
+
+        List<RoomBooking> roomBookingList = newBooking.getRoomBookingList();
+        double priceRoom = 0;
+        for(RoomBooking item: roomBookingList){
+            priceRoom += item.getPrice()* item.getCount();
+        }
+
+        newBooking.setPrice(priceGuest + priceRoom);
+
         //String randomKey = UUID.randomUUID().toString();
         newBooking.setBookingCode("DC-"+id);
 
@@ -79,8 +94,23 @@ public class BookingService {
         bookingFound.setPhone(updateBooking.getPhone());
         bookingFound.setLastName(bookingFound.getLastName());
         bookingFound.setFirstName(bookingFound.getFirstName());
-        bookingFound.setPrice(updateBooking.getPrice());
+       // bookingFound.setPrice(updateBooking.getPrice());
         bookingFound.setStatus(bookingFound.getStatus());
+
+        int adult = bookingFound.getAdult();
+        int children = bookingFound.getChildren();
+        int infant = bookingFound.getInfant();
+
+        double priceGuest = bookingFound.getPrice() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
+
+
+        List<RoomBooking> roomBookingList = bookingFound.getRoomBookingList();
+        double priceRoom = 0;
+        for(RoomBooking item: roomBookingList){
+            priceRoom += item.getPrice()* item.getCount();
+        }
+
+        bookingFound.setPrice(priceGuest + priceRoom);
 
         return bookingRepository.save(bookingFound);
     }
@@ -128,6 +158,22 @@ public class BookingService {
         }
 
         bookingFound.setPassengerList(passengers);
+
+
+        int adult = bookingFound.getAdult();
+        int children = bookingFound.getChildren();
+        int infant = bookingFound.getInfant();
+
+        double priceGuest = bookingFound.getPrice() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
+
+
+        List<RoomBooking> roomBookingList = bookingFound.getRoomBookingList();
+        double priceRoom = 0;
+        for(RoomBooking item: roomBookingList){
+            priceRoom += item.getPrice()* item.getCount();
+        }
+
+        bookingFound.setPrice(priceGuest + priceRoom);
         return bookingRepository.save(bookingFound);
     }
 
@@ -146,6 +192,18 @@ public class BookingService {
         roomBookingList.addAll(roomBookings);
 
         bookingFound.setRoomBookingList(roomBookingList);
+
+        int adult = bookingFound.getAdult();
+        int children = bookingFound.getChildren();
+        int infant = bookingFound.getInfant();
+
+        double priceGuest = bookingFound.getPrice() * (adult + 0.7 * children + ((infant > 1) ? (infant-1)*0.7f:0));
+        List<RoomBooking> roomList = bookingFound.getRoomBookingList();
+        double priceRoom = 0;
+        for(RoomBooking item: roomList){
+            priceRoom += item.getPrice()* item.getCount();
+        }
+        bookingFound.setPrice(priceGuest + priceRoom);
         return bookingRepository.save(bookingFound);
     }
 

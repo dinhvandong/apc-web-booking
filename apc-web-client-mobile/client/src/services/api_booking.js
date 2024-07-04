@@ -39,6 +39,21 @@ export const addPassenger = async (bookingCode, passengerList) => {
   }
 };
 
+
+export const addListRoom = async (bookingCode, listRooms) => {
+  const headers = {
+    'Content-Type': 'application/json'
+  };
+  try {
+    //const token = localStorage.getItem("token");
+    const response = await axios.post(`${API_URL}/booking/insertListRoom?bookingCode=${bookingCode}`,
+      listRooms, { headers })
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getBookings = async () => {
   try {
     //const token = localStorage.getItem("token");

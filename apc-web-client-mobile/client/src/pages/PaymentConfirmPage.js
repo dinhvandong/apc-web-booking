@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import HeaderSelectCabin from '../components/HeaderSelectCabin'
 // import SelectCabin from '../components/SelectCabin'
 import EventItem from '../components/EventItem'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ic_checkbox from '../assets/ic_checkbox.png';
 import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
@@ -17,6 +17,7 @@ import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
 import { convertToCurrencyFormat } from '../utils/utils';
 import { createBooking, updateBooking } from '../services/api_booking';
 const PaymentConfirmPage = () => {
+    const { bookingCode } = useParams();
 
     const [hidden1, setHidden1] = useState(false);
     const [hidden2, setHidden2] = useState(false);
@@ -33,7 +34,6 @@ const PaymentConfirmPage = () => {
     const [currentTime, setCurrentTime] = useState('');
 
     const values = getAllServices();
-    console.log("getAllServices", values);
 
     const title = bookingInfo.title;
     const adult = bookingInfo.adult;
@@ -52,60 +52,19 @@ const PaymentConfirmPage = () => {
     console.log("PriceBase:", priceBase);
     console.log("Price:", price);
 
-    // updatePrice(100);
-
-    // customerName: '',
-    // firstName: '',
-    // lastName: '',
-    // country: '',
-    // countryCode: '',
-    // phone: '',
-    // email: '',
-    // adult: 1,
-    // children: 0,
-    // infant: 0,
-    // flexibleOrNonRefund: true,
-    // price: 0,
-    // cruiseType: 'Day Cruise',
-
-    // const items = getAllServices;
-    //const [items, setItems]= useState([]);
-
-    // console.log("itemsxxx:", items);
-    // const [cruiseType, setCruiseType] = useState('Day Cruise');
+    const [bookingData, setBookingData] = useState();
+    
     const gotoContactInfor = async () => {
 
-       // Call updateBooking 
+        navigate('/booking-success')
 
-        //const result = await registerRequest(firstName, lastName, phone,
-        const response = await updateBooking(bookingInfo);
-        console.log("BookingResponse:", response);
-        console.log("bookingInfo:", bookingInfo);
+        // const response = await updateBooking(bookingInfo);
+        // console.log("BookingResponse:", response);
+        // console.log("bookingInfo:", bookingInfo);
+        // if (response.success === 200) {
+        //     setBookingInfo(response.data);
 
-        // country, gender, email, password);
-        if (response.success === 200) {
-            setBookingInfo(response.data);
-            navigate('/booking-success')
-
-            // const token = result.data.message;
-            //const user = result.data
-            //login(token, user);
-            // navigate('/registration-success');
-
-        } else {
-            // console.log("resultLogin:", result);
-        }
-
-
-
-
-
-        
-        // if (cruiseType === 'Day Cruise') {
-        //     navigate('/contact');
-        // }
-        // else {
-        //     navigate('/contact');
+        // } else {
         // }
     }
 
@@ -156,7 +115,6 @@ const PaymentConfirmPage = () => {
     }
 
     useEffect(() => {
-
         const count = adult + children * 0.75 + infant * 0.5;
         setFinalPrice(count * price);
 
@@ -166,27 +124,8 @@ const PaymentConfirmPage = () => {
             day: '2-digit',
             year: 'numeric'
         });
-
         setCurrentTime(formatDate(bookingDate));
-
         calculateTotalPrice();
-
-
-        //   for (let i = 0; i < values.length; i++){
-        //     let item = values[i];
-        //     let price = item.price  * item.count;
-        //     console.log("price_item:", price);
-        //     setPriceService(priceService + price);
-        //   }
-
-
-        // const interval = setInterval(() => {
-        //     const vietnamTime = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
-        //     setCurrentTime(vietnamTime);
-        //   }, 1000); // Update every second
-
-        //   return () => clearInterval(interval); // Cleanup interval on component unmount
-        //setPrice(price);
 
     }, []);
 

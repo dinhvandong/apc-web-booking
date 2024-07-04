@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import HeaderSelectCabin from '../components/HeaderSelectCabin';
 // import SelectCabin from '../components/SelectCabin'
 import EventItem from '../components/EventItem';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ic_checkbox from '../assets/ic_checkbox.png';
 import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
@@ -11,7 +11,7 @@ import { AuthContext } from '../AuthProvider';
 import RoomItem from '../components/RoomItem';
 import HeaderAncillary from '../components/HeaderAncillary';
 import { API_URL_IMAGE, getRooms } from '../services/api';
-import { getBookingByCode } from '../services/api_booking';
+import { addListRoom, createBooking, getBookingByCode } from '../services/api_booking';
 const AncillaryPage = () => {
     const { bookingCode } = useParams();
 
@@ -28,30 +28,33 @@ const AncillaryPage = () => {
     const [roomList, setRoomList] = useState([]);
     const [items, setItems] = useState([]);
 
-    const adult = bookingInfo.adult;
-    const children = bookingInfo.children;
-    const infant = bookingInfo.infant;
-    const count = adult + children * 0.75 + infant * 0.5;
+
 
 
 
     const getBooking = async () => {
         const result = await getBookingByCode(bookingCode);
         if (result.success === 200) {
-          setBooking(result.data);
-         
+            const bookingInfo = result.data;
+            const adult = bookingInfo.adult;
+            const children = bookingInfo.children;
+            const infant = bookingInfo.infant;
+            const count = adult + children * 0.75 + infant * 0.5;
+            const price = bookingInfo.price;
+            setFinalPrice(count * price);
+            setPrice(price);
+            setBooking(result.data);
+
         } else {
-          window.alert('Không tìm thấy mã booking');
-    
+            window.alert('Không tìm thấy mã booking');
+
         }
-    
-      }
+
+    }
     useEffect(() => {
 
         getBooking();
-        const price = bookingInfo.price;
-        setFinalPrice(count * price);
-        setPrice(price);
+
         const fetchData = async () => {
             try {
 
@@ -62,7 +65,7 @@ const AncillaryPage = () => {
                     //renderedItems.push(<li key={i}>{items[i]}</li>);
                     const item = roomList[i];
                     console.log("iemxx:", item);
-                   // addService(item.roomType, item.priceBase, 0);
+                    // addService(item.roomType, item.priceBase, 0);
                     //  const newItem = { service: item.roomType, price:item.priceBase, count:0 };
 
                     //  setItems(prevItems => [...prevItems, newItem]);
@@ -102,11 +105,22 @@ const AncillaryPage = () => {
     //     'Private balcony',
     //     'En-suite bathroom with standing shower'];
 
-    const gotoPaymentConfirm = () => {
+    const gotoPaymentConfirm = async () => {
 
         const items = getAllServices();
         console.log("ITEMXXX:", items);
-        navigate('/payment-confirm');
+
+
+        const response = await addListRoom(bookingCode, items);
+        console.log("BookingResponse:", response);
+        // country, gender, email, password);
+        if (response.success === 200) {
+            
+            navigate(`/payment-confirm/${bookingCode}`);
+
+        }
+
+
         //history.replace('/');
 
     }
