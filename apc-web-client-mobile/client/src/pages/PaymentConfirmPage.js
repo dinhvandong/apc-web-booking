@@ -13,6 +13,7 @@ import bg_payment from '../assets/cabin1.png';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import paypal from '../assets/paypal_icon.png';
+import mbLogo from '../assets/Logo_MB_new.png';
 import HeaderPaymentConfirm from '../components/HeaderPaymentConfirm';
 import { convertToCurrencyFormat } from '../utils/utils';
 import { createBooking, getBookingByCode, updateBooking } from '../services/api_booking';
@@ -56,7 +57,7 @@ const PaymentConfirmPage = () => {
     
     const gotoContactInfor = async () => {
 
-        navigate('/booking-success')
+        navigate(`/booking-success/${bookingCode}`)
 
         // const response = await updateBooking(bookingInfo);
         // console.log("BookingResponse:", response);
@@ -120,6 +121,16 @@ const PaymentConfirmPage = () => {
         if (result.success === 200) {
             setBookingData(result.data);
             setCurrentTime(formatDate(result.data.bookingDate));
+
+            let totalPrice = 0;
+
+            for (let i = 0; i < result.data.roomBookingList.length; i++) {
+                let item = result.data.roomBookingList[i];
+                let price = item.price * item.count;
+                totalPrice += price;
+            }
+    
+            setPriceService(totalPrice);
 
         }
     }
@@ -255,7 +266,7 @@ const PaymentConfirmPage = () => {
                         bookingData!= null && (<div className='flex flex-col'>
                                 <div className='flex justify-between w-full mt-5 font-bold text-black'>
                                     <p>Cruise Package</p>
-                                    <p>{(bookingData.adult * bookingData.priceBase) + (bookingData.children * bookingData.priceBase * 0.7) + (bookingData.infant * bookingData.priceBase * 0.5)} k VND</p>
+                                    <p>{(bookingData.adult * bookingData.priceBase) + (bookingData.children * bookingData.priceBase * 0.7) + (bookingData.infant>1 ? ((bookingData.infant -1) * bookingData.priceBase * 0.7):0)} k VND</p>
                                 </div>
                                 <div className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
                                     <p>Adults x {bookingData.adult} </p>
@@ -286,7 +297,7 @@ const PaymentConfirmPage = () => {
 
                                 <div className='flex justify-between w-full mt-5 font-bold text-black'>
                                     <p>TOTAL</p>
-                                    <p>{priceService + (priceBase * adult + priceBase * children * 0.7 + priceBase * infant)}k VND</p>
+                                    <p>{bookingData!=null && bookingData.price} k VND</p>
                                 </div>
 
                             </div>) : <div></div>
@@ -412,7 +423,7 @@ const PaymentConfirmPage = () => {
                         </div>
 
                         <div className='flex items-center justify-end'>
-                            <img src={paypal} className='mr-5 w-[94px] h-[65px]' />
+                            <img src={mbLogo} className='mr-5' />
                             <button className='font-bold text-brown_color'>Change</button>
                         </div>
                     </div>

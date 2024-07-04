@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import HeaderSelectCabin from '../components/HeaderSelectCabin'
 // import SelectCabin from '../components/SelectCabin'
 import EventItem from '../components/EventItem'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ic_checkbox from '../assets/ic_checkbox.png';
 import ic_charge from '../assets/ic_charge.png';
 import ic_notpermit from '../assets/ic_notpermit.png';
@@ -11,11 +11,16 @@ import { AuthContext } from '../AuthProvider';
 import RoomItem from '../components/RoomItem';
 import bg_payment from '../assets/bg-payment.png';
 import { MdKeyboardArrowUp } from 'react-icons/md';
-import ic_success from '../assets/ic_success.png';
+// import ic_success from '../assets/ic_success.png';
+import ic_success from '../assets/mbbank.jpg';
+
 import ic_copy from '../assets/copy.png';
 import HeaderBookingSuccess from '../components/HeaderBookingSuccess';
 
 const BookingSuccessfulPage = () => {
+
+    const { bookingCode } = useParams();
+
     const navigate = useNavigate();
     const { bookingInfo } = useContext(AuthContext);
     const [finalPrice, setFinalPrice] = useState(0);
@@ -30,7 +35,11 @@ const BookingSuccessfulPage = () => {
         }
     }
 
-    const bookingCode = bookingInfo.bookingCode;
+    const gotoBookingDetail = () => {
+        navigate('/booking-search/' + bookingCode);
+    }
+
+   // const bookingCode = bookingInfo.bookingCode;
     const handleCopy = () => {
         navigator.clipboard.writeText(bookingCode)
           .then(() => {
@@ -65,7 +74,7 @@ const BookingSuccessfulPage = () => {
             <HeaderBookingSuccess />
             <div className=' px-5 w-full items-center justify-center md:w-[600px] flex flex-col mb-[10px] h-screen'>
 
-                <img src={ic_success} className='mt-5 w-[150px] h-[150px]' />
+                <img src={ic_success} className='rounded-md mt-5 w-[150px] h-[200px]' />
                 <p className='mt-5 ml-5 mr-5 text-center text-black'>
                     Payment has been successful.Look forward to welcoming you onboard Ambassador Cruise!
                 </p>
@@ -81,7 +90,7 @@ const BookingSuccessfulPage = () => {
 
 
                 </div>
-                <p className='mt-5 font-bold text-center text-brown_color'>View Your Booking</p>
+                <p onClick={gotoBookingDetail} className='mt-5 font-bold text-center hover:cursor-pointer text-brown_color'>View Your Booking</p>
 
             </div>
             <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-[#bbbbbf] flex justify-around py-4`}>

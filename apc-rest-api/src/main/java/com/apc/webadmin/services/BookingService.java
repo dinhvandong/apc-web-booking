@@ -67,7 +67,7 @@ public class BookingService {
         newBooking.setPrice(priceGuest + priceRoom);
 
         //String randomKey = UUID.randomUUID().toString();
-        newBooking.setBookingCode("DC-"+id);
+        newBooking.setBookingCode("DC"+id);
 
         return bookingRepository.insert(newBooking);
     }
@@ -124,7 +124,7 @@ public class BookingService {
                 sePayList = transactionSepayService.getTransactionsByContent(item.getBookingCode());
                 for (TransactionSePay sePay: sePayList){
                     double amountIn = Double.parseDouble(sePay.getAmount_in());
-                    if(amountIn == (item.getPrice())){
+                    if(amountIn >= (item.getPrice())){
                         item.setStatus(Booking.BOOKING_DONE);
                         bookingRepository.save(item);
                         break;

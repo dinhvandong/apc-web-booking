@@ -72,7 +72,7 @@ function App() {
 
         <Route path="/ancillary/:bookingCode" element={<AncillaryPage />} />
         <Route path="/payment-confirm/:bookingCode" element={<PaymentConfirmPage />} />
-        <Route path="/booking-success" element={<BookingSuccessfulPage />} />
+        <Route path="/booking-success/:bookingCode" element={<BookingSuccessfulPage />} />
         <Route path="/notification" element={<NotificationPage />} />
 
         <Route path="/menu" element={<MenuPage />} />

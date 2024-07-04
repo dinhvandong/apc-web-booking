@@ -237,7 +237,8 @@ const BookingTable = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
-        },
+            render: (status) => (status === 2 ? 'Confirm' : 'Pending'),
+          },
         {
             title: 'Member',
             key: 'member',
