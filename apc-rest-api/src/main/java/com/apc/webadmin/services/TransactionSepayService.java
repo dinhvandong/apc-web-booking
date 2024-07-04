@@ -20,40 +20,40 @@ import java.util.Optional;
 @Service
 public class TransactionSepayService {
 
-    @Autowired
-    TransactionSepayRepository transactionSepayRepository;
-
-    @Autowired
-    SequenceGeneratorService sequenceGeneratorService;
-
-    public TransactionSePay insert(TransactionSePay notification)
-    {
-        Long id = sequenceGeneratorService.generateSequence(TransactionSePay.SEQUENCE_NAME);
-        notification.setId(id);
-        return  transactionSepayRepository.insert(notification);
-    }
-
-    public List<TransactionSePay> findAll()
-    {
-        return  transactionSepayRepository.findAll();
-    }
-
-    public Optional<TransactionSePay> findById(Long id){
-        return  transactionSepayRepository.findById(id);
-    }
-
-
-
-
-    public TransactionSePay update(TransactionSePay notification)
-    {
-        Optional<TransactionSePay> optionalNotification =
-                transactionSepayRepository.findById(notification.getId());
-        if(optionalNotification.isEmpty()) {
-            return null;
-        }
-        return  transactionSepayRepository.save(notification);
-    }
+//    @Autowired
+//    TransactionSepayRepository transactionSepayRepository;
+//
+//    @Autowired
+//    SequenceGeneratorService sequenceGeneratorService;
+//
+//    public TransactionSePay insert(TransactionSePay notification)
+//    {
+//        Long id = sequenceGeneratorService.generateSequence(TransactionSePay.SEQUENCE_NAME);
+//        notification.setId(id);
+//        return  transactionSepayRepository.insert(notification);
+//    }
+//
+//    public List<TransactionSePay> findAll()
+//    {
+//        return  transactionSepayRepository.findAll();
+//    }
+//
+//    public Optional<TransactionSePay> findById(Long id){
+//        return  transactionSepayRepository.findById(id);
+//    }
+//
+//
+//
+//
+//    public TransactionSePay update(TransactionSePay notification)
+//    {
+//        Optional<TransactionSePay> optionalNotification =
+//                transactionSepayRepository.findById(notification.getId());
+//        if(optionalNotification.isEmpty()) {
+//            return null;
+//        }
+//        return  transactionSepayRepository.save(notification);
+//    }
 
 
     private final WebClient webClient;

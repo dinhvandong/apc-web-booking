@@ -3,73 +3,91 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "transaction_sepay")
 public class TransactionSePay {
 
-    @Id
-    private Long id;
-
-    public static final String SEQUENCE_NAME = "transaction_sepay_sequence";
-
-
-    private String gateway;
-
-    private String transactionDate;
-
-    private String accountNumber;
-
+    private String id;
+    private String bank_brand_name;
+    private String account_number;
+    private String transaction_date;
+    private String amount_out;
+    private String amount_in;
+    private String accumulated;
+    private String transaction_content;
+    private String reference_number;
     private String code;
+    private String sub_account;
+    private String bank_account_id;
 
-    private String content;
+    public String getId() {
+        return id;
+    }
 
-    private String transferType;
-
-    private double transferAmount;
-
-    private double accumulated;
-
-    private String subAccount;
-
-    private String referenceCode;
-
-    private String description;
-
-    // Constructors, getters, and setters
-
-    // Example constructor
-    public TransactionSePay(
-   Long id, String gateway, String transactionDate,
-  String accountNumber, String code, String content,
-   String transferType, double transferAmount, double accumulated,
-   String subAccount, String referenceCode, String description) {
+    public void setId(String id) {
         this.id = id;
-        this.gateway = gateway;
-        this.transactionDate = transactionDate;
-        this.accountNumber = accountNumber;
-        this.code = code;
-        this.content = content;
-        this.transferType = transferType;
-        this.transferAmount = transferAmount;
+    }
+
+    public String getBank_brand_name() {
+        return bank_brand_name;
+    }
+
+    public void setBank_brand_name(String bank_brand_name) {
+        this.bank_brand_name = bank_brand_name;
+    }
+
+    public String getAccount_number() {
+        return account_number;
+    }
+
+    public void setAccount_number(String account_number) {
+        this.account_number = account_number;
+    }
+
+    public String getTransaction_date() {
+        return transaction_date;
+    }
+
+    public void setTransaction_date(String transaction_date) {
+        this.transaction_date = transaction_date;
+    }
+
+    public String getAmount_out() {
+        return amount_out;
+    }
+
+    public void setAmount_out(String amount_out) {
+        this.amount_out = amount_out;
+    }
+
+    public String getAmount_in() {
+        return amount_in;
+    }
+
+    public void setAmount_in(String amount_in) {
+        this.amount_in = amount_in;
+    }
+
+    public String getAccumulated() {
+        return accumulated;
+    }
+
+    public void setAccumulated(String accumulated) {
         this.accumulated = accumulated;
-        this.subAccount = subAccount;
-        this.referenceCode = referenceCode;
-        this.description = description;
     }
 
-    public String getTransactionDate() {
-        return transactionDate;
+    public String getTransaction_content() {
+        return transaction_content;
     }
 
-    public void setTransactionDate(String transactionDate) {
-        this.transactionDate = transactionDate;
+    public void setTransaction_content(String transaction_content) {
+        this.transaction_content = transaction_content;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getReference_number() {
+        return reference_number;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setReference_number(String reference_number) {
+        this.reference_number = reference_number;
     }
 
     public String getCode() {
@@ -80,78 +98,20 @@ public class TransactionSePay {
         this.code = code;
     }
 
-    public String getContent() {
-        return content;
+    public String getSub_account() {
+        return sub_account;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setSub_account(String sub_account) {
+        this.sub_account = sub_account;
     }
 
-    public String getTransferType() {
-        return transferType;
+    public String getBank_account_id() {
+        return bank_account_id;
     }
 
-    public void setTransferType(String transferType) {
-        this.transferType = transferType;
+    public void setBank_account_id(String bank_account_id) {
+        this.bank_account_id = bank_account_id;
     }
-
-    public double getTransferAmount() {
-        return transferAmount;
-    }
-
-    public void setTransferAmount(double transferAmount) {
-        this.transferAmount = transferAmount;
-    }
-
-    public double getAccumulated() {
-        return accumulated;
-    }
-
-    public void setAccumulated(double accumulated) {
-        this.accumulated = accumulated;
-    }
-
-    public String getSubAccount() {
-        return subAccount;
-    }
-
-    public void setSubAccount(String subAccount) {
-        this.subAccount = subAccount;
-    }
-
-    public String getReferenceCode() {
-        return referenceCode;
-    }
-
-    public void setReferenceCode(String referenceCode) {
-        this.referenceCode = referenceCode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    // Example getters and setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getGateway() {
-        return gateway;
-    }
-
-    public void setGateway(String gateway) {
-        this.gateway = gateway;
-    }
-
     // Other getters and setters for the remaining fields
 }
