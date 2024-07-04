@@ -1,6 +1,7 @@
 package com.apc.webadmin.controllers;
 
 import com.apc.webadmin.dto.ResponseObject;
+import com.apc.webadmin.models.ApiResponse;
 import com.apc.webadmin.models.News;
 import com.apc.webadmin.models.TransactionSePay;
 import com.apc.webadmin.services.NewsService;
@@ -39,7 +40,10 @@ public class TransactionSepayController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
 
     }
-
+    @GetMapping("/list")
+    public ApiResponse getTransactions() {
+        return transactionSepayService.getTransactions();
+    }
 
 
     @GetMapping("/findById")
