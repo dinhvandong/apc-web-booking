@@ -237,7 +237,9 @@ const BookingTable = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
-            render: (status) => (status === 2 ? 'Confirm' : 'Pending'),
+            render: (record) => (record.status === 2 ? 
+                
+                <span className='font-bold text-green-600'>Confirm</span> :<span className='font-bold text-red-600'>Pending</span>),
           },
         {
             title: 'Member',
