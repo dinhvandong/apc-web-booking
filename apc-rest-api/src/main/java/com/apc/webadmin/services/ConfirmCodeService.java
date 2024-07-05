@@ -2,6 +2,7 @@ package com.apc.webadmin.services;
 
 import com.apc.webadmin.database.SequenceGeneratorService;
 import com.apc.webadmin.models.ConfirmCode;
+import com.apc.webadmin.models.User;
 import com.apc.webadmin.models.Video;
 import com.apc.webadmin.repositories.ConfirmCodeRepository;
 import com.apc.webadmin.repositories.VideRepository;
@@ -17,6 +18,9 @@ public class ConfirmCodeService {
     ConfirmCodeRepository confirmCodeRepository;
     @Autowired
     SequenceGeneratorService sequenceGeneratorService;
+
+    @Autowired
+    UserService userService;
     public List<ConfirmCode> findAll(){
         return confirmCodeRepository.findAll();
     }
@@ -51,9 +55,15 @@ public class ConfirmCodeService {
         ConfirmCode confirmCode = confirmCodeRepository.findBySecureCodeAndPathRandomAndStatus(code, path, ConfirmCode.STATUS_CONFIRM_PENDING);
         if(confirmCode != null){
             confirmCode.setStatus(ConfirmCode.STATUS_CONFIRM_OK);
+
+            String email = confirmCode.getEmail();
+            User user = userService.findByEmail(email);
+            user.setStatus(User.STATUS_CONFIRM);
+            userService.updateUser(user);
             return confirmCodeRepository.save(confirmCode);
 
-        }else {
+        }else
+        {
 
             return null;
         }
