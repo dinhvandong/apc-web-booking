@@ -90,6 +90,28 @@ export const loginRequest = async (email, password) => {
 };
 
 
+
+export const confirmCodeRequest = async (path, code) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/requestConfirmCode?path=${path}&code=${code}`, 
+    {
+      withCredentials: true,
+    },);
+    // console.log("loginResoibse:", response.data);
+    if (response.data.success === 200) 
+    {
+      return response.data;
+    } else 
+    {
+      return null;
+    }
+  } catch (error) 
+  {
+    throw error;
+  }
+};
+
+
 export const registerRequest = async (
   firstName, lastName, phone,
   country, gender,

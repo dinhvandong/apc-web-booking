@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SignIn from '../components/SignIn'
 import BottomNavigation from '../components/BottomNavigation'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { isAuthenticated } from '../services/api'
 import SignUp from '../components/SignUp'
+import ConfirmRegisterCode from '../components/ConfirmRegisterCode'
+import HeaderSignIn from '../components/HeaderSignIn'
 const ConfirmRegisterCodePage = () => {
-    const { code } = useParams();
+    const { path } = useParams();
 
     const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const ConfirmRegisterCodePage = () => {
       <div
         className={`min-h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}>      
          <HeaderSignIn title={"Confirm Code"} />
-        <SignUp />
+        <ConfirmRegisterCode path = {path} />
         <BottomNavigation selected={"account"} />
       </div>
     )

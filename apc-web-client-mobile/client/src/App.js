@@ -46,7 +46,7 @@ function App() {
         {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
         <Route path="/" element={<HomePage />} />
         <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/confirm-code/:code" element={<ConfirmRegisterCodePage />} />
+        <Route path="/confirm-code/:path" element={<ConfirmRegisterCodePage />} />
 
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/registration-success" element={<SignUpSuccessPage />} />

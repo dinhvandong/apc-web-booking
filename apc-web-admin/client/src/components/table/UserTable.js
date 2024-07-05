@@ -86,7 +86,7 @@ const UserTable = () => {
           color: status === 0 ? 'red' : 'inherit',
         };
 
-        return <span style={statusStyle}>{(status === 1 ? 'Hoạt động' : 'Dừng hoạt động')}</span>;
+        return <span style={statusStyle}>{(status === 2 ? 'Hoạt động' : 'Chưa kích hoạt')}</span>;
       },
     },
     {
