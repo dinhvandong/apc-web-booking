@@ -162,4 +162,15 @@ public class AuthController {
 
 
     }
+
+
+    @GetMapping("/findAllRequestCode")
+    public ResponseEntity<?> findAllRequestCode(){
+
+
+        return ResponseEntity.status(HttpStatus.OK).body
+                (new ResponseObject(200,confirmCodeService.findAll(),"Success"));
+
+
+    }
 }
