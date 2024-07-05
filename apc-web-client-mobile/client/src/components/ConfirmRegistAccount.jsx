@@ -2,29 +2,14 @@ import React, { useState } from 'react'
 import { confirmCodeRequest } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
-const ConfirmRegisterCode = (props) => {
+const ConfirmRegistAccount = () => {
     const navigate = useNavigate();
 
-    const [code, setCode] = useState('');
-    const path = props.path;
-
-    const handleCodeChange = (e) => {
-        setCode(e.target.value);
-    }
-
-
+    
     const confirmRequest = async (e) =>{
         e.preventDefault();
-        const response = await confirmCodeRequest(path, code);
-        console.log("Response:", response);
-        if (response.success === 200) 
-        {
-            alert("Completed registration! Please type your email and password to sign-in.");
-            navigate('/registration-success');
-        } else 
-        {
-            alert("Registration fail!");
-        }
+        navigate('/home');
+
     }
     return (
         <div className='flex bg-white flex-col items-center justify-center  w-full md:w-[600px] flex-grow  h-[1000px] overflow-y-auto'>
@@ -44,28 +29,13 @@ const ConfirmRegisterCode = (props) => {
             </div>
 
             <div className='mt-2 ml-4 mr-4'>
-                <p>Please provide your secret code from your email.</p>
+                <p>Please check your email and click confirmed link and copy secure code.</p>
 
             </div>
             <div className='mt-2'>
-                <p>*Please use English character only</p>
+                <p>*Please check your email to complete your registration</p>
             </div>
             <form className=" px-5  w-full md:w-[600px]   flex flex-col mt-2 md:ml-5 md:mr-5  rounded">
-
-                <div className="flex mt-2 mb-2">
-
-                    <div className='flex flex-col w-full'>
-                        <label htmlFor="username" className="text-[14px] block mb-2 text-black">Enter confirmed code from your email*</label>
-                        <input
-                            type="text"
-                            id="code"
-                            className="w-full px-3 py-1 border border-gray-300 rounded"
-                            value={code}
-                            onChange={handleCodeChange}
-                        />
-                    </div>
-
-                </div>
 
 
 
@@ -75,7 +45,7 @@ const ConfirmRegisterCode = (props) => {
                         type="submit"
                         className="bg-[#B77855] text-white w-full px-3 py-2 border rounded mt-2 hover:bg-[#B77855]"
                     >
-                        Confirm Code
+                        OK
                     </button>
                 </div>
             </form>
@@ -83,4 +53,5 @@ const ConfirmRegisterCode = (props) => {
     )
 }
 
-export default ConfirmRegisterCode
+
+export default ConfirmRegistAccount

@@ -147,9 +147,9 @@ const MyBookingSearch = (props) => {
 
           </div>
 
-          <div className='text-[#0D992C] text-center font-bold w-full mt-5 '>
+          <div className='w-full mt-5 font-bold text-center '>
 
-            <h1>Booking confirmed</h1>
+            <h1>{(booking != null && booking.status ===2)?<span className='text-green-600'>Booking confirmed</span>:(<span className='text-red-600'>Booking pending</span>)}</h1>
           </div>
 
           <div className='flex w-full mt-5 text-[16px] text-black'>

@@ -216,10 +216,11 @@ const handleLastNameChange = (e)=>{
       const token = result.data.message;
       const user = result.data
       //login(token, user);
-      navigate('/registration-success');
+      navigate('/confirm-account');
 
     } else {
       console.log("resultLogin:", result);
+      alert("Registration fail!")
     }
     // navigate('/admin');
     setEmail('');

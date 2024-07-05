@@ -1,16 +1,16 @@
 package com.apc.webadmin.models;
 
 public class RoomBooking {
-    private String roomType;
+    private String service;
     private double price;
     private int count;
 
-    public String getRoomType() {
-        return roomType;
+    public String getService() {
+        return service;
     }
 
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
+    public void setService(String service) {
+        this.service = service;
     }
 
     public double getPrice() {

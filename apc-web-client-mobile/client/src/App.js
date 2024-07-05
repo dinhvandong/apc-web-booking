@@ -38,6 +38,7 @@ import ItineraryDetailPage from './pages/ItineraryDetailPage';
 import MyBookingImportExcelPage from './pages/MyBookingImportExcelPage';
 import HistoryBookingPage from './pages/HistoryBookingPage';
 import ConfirmRegisterCodePage from './pages/ConfirmRegisterCodePage';
+import ConfirmRegistAccountPage from './pages/ConfirmRegistAccountPage';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/confirm-code/:path" element={<ConfirmRegisterCodePage />} />
+        <Route path="/confirm-account" element={<ConfirmRegistAccountPage />} />
 
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/registration-success" element={<SignUpSuccessPage />} />

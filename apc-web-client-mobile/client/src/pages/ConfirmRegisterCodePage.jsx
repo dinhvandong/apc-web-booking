@@ -25,7 +25,7 @@ const ConfirmRegisterCodePage = () => {
       }, []);
     return (
       <div
-        className={`min-h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}>      
+        className={`min-h-screen bg-cover bg-center bg-[#bbbbbf] flex flex-col  items-center transition-opacity duration-500`}>      
          <HeaderSignIn title={"Confirm Code"} />
         <ConfirmRegisterCode path = {path} />
         <BottomNavigation selected={"account"} />

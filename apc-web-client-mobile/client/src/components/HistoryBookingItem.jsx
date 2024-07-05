@@ -112,6 +112,16 @@ const HistoryBookingItem = ({ booking }) => {
                 <span className='font-bold'>BookingDate:</span> <span>{booking.bookingDate}</span>
 
             </div>
+
+            <div className='mt-2'>
+                <span className='font-bold'>BookingStatus:</span> {booking.status==2?(<span className='font-bold text-green-600'>{'Confirmed'}</span>):(<span className='font-bold text-red-600'>{'Pending'}</span>)}
+
+            </div>
+
+            <div className='mt-2'>
+                <span className='font-bold'>Bill:</span> {booking.price} k VND
+
+            </div>
         </div>
     )
 }
