@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import HeaderSelectCabin from '../components/HeaderSelectCabin'
 // import SelectCabin from '../components/SelectCabin'
 import EventItem from '../components/EventItem'
@@ -16,16 +16,19 @@ import ic_success from '../assets/mbbank.jpg';
 
 import ic_copy from '../assets/copy.png';
 import HeaderBookingSuccess from '../components/HeaderBookingSuccess';
+import { getBookingByCode } from '../services/api_booking';
 
 const BookingSuccessfulPage = () => {
 
     const { bookingCode } = useParams();
+    const inputRef = useRef(null);
 
     const navigate = useNavigate();
     const { bookingInfo } = useContext(AuthContext);
     const [finalPrice, setFinalPrice] = useState(0);
     const [price, setPrice] = useState(0);
     const [cruiseType, setCruiseType] = useState('Day Cruise');
+    const [booking, setBooking] = useState();
     const gotoContactInfor = () => {
         if (cruiseType === 'Day Cruise') {
             navigate('/contact');
@@ -39,16 +42,20 @@ const BookingSuccessfulPage = () => {
         navigate('/booking-search/' + bookingCode);
     }
 
-   // const bookingCode = bookingInfo.bookingCode;
+    // const bookingCode = bookingInfo.bookingCode;
     const handleCopy = () => {
-        navigator.clipboard.writeText(bookingCode)
-          .then(() => {
-           alert('BookingCode copied to clipboard');
-          })
-          .catch((error) => {
-           alert('Error copying text to clipboard:', error);
-          });
-      };
+
+        inputRef.current.select();
+        document.execCommand('copy');
+        alert('BookingCode copied to clipboard');
+        // navigator.clipboard.writeText(bookingCode)
+        //     .then(() => {
+        //         alert('BookingCode copied to clipboard');
+        //     })
+        //     .catch((error) => {
+        //         alert('Error copying text to clipboard:', error);
+        //     });
+    };
 
     useEffect(() => {
         const adult = bookingInfo.adult;
@@ -69,6 +76,17 @@ const BookingSuccessfulPage = () => {
         'Average room size: 30sqm.',
         'Private balcony',
         'En-suite bathroom with standing shower'];
+    const getBooking = async () => {
+        const result = await getBookingByCode(bookingCode);
+        if (result.success === 200) {
+            setBooking(result.data);
+        }
+    }
+
+    useEffect(() => {
+        getBooking();
+    }, []);
+
     return (
         <div className='flex flex-col bg-[#bbbbbf] items-center justify-center w-full mb-[100px] h-auto'>
             <HeaderBookingSuccess />
@@ -76,15 +94,21 @@ const BookingSuccessfulPage = () => {
 
                 <img src={ic_success} className='rounded-md mt-5 w-[150px] h-[200px]' />
                 <p className='mt-5 ml-5 mr-5 text-center text-black'>
-                    Payment has been successful.Look forward to welcoming you onboard Ambassador Cruise!
+                    Please transfer money to the account number above by scanning the QR code with the message {bookingCode} and the amount is {booking != null && booking.price} k VND
                 </p>
                 <div className='bg-[#2F4842] ml-5 px-5 mr-5 rounded-lg flex flex-col  py-5 w-full  h-auto'>
 
                     <p className='text-white'>BOOKING CODE</p>
                     <div className='flex items-center justify-between p-5 mt-5 ml-5 mr-5 bg-white rounded-lg'>
-
-                        <p className='font-bold text-[30px]'>{bookingCode}</p>
-                        <img onClick={handleCopy} src={ic_copy} className='w-5 h-5'/>
+                        <input className='w-full font-bold text-[30px]'
+                            ref={inputRef}
+                            type="text"
+                            value={bookingCode}
+                            readOnly
+                        // style={{ position: 'absolute', left: '-9999px' }}
+                        />
+                        {/* <p className='font-bold text-[30px]'>{bookingCode}</p> */}
+                        <img onClick={handleCopy} src={ic_copy} className='w-5 h-5' />
 
                     </div>
 

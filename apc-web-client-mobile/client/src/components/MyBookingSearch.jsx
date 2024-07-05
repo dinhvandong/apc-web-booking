@@ -14,6 +14,7 @@ const MyBookingSearch = (props) => {
   console.log("BookingCodeA:", bookingCode);
   const { updateBookingSearch } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { priceService, setPriceService } = useState(0);
 
   const gotoMyBooking2 = () => {
     navigate(`/my-booking2/${bookingCode}`)
@@ -26,7 +27,14 @@ const MyBookingSearch = (props) => {
       setBooking(result.data);
       setCustomers(result.data.passengerList);
       console.log("myBooking:", result.data);
+      const listService = result.data.roomBookingList;
 
+      for (let i = 0; i < listService.length; i++) {
+        const item = listService[i];
+        // Perform actions with the current item
+        const price = item.price * item.count;
+        setPriceService(priceService + price);
+      }
 
     } else {
       window.alert('Không tìm thấy mã booking');
@@ -66,6 +74,10 @@ const MyBookingSearch = (props) => {
 
   }
 
+  const gotoPaymentProcess = () => {
+
+    navigate(`/booking-success/${bookingCode}`);
+  }
   useEffect(() => {
 
     getBooking();
@@ -147,9 +159,11 @@ const MyBookingSearch = (props) => {
 
           </div>
 
-          <div className='w-full mt-5 font-bold text-center '>
+          <div className='flex justify-between w-full mt-5 font-bold text-center '>
 
-            <h1>{(booking != null && booking.status ===2)?<span className='text-green-600'>Booking confirmed</span>:(<span className='text-red-600'>Booking pending</span>)}</h1>
+            <h1>{(booking != null && booking.status === 2) ? <span className='text-green-600'>Booking confirmed</span> : (<span className='text-red-600'>Booking pending </span>)}</h1>
+            <h1>{(booking != null && booking.status === 1) ? <span onClick={gotoPaymentProcess} className='ml-5 font-bold hover:cursor-pointer text-brown_color'>View Payment Info</span> : <p></p>}</h1>
+
           </div>
 
           <div className='flex w-full mt-5 text-[16px] text-black'>
@@ -161,31 +175,17 @@ const MyBookingSearch = (props) => {
             </div>
             <div className='text-[20px] font-bold text-end items-center justify-end w-1/2'>
               <p>{bookingCode}</p>
-
-
             </div>
-
           </div>
-
-
-
         </div>
         <div className='flex flex-col w-full p-5 mt-5 bg-white rounded-md'>
-
-
           <div className='flex w-full mt-5 text-[16px] text-black font-bold '>
-
             <div className='flex items-center justify-start w-1/2'>
-
               <p>Date of Purchase</p>
-
             </div>
             <div className='items-center justify-end w-1/2 text-end'>
               <p>{booking != null ? formatDate(booking.createdDate) : ""}</p>
-
-
             </div>
-
           </div>
           <div className='flex w-full mt-5 text-[16px] font-bold text-black'>
 
@@ -286,25 +286,26 @@ const MyBookingSearch = (props) => {
 
               </div>
               <div className='flex items-center justify-end w-1/2 text-end'>
-                <p>3,160,000 VND </p>
+                <p>{priceService} k VND </p>
               </div>
             </div>
-            <div className='flex w-full mt-5 text-gray-600'>
 
-              <div className='flex items-center justify-start w-1/2 ml-5'>
+            {booking != null && booking.roomBookingList.map((item, index) => (
+              <div className='flex w-full mt-5 text-gray-600'>
 
-                <p>Shuttle bus x3</p>
+                <div className='flex items-center justify-start w-1/2 ml-5'>
 
-              </div>
-              <div className='flex items-center justify-end w-1/2 text-end'>
-                <p>1,800,000 VND   </p>
+                  <p>{item.service} x {item.count}</p>
 
+                </div>
+                <div className='flex items-center justify-end w-1/2 text-end'>
+                  <p>{item.price} k VND   </p>
+                </div>
 
-              </div>
+              </div>))
+            }
 
-            </div>
-
-            <div className='flex w-full mt-5 text-gray-600'>
+            {/* <div className='flex w-full mt-5 text-gray-600'>
 
               <div className='flex items-center justify-start w-1/2 ml-5'>
 
@@ -315,7 +316,7 @@ const MyBookingSearch = (props) => {
                 <p>2,500,000 VND   </p>
               </div>
 
-            </div>
+            </div> */}
 
 
             <div className='flex w-full mt-5 font-bold text-black text-[16px]'>
@@ -326,7 +327,7 @@ const MyBookingSearch = (props) => {
 
               </div>
               <div className='flex items-center justify-end w-1/2 text-end'>
-                <p>9,835,375 VND </p>
+                <p>{booking != null && booking.price} k VND </p>
               </div>
             </div>
 
@@ -373,7 +374,7 @@ const MyBookingSearch = (props) => {
             <div>
               {hiddenPassenger === false ? customers.map((customer, index) => (
                 <CustomerItem key={customer.id}
-                index={ index}
+                  index={index}
                   title={customer.title}
                   firstName={customer.firstName}
                   lastName={customer.lastName}

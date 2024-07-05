@@ -16,7 +16,7 @@ const HeaderBookingSuccess = () => {
                 {/* Add your back icon here */}
                 {/* <FaArrowLeft className='text-red-600' /> */}
             </button>
-            <h1 className="text-xl font-bold">Select Your Plan</h1>
+            <h1 className="text-xl font-bold">Payment Process</h1>
             <div className="mr-4"></div> {/* Add any other elements on the right side */}
         </header>
     )

@@ -120,6 +120,7 @@ const PaymentConfirmPage = () => {
         const result = await getBookingByCode(bookingCode);
         if (result.success === 200) {
             setBookingData(result.data);
+            console.log("BOOKING_DATA:",result.data);
             setCurrentTime(formatDate(result.data.bookingDate));
 
             let totalPrice = 0;
@@ -240,7 +241,7 @@ const PaymentConfirmPage = () => {
                         hidden2 == false ? <div>
                             {bookingData!= null && bookingData.roomBookingList.map((item, index) => (
                                 <div className='flex justify-between w-full' key={index}>
-                                    <p className='font-bold'>{item.roomType}</p>
+                                    <p className='font-bold'>{item.service}</p>
                                     <p>{item.count}</p>
                                 </div>
                             ))}
@@ -289,7 +290,7 @@ const PaymentConfirmPage = () => {
 
                                 {bookingData!= null && bookingData.roomBookingList.map((item, index) => (
                                     <div key={index} className='flex ml-2 px-2 font-thin text-[#9DA4AE] justify-between w-full'>
-                                        <p>{item.roomType} x {item.count}</p>
+                                        <p>{item.service} x {item.count}</p>
                                         <p>{item.price} VND</p>
                                     </div>
                                 ))}
