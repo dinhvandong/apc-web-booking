@@ -12,6 +12,12 @@ public class ConfirmCode {
     @Transient
     public static final String SEQUENCE_NAME = "confirm_code_sequence";
 
+    @Transient
+    public static final int STATUS_CONFIRM_OK = 2;
+
+    @Transient
+    public static final int STATUS_CONFIRM_PENDING = 2;
+
     private Long userID;
 
     private String email;
@@ -19,12 +25,21 @@ public class ConfirmCode {
 
     private String secureCode;
 
+    private String pathRandom;
+
     private Long createdTime;
 
     private int status = 1;
 
     private String type;
 
+    public String getPathRandom() {
+        return pathRandom;
+    }
+
+    public void setPathRandom(String pathRandom) {
+        this.pathRandom = pathRandom;
+    }
 
     public String getType() {
         return type;

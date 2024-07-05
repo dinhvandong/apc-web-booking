@@ -8,6 +8,18 @@ public class User {
     private Long id;
     @Transient
     public static final String SEQUENCE_NAME = "user_sequence";
+
+
+    @Transient
+    public static final int STATUS_PENDING = 1;
+
+    @Transient
+    public static final int STATUS_CONFIRM = 2;
+
+    @Transient
+    public static final int STATUS_DELETE = -1;
+
+
 //    private String username;
     private String email;
 

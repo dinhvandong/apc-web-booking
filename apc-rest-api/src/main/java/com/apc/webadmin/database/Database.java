@@ -24,7 +24,7 @@ public class Database {
                 user.setEmail("admin@gmail.com");
                 user.setPhone("84965741051");
                 user.setPassword(PasswordEncoder.getInstance().encodePassword("A123456a@"));
-                user.setStatus(1);
+                user.setStatus(User.STATUS_CONFIRM);
                 user.setGender("Mr");
                 user.setCountry("Vietnam");
                 user.setFirstName("Dong");
@@ -36,6 +36,7 @@ public class Database {
                 long longDate = Long.parseLong(formattedDate);
                 user.setCreatedDate(longDate);
                 //userRepository.deleteAll();
+                userRepository.save(user);
                 if(userRepository.findAll().isEmpty())
                     userRepository.insert(user);
 

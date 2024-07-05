@@ -6,5 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface ConfirmCodeRepository extends MongoRepository<ConfirmCode, Long>
 {
 
-
+    ConfirmCode findBySecureCodeAndPathRandom(String secureCode, String pathRandom);
+    ConfirmCode findBySecureCodeAndPathRandomAndStatus(String secureCode, String pathRandom, int status);
 }

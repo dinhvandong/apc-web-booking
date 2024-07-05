@@ -13,6 +13,7 @@ import com.apc.webadmin.services.ConfirmCodeService;
 import com.apc.webadmin.services.EmailService;
 import com.apc.webadmin.services.UserService;
 import com.apc.webadmin.utils.DateUtils;
+import com.apc.webadmin.utils.Ultis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,10 +66,21 @@ public class AuthController {
         requestUser.setRole("client");
         requestUser.setCountry(userDTO.getCountry());
         requestUser.setGender(userDTO.getGender());
-        requestUser.setStatus(1);
+        requestUser.setStatus(User.STATUS_PENDING);
         User user = userService.createUser(requestUser);
 
-        emailService.sendEmailRegisterSuccess(userDTO.getEmail(), userDTO.getFirstName() + " "+ userDTO.getLastName());
+        ConfirmCode confirmCode = new ConfirmCode();
+        Long idCode = sequenceGeneratorService.generateSequence(ConfirmCode.SEQUENCE_NAME);
+        confirmCode.setId(idCode);
+        confirmCode.setUserID(user.getId());
+        confirmCode.setEmail(userDTO.getEmail());
+        confirmCode.setStatus(ConfirmCode.STATUS_CONFIRM_PENDING);
+        confirmCode.setCreatedTime(DateUtils.getCurrentDate());
+        confirmCode.setSecureCode(Ultis.generateRandomCode(6));
+        confirmCode.setPathRandom(Ultis.generateRandomString(10));
+        confirmCodeService.create(confirmCode);
+
+        emailService.sendEmailRegisterConfirmCode(userDTO.getEmail(), userDTO.getFirstName() + " "+ userDTO.getLastName(), confirmCode.getPathRandom(), confirmCode.getSecureCode());
 
         return ResponseEntity.status(HttpStatus.OK).body
                 (new ResponseObject(200, user, "success"));
@@ -87,8 +99,7 @@ public class AuthController {
         requestUser.setCountry(userDTO.getCountry());
         requestUser.setLastName(userDTO.getLastName());
         requestUser.setFirstName(userDTO.getFirstName());
-        requestUser.setStatus(1);
-        requestUser.setStatus(1);
+        requestUser.setStatus(User.STATUS_CONFIRM);
         requestUser.setGender(userDTO.getGender());
         requestUser.setRole("admin");
         User user = userService.createUser(requestUser);
@@ -99,9 +110,9 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody UserDTO userDTO) {
         User user = userService.findByEmail((userDTO.getEmail()));
-        if (user == null || !PasswordEncoder.getInstance().matches(userDTO.getPassword(), user.getPassword())) {
+        if (user==null || user.getStatus() != User.STATUS_CONFIRM || !PasswordEncoder.getInstance().matches(userDTO.getPassword(), user.getPassword())) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseObject(201, user, "Token invalid"));
+                    .body(new ResponseObject(201, user, "User not found"));
         }
         String token = authService.loginWithEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         JwtTokenStore.getInstance().storeToken(userDTO.getEmail(), token);
@@ -132,6 +143,23 @@ public class AuthController {
         ConfirmCode confirmCode1 = confirmCodeService.create(confirmCode);
         return ResponseEntity.status(HttpStatus.OK).body
                 (new ResponseObject(200,confirmCode1,"success"));
+
+    }
+
+
+    @PostMapping("/requestConfirmCode")
+    public ResponseEntity<?> requestConfirmCode(@RequestParam String path, @RequestParam String code){
+
+        ConfirmCode confirmCode = null;
+        confirmCode = confirmCodeService.findBySecureCodeAndPath(code, path);
+
+        if(confirmCode== null){
+            return ResponseEntity.status(HttpStatus.OK).body
+                    (new ResponseObject(201,false,"fail"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body
+                (new ResponseObject(200,true,"Success"));
+
 
     }
 }

@@ -55,7 +55,14 @@ public class UserService {
 
     public  boolean existsByEmailOrPhone(String email, String phone){
 
-        return userRepository.existsByEmailOrPhone(email,phone);
+        boolean check1 =  userRepository.existsByEmailOrPhone(email,phone);
+
+        if(check1){
+
+            User user = findByEmail(email);
+            return user.getStatus() == User.STATUS_CONFIRM;
+        }
+        return false;
     }
 
     public User findByEmail(String email) {

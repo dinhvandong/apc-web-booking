@@ -46,6 +46,14 @@ public class ConfirmCodeService {
         return optional.get();
     }
 
+    public  ConfirmCode findBySecureCodeAndPath(String code, String path){
+
+        ConfirmCode confirmCode = confirmCodeRepository.findBySecureCodeAndPathRandomAndStatus(code, path, ConfirmCode.STATUS_CONFIRM_PENDING);
+        confirmCode.setStatus(ConfirmCode.STATUS_CONFIRM_OK);
+        return confirmCodeRepository.save(confirmCode);
+
+    }
+
     public ConfirmCode update(ConfirmCode confirmCode)
     {
         Optional<ConfirmCode> optional = confirmCodeRepository.findById(confirmCode.getId());
