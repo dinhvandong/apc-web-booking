@@ -57,10 +57,17 @@ public class UserService {
 
         boolean check1 =  userRepository.existsByEmailOrPhone(email,phone);
 
-        if(check1){
-
+        if(check1)
+        {
             User user = findByEmail(email);
-            return user.getStatus() == User.STATUS_CONFIRM;
+            if(user.getStatus()== User.STATUS_CONFIRM)
+            {
+                return true;
+            }else if(user.getStatus() == User.STATUS_PENDING)
+            {
+                userRepository.delete(user);
+                return false;
+            }
         }
         return false;
     }
@@ -70,10 +77,14 @@ public class UserService {
 
         //if(optionalUser.isEmpty()) return  null;
         //return  optionalUser.get();
-
+        for(User user: findAll()){
+            if(user.getEmail().equals(email) && user.getStatus()== User.STATUS_CONFIRM)
+                return user;
+        }
 
         for(User user: findAll()){
-            if(user.getEmail().equals(email)) return user;
+            if(user.getEmail().equals(email))
+                return user;
         }
         return  null;
        // return optionalUser.orElse(null);

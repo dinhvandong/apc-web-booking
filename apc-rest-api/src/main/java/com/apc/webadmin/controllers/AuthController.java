@@ -67,6 +67,7 @@ public class AuthController {
         requestUser.setCountry(userDTO.getCountry());
         requestUser.setGender(userDTO.getGender());
         requestUser.setStatus(User.STATUS_PENDING);
+
         User user = userService.createUser(requestUser);
 
         ConfirmCode confirmCode = new ConfirmCode();

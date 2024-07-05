@@ -97,13 +97,13 @@ export const confirmCodeRequest = async (path, code) => {
     {
       withCredentials: true,
     },);
-    // console.log("loginResoibse:", response.data);
+    console.log("loginResoibse:", response.data);
     if (response.data.success === 200) 
     {
       return response.data;
     } else 
     {
-      return null;
+      return response.data;
     }
   } catch (error) 
   {

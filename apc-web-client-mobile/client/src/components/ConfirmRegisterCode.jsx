@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { confirmCodeRequest } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const ConfirmRegisterCode = (props) => {
+    const navigate = useNavigate();
 
     const [code, setCode] = useState('');
     const path = props.path;
@@ -14,12 +16,14 @@ const ConfirmRegisterCode = (props) => {
     const confirmRequest = async (e) => {
         e.preventDefault();
         const response = await confirmCodeRequest(path, code);
-        if (response.status === 200) {
-            alert("Confirm successful");
+        console.log("Response:", response);
+        if (response.success === 200) {
+            alert("Completed registration! Please type your email and password to sign-in.");
         } else {
-            alert("Confirm fail");
+            alert("Registration fail!");
 
         }
+        navigate('/sign-in')
     }
     return (
         <div className='flex flex-col items-center justify-center  w-full md:w-[600px] flex-grow  h-[1000px] overflow-y-auto'>
