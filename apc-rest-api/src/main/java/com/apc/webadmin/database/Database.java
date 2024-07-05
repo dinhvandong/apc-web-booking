@@ -35,7 +35,7 @@ public class Database {
                 String formattedDate = currentDate.format(formatter);
                 long longDate = Long.parseLong(formattedDate);
                 user.setCreatedDate(longDate);
-                //userRepository.deleteAll();
+                userRepository.deleteAll();
                 userRepository.save(user);
                 if(userRepository.findAll().isEmpty())
                     userRepository.insert(user);

@@ -11,7 +11,8 @@ const ConfirmRegisterCode = (props) => {
     }
 
 
-    const confirmRequest = async () => {
+    const confirmRequest = async (e) => {
+        e.preventDefault();
         const response = await confirmCodeRequest(path, code);
         if (response.status === 200) {
             alert("Confirm successful");

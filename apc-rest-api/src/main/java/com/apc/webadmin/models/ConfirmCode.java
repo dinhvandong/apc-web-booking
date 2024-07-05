@@ -16,7 +16,7 @@ public class ConfirmCode {
     public static final int STATUS_CONFIRM_OK = 2;
 
     @Transient
-    public static final int STATUS_CONFIRM_PENDING = 2;
+    public static final int STATUS_CONFIRM_PENDING = 1;
 
     private Long userID;
 
