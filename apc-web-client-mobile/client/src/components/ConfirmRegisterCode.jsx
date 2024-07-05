@@ -49,7 +49,7 @@ const ConfirmRegisterCode = (props) => {
 
                 <div className="flex mt-2 mb-2">
 
-                    <div className='w-[50%] flex flex-col'>
+                    <div className='flex flex-col w-full'>
                         <label htmlFor="username" className="text-[14px] block mb-2 text-black">Enter confirmed code from your email*</label>
                         <input
                             type="text"
