@@ -150,6 +150,8 @@ public class AuthController {
 
         confirmCode.setStatus(ConfirmCode.STATUS_CONFIRM_OK);
 
+        confirmCodeService.update(confirmCode);
+
         User user = userService.findByEmail(confirmCode.getEmail());
         user.setPassword(password);
         userService.updateUser(user);

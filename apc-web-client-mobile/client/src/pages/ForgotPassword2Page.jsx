@@ -21,7 +21,13 @@ const ForgotPassword2Page = () => {
         setConfirmPassword(e.target.value);
     };
     const navigate = useNavigate();
-    const gotoHomePage = async () => {
+    const gotoHomePage =  (event) => {
+        event.preventDefault();
+        requestUpdate();
+       
+    }
+
+    const requestUpdate=async ()=>{
 
         if(password === confirmPassword){
 
@@ -51,7 +57,7 @@ const ForgotPassword2Page = () => {
                 <h1 className="text-xl font-bold">{"Forgot Password"}</h1>
             </header>
             <div className='flex flex-col items-center justify-center w-full h-screen bg-white'>
-                <form className='flex flex-col items-center justify-center px-5 py-5'>
+                <form onSubmit={gotoHomePage} className='flex flex-col items-center justify-center px-5 py-5'>
                     <img src={forgot_password} className='w-[150px] h-[150px]' />
                     <div>
                         <p>
@@ -95,7 +101,7 @@ const ForgotPassword2Page = () => {
                         />
                     </div>
 
-                    <button onClick={gotoHomePage} className='text-white w-full md:w-[600px] m-5 py-2 rounded bg-[#B77855]'> Change Password</button>
+                    <button type='submit' className='text-white w-full md:w-[600px] m-5 py-2 rounded bg-[#B77855]'> Change Password</button>
                 </form>
             </div>
         </div>
