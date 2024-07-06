@@ -154,15 +154,20 @@ public class AuthController {
         confirmCodeService.update(confirmCode);
 
         User user = userService.findByEmail(email);
+        if(user!= null){
+            user.setPassword(password);
+            userService.updateUser(user);
+            emailService.sendEmailChangePasswordSuccess(email, user.getFirstName() + " "+
+                    user.getLastName());
 
-        user.setPassword(password);
-        userService.updateUser(user);
+            return ResponseEntity.status(HttpStatus.OK).body
+                    (new ResponseObject(200,user,"success"));
 
-        emailService.sendEmailChangePasswordSuccess(email, user.getFirstName() + " "+
-                user.getLastName());
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body
-                (new ResponseObject(200,user,"success"));
+                (new ResponseObject(202,false,"update fail"));
+
     }
 
     @PostMapping("/requestCodeForgotPassword")
