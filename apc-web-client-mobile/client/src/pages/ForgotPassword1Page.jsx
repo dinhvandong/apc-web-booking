@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import forgot_password from '../assets/forgot-password-icon.png';
 import { useNavigate } from 'react-router-dom';
+import { requestForgotPassword } from '../services/api';
 const ForgotPassword1Page = () => {
 
     const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ const ForgotPassword1Page = () => {
     };
     const navigate = useNavigate();
     const gotoHomePage = async () => {
+        console.log("Email:", email);
 
         const response = await requestForgotPassword(email);
 

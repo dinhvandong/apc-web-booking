@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import forgot_password from '../assets/forgot-password-icon.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { requestChangePassword } from '../services/api';
 const ForgotPassword2Page = () => {
     const { email } = useParams();
