@@ -157,12 +157,12 @@ public class AuthController {
         if(user!= null){
            // user.setPassword(password);
             user.setPassword(PasswordEncoder.getInstance().encodePassword(password));
-            userService.updateUser(user);
+          User response =    userService.updateUser(user);
             emailService.sendEmailChangePasswordSuccess(email, user.getFirstName() + " "+
                     user.getLastName());
 
             return ResponseEntity.status(HttpStatus.OK).body
-                    (new ResponseObject(200,user,"success"));
+                    (new ResponseObject(200,response,"success"));
 
         }
 
@@ -233,4 +233,6 @@ public class AuthController {
 
 
     }
+
+
 }

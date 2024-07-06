@@ -78,7 +78,7 @@ public class EmailService {
     {
 
 
-        String subject = "Password Reset Request for Your AmbassadorCruise Account";
+        String subject = "Reset Password Successful";
 
         String body ="Dear " + fullName+ ",\n" +
                 "\n" +
