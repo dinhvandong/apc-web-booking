@@ -76,6 +76,7 @@ public class AuthController {
         confirmCode.setUserID(user.getId());
         confirmCode.setEmail(userDTO.getEmail());
         confirmCode.setStatus(ConfirmCode.STATUS_CONFIRM_PENDING);
+        confirmCode.setType(ConfirmCode.REGISTER_NEW);
         confirmCode.setCreatedTime(DateUtils.getCurrentDate());
         confirmCode.setSecureCode(Ultis.generateRandomCode(6));
         confirmCode.setPathRandom(Ultis.generateRandomString(10));

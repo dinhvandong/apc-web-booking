@@ -31,14 +31,14 @@ public class ConfirmCode {
 
     private int status = 1;
 
-    private String type;
+    private String type = REGISTER_NEW;
 
 
     @Transient
     public static final String FORGOT_PASSWORD = "forgot_password";
 
     @Transient
-    public static final String REGISTER_NEW = "forgot_password";
+    public static final String REGISTER_NEW = "register_new";
 
     public String getPathRandom() {
         return pathRandom;
