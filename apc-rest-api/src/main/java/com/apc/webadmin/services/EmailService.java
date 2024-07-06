@@ -74,6 +74,34 @@ public class EmailService {
     }
 
 
+    public void sendEmailChangePasswordSuccess(String email, String fullName)
+    {
+
+
+        String subject = "Password Reset Request for Your AmbassadorCruise Account";
+
+        String body ="Dear " + fullName+ ",\n" +
+                "\n" +
+                "We hope this email finds you well. We are writing to inform you that your password has been successfully changed for your Travel Tour System website account. The security of your account is of utmost importance to us, and we want to ensure that your information remains safe and protected." +
+                 "\n" +
+                "If you did not initiate this password change, please contact our support team immediately at [support email/phone number]. We will investigate the matter further to ensure the security of your account. " +
+                "To enhance your account security, we recommend following these best practices:\n" +
+                "\n." +
+                "1. Create a strong password: Use a combination of uppercase and lowercase letters, numbers, and special characters. Avoid using easily guessable information such as your name or birthdate."
+                + "\n" +
+                "2. Regularly update your password: Changing your password periodically reduces the risk of unauthorized access to your account."
+
+                 + "\n" +
+                        "Thank you for choosing our Travel Tour System website. We remain committed to providing you with a secure and enjoyable experience.\n" +
+                        "\n";
+
+        sendEmail(email, subject, body);
+
+
+
+    }
+
+
     public void sendEmailRegisterSuccess(String email,  String fullName){
 
 

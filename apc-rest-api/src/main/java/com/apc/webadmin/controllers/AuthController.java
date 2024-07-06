@@ -154,6 +154,9 @@ public class AuthController {
         user.setPassword(password);
         userService.updateUser(user);
 
+        emailService.sendEmailChangePasswordSuccess(email, user.getFirstName() + " "+
+                user.getLastName());
+
         return ResponseEntity.status(HttpStatus.OK).body
                 (new ResponseObject(200,user,"success"));
     }

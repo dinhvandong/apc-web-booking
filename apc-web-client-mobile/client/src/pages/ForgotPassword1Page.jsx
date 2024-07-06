@@ -12,8 +12,14 @@ const ForgotPassword1Page = () => {
       setEmail(e.target.value);
     };
     const navigate = useNavigate();
-    const gotoHomePage = async () => {
-        console.log("Email:", email);
+    const gotoHomePage =  (event) => {
+        event.preventDefault();
+
+       console.log("Email:", email);
+       callAPI();
+    }
+
+    const callAPI = async () =>{
 
         const response = await requestForgotPassword(email);
 
@@ -25,8 +31,6 @@ const ForgotPassword1Page = () => {
 
             alert("Email is invalid");
         }
-
-        
     }
     return (
         <div
@@ -41,7 +45,7 @@ const ForgotPassword1Page = () => {
 
             <div className='flex flex-col items-center justify-center w-full h-screen bg-white'>
 
-                <form className='flex flex-col items-center justify-center px-5 py-5'>
+                <form onSubmit={gotoHomePage} className='flex flex-col items-center justify-center px-5 py-5'>
                     <img src={forgot_password} className='w-[150px] h-[150px]' />
 
                     <div>
@@ -68,7 +72,7 @@ const ForgotPassword1Page = () => {
                         />
                     </div>
 
-                    <button onClick={gotoHomePage} className='text-white w-full md:w-[600px] m-5 py-2 rounded bg-[#B77855]'> Send Code</button>
+                    <button type='submit' className='text-white w-full md:w-[600px] m-5 py-2 rounded bg-[#B77855]'> Send Code</button>
                 </form>
             </div>
         </div>
