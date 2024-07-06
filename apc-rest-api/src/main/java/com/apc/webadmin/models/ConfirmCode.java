@@ -33,6 +33,13 @@ public class ConfirmCode {
 
     private String type;
 
+
+    @Transient
+    public static final String FORGOT_PASSWORD = "forgot_password";
+
+    @Transient
+    public static final String REGISTER_NEW = "forgot_password";
+
     public String getPathRandom() {
         return pathRandom;
     }

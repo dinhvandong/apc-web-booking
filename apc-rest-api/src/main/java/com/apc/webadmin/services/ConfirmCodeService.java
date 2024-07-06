@@ -50,6 +50,18 @@ public class ConfirmCodeService {
         return optional.get();
     }
 
+
+    public ConfirmCode findBySecureCodeAndEmailAndType(String code, String email, String type){
+
+        ConfirmCode found = confirmCodeRepository.findBySecureCodeAndEmailAndType(code, email, type);
+        if(found.getStatus()== ConfirmCode.STATUS_CONFIRM_PENDING)
+        {
+            return found;
+        }
+        return  null;
+
+    }
+
     public  ConfirmCode findBySecureCodeAndPath(String code, String path){
 
         ConfirmCode confirmCode = confirmCodeRepository.findBySecureCodeAndPathRandomAndStatus(code, path, ConfirmCode.STATUS_CONFIRM_PENDING);

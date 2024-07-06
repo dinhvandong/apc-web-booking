@@ -89,7 +89,51 @@ export const loginRequest = async (email, password) => {
   }
 };
 
+export const requestForgotPassword = async (email) =>{
 
+  try {
+    const response = await axios.post(`${API_URL}/auth/requestCodeForgotPassword?email=${email}`,
+    {
+      withCredentials: true,
+    },);
+    // console.log("loginResoibse:", response.data);
+    if (response.data.success === 200) 
+    {
+      
+      return response.data;
+    } else 
+    {
+      return null;
+    }
+  } catch (error) 
+  {
+    throw error;
+  }
+
+}
+
+export const requestChangePassword = async (email,code,  newPassword) =>{
+
+  try {
+    const response = await axios.post(`${API_URL}/auth/requestChangePassword?email=${email}&code=${code}&password=${newPassword}`,
+    {
+      withCredentials: true,
+    },);
+
+    if (response.data.success === 200) 
+    {
+      return response.data;
+    } else 
+    {
+      return null;
+    }
+    
+  } catch (error) 
+  {
+    throw error;
+  }
+
+}
 
 export const confirmCodeRequest = async (path, code) => {
   try {

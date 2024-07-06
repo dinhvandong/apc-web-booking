@@ -11,12 +11,24 @@ const ForgotPassword1Page = () => {
       setEmail(e.target.value);
     };
     const navigate = useNavigate();
-    const gotoHomePage = () => {
-        navigate('/home');
+    const gotoHomePage = async () => {
+
+        const response = await requestForgotPassword(email);
+
+        if(response != null){
+
+            navigate(`/forgot-password2/${email}`);
+
+        }else {
+
+            alert("Email is invalid");
+        }
+
+        
     }
     return (
         <div
-            className={`min-h-screen bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
+            className={`min-h-screen bg-[#bbbbbf] bg-cover bg-center flex flex-col  items-center transition-opacity duration-500`}
 
         >
 
@@ -25,9 +37,9 @@ const ForgotPassword1Page = () => {
                 <h1 className="text-xl font-bold">{"Forgot Password"}</h1>
             </header>
 
-            <div className='flex flex-col items-center justify-center w-full h-screen'>
+            <div className='flex flex-col items-center justify-center w-full h-screen bg-white'>
 
-                <div className='flex flex-col items-center justify-center'>
+                <form className='flex flex-col items-center justify-center px-5 py-5'>
                     <img src={forgot_password} className='w-[150px] h-[150px]' />
 
                     <div>
@@ -55,7 +67,7 @@ const ForgotPassword1Page = () => {
                     </div>
 
                     <button onClick={gotoHomePage} className='text-white w-full md:w-[600px] m-5 py-2 rounded bg-[#B77855]'> Send Code</button>
-                </div>
+                </form>
             </div>
         </div>
     )

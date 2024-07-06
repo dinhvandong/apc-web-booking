@@ -135,15 +135,57 @@ public class AuthController {
     }
 
 
-    @PostMapping("/requestCodeChangePassword")
-    public ResponseEntity<?> requestCodeChangePassword(@RequestBody ConfirmCode confirmCode){
-        Long id = sequenceGeneratorService.generateSequence(ConfirmCode.SEQUENCE_NAME);
-        confirmCode.setType("CHANGE_PASSWORD");
-        confirmCode.setId(id);
-        confirmCode.setCreatedTime(DateUtils.getCurrentDate());
-        ConfirmCode confirmCode1 = confirmCodeService.create(confirmCode);
+    @PostMapping("/requestChangePassword")
+    public ResponseEntity<?> requestCodeChangePassword(@RequestParam String email,
+                                                       @RequestParam String code,
+                                                       @RequestParam String password)
+    {
+        ConfirmCode confirmCode = confirmCodeService
+                .findBySecureCodeAndEmailAndType(code, email, ConfirmCode.FORGOT_PASSWORD);
+
+        if(confirmCode == null){
+            return ResponseEntity.status(HttpStatus.OK).body
+                    (new ResponseObject(200,false,"not found"));
+        }
+
+        confirmCode.setStatus(ConfirmCode.STATUS_CONFIRM_OK);
+
+        User user = userService.findByEmail(confirmCode.getEmail());
+        user.setPassword(password);
+        userService.updateUser(user);
+
         return ResponseEntity.status(HttpStatus.OK).body
-                (new ResponseObject(200,confirmCode1,"success"));
+                (new ResponseObject(200,user,"success"));
+    }
+
+    @PostMapping("/requestCodeForgotPassword")
+    public ResponseEntity<?> requestCodeForgotPassword(@RequestParam String email)
+    {
+        User found = userService.findByEmail(email);
+        if(found!= null){
+
+            ConfirmCode confirmCode = new ConfirmCode();
+            Long idCode = sequenceGeneratorService.generateSequence(ConfirmCode.SEQUENCE_NAME);
+            confirmCode.setId(idCode);
+            confirmCode.setEmail(email);
+            confirmCode.setStatus(ConfirmCode.STATUS_CONFIRM_PENDING);
+            confirmCode.setType(ConfirmCode.FORGOT_PASSWORD);
+            confirmCode.setCreatedTime(DateUtils.getCurrentDate());
+            confirmCode.setSecureCode(Ultis.generateRandomCode(6));
+            confirmCode.setPathRandom(Ultis.generateRandomString(10));
+            confirmCodeService.create(confirmCode);
+            ConfirmCode confirmCode1 = confirmCodeService.create(confirmCode);
+            // Send email
+            emailService.sendEmailForgotPassword(email, found.getFirstName() + " "+
+                    found.getLastName(), confirmCode.getSecureCode());
+
+            return ResponseEntity.status(HttpStatus.OK).body
+                    (new ResponseObject(200,confirmCode1,"success"));
+
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body
+                (new ResponseObject(201,false,"Email is not found."));
 
     }
 
@@ -158,6 +200,10 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.OK).body
                     (new ResponseObject(201,false,"fail"));
         }
+
+        // send Email
+
+
         return ResponseEntity.status(HttpStatus.OK).body
                 (new ResponseObject(200,true,"Success"));
 

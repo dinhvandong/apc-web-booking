@@ -53,7 +53,7 @@ function App() {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/registration-success" element={<SignUpSuccessPage />} />
         <Route path="/forgot-password1" element={<ForgotPassword1Page />} />
-        <Route path="/forgot-password2" element={<ForgotPassword2Page />} />
+        <Route path="/forgot-password2/:email" element={<ForgotPassword2Page />} />
         <Route path="/forgot-password3" element={<ForgotPassword3Page />} />
         <Route path="/my-booking" element={<MyBookingPage />} />
         <Route path="/my-booking2/:bookingCode" element={<MyBooking2Page />} />

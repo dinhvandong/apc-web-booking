@@ -48,6 +48,31 @@ public class EmailService {
 
     }
 
+    public void sendEmailForgotPassword(String email, String fullName, String code)
+    {
+
+
+        String subject = "Password Reset Request for Your AmbassadorCruise Account";
+
+        String body ="Dear " + fullName+ ",\n" +
+                "\n" +
+                "We have received a request to reset your password for your Travel Tour account." +
+                " We understand that forgetting passwords can be frustrating, but don't worry!" +
+                " We are here to help you regain access to your account.\n" +
+                "\n" +
+                "Please note that the password reset link will expire within 24 hours for security purposes. " +
+                "If you don't receive the email within a few minutes, please check your spam or junk folder." +
+                " If you still encounter any issues, please contact our customer support team for further assistance."
+                + "\n" +
+                " Here are code for update your new password: " + code;
+
+
+        sendEmail(email, subject, body);
+
+
+
+    }
+
 
     public void sendEmailRegisterSuccess(String email,  String fullName){
 
