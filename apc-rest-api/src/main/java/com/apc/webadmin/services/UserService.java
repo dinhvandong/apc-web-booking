@@ -123,6 +123,19 @@ public class UserService {
         }
 
     }
+
+    public User updateChangePassword( User updatedUser){
+        Long id = updatedUser.getId();
+        Optional<User> existingUser = userRepository.findById(id);
+        if (existingUser.isPresent()) {
+            User user = existingUser.get();
+            user.setPassword(updatedUser.getPassword());
+            return userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("User not found with id: " + id);
+        }
+
+    }
     public User updateUser(User updatedUser) {
         Long id = updatedUser.getId();
         Optional<User> existingUser = userRepository.findById(id);

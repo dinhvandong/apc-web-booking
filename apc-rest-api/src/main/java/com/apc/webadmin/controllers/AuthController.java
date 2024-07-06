@@ -155,9 +155,10 @@ public class AuthController {
 
         User user = userService.findByEmail(email);
         if(user!= null){
-           // user.setPassword(password);
+
+
             user.setPassword(PasswordEncoder.getInstance().encodePassword(password));
-          User response =    userService.updateUser(user);
+          User response =    userService.updateChangePassword(user);
             emailService.sendEmailChangePasswordSuccess(email, user.getFirstName() + " "+
                     user.getLastName());
 
