@@ -153,7 +153,7 @@ public class AuthController {
 
         confirmCodeService.update(confirmCode);
 
-        User user = userService.findByEmail(confirmCode.getEmail());
+        User user = userService.findByEmail(email);
 
         user.setPassword(password);
         userService.updateUser(user);
