@@ -96,7 +96,6 @@ public class ConfirmCodeService {
         ConfirmCode found = optional.get();
         found.setEmail(confirmCode.getEmail());
         found.setSecureCode(confirmCode.getSecureCode());
-        found.setUserID(confirmCode.getUserID());
         found.setEmail(confirmCode.getEmail());
         return confirmCodeRepository.save(found);
     }
