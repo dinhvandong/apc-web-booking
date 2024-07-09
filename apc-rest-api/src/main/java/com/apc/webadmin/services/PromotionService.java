@@ -58,7 +58,7 @@ public class PromotionService {
         found.setCategory(news.getCategory());
         found.setContent(news.getContent());
         found.setThumb(news.getThumb());
-        System.out.println("promotion:"+ found.getThumb());
+       // System.out.println("promotion:"+ found.getThumb());
         return promotionRepository.save(found);
     }
 
