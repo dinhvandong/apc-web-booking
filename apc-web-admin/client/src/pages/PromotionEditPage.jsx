@@ -30,7 +30,9 @@ const PromotionEditPage = () => {
         <div>
             <Sidebar menu="tab5" />
           </div>
-          <div className="flex w-[100%]   flex-row justify-center">     
+          <div className="flex w-[100%]   flex-col items-center">    
+          <div className="w-full h-[50px] bg-base_color">
+          </div> 
                <PromotionEdit id = {id} />
           </div>
         </div>

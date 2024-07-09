@@ -26,9 +26,6 @@ const Promotion = () => {
   }
   return (
     <div className='flex flex-col w-full h-auto'>
-      <div className="w-full h-[50px] bg-base_color">
-
-      </div>
       <div className="flex justify-start m-5 md:justify-center sm:justify-center lg:justify-start">
         <p className="font-bold">PROMOTIONS LIST</p>
       </div>

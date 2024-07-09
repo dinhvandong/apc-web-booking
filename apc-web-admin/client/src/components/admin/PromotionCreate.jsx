@@ -107,7 +107,7 @@ const PromotionCreate = () => {
   };
 
   return (
-    <div>
+    <div className='flex flex-col w-[80%] h-auto'>
 
       <div className='mt-5'>
 

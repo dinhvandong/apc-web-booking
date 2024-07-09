@@ -9,6 +9,9 @@ import CategoryNewsList from './CategoryNewsList';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { findPromotionById, updatePromotion } from '../../services/api_promotion';
+import { API_URL_IMAGE, uploadFile } from '../../services/api';
+import { Button, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 const PromotionEdit = (props) => {
   const { id } = props;
@@ -17,7 +20,11 @@ const PromotionEdit = (props) => {
   const [subTitle, setSubTitle] = useState('');
   const [content, setContent] = useState(null);
   const [category, setCategory] = useState('');
+  const [price, setPrice] = useState(0);
 
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value);
+  }
 
 
   const handleTitleChange = (e) => {
@@ -61,15 +68,18 @@ const PromotionEdit = (props) => {
   // };
   const saveContent = async () => {
     try {
-  
+
       const news = {
         id: id,
         title: title,
         subTitle: subTitle,
         content: content,
         category: category,
+        thumb: file.toString(),
+        price: price
+
       }
-      console.log("JSON_NEWS:", news);
+      console.log("JSON_NEWS:", JSON.stringify(news));
       const response = await updatePromotion(news);
       console.log('Content saved:', response.data);
     } catch (error) {
@@ -77,7 +87,7 @@ const PromotionEdit = (props) => {
     }
   };
 
-  
+
   useEffect(() => {
     const fetchContent = async () => {
       try {
@@ -88,6 +98,10 @@ const PromotionEdit = (props) => {
         console.log("contentValue:", contentValue);
         setContent(contentValue);
         setCategory(responseValue.category)
+        setTitle(responseValue.title);
+        setSubTitle(responseValue.subTitle);
+        setPrice(responseValue.price);
+        setFile(responseValue.thumb);
       } catch (error) {
         console.error('Error fetching content:', error);
       }
@@ -99,16 +113,51 @@ const PromotionEdit = (props) => {
   const handleContentChange = (content) => {
     setContent(content);
   };
+  const [file, setFile] = useState(0);
 
+  const handleFileUpload = async (file) => {
+    // Handle the file upload logic here
+    console.log(file);
+
+    const response = await uploadFile(file);
+    //const fileResponse = API_URL_IMAGE + response.data;
+    setFile(response.data);
+    console.log("upload-file", response.data);
+  };
   return (
-    <div>
+    <div className='flex flex-col w-[80%] h-auto'>
+   
       <div className='mt-5 '>
         <label>Title</label>
-        <input onChange={handleTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
+        <input value={title} onChange={handleTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
       </div>
       <div className='mt-5'>
         <label>Sub Title</label>
-        <input onChange={handleSubTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
+        <input value={subTitle} onChange={handleSubTitleChange} className='w-full p-2 py-3 border border-gray-600 ' />
+      </div>
+
+      <div className='mt-5'>
+
+        <label>Price</label>
+        <input value={price} onChange={handlePriceChange} type='number' className='w-full p-2 py-3 border border-gray-600 ' />
+      </div>
+
+      <div className="mt-5">
+        <label htmlFor="email" className="block mb-2 font-medium">
+          Thumb Image: <span className="text-lg text-red-500">*</span>
+        </label>
+        <Upload
+          id='thumb' name='thumb'
+          beforeUpload={() => false} // Prevent automatic file upload
+          onChange={(info) => handleFileUpload(info.file)}
+          maxCount={1}
+        >
+          <Button icon={<UploadOutlined />}>Select File</Button>
+        </Upload>
+      </div>
+      <div className="mt-2">
+        <img src={API_URL_IMAGE + file} className='w-[100px] h-[100px]' />
+
       </div>
       <div className='mt-5'>
         <label>Select Category</label>
