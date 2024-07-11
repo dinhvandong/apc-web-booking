@@ -4,6 +4,7 @@ import icEdit from '../assets/icons8-edit-50.png';
 import { useNavigate } from 'react-router-dom';
 import ic_copy from '../assets/copy.png';
 import ClipboardJS from 'clipboard';
+import { convertToCurrencyFormat } from '../utils/utils';
 
 const HistoryBookingItem = ({ booking }) => {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ const HistoryBookingItem = ({ booking }) => {
 
                 <div className='flex items-center font-bold text-brown_color'>
                     < img src={logo} className='w-[35px] h-[35px]' />
-                    <p className='ml-3'>AmbassadorDayCruise</p>
+                    <p className='ml-3'>Ambassador {booking.cruiseType}</p>
                 </div>
 
                 <button onClick={gotoBookingDetail} className='flex'>
@@ -66,15 +67,16 @@ const HistoryBookingItem = ({ booking }) => {
                 </button>
             </div>
 
-            <div className='mt-2'>
-                <span className='font-bold'>Booking Code:</span> <span>  
-                    <input className='w-full'
-                    ref={inputRef}
-                    type="text"
-                    value={booking.bookingCode}
-                    readOnly
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>Booking Code:</div> 
+                <div>
+                    <input className='w-full text-right'
+                        ref={inputRef}
+                        type="text"
+                        value={booking.bookingCode}
+                        readOnly
                     // style={{ position: 'absolute', left: '-9999px' }}
-                /></span>
+                    /></div>
 
             </div>
             <div className='flex items-center mt-2'>
@@ -84,42 +86,42 @@ const HistoryBookingItem = ({ booking }) => {
                     <div className='ml-3 font-bold hover:cursor-pointer text-brown_color'>Copy Booking Code</div>
                 </div>
             </div>
-            <div className='mt-2'>
-                <span className='font-bold'>Title:</span> <span>{booking.title}</span>
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>Title:</div> <div>{booking.title}</div>
 
             </div>
-            <div className='mt-2'>
-                <span className='font-bold'>FirstName:</span> <span>{booking.firstName}</span>
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>FirstName:</div> <div>{booking.firstName}</div>
 
             </div>
-            <div className='mt-2'>
-                <span className='font-bold'>LastName: </span> <span>{booking.lastName}</span>
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>LastName: </div> <div>{booking.lastName}</div>
 
             </div>
-            <div className='mt-2'>
-                <span className='font-bold'>Email:</span> <span>{booking.email}</span>
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>Email:</div> <div>{booking.email}</div>
 
             </div>
-            <div className='mt-2'>
-                <span className='font-bold'>PhoneNumber: </span> <span>{booking.phone}</span>
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>PhoneNumber: </div> <div>{booking.phone}</div>
 
             </div>
-            <div className='mt-2'>
-                <span className='font-bold'>CreatedDate:</span> <span>{booking.createdDate}</span>
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>CreatedDate:</div> <div>{booking.createdDate}</div>
 
             </div>
-            <div className='mt-2'>
-                <span className='font-bold'>BookingDate:</span> <span>{booking.bookingDate}</span>
-
-            </div>
-
-            <div className='mt-2'>
-                <span className='font-bold'>BookingStatus:</span> {booking.status==2?(<span className='font-bold text-green-600'>{'Confirmed'}</span>):(<span className='font-bold text-red-600'>{'Pending'}</span>)}
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>BookingDate:</div> <div>{booking.bookingDate}</div>
 
             </div>
 
-            <div className='mt-2'>
-                <span className='font-bold'>Bill:</span> {booking.price} k VND
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>BookingStatus:</div> {booking.status == 2 ? (<div className='font-bold text-green-600'>{'Confirmed'}</div>) : (<div className='font-bold text-red-600'>{'Pending'}</div>)}
+
+            </div>
+
+            <div className='flex justify-between mt-2'>
+                <div className='font-bold'>Bill:</div> <div>{convertToCurrencyFormat(booking.price)} VND</div> 
 
             </div>
         </div>

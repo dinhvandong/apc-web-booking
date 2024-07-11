@@ -39,6 +39,7 @@ import MyBookingImportExcelPage from './pages/MyBookingImportExcelPage';
 import HistoryBookingPage from './pages/HistoryBookingPage';
 import ConfirmRegisterCodePage from './pages/ConfirmRegisterCodePage';
 import ConfirmRegistAccountPage from './pages/ConfirmRegistAccountPage';
+import PrivacyPage from './pages/PrivacyPage';
 
 function App() {
   return (
@@ -82,6 +83,8 @@ function App() {
 
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/faq" element={<FaqPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+
         <Route path="/term-condition" element={<TermConditionPage />} />
         <Route path="/plan-cruise/:id" element={<PlanCruisePage />} />
         <Route path="/profile-page" element={<ProfilePage />} />

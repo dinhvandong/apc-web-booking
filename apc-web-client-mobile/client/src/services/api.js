@@ -113,7 +113,7 @@ export const requestForgotPassword = async (email) =>{
 }
 
 export const requestChangePassword = async (email,code,  newPassword) =>{
-
+//http://163.44.206.118:8080/api/auth/requestChangePassword?email=dongdinhvan.it@gmail.com&code=538303&password=12345678
   try {
     const response = await axios.post(`${API_URL}/auth/requestChangePassword?email=${email}&code=${code}&password=${newPassword}`,
     {
@@ -127,7 +127,7 @@ export const requestChangePassword = async (email,code,  newPassword) =>{
     {
       return null;
     }
-    
+
   } catch (error) 
   {
     throw error;

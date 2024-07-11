@@ -31,6 +31,9 @@ public class BookingService {
     @Autowired
     TransactionSepayService transactionSepayService;
 
+    @Autowired
+    EmailService emailService;
+
     private final BookingRepository bookingRepository;
     private final SequenceGeneratorService sequenceGeneratorService;
 //    private final TransactionSepayService transactionSepayService;
@@ -132,6 +135,10 @@ public class BookingService {
                             Booking newBooking = null;
                             newBooking = item;
                             newBooking.setStatus(Booking.BOOKING_DONE);
+
+                            emailService.sendBookingConfirmation(newBooking.getEmail(), newBooking.getFirstName() + " "+
+                                    newBooking.getLastName(), newBooking.getBookingCode(), newBooking.getCruiseType());
+
                             Booking updateBooking =  bookingRepository.save(newBooking);
                             break;
                         }

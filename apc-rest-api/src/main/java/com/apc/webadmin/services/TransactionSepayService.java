@@ -88,24 +88,8 @@ public class TransactionSepayService {
 
             Optional<TransactionSePay> optional = findById(item.getId());
             if(optional.isEmpty()){
-
-                //TransactionSePay newItem = item;
                 String value = extractValue(item.getTransaction_content());
                 item.setTransaction_content("DC"+value);
-//                if(item.getTransaction_content().contains("QR"))
-//                {
-//                    String content = item.getTransaction_content();
-//                    String [] arrayContent = content.split(" ");
-//                    item.setTransaction_content(arrayContent[1]);
-//
-//                }else
-//                {
-//
-//                    String content = item.getTransaction_content();
-//                    String [] arrayContent = content.split(" ");
-//                    item.setTransaction_content(arrayContent[0]);
-//                }
-
                 create(item);
             }
         }

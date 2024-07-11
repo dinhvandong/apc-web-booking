@@ -116,4 +116,57 @@ public class EmailService {
 
         sendEmail(email, subject, body);
     }
+
+
+
+    public void sendBookingConfirmation(String email, String fullName, String bookingCode, String cruiseType){
+
+    String subject = "Ambassador Cruise Reservation has been confirmed!\n";
+
+        String bodyDayCruise ="Dear " + fullName+ ",\n" +
+                "We are delighted to inform you that your reservation for Ambassador Cruise has been confirmed.\n"+
+                "Your itinerary is now secured for the following:\n"+
+                "[Booking Code]:"+
+                bookingCode +"\n"+
+                "IMPORTANT NOTES\n" +
+                "CHECK-IN INSTRUCTIONS\n"+
+                "1. Ambassador Day Cruise:\n"+
+                "    Boarding Time: 08:30 AM\n"+
+                "    Check-out Time: 04:30 PM\n"+
+                "To ensure a seamless check-in experience and avoid any late check-in charges, please make sure to arrive at the Ambassador Check-in Lounge 30 minutes before Boarding time.\n" +
+                "Kindly note that advanced registration is mandatory. Please provide all passenger information (including full name, gender, date of birth, and nationality) at least 24 hours prior to your departure. Failure to supply this information may result in denial of boarding or a late fee of USD 30 per person.\n"+
+                "SPECIAL REQUEST\n"+
+                "If you have any special dietary requirements or food allergies, please inform us before your cruise date.\n"+
+                "Thank you for choosing to sail with Ambassador Cruises to Halong Bay. We are looking forward to welcoming you aboard and making your trip a truly extraordinary one.\n"+
+                "Sincerely,\n"+
+                "Ambassador Cruise\n"+
+                "\nThis email is intended for [email address], because you have made a reservation through Ambassador Cruise website.\n";
+
+        String bodyDinnerCruise ="Dear " + fullName+ ",\n" +
+                "We are delighted to inform you that your reservation for Ambassador Cruise has been confirmed.\n"+
+                "Your itinerary is now secured for the following:\n"+
+                "[Booking Code]:"+
+                bookingCode +"\n"+
+                "IMPORTANT NOTES\n" +
+                "CHECK-IN INSTRUCTIONS\n"+
+                "1.  Ambassador Dinner Cruise:\n"+
+                "    Boarding Time: 05:30 PM\n"+
+                "    Check-out Time: 09:00 PM\n"+
+                "To ensure a seamless check-in experience and avoid any late check-in charges, please make sure to arrive at the Ambassador Check-in Lounge 30 minutes before Boarding time.\n" +
+                "Kindly note that advanced registration is mandatory. Please provide all passenger information (including full name, gender, date of birth, and nationality) at least 24 hours prior to your departure. Failure to supply this information may result in denial of boarding or a late fee of USD 30 per person.\n"+
+                "SPECIAL REQUEST\n"+
+                "If you have any special dietary requirements or food allergies, please inform us before your cruise date.\n"+
+                "Thank you for choosing to sail with Ambassador Cruises to Halong Bay. We are looking forward to welcoming you aboard and making your trip a truly extraordinary one.\n"+
+                "Sincerely,\n"+
+                "Ambassador Cruise\n"+
+                "\nThis email is intended for [email address], because you have made a reservation through Ambassador Cruise website.\n";
+
+
+        if(cruiseType.equals("Day Cruise")) {
+            sendEmail(email, subject, bodyDayCruise);
+        }else if(cruiseType.equals("Dinner Cruise")){
+            sendEmail(email, subject, bodyDinnerCruise);
+        }
+
+    }
 }

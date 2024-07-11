@@ -76,7 +76,7 @@ const ListMenu = () => {
   };
   const gotoPrivacy = () => {
     console.log('Button clicked!');
-    navigate("/term-condition");
+    navigate("/privacy");
     //term-condition
   };
   const gotoFq = () => {
