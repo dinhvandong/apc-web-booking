@@ -62,6 +62,4 @@ public class PromotionService {
         return promotionRepository.save(found);
     }
 
-
-
 }

@@ -202,6 +202,12 @@ const Sidebar = (props) => {
     navigate("/admin/bookings");
   }
 
+  function gotoItineraryList() {
+    navigate("/admin/itinerary");
+  }
+
+
+
   const tab = props.menu;
   const styleMenu1 = tab === "tab1" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu2 = tab === "tab2" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
@@ -214,7 +220,10 @@ const Sidebar = (props) => {
   const styleMenu9 = tab === "tab9" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu10 = tab === "tab10" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
   const styleMenu11 = tab === "tab11" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
-  const styleMenu12 = tab === "tab10" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu12 = tab === "tab12" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu13 = tab === "tab13" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu14 = tab === "tab14" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
+  const styleMenu15 = tab === "tab15" ? "bg-[#E9E9E9]" : "bg-[#FFFFFF]";
 
   const [width, setWidth] = useState('w-[200px]');
   const [active, setActive] = useState(true);
@@ -300,17 +309,7 @@ const Sidebar = (props) => {
             }
           </button>
 
-          {/* <button
-            onClick={() => gotoPrice()}
-            onMouseEnter={handleMouseEnter4}
-            onMouseLeave={handleMouseLeave4}
-            className={`flex flex-row justify-start items-center ${styleMenu4} hover:text-red-600`}
-          >
-            <FaLayerGroup className="w-5 h-5 m-3 text-base_color" />
-            {
-              active == true ? <div className="text-sm ">Giá</div> : <div></div>
-            }
-          </button> */}
+        
           <button
             onClick={() => gotoNews()}
             onMouseEnter={handleMouseEnter5}
@@ -412,6 +411,19 @@ const Sidebar = (props) => {
             <IoBook className="w-5 h-5 m-3 text-base_color" />
             {
               active == true ? <div className="text-sm ">Video List</div> : <div></div>
+
+            }
+          </button>
+
+          <button
+            onClick={() => gotoItineraryList()}
+            onMouseEnter={handleMouseEnter12}
+            onMouseLeave={handleMouseLeave12}
+            className={`flex flex-row justify-start items-center ${styleMenu12} hover:text-red-600`}
+          >
+            <IoBook className="w-5 h-5 m-3 text-base_color" />
+            {
+              active == true ? <div className="text-sm ">Itinerary List</div> : <div></div>
 
             }
           </button>

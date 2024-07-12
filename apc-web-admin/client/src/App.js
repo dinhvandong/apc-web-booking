@@ -46,6 +46,9 @@ import GalleryDetailCreatePage from './pages/GalleryDetailCreatePage';
 import VideoPage from './pages/VideoPage';
 import VideoCreatePage from './pages/VideoCreatePage';
 import VideoEditPage from './pages/VideoEditPage';
+import ItineraryPage from './pages/ItineraryPage';
+import ItineraryCreatePage from './pages/ItineraryCreatePage';
+import ItineraryEditPage from './pages/ItineraryEditPage';
 
 function App() {
   return (
@@ -107,6 +110,11 @@ function App() {
         <Route path="/admin/gallery_detail/:id" element={<GalleryDetailPage />} />
         <Route path="/admin/gallery_detail/create-new/:id" element={<GalleryDetailCreatePage />} />
         <Route path="/admin/gallery/update/:id" element={<GalleryEditPage />} />
+
+
+        <Route path="/admin/itinerary" element={<ItineraryPage />} />
+        <Route path="/admin/itinerary/create-new" element={<ItineraryCreatePage />} />
+        <Route path="/admin/itinerary/update/:id" element={<ItineraryEditPage />} />
 
 
 

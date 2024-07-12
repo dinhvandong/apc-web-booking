@@ -16,6 +16,9 @@ public class Itinerary {
 
     private String title;
     private String desc;
+
+    private String thumb;
+
     private List<ItineraryItem> itemList;
 
     private String importanceNotes;
@@ -27,6 +30,13 @@ public class Itinerary {
     private String exclusions;
 
 
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
 
     public Long getId() {
         return id;

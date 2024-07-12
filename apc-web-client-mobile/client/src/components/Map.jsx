@@ -26,7 +26,7 @@ function Map() {
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={center} icon={customIcon} /> // Use the custom icon for the marker
+      <Marker position={center} icon={customIcon} /> 
     </MapContainer>
   );
 }
