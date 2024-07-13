@@ -557,6 +557,12 @@ export const getGroupById = async (id) => {
   }
 };
 
+export const getFirstSentence =(text)=> {
+  const sentences = text.trim().split(/[.!?]/);
+  const firstSentence = sentences[0].trim();
+  return firstSentence;
+}
+
 export const convertDateFormat = (inputDate) => {
   let inpuDateString = inputDate + "";
   const year = inpuDateString.substring(0, 4);

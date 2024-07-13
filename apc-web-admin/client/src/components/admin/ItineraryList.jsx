@@ -23,7 +23,7 @@ const ItineraryList = () => {
     setIsOn(!isOn);
   };
   const handleInsert = () => {
-    navigate("/admin/gallery/create-new");
+    navigate("/admin/itinerary/create-new");
   };
   const handleSearch = () => {
 

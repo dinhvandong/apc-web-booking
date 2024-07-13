@@ -97,13 +97,6 @@ const PromotionCreate = () => {
     //const fileResponse = API_URL_IMAGE + response.data;
     setFile(response.data);
     console.log("upload-file", response.data);
-
-    // setFormData(prevFormData => ({
-    //     ...prevFormData,
-    //     thumb: response.data
-    // }));
-
-
   };
 
   return (
