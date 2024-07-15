@@ -10,32 +10,25 @@ import { createItinerary } from '../../services/api_itinerary';
 const ItineraryCreate = () => {
     const navigate = useNavigate();
     const [itemList, setItemList] = useState([]);
-
-    
-   
     const [formData, setFormData] = useState({
         title: '',
         desc: '',
         thumb: '',
         importanceNotes: '',
-        benefits:'',
-        inclusions:'',
-        exclusions:'',
+        benefits: '',
+        inclusions: '',
+        exclusions: '',
         itemList: []
-
     });
 
     const handleInsert = () => {
         console.log("Item_SIZE:", itemList);
-
         const newItem = {
             id: (itemList.length + 1), // Generate a unique ID for the new item
-            timer: '' ,
-            desc: '' // Initialize the value as an empty string
+            timer: 'Thời gian',
+            desc: 'Mô tả' // Initialize the value as an empty string
         };
         setItemList((prevItems) => [...prevItems, newItem]);
-
-        //console.log("Item_SIZE:", items);
     }
 
     const handleChange = (e) => {
@@ -61,7 +54,7 @@ const ItineraryCreate = () => {
         newArray.splice(index, 1); // Remove the element at the given index
         setItemList(newArray); // Update the state with the new array
     }
-    
+
     function handleInputChangeItemTimer(e, itemId) {
         const updatedItems = itemList.map((item) => {
             if (item.id === itemId) {
@@ -86,10 +79,10 @@ const ItineraryCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         insertData();
-       
+
     };
 
-    const  insertData = async ()=>{
+    const insertData = async () => {
         const updatedFormData = {
             ...formData,
             itemList: itemList, // Update the specific field
@@ -114,7 +107,7 @@ const ItineraryCreate = () => {
             <div className='h-[1px] bg-base_color w-full'></div>
             <div className="flex w-full h-auto m-5 mx-auto">
 
-                <div className='flex flex-col w-1/2 h-auto m-2'>
+                <div className='flex flex-col w-[60%] h-auto m-2'>
                     <form onSubmit={handleSubmit} className="w-full mx-auto mt-2 ml-5 mr-5">
                         <div className="mb-2">
                             <label htmlFor="name" className="block mb-2 font-medium">
@@ -134,7 +127,8 @@ const ItineraryCreate = () => {
                             <label htmlFor="description" className="block mb-2 font-medium">
                                 Mô tả: <span className="text-lg text-red-500">*</span>
                             </label>
-                            <input
+
+                            <textarea
                                 type="text"
                                 id="desc"
                                 name="desc"
@@ -142,13 +136,14 @@ const ItineraryCreate = () => {
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
                                 required
-                            />
+                            ></textarea>
+                           
                         </div>
                         <div className="mb-2">
                             <label htmlFor="description" className="block mb-2 font-medium">
-                            ImportanceNotes: <span className="text-lg text-red-500">*</span>
+                                ImportanceNotes: <span className="text-lg text-red-500">*</span>
                             </label>
-                            <input
+                            <textarea
                                 type="text"
                                 id="importanceNotes"
                                 name="importanceNotes"
@@ -160,9 +155,9 @@ const ItineraryCreate = () => {
                         </div>
                         <div className="mb-2">
                             <label htmlFor="description" className="block mb-2 font-medium">
-                            Benefits: <span className="text-lg text-red-500">*</span>
+                                Benefits: <span className="text-lg text-red-500">*</span>
                             </label>
-                            <input
+                            <textarea
                                 type="text"
                                 id="benefits"
                                 name="benefits"
@@ -174,9 +169,9 @@ const ItineraryCreate = () => {
                         </div>
                         <div className="mb-2">
                             <label htmlFor="inclusions" className="block mb-2 font-medium">
-                            Inclusions: <span className="text-lg text-red-500">*</span>
+                                Inclusions: <span className="text-lg text-red-500">*</span>
                             </label>
-                            <input
+                            <textarea
                                 type="text"
                                 id="inclusions"
                                 name="inclusions"
@@ -188,9 +183,9 @@ const ItineraryCreate = () => {
                         </div>
                         <div className="mb-2">
                             <label htmlFor="exclusions" className="block mb-2 font-medium">
-                            Exclusions: <span className="text-lg text-red-500">*</span>
+                                Exclusions: <span className="text-lg text-red-500">*</span>
                             </label>
-                            <input
+                            <textarea
                                 type="text"
                                 id="exclusions"
                                 name="exclusions"
@@ -227,13 +222,13 @@ const ItineraryCreate = () => {
                         <div className='h-auto '>
                             <ul>
                                 {itemList.map((item, index) => (
-                                    <li className='flex items-center px-5 mt-5' key={item.id}>
-                                          <input className='border-2 border-gray-500'
+                                    <li className='flex items-center w-full px-5 mt-5' key={item.id}>
+                                        <input className='border-2 w-[20%] border-gray-500'
                                             type="text"
                                             value={item.timer}
                                             onChange={(e) => handleInputChangeItemTimer(e, item.id)}
                                         />
-                                        <input className='border-2 border-gray-500'
+                                        <textarea className='w-[60%] ml-5 border-2 border-gray-500'
                                             type="text"
                                             value={item.desc}
                                             onChange={(e) => handleInputChangeItemDesc(e, item.id)}

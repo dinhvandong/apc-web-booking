@@ -131,7 +131,7 @@ public class BookingService {
                     System.out.println("Scan TransactionSePay:" + sePay.getTransaction_content());
                     if(sePay.getTransaction_content().equals(item.getBookingCode())){
                         double amountIn = Double.parseDouble(sePay.getAmount_in());
-                        if(amountIn >= (item.getPrice())){
+                        if(amountIn >= (item.getPrice()*1000)){
                             Booking newBooking = null;
                             newBooking = item;
                             newBooking.setStatus(Booking.BOOKING_DONE);

@@ -6,6 +6,7 @@ import CategoryNewsList from '../components/CategoryNewsList';
 import PromotionList from '../components/PromotionList';
 import HeaderPromotion from '../components/HeaderPromotion';
 import HeaderItinerary from '../components/HeaderItinerary';
+import ItineraryList from '../components/ItineraryList';
 
 const ItineraryPage = () => {
 
@@ -20,7 +21,7 @@ const ItineraryPage = () => {
             {/* <CategoryNewsList categories={categories} /> */}
 
             {/* <CategoriesList/> */}
-            <PromotionList />
+            <ItineraryList />
         </div>);
 }
 
