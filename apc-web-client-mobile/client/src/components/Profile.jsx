@@ -28,7 +28,7 @@ const Profile = () => {
 
     }
     return (
-        <div className='flex flex-col items-center justify-center w-full h-[1000px] p-5 overflow-y-auto' style={{
+        <div className='flex flex-col items-center justify-center w-full h-screen p-5 overflow-y-auto' style={{
             backgroundImage: `url(${bg_signin})`, backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
