@@ -22,12 +22,6 @@ import java.util.UUID;
 
 @Service
 public class BookingService {
-//    @Autowired
-//    BookingRepository bookingRepository;
-//    @Autowired
-//    SequenceGeneratorService sequenceGeneratorService;
-//
-//
     @Autowired
     TransactionSepayService transactionSepayService;
 
@@ -36,19 +30,19 @@ public class BookingService {
 
     private final BookingRepository bookingRepository;
     private final SequenceGeneratorService sequenceGeneratorService;
-//    private final TransactionSepayService transactionSepayService;
 
     @Autowired
     public BookingService(
             BookingRepository bookingRepository,
             SequenceGeneratorService sequenceGeneratorService,
-            TransactionSepayService transactionSepayService
-    ) {
+            TransactionSepayService transactionSepayService)
+    {
         this.bookingRepository = bookingRepository;
         this.sequenceGeneratorService = sequenceGeneratorService;
         this.transactionSepayService = transactionSepayService;
     }
-    public Booking create(Booking newBooking){
+    public Booking create(Booking newBooking)
+    {
         Long id = sequenceGeneratorService.generateSequence(Booking.SEQUENCE_NAME);
         newBooking.setId(id);
         newBooking.setStatus(1);
@@ -66,12 +60,8 @@ public class BookingService {
         for(RoomBooking item: roomBookingList){
             priceRoom += item.getPrice()* item.getCount();
         }
-
         newBooking.setPrice(priceGuest + priceRoom);
-
-        //String randomKey = UUID.randomUUID().toString();
         newBooking.setBookingCode("DC"+id);
-
         return bookingRepository.insert(newBooking);
     }
 
