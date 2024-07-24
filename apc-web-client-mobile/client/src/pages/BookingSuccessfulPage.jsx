@@ -117,7 +117,7 @@ const BookingSuccessfulPage = () => {
                 <p onClick={gotoBookingDetail} className='mt-5 font-bold text-center hover:cursor-pointer text-brown_color'>View Your Booking</p>
 
             </div>
-            <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-[#bbbbbf] flex justify-around py-4`}>
+            <nav className={`fixed bottom-0 left-0 right-0 z-10  w-full bg-[#FFF] flex justify-around py-4`}>
                 <div className='w-full md:w-[600px] m-5 h-[60px] flex flex-row'>
                     <p className='text-black'>
                         Please note that the request for electronic invoice is valid within 72 hours after successful payment. If you require electronic invoice, please access My Booking to register for the e-invoice thereafter.

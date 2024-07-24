@@ -1,13 +1,25 @@
 package com.apc.webadmin.utils;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DateUtils {
 
-
+    public static String formatDate(Long dateLong) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd");
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = inputFormat.parse(String.valueOf(dateLong));
+            return outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static String convertLongToYYYYMM(long dateValue) {
         LocalDate date = LocalDate.parse(String.valueOf(dateValue), DateTimeFormatter.BASIC_ISO_DATE);
         return date.format(DateTimeFormatter.ofPattern("yyyyMM"));

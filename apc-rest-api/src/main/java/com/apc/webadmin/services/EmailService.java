@@ -27,10 +27,7 @@ public class EmailService {
 
     public void sendEmailRegisterConfirmCode(String email, String fullName, String path, String code)
     {
-
-
         String subject = "Register new account from AmbassadorDayCruise ";
-
         String body ="Dear " + fullName+ ",\n" +
                 "\n" +
                 "We are thrilled to welcome you to our AmbassadorCruise Booking System! Thank you for choosing us to be your trusted platform for booking your next unforgettable adventure. We can't wait to help you create amazing memories.\n" +
@@ -41,19 +38,12 @@ public class EmailService {
 
         + "\n" +
                 "Your register code is: " + code;
-
         sendEmail(email, subject, body);
-
-
-
     }
 
     public void sendEmailForgotPassword(String email, String fullName, String code)
     {
-
-
         String subject = "Password Reset Request for Your AmbassadorCruise Account";
-
         String body ="Dear " + fullName+ ",\n" +
                 "\n" +
                 "We have received a request to reset your password for your Travel Tour account." +
@@ -65,19 +55,12 @@ public class EmailService {
                 " If you still encounter any issues, please contact our customer support team for further assistance."
                 + "\n" +
                 " Here are code for update your new password: " + code;
-
-
         sendEmail(email, subject, body);
-
-
-
     }
 
 
     public void sendEmailChangePasswordSuccess(String email, String fullName)
     {
-
-
         String subject = "Reset Password Successful";
 
         String body ="Dear " + fullName+ ",\n" +

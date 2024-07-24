@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,9 @@ public class BookingService {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    PmsBookingService pmsBookingService;
 
     private final BookingRepository bookingRepository;
     private final SequenceGeneratorService sequenceGeneratorService;
@@ -108,27 +112,23 @@ public class BookingService {
         return bookingRepository.save(bookingFound);
     }
 
-    @Scheduled(fixedRate = 20000) // Execute every minute (60000 milliseconds)
+    @Scheduled(fixedRate = 20000)
     public boolean updateStatus(){
-        System.out.println("Scan Booking:");
         List<Booking> bookingList = findAll();
         for(Booking item: bookingList){
             if(item.getStatus()== Booking.BOOKING_PENDING){
                 List<TransactionSePay> sePayList = new ArrayList<>();
                 sePayList = transactionSepayService.findAll();
-                        //transactionSepayService.getTransactionsByContent(item.getBookingCode());
                 for (TransactionSePay sePay: sePayList){
-                    System.out.println("Scan TransactionSePay:" + sePay.getTransaction_content());
                     if(sePay.getTransaction_content().equals(item.getBookingCode())){
                         double amountIn = Double.parseDouble(sePay.getAmount_in());
                         if(amountIn >= (item.getPrice()*1000)){
                             Booking newBooking = null;
                             newBooking = item;
                             newBooking.setStatus(Booking.BOOKING_DONE);
-
                             emailService.sendBookingConfirmation(newBooking.getEmail(), newBooking.getFirstName() + " "+
                                     newBooking.getLastName(), newBooking.getBookingCode(), newBooking.getCruiseType());
-
+                            pmsBookingService.requestBooking(newBooking);
                             Booking updateBooking =  bookingRepository.save(newBooking);
                             break;
                         }

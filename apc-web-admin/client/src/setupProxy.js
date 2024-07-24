@@ -5,7 +5,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: `http://${ROOT_URL}:8080`, // Replace with the server URL
+      target: `https://${ROOT_URL}`, // Replace with the server URL
       changeOrigin: true,
     })
   );

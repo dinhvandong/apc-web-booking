@@ -14,7 +14,6 @@ export const createPriceArray = async (dateFrom, dateTo, priceDay, priceDinner, 
     try 
     {
 
-    //http://localhost:8080/api/pricetimes/insertMulti2?dateFrom=2024/05/01&dateTo=2025/05/01&priceDay=2000&priceDinner=2500
     
     console.log("DateFrom:", dateFrom);
     console.log("DateTo:", dateTo);
@@ -74,5 +73,4 @@ export const createPriceArray = async (dateFrom, dateTo, priceDay, priceDinner, 
     }
   }
 
-  //localhost:8080/api/pricetimes/getPriceByDate?date=20240506
   
