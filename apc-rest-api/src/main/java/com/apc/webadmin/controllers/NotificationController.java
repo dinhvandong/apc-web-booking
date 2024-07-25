@@ -33,13 +33,35 @@ public class NotificationController {
     NotificationService notificationService;
     @Autowired
     UserService userService;
+
+//
+//    @PostMapping("/findAllƯ")
+//    public ResponseEntity<?> findAll(@RequestParam String token)
+//    {
+//        if(token.isBlank())
+//        {
+//            return ResponseEntity.status(HttpStatus.OK).body
+//                    (new ResponseObject(201, null,"token jwt is not exist"));
+//        }
+//        token = "Bearer " + token;
+//        boolean isAuthenticated = JwtInterceptor.getInstance().isValidToken(token);
+//        if(isAuthenticated)
+//        {
+//            List<Notification> response =  notificationService.findAll();
+//            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
+//        }
+//        else
+//        {
+//            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"notification is not exist"));
+//        }
+//    }
     @PostMapping("/findAll")
     public ResponseEntity<?> findAll(@RequestParam String token)
     {
         if(token.isBlank())
         {
-            return ResponseEntity.status(HttpStatus.OK).body
-                    (new ResponseObject(201, null,"token jwt is not exist"));
+            List<Notification> response =  notificationService.findAllWithoutToken();
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
         }
         token = "Bearer " + token;
         boolean isAuthenticated = JwtInterceptor.getInstance().isValidToken(token);
@@ -50,7 +72,8 @@ public class NotificationController {
         }
         else
         {
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, null,"notification is not exist"));
+            List<Notification> response =  notificationService.findAllWithoutToken();
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response,"success"));
         }
     }
     @PostMapping("/insert")

@@ -40,6 +40,7 @@ import HistoryBookingPage from './pages/HistoryBookingPage';
 import ConfirmRegisterCodePage from './pages/ConfirmRegisterCodePage';
 import ConfirmRegistAccountPage from './pages/ConfirmRegistAccountPage';
 import PrivacyPage from './pages/PrivacyPage';
+import NotificationDetailPage from './pages/NotificationDetailPage';
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
         <Route path="/payment-confirm/:bookingCode" element={<PaymentConfirmPage />} />
         <Route path="/booking-success/:bookingCode" element={<BookingSuccessfulPage />} />
         <Route path="/notification" element={<NotificationPage />} />
+        <Route path="/notification-detail/:news" element={<NotificationDetailPage />} />
 
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/faq" element={<FaqPage />} />

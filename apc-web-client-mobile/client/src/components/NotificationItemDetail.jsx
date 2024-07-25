@@ -5,11 +5,12 @@ import { API_URL_IMAGE } from '../services/api';
 import Notification from './Notification';
 import menuIcon from '../assets/icon-menu5.png';
 
-const NotificationItem = ({ news }) => {
+const NotificationItemDetail = ({ id }) => {
   const navigate = useNavigate();
-  const id = news.id;
+  const id = id;
+  
   const gotoDetail = ()=>{
-    navigate(`/notification-detail/${id}`)
+    navigate('/')
   }
   return (
     <div className='flex items-center justify-center w-full px-4'>
@@ -34,4 +35,4 @@ const NotificationItem = ({ news }) => {
   );
 };
 
-export default NotificationItem;
+export default NotificationItemDetail;

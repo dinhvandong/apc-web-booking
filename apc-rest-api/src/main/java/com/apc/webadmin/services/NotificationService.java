@@ -29,6 +29,10 @@ public class NotificationService {
         notification.setStatus(1);
         return  notificationRepository.insert(notification);
     }
+    public List<Notification> findAllWithoutToken()
+    {
+        return  notificationRepository.findAll();
+    }
 
     public List<Notification> findAll()
     {

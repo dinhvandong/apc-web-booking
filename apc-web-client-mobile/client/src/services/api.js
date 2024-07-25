@@ -1,18 +1,14 @@
-// api.js
 import axios from 'axios';
-
 export const ROOT_URL = "api.ambassadordaycruise.com";
 export const API_URL_IMAGE = `https://${ROOT_URL}/api/images/`;
 
 export const API_URL = `https://${ROOT_URL}/api`; // Replace with your API URL
 axios.defaults.baseURL = `https://${ROOT_URL}`; // Replace with your backend API's base URL
  // Replace with your backend API's base URL
-
 // Add the following lines to set the CORS headers
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; // Replace '*' with the allowed origin(s) of your backend API
 axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'; // Specify the allowed HTTP methods
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'; // Specify the allowed headers
-
 
 export const authenticated = async () => {
   const token = localStorage.getItem('token');
